@@ -1,0 +1,25 @@
+BootStrap: docker
+From: mattocci/myenv:4.1.0
+
+%apprun R
+  exec R "${@}"
+
+%apprun Rscript
+  exec Rscript "${@}"
+
+%runscript
+  exec R "${@}"
+
+%post
+    DEBIAN_FRONTEND=noninteractive
+
+   installGithub.r \
+      mattocci27/ggsma \
+      zeehio/facetscales
+
+   install2.r -n -1 --skipinstalled --error \
+      --deps TRUE \
+          egg \
+          ggcorrplot \
+          xlsx
+

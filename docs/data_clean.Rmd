@@ -1,0 +1,206 @@
+
+```{r global_options, include=FALSE}
+library(knitr)
+basename <- "ms-trait-method"
+opts_chunk$set(fig.path = paste("components/figure/", basename, "-", sep=""),
+               cache.path = paste("components/cache/", basename, "/", sep=""))
+opts_chunk$set(cache = 2)
+knitr::opts_chunk$set(echo=FALSE,
+                      cache=FALSE,
+                      warning=FALSE,
+                      message=FALSE)
+```
+
+```{r, include = FALSE}
+library(tidyverse)
+library(patchwork)
+library(ggsma)
+```
+
+# Make clean tree-level data
+
+- New data 2021 August
+
+```{r new-data}
+d <- read_csv("../data-raw/LMA_Raw.csv")
+
+d <- d |>
+  mutate(Location = ifelse(Location == "Ailao_underground", "Ailao_understory", Location)) |>
+  filter(!is.na(Species)) |>
+  filter(!is.na(LMAdisc)) |>
+  # 0.6 cm: 0.3^2 * pi * 3 disc = 0.848 
+  mutate(LMAdisc = LMAdisc * 0.899 / 0.848) |>
+  mutate(Species = str_replace_all(Species, "\\?", " "))# |>
+
+
+sp_dat <- d |>
+  group_by(Species, Location) |>
+  summarise_at(
+    .vars = vars(
+                LMAdisc,
+                LMAleaf,
+                LDdisc,
+                #LDdisc2,
+                LDleaf,
+                LDMCdisc,
+                LDMCleaf,
+                LTleaf,
+                LTdisc,
+                Leaf_area_leaf
+                ),
+    .funs =  \(x)mean(x, na.rm = TRUE))
+
+sp_list <- d |>
+  dplyr::select(Species:`Data contributor`) |>
+  unique()
+
+new_dat <- full_join(sp_list, sp_dat, by = c("Species", "Location")) |>
+  rename(LAleaf = Leaf_area_leaf) |>
+  rename(contributor = `Data contributor`) |>
+  mutate(Garden = "NO")
+
+```
+
+# Original data
+
+- replace orginal data with the new data 
+
+```{r ori-data}
+
+d2 <- read_csv("../data-raw/LMA_LA.csv")
+
+d2 <- d2 |>
+  filter(Location != "Garden_palm") |>
+  filter(Location != "Ailao_understory") |>
+  filter(Location != "Mengla_bubeng") |>
+  filter(Location != "Yuanjiang_savan") |>
+  filter(Species != "Dendrobium primulinum Lindl.") |>
+  filter(Species != "Dendrobium nobile Lindl.")
+
+
+d2 |>
+  dplyr::select(Garden, Location) |>
+  unique()
+
+d2 |>
+  arrange(Species) %>%
+  dplyr::select(sort(names(.))) |> names()
+
+
+new_dat2 <- full_join(new_dat, d2,
+          by = c("Species", "Family", "Location", "Biomes", "LMAdisc",
+                 "Garden",
+                 "LMAleaf",
+                 "LAleaf" = "LA",
+                 "LTleaf" = "LT",
+                 "LTdisc",
+                 "LDdisc",
+                 "LDleaf", "LDMCdisc", "LDMCleaf",
+                 "Leaf_habit" = "Leaf habit",
+                 "Growth_form" = "Growth form",
+                 "contributor" = "Data.contributor"
+          )
+)
+
+
+```
+
+# Yakushima
+
+- join yakushima data
+
+
+```{r, yakushima}
+d3 <- read_csv("../data-raw/leaf_traits_for_Katabuchi.csv")
+
+yaku <- d3 |>
+  filter(Growthform != "H") |>
+  mutate(Location = "Yakushima") |>
+  mutate(Biomes = "ST2") |>
+  mutate(Garden = "NO") |>
+  mutate(MAT = NA) |>
+  mutate(MAP = NA) |>
+  mutate(Contributor = "Onoda Yusuke") |>
+  rename(
+                LA = `LA mean (leaf let)`,
+                LT = `Lamina thickness`,
+                LMAdisc = `LD LMA`,
+                LMAleaf = `Whole leaf LMA`,
+                LDMCleaf = `LDMC`,
+                LDdisc = `TD`
+  ) |>
+  mutate(LDleaf = LMAleaf / LT * 10^-3) %>%
+  mutate(LDMCdisc = NA) |>
+  mutate(LTdisc = NA) |>
+  mutate(Growthform = ifelse(Growthform == "W", "Trees", Growthform))
+
+yaku_sp <- yaku |>
+  group_by(Species) |>
+  summarize(
+             Family = APG.family,
+             Growthform,
+             EveDec,
+             Location,
+             Biomes,
+             Garden, 
+             MAT,
+             MAP,
+             Contributor,
+             LMAdisc = mean(LMAdisc, na.rm = TRUE),
+             LMAleaf = mean(LMAleaf, na.rm = TRUE), 
+             LDMCdisc = LDMCdisc,
+             LDMCleaf = mean(LDMCleaf, na.rm = TRUE), 
+             LDdisc = mean(LDdisc, na.rm = TRUE), 
+             LDleaf = mean(LDleaf, na.rm = TRUE), 
+             LT = mean(LT, na.rm = TRUE),
+             LTdisc = mean(LTdisc, na.rm = TRUE),
+             LA = mean(LA, na.rm = TRUE)
+             ) |>
+  unique()
+
+
+new_dat3 <- full_join(new_dat2, yaku_sp,
+                      by = c("Species", "Family", "Location", "Biomes", 
+                             "LMAdisc", "LMAleaf", "LDleaf", "LDMCdisc", 
+                             "Growth_form" = "Growthform",
+                             "Leaf_habit" = "EveDec",
+                             "contributor" = "Contributor",
+                             "LDdisc",
+                             "LTleaf" = "LT",
+                             "LAleaf" = "LA",
+                             "LDMCleaf", "Garden", "MAT", "MAP",
+                             "LTdisc")) |>
+                      rename(Contributor = contributor)
+
+new_dat3 |>
+  dplyr::select(
+    Species,
+    Family,
+    Growth_form,
+    Leaf_habit,
+    Leaf_type,
+    Location,
+    Garden,
+    MAT,
+    MAP,
+    Biomes,
+    Contributor,
+    LMAdisc,
+    LMAleaf,
+    LDdisc,
+    LDleaf,
+    LDMCdisc,
+    LDMCleaf,
+    LTleaf,
+    LTdisc,
+    LAleaf
+  ) |> 
+  rename(Growthform  = Growth_form) |>
+  rename(EveDec = Leaf_habit) |>
+  rename(LeafType = Leaf_type) |>
+  mutate(LeafType = case_when(
+                              LeafType == "single" ~ "S",
+                              LeafType == "compound" ~ "C")) |>
+  write_csv("../data/full_data.csv")
+
+```

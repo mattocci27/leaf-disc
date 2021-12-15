@@ -1,0 +1,39 @@
+```{r}
+
+sig1 <- 0.064 |> sqrt()
+sig2 <- 0.02 |> sqrt()
+rho <- -0.5
+S <- matrix(c(sig1^2, rho*sig1*sig2, rho*sig1*sig2, sig2^2), ncol = 2)
+
+v <- NULL
+m <- NULL
+for (i in 1:100) {
+  hoge <- mvtnorm::rmvnorm(100, c(0.14, 0.009),  S)
+  v[i] <- var(hoge[,1] * hoge[,2])
+  m[i] <- mean(hoge[,1] * hoge[,2])
+}
+mean(v)
+mean(m)
+
+plot(hoge[,2] * hoge[,1], -hoge[,2])
+plot(hoge[,2] * hoge[,1], hoge[,1])
+
+hist(v)
+hist(m)
+
+
+LMAratio <- rnorm(100, 1, 0.1)
+LTratio <- rnorm(100, 1, 0.05)
+
+LDratio <-  LMAratio * LTratio
+
+plot(LMAratio, LDratio)
+
+
+```
+
+[ins] r$> log(tmp$LDratio) |> mean(na.rm = TRUE)
+[1] 0.1344168
+
+[ins] r$> log(tmp$LDratio) |> var(na.rm = TRUE)
+[1] 0.04587086
