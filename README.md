@@ -19,6 +19,12 @@ make
 
 To make specific files.
 
+For example:
+
+```bash
+make analysis
+```
+
 ```bash
 make docs/figs.html
 ```
