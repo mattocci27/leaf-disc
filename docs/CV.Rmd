@@ -1,0 +1,317 @@
+---
+title: CV
+author: Masatoshi Katabuchi
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+output:
+  html_document:
+      fig_caption: yes
+      theme: spacelab #readable #sandstone #spacelab #flatly
+      highlight: pygments #tango #kate
+      toc: TRUE
+      toc_depth: 2
+      number_sections: TRUE
+      toc_float:
+        collapsed: TRUE
+        smooth_scroll: TRUE
+        toc: true
+---
+
+```{r}
+library(tidyverse)
+```
+
+# MVN version
+
+## Model
+
+First, we foucs on the species means.
+Trait X (whole leaf LMA) for *i*th species is:
+$$
+X_i \sim N(\mu, \sigma_x^2).
+$$
+
+
+Trait Y (leaf disc LMA) for *i*th species is:
+
+$$
+Y_i = X_i + \epsilon_i
+$$
+
+where 
+$$
+\epsilon_i \sim N(0, \sigma_{\epsilon}^2) 
+$$
+
+
+**Q1: Do species mean of whole-leaf LMA and leaf disc LMA match well?**
+
+This can be rephrased as testing the covariance between species mean of whole-leaf LMA and leaf disc LMA.
+(i.e., 
+$\mathrm{Cov}(X_i, Y_i)$
+).
+This will be simple and it depends on $\sigma_y$.
+
+Then, let's look at the intraspecifc variation (ITV).
+Trait x and y for *j*th leaf of *i*th species are assumed to follow a
+multivariate normal distribution (MVN) because there should be positve covariances
+between the trait values with species (i.e., individual that has large x should
+have large y too).
+
+$$
+\begin{bmatrix}
+x_{ij} \\
+y_{ij} 
+\end{bmatrix}
+\sim MVN(
+\begin{bmatrix}
+\mu_{i} \\
+\mu_{i} 
+\end{bmatrix}
+,
+\begin{bmatrix}
+\sigma_{xi}^2 & \rho\sigma_{xi}\sigma_{yi} \\
+\rho\sigma_{xi}\sigma_{yi} & \sigma_{yi}^2 \\
+\end{bmatrix}
+)
+$$
+
+where $\mathrm{log}\sigma_{xi}$ and $\mathrm{log}\sigma_{yi}$ follow a MVN because there should be positive covariances
+between the extents of intraspecifc variation (i.e., species that have large ITV
+should have large ITV for both x and y traits).
+
+$$
+\begin{bmatrix}
+\mathrm{log}\sigma_{x i} \\
+\mathrm{log}\sigma_{y i}
+\end{bmatrix}
+\sim MVN(
+\begin{bmatrix}
+\tau_{x} \\
+\tau_{y} 
+\end{bmatrix}
+,
+\begin{bmatrix}
+\hat{\sigma_{x}}^2 & \rho'\hat{\sigma_{x}}\hat{\sigma_{y}} \\
+\rho'\hat{\sigma_{x}}\hat{\sigma_{y}} & \hat{\sigma_{y}}^2 \\
+\end{bmatrix}
+).
+$$
+
+Alternatively, ITV can be written as:
+
+$$
+x_{ij} \sim N(\mu_i, \sigma_{xi}^2)
+$$
+
+$$
+y_{ij} = x_{ij} + \epsilon_{ij} 
+$$
+
+$$
+\epsilon_{ij} \sim N(0,  \sigma_{\epsilon i}^2).
+$$
+
+CV of trait x for *i*th species is:
+
+$$
+CV_{xi} = \frac{\sigma_{xi}}{\mu_i}
+$$
+
+or 
+
+$$
+CV = \sqrt{exp(\sigma_{xi}^2) - 1}.
+$$
+
+
+**Q2: Does the extent of intraspecifc variation match between the whole-leaf and
+leaf disc estimates?**
+
+This can be rephrased as testing the covariance between CV of LMA for each species estimated by whole-leaf and leaf disc.
+(i.e., 
+$\mathrm{Cov}(CV_{x}, CV_{y})$
+).
+
+
+## Example
+
+```{r}
+cv <- \(x) sd(x)/mean(x)
+cv_ln <- \(x) sqrt(exp(var(x)) - 1)
+```
+
+```{r, eval=TRUE}
+set.seed(123)
+# n: sp
+n <- 100
+# m: trees for each species
+m <- 10
+
+mu <- 5
+sig_x <- 1
+sig_e <- 0.5
+tau_x <- -1
+sig_tx_hat <- 0.3
+tau_y <- -1
+sig_ty_hat <- 0.5
+
+x <- rnorm(n, mu, sig_x)
+y <- x + rnorm(n, 0, sig_e^2)
+```
+
+```{r}
+rho0 <- 0.3
+S0 <- c(sig_tx_hat^2, rho0 * sig_tx_hat * sig_ty_hat,
+    rho0 * sig_tx_hat * sig_ty_hat, sig_ty_hat^2) |>
+    matrix(ncol = 2)
+
+sig_t <- mvtnorm::rmvnorm(n, mean = c(tau_x, tau_y), sigma = S0) |>
+  exp()
+```
+
+```{r,eval=TRUE}
+rho <- 0.5
+tmp <- NULL
+for (i in 1:length(mu_i)) {
+  S <- c(sig_t[i,1]^2, rho * sig_t[i,1] * sig_t[i,2],
+    rho * sig_t[i,1] * sig_t[i,2], sig_t[i,2]^2) |>
+    matrix(ncol = 2)
+  tmp <- rbind(tmp, mvtnorm::rmvnorm(m, mean = rep(mu_i[i], 2), sigma = S))
+}
+colnames(tmp) <- c("x", "y")
+
+trait <- tmp |>
+  as_tibble() |>
+  mutate(sp = rep(1:n, each = m)) |>
+  mutate(tree = rep(1:m, n))
+
+cv_dat <- trait |>
+  group_by(sp) |>
+  summarise_at(
+               .vars = vars(x, y),
+               .funs = cv)
+
+cv_dat2 <- trait |>
+  group_by(sp) |>
+  summarise_at(
+               .vars = vars(x, y),
+               .funs = cv_ln)
+```
+
+Species mean.
+
+```{r}
+plot(x, y)
+cor.test(x, y)
+```
+
+Each tree.
+
+```{r}
+plot(y ~ x, trait)
+cor.test(trait$y, trait$x)
+```
+
+CV.
+
+```{r}
+plot(y ~ x, cv_dat, log = "xy")
+cor.test(log(cv_dat$y), log(cv_dat$x))
+```
+
+
+## Log-normal CV
+
+$$
+CV = \sqrt{exp(\mathrm{V}|x|) - 1}
+$$
+
+CV.
+
+```{r}
+plot(y ~ x, cv_dat2, log = "xy")
+cor.test(log(cv_dat2$y), log(cv_dat2$x))
+```
+
+# Non-MVN version
+
+## Example
+
+```{r, eval=TRUE}
+set.seed(123)
+# n: sp
+n <- 100
+# m: trees for each species
+m <- 10
+
+mu <- 5
+sig_x <- 1
+sig_tx_hat <- 0.3
+tau_x <- -1
+mu_i <- rnorm(n, mu, sig_x)
+sig_tx <- rnorm(n, tau_x, sig_tx_hat) |> exp()
+x <- mapply(rnorm, m, mu_i, sig_tx)
+
+tau_e <- -0.2
+sig_te_hat <- 0.1
+sig_te <- rnorm(n, tau_e, sig_te_hat) |> exp()
+e <- mapply(rnorm, m, 0, sig_te^2)
+
+y <- x + e
+
+x <- as.numeric(x)
+y <- as.numeric(y)
+
+trait <- tibble(x, y) |>
+  mutate(sp = rep(1:n, each = m)) |>
+  mutate(tree = rep(1:m, n))
+
+cv_dat <- trait |>
+  group_by(sp) |>
+  summarise_at(
+               .vars = vars(x, y),
+               .funs = cv)
+
+mean_dat <- trait |>
+  group_by(sp) |>
+  summarise_at(
+               .vars = vars(x, y),
+               .funs = mean)
+
+cv_dat2 <- trait |>
+  group_by(sp) |>
+  summarise_at(
+               .vars = vars(x, y),
+               .funs = cv_ln)
+
+```
+
+
+Species mean.
+
+```{r}
+plot(y ~ x, mean_dat)
+cor.test(mean_dat$y, mean_dat$x)
+```
+
+Each tree.
+
+```{r}
+plot(y ~ x, trait)
+cor.test(trait$y, trait$x)
+```
+
+CV.
+
+```{r}
+plot(y ~ x, cv_dat, log = "xy")
+cor.test(log(cv_dat$y), log(cv_dat$x))
+```
+
+```{r, eval=FALSE, echo=FALSE}
+x <- seq(0.1, 1.5, length = 80)
+plot(x, sqrt(exp(x^2) - 1), type = "l")
+lines(x, x, lty = 2)
+lines(x, x^2, lty = 3)
+lines(x, exp(x), lty = 4)
+```

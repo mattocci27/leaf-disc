@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  leaf-disc:
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile
+    command: make docker
+    #command: ls /usr/share/fonts/truetype
+    #command: ls /usr/share/fonts/truetype/liberation
+    #command: R -e 'system.time(rmarkdown::render("test.Rmd"))'
+    container_name: leaf-disc
+    environment:
+      - LOCAL_UID=${LOCAL_UID}
+      - LOCAL_GID=${LOCAL_GID}
+    working_dir: /trait-methods
+    volumes:
+      - .:/trait-methods

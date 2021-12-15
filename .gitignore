@@ -1,0 +1,147 @@
+kitematic/*
+rmd/core
+core
+*.rda
+.bash_history
+.cache/
+.rstudio/
+log/*.log
+*_cache
+*_files
+nohup.out
+.DS_Store
+
+# History files
+.Rhistory
+.Rapp.history
+
+# Session Data files
+.RData
+
+# User-specific files
+.Ruserdata
+
+# Example code in package build process
+*-Ex.R
+
+# Output files from R CMD build
+/*.tar.gz
+
+# Output files from R CMD check
+/*.Rcheck/
+
+# RStudio files
+.Rproj.user/
+
+# produced vignettes
+vignettes/*.html
+vignettes/*.pdf
+
+# OAuth2 token, see https://github.com/hadley/httr/releases/tag/v0.3
+.httr-oauth
+
+# knitr and R markdown default cache directories
+*_cache/
+/cache/
+*_files/
+/files/
+
+# Temporary files created by R markdown
+*.utf8.md
+*.knit.md
+
+# R Environment Variables
+.Renviron
+
+# Vagrant
+.itematic/*
+rmd/core
+core
+*.rda
+.bash_history
+.cache/
+.rstudio/
+log/*.log
+*_cache
+*_files
+nohup.out
+.DS_Store
+
+# History files
+.Rhistory
+.Rapp.history
+
+# Session Data files
+.RData
+
+# User-specific files
+.Ruserdata
+
+# Example code in package build process
+*-Ex.R
+
+# Output files from R CMD build
+/*.tar.gz
+
+# Output files from R CMD check
+/*.Rcheck/
+
+# RStudio files
+.Rproj.user/
+
+# produced vignettes
+vignettes/*.html
+vignettes/*.pdf
+
+# OAuth2 token, see https://github.com/hadley/httr/releases/tag/v0.3
+.httr-oauth
+
+# knitr and R markdown default cache directories
+*_cache/
+/cache/
+
+# Temporary files created by R markdown
+*.utf8.md
+*.knit.md
+
+# R Environment Variables
+.Renviron
+
+# Vagrant
+.vagrant
+
+# word
+*.docx
+*.doc
+
+# sif
+*.sif
+
+# database
+*.sqlite3
+
+# rar
+*.rar
+
+cache/
+
+*.xlsx
+
+archive/
+
+
+figs/LA_prorp.png
+figs/LT_prop.png
+ms/LMA_figs.pdf
+ms/*.pdf
+ms/*.html
+ms/diff.pdf
+
+data/try.csv
+data/try_long.csv
+
+docs/components/
+
+!/ms/templates/*
+
+.env
