@@ -1,6 +1,6 @@
 CV = data/full_data_cv.csv data/tree_data.csv docs/data_clean_cv.html
 
-all: data/full_data.csv $(CV) values.yml docs/figs.html ms/leaf_disc.bib ms/LMA_method.pdf ms/diff.pdf ms/SI.html ms/cover.pdf ms/cover.docx
+all: data/full_data.csv $(CV) values.yml docs/figs.html ms/leaf_disc.bib ms/LMA_method.pdf ms/diff.pdf ms/SI.html ms/cover.pdf ms/cover.docx ms/response_letter.pdf ms/response_letter.docx
 
 docker: data/full_data.csv $(CV) values.yml docs/figs.html ms/LMA_method.pdf ms/diff.pdf ms/SI.html ms/cover.pdf ms/cover.docx
 
@@ -39,11 +39,22 @@ ms/cover.pdf: ms/cover.md
 
 ms/cover.docx: ms/cover.md
 	pandoc $< \
-        --reference-doc ms/templates/cover_style.docx \
+  --reference-doc ms/templates/cover_style.docx \
 	-o $@
 
 ms/leaf_disc.bib: ~/trait_method.bib
 	cp $< ./ms/
+
+ms/response_letter.pdf: ms/response_letter.Rmd
+	R -e 'system.time(rmarkdown::render("$<", "all"))'
+#	pandoc $< \
+	--template ms/templates/eisvogel2.tex \
+	-o $@
+
+ms/response_letter.docx: ms/response_letter.Rmd
+	R -e 'system.time(rmarkdown::render("$<", "all"))'
+# pandoc $< \
+	-o $@
 
 .PHONY: clean
 clean:

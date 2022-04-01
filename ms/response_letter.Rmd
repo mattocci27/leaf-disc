@@ -1,0 +1,139 @@
+---
+geometry: margin=1in
+link-citations: yes
+#csl: templates/xxxx.csl
+#bibliography: xxxx.bib
+fontsize: 12pt
+header-includes:
+  - \usepackage{booktabs}
+  - \usepackage{longtable}
+  - \usepackage{array}
+  - \usepackage{multirow}
+  - \usepackage{wrapfig}
+  - \usepackage{float}
+  - \usepackage{colortbl}
+  - \usepackage{pdflscape}
+  - \usepackage{tabu}
+  - \usepackage{threeparttable}
+  - \usepackage{threeparttablex}
+  - \usepackage[normalem]{ulem}
+  - \usepackage{makecell}
+  - \usepackage{xcolor}
+  - \usepackage{lineno}
+ # - \linenumbers
+output:
+  pdf_document:
+    keep_md: false
+    fig_caption: yes
+    keep_tex: no
+    toc: no
+    number_sections: no
+    template: templates/eisvogel2.tex
+    #template: null
+    pandoc_args:
+      - "--filter"
+      - "pandoc-crossref"
+  word_document:
+    fig_width: 6
+    fig_caption: yes
+    toc: FALSE
+    reference_docx: templates/rmd_style.docx
+    pandoc_args:
+    - "--filter"
+    - "pandoc-crossref"
+    - "--mathml"
+---
+
+
+> AE comments: Thanks for the submission. I agree with the reviewers that the paper has merit and will be of interest to many researchers because LMA is a widely used trait. Both reviewers have some feedback for you to consider. Reviewer 1's suggestions would require extensive revisions to address. Reviewer 2 has suggested a modification to the title. I think the existing title is fine if you prefer to keep that but would ask you to carefully consider all other comments carefully.
+
+> Reviewer #1: Summary of Manuscript:
+> This manuscript compares two methods of measuring LMA (leaf mass per area), an ecologically important functional trait in plants. It is a carefully executed and useful piece of work, in that LMA is a very widely measured plant trait and many readers will be interested in identifying the best methods to use when measuring LMA in their system, as well as how to compare their own measurements to other published estimates. However, I believe the paper needs modification; I include recommendations, including three major concerns, below:
+
+test
+
+
+> 1. Framing: I think the paper misses an opportunity to provide a bit more context for why the study is important. The authors could provide more concrete examples of why standardizing LMA techniques across studies matters: e.g. what is the ecological significance of an LMA measurement difference between the two methods?  This could also be set up in the introduction by providing more context for LMA as a functional trait. For example, by citing the TRY database, the authors could provide readers with the importance and ubiquity of LMA relative to other plant traits (e.g. of all the studies of plant traits in TRY, how many report LMA?)
+
+
+> 2. A crucial thing for readers to know is how to "convert" one method's estimate of LMA to another: the authors could report an equation (or a few, accounting for some additional covariates such as leaf area and leaf thickness, which this paper identifies as important modifiers of the relationship) that scholars could use in the future if trying to compare LMA estimates collected using different methods. In other words, taking the eq from Appendix 2 and modifying it given the results of this study.
+
+
+> 3. I am confused and unconvinced by the inclusion and discussion of intraspecific trait variation on several levels. First, the authors do not clearly explain ITV, its importance, or its relevance to LMA. Secondly, the methods used to quantify ITV are not recommended (see Yang et al 2020. Large underestimation of intraspecific trait variation and its improvements. Frontiers in Plant Science); ideally the authors should use Bao's CV estimator. Finally, there is little interpretation of the results of their analysis. I think this metric needs to either be excluded entirely or significantly expanded upon.
+
+> Line comments:
+
+> L49 I think the introduction would benefit from an initial sentence to give more context for the definition of LMA (perhaps by restructuring this paragraph to introduce traits and the LES first, and then defining LMA in that context).
+
+> L69-73 This sentence is crucial for your hypotheses but is buried in the middle of this paragraph. I suggest breaking this paragraph (beginning on line 63) up into 2: the first describing different methods of measurement and how commonly each are used, and any previous attempts to compare them. The second paragraph can get into which leaf types are likely to give similar or different estimates based on the two metrics and why.
+
+> L82-84 I find this introduction of ITV to be confusing. ITV has a robust literature which is not cited here (for a recent review, see Westerband, Funk, and Barton, 2021. Intraspecific trait variation in plants: a renewed focus on its role in ecological processes. Annals of botany). The authors should briefly introduce this concept and it's ecological relevance before applying it to their question of which method generates greater estimates of ITV and why.
+
+> L99-100 It may bear repeating here why you expect the estimates to match up better for smaller and/or thicker leaves
+
+> L101-102 again, might be worth stating why (even if it is discussed above)
+
+> L107- 113 The description of the sites/data is a little confusing: it seems that there are two datasets: one which includes 3 different sites, and another that includes a fourth site, for which a subset of the samples had additional measurement taken. I recommend clarifying this section to explain the different levels of organization, as well as including some of the methodological data in Table S1 (e.g. number of total samples, whether leaf thickness was measured, leaf punch size).
+
+> L148-151 why were the species divided at all? Why not analyze the data as a single group, using leaf area and leaf thickness as (continuous) covariates? Dividing the species into groups this way turns a continuous variable into a categorical one, which is poor statistical practice.
+
+> L154-160 see major comment 3
+
+> L169-172 This is the major result of the paper. I suggest making it the first line of the results section (however I would modify it to fit the individual, rather than species-mean, level data: see below).
+
+> L175-176 Based on this, I am confused about the statistical approach. Did the authors separately run regressions for species-level means and individual level means? If so, it is almost a statistical inevitability that the individual level analysis would have a lower r2 than the species level analysis: therefore I would not report this as a result, per se. In addition, the species level means is more or less meaningless in the context of this paper: much more importantly is the comparison of individual based measurements. I would therefore remove the species level results form the manuscript, and instead only report on the individual level data.
+
+> L182 I believe leaf punch size was something that varied between datasets, and was never measured on the same leaves. I'm therefore confused as to how the authors are interpreting the effect of "leaf punch size" in their models: could this not simply be a reflection of the different species represented in the different datasets?
+
+> L183-184 Which metric had higher ITV? That is a more relevant result than simply the R2 value.
+
+> L193 you mention "appropriate calibration": it would be extremely useful if the authors were to report an equation (or several) for converting LMA measured by one metric to the other, ideally that incorporate leaf area and thickness (see major comment).
+
+> L201-204 This is a result, and an important one (again, I'm thinking of readers who are looking for advice on how to measure LMA): it should be reported in the results section.
+
+> L247 is this reported in the results somewhere? I thought the multiple discs/leaf were measured together?
+
+> Appendix S2 seems to be missing the x axis titles
+
+> Reviewer #2: In this work, the authors compared two methods to measure LMA of plants: leaf disc sampling and whole-leaf sampling using 334 woody species from East Asia. The main finding are that (i) mean values of leaf disc LMA is a good proxy for mean values of whole-leaf LMA; (ii) larger and thinner leaves tended to show the large discrepancies between the leaf disc and whole-leaf estimates. Therefore, the present work implies that when one needs to mix leaf disc LMA and whole-leaf LMA in a single analysis (e.g., meta-analysis), appropriate calibrations are necessary. This manuscript was well written. At least, I can read the whole manuscript fast. The study is valuable for choosing a better approach when calculating LMA. I suggest minor to moderate revisions for this manuscript.
+
+> General Comments:
+
+> In the Introduction section, the authors had better add some introduction to the leaf disc sampling method, since this method was focused to make a comparison with the whole-leaf sampling method for calculating LMA.
+
+> The authors had better explain why they used the LMA values with leaf petioles mass.
+
+> Line-specific Comments:
+
+> Line 1: Suggest adding "- evidence from 334 woody species" in the title.
+
+> Lines 26 and 51: Change "the key trait" to "an important functional trait".
+
+> Line 57: I think that the following reference helps to support this statement, because LMA values were found to vary across leaf age, and LMA also exhibits a plasticity to climate when leaves enter the maturation stage (Jiao et al., 2022).
+> Jiao, Y., Niklas, K.J., Wang, L., Yu, K., Li, Y., Shi, P. 2022. Influence of leaf age on the scaling relationships of lamina biomass vs. area. Frontiers in Plant Science In press.
+
+> Line 70: Please consider citing the following references:
+
+> Li, Y., Shi, P., Niinemets, Ü., Song, Y., Yu, K., Schrader, J., Niklas, K.J. 2022. Diminishing returns among lamina fresh and dry mass, surface area, and petiole fresh mass among nine Lauraceae species. American Journal of Botany In press. doi: 10.1002/ajb2.1812
+
+> Li, Y., Zheng, Y., Ratkowsky, D.A., Wei, H., Shi, P. 2022. Application of an ovate leaf shape model to evaluate leaf bilateral asymmetry and calculate lamina centroid location. Frontiers in Plant Science, 12: 822907. doi: 10.3389/fpls.2021.822907
+
+> Lines 97 and 98: Drop the numerical values of R squared. There is no need to exhibit the results here.
+
+> Lines 105 and 106: Why did you only collect the data in China and Japan. Here, I think, you had better add one to three sentences to explain the feasibility of showing general results for other floras.
+
+> Lines 124 and 125: Why did you maintain leaf petiole in calculating LMA? It is strange for me, because it might inflate LMA given that its definition is dry mass per unit leaf area. What is the meaning for "avoiding thick veins"? Do you mean in the experiment you punch the positions without having the secondary order veins?
+
+> Lines 129-131: Can you class the leaf shapes of 334 woody species you have used? It will affect your sampling positions you are describing here.
+
+> Lines 151-153: I think, a frequency of LA is needed as a supplementary figure to show the feasibility of such divisions.
+
+> Line 157: Are you that the unit of CV is not a percentage? In general, an unitless variable, we usually use its percentage.
+
+> Line 163: It is incorrect to use 1000 bootstrap replates to calculate a confidence interval! In general, >= 30 replates are enough for calculating a standard deviation, and >= 2000 replates to calculate a confidence interval.
+
+> Lines 168 and 169: It is a strange result for me. Leaf area has been demonstrated to be negatively correlated to mean leaf thickness at the species level (see Figure 4 in Lin et al., 2018). It seems that you obtained a negative correlation based on the pooled data of biomes. If possible, I suggest adding several sentences to discuss the reasons for the pooled data in the Discussion section.
+
+> Lin, S., Shao, L., Hui, C., Song, Y., Reddy, G.V.P., Gielis, J., Li, F., Ding, Y., Wei, Q., Shi, P. 2018. Why does not the leaf weight-area allometry of bamboos follow the 3/2-power law? Frontiers in Plant Science 9: 583, https://doi.org/10.1016/10.3389/fpls.2018.00583
+
+> Line 171: "… were 9.4% greater than disc-based estimates …" Can you provide a standard deviation or a confidence interval for 9.4%? In general, we can use the bootstrap method to get it.

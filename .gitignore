@@ -141,6 +141,7 @@ data/try.csv
 data/try_long.csv
 
 docs/components/
+ms/*.log
 
 !/ms/templates/*
 
