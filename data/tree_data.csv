@@ -1,4 +1,4 @@
-ID,Species,Family,Growthform,EveDec,Leaf_type,Location,Biomes,Contributor,LMAdisc,LMAleaf,LDdisc,LDleaf,LTleaf,LTdisc,LAleaf
+id,species,family,growth_form,leaf_habit,leaf_type,location,biomes,data_contributor,lma_disc,lma_leaf,ld_disc,ld_leaf,lt_leaf,lt_disc,la_leaf
 103-1,Lithocarpus pachyphyllus,Fagaceae,T,E,single,Ailao_understory,STF,Chen Yajun,128.79109451132075,123.9037524,0.356260453,0.485262738,0.255333333,0.341,76.511
 103-2,Lithocarpus pachyphyllus,Fagaceae,T,E,single,Ailao_understory,STF,Chen Yajun,116.8659931951651,141.3979112,0.322957677,0.473959479,0.298333333,0.341333333,60.991
 103-3,Lithocarpus pachyphyllus,Fagaceae,T,E,single,Ailao_understory,STF,Chen Yajun,128.79109451132075,134.8562518,0.34709947,0.453044519,0.297666667,0.35,60.279
