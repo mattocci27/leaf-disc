@@ -2,7 +2,9 @@ library(targets)
 library(tarchetypes)
 library(furrr)
 
+source("R/util.R")
 source("R/data_clean.R")
+source("R/sp_analysis.R")
 
 options(clustermq.scheduler = "multiprocess")
 plan(multisession, workers = parallel::detectCores())
@@ -10,9 +12,12 @@ tar_option_set(packages = c(
   "tidyverse",
   "patchwork",
   "ggsma",
+  "ggpubr",
   "smatr",
   "janitor"
 ))
+
+
 
 list(
   # data cleaning ----------------------------------
@@ -66,5 +71,9 @@ list(
   tar_target(
     tree_dat,
     tree_dat_clean(tree_data_csv)
+  ),
+  tar_target(
+    la_lt_grid_plot,
+    la_lt_grid(sp_mean)
   )
 )
