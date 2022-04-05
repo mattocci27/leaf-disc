@@ -1,0 +1,67 @@
+---
+Title: "your title"
+author: "Masatoshi Katabuchi"
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+output:
+  html_document:
+    fig_caption: yes
+    theme: spacelab #readable #sandstone #spacelab #flatly
+    highlight: pygments #tango #kate
+    toc: TRUE
+    toc_depth: 2
+    number_sections: TRUE
+    toc_float:
+     collapsed: TRUE
+     smooth_scroll: TRUE
+     toc: true
+---
+
+```{r global_options, include=FALSE}
+library(knitr)
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  message = FALSE,
+  cache = FALSE,
+  fig.align = "center",
+  fig.show = "hold"
+)
+```
+
+```{r}
+library(tidyverse)
+library(targets)
+library(kableExtra)
+```
+
+# Leaf disc vs whole-leaf LMA (species-level)
+
+```{r}
+tar_read(lalt_pool_grid_plot)
+```
+
+```{r}
+theme_set(theme_bw())
+theme_update(text = element_text(family = "Arial"))
+```
+
+## Pooled
+
+```{r}
+tar_read(lalt_pool_grid_plot)
+```
+
+## Seprated
+
+```{r}
+tar_read(lalt_sep_grid_plot)
+```
+
+## SMA table (species-level)
+
+```{r}
+tar_load(sma_tab)
+sma_tab |>
+  kable() |>
+  kable_styling()
+```
