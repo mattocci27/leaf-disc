@@ -72,8 +72,22 @@ list(
     tree_dat,
     tree_dat_clean(tree_data_csv)
   ),
+
+  # analyses and figs ---------------------------------------------
   tar_target(
-    la_lt_grid_plot,
-    la_lt_grid(sp_mean)
+    lalt_pool_grid_plot,
+    lalt_pool_grid(sp_mean)
+  ),
+  tar_target(
+    lalt_sep_grid_plot,
+    lalt_sep_grid(sp_mean)
+  ),
+  tar_target(
+    sma_tab,
+    generate_sma_tab(sp_mean)
+  ),
+  tar_render(
+    report,
+    "report.Rmd"
   )
 )
