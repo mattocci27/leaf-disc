@@ -128,6 +128,7 @@ list(
     ggsave(
       "figs/lalt_sep_grid.pdf",
       lalt_sep_grid_plot,
+      device = cairo_pdf,
       width = 6,
       height = 6
     ),
@@ -159,6 +160,7 @@ list(
     ggsave(
       "figs/lalt_tree_grid.pdf",
       lalt_tree_grid_plot,
+      device = cairo_pdf,
       width = 6,
       height = 6
     ),
@@ -185,6 +187,7 @@ list(
     ggsave(
       "figs/ratio.pdf",
       ratio_plot,
+      device = cairo_pdf,
       width = 9,
       height = 3
     ),
@@ -211,6 +214,7 @@ list(
     ggsave(
       "figs/lma_ld.pdf",
       lma_ld_plot,
+      device = cairo_pdf,
       width = 6,
       height = 3
     ),
@@ -237,6 +241,7 @@ list(
     ggsave(
       "figs/cv_pool.pdf",
       cv_pool_plot,
+      device = cairo_pdf,
       width = 3,
       height = 3
     ),
@@ -263,6 +268,7 @@ list(
     ggsave(
       "figs/cv_sep.pdf",
       cv_sep_plot,
+      device = cairo_pdf,
       width = 6,
       height = 3
     ),
@@ -289,6 +295,7 @@ list(
     ggsave(
       "figs/petiole.pdf",
       petiole_plot,
+      device = cairo_pdf,
       width = 8,
       height = 4
     ),
