@@ -5,7 +5,8 @@ services:
     build:
       context: .
       dockerfile: ./docker/Dockerfile
-    command: make docker
+    command: Rscript run.R
+    #command: make docker
     #command: ls /usr/share/fonts/truetype
     #command: ls /usr/share/fonts/truetype/liberation
     #command: R -e 'system.time(rmarkdown::render("test.Rmd"))'

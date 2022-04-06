@@ -53,6 +53,11 @@ If you are not using docker, you will need the following dependencies.
 	- tidyverse
 	- tinytex
   - lmtest
+	- targets
+	- tarchetypes
+	- clustermq
+	- janitor
+	- extrafont
 - pandoc
 - pandoc-crossref
 - latexdiff
