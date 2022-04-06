@@ -1,8 +1,6 @@
 library(targets)
 library(tarchetypes)
-library(furrr)
 library(tidyverse)
-library(parallel)
 
 source("R/util.R")
 source("R/data_clean.R")
@@ -11,8 +9,7 @@ source("R/ind_analysis.R")
 source("R/fig_write.R")
 
 options(clustermq.scheduler = "multiprocess")
-options(mc.cores = detectCores()) # 4
-plan(multisession, workers = parallel::detectCores())
+
 tar_option_set(packages = c(
   "tidyverse",
   "patchwork",
@@ -20,14 +17,9 @@ tar_option_set(packages = c(
   "ggpubr",
   "smatr",
   "janitor",
-  "extrafont",
-  "parallel"
+  "extrafont"
 ))
 
-theme_set(theme_bw())
-theme_update(text = element_text(family = "Arial"))
-
-#
 list(
   # data cleaning ----------------------------------
   tar_target(
@@ -101,7 +93,8 @@ list(
       dpi = 300,
       width = 6,
       height = 6
-    )
+    ),
+    format = "file"
   ),
   tar_target(
     lalt_pool_grid_pdf,
@@ -110,7 +103,8 @@ list(
       lalt_pool_grid_plot,
       width = 6,
       height = 6
-    )
+    ),
+    format = "file"
   ),
 
   tar_target(
@@ -125,7 +119,8 @@ list(
       dpi = 300,
       width = 6,
       height = 6
-    )
+    ),
+    format = "file"
   ),
   tar_target(
     lalt_sep_grid_pdf,
@@ -134,7 +129,8 @@ list(
       lalt_sep_grid_plot,
       width = 6,
       height = 6
-    )
+    ),
+    format = "file"
   ),
 
   tar_target(
@@ -146,20 +142,104 @@ list(
     lalt_tree_grid_plot,
     lalt_tree_grid(tree)
   ),
+  tar_target(
+    lalt_tree_grid_png,
+    ggsave(
+      "figs/lalt_tree_grid.png",
+      lalt_tree_grid_plot,
+      dpi = 300,
+      width = 6,
+      height = 6
+    ),
+    format = "file"
+  ),
+  tar_target(
+    lalt_tree_grid_pdf,
+    ggsave(
+      "figs/lalt_tree_grid.pdf",
+      lalt_tree_grid_plot,
+      width = 6,
+      height = 6
+    ),
+    format = "file"
+  ),
 
   tar_target(
     ratio_plot,
     ratio_combine(tree)
+  ),
+  tar_target(
+    ratio_png,
+    ggsave(
+      "figs/ratio.png",
+      ratio_plot,
+      dpi = 300,
+      width = 9,
+      height = 3
+    ),
+    format = "file"
+  ),
+  tar_target(
+    ratio_pdf,
+    ggsave(
+      "figs/ratio.pdf",
+      ratio_plot,
+      width = 9,
+      height = 3
+    ),
+    format = "file"
   ),
 
   tar_target(
     lma_ld_plot,
     lma_ld_wrap_point(sp_mean)
   ),
+  tar_target(
+    lma_ld_png,
+    ggsave(
+      "figs/lma_ld.png",
+      lma_ld_plot,
+      dpi = 300,
+      width = 6,
+      height = 3
+    ),
+    format = "file"
+  ),
+  tar_target(
+    lma_ld_pdf,
+    ggsave(
+      "figs/lma_ld.pdf",
+      lma_ld_plot,
+      width = 6,
+      height = 3
+    ),
+    format = "file"
+  ),
 
   tar_target(
     cv_pool_plot,
     cv_pool_point(sp_cv)
+  ),
+  tar_target(
+    cv_pool_png,
+    ggsave(
+      "figs/cv_pool.png",
+      cv_pool_plot,
+      dpi = 300,
+      width = 3,
+      height = 3
+    ),
+    format = "file"
+  ),
+  tar_target(
+    cv_pool_pdf,
+    ggsave(
+      "figs/cv_pool.pdf",
+      cv_pool_plot,
+      width = 3,
+      height = 3
+    ),
+    format = "file"
   ),
 
   tar_target(
@@ -167,65 +247,55 @@ list(
     cv_sep_point(sp_cv)
   ),
   tar_target(
+    cv_sep_png,
+    ggsave(
+      "figs/cv_sep.png",
+      cv_sep_plot,
+      dpi = 300,
+      width = 6,
+      height = 3
+    ),
+    format = "file"
+  ),
+  tar_target(
+    cv_sep_pdf,
+    ggsave(
+      "figs/cv_sep.pdf",
+      cv_sep_plot,
+      width = 6,
+      height = 3
+    ),
+    format = "file"
+  ),
+
+  tar_target(
     petiole_plot,
     petiole_point(yaku_sp)
   ),
-
-  # tar_target(
-  #   test,
-  #   list(
-  #     lalt_pool_grid_plot,
-  #     lalt_sep_grid_plot),
-  #   pattern = map(
-  #     lalt_pool_grid_plot,
-  #     lalt_sep_grid_plot)
-  # ),
-
-  # tar_target(
-  #   plot_dat,
-  #   create_plot_dat(
-  #     list(
-  #       lalt_pool_grid_plot = lalt_pool_grid_plot,
-  #       lalt_sep_grid_plot = lalt_sep_grid_plot,
-  #       lalt_tree_grid_plot = lalt_tree_grid_plot,
-  #       ratio_plot = ratio_plot,
-  #       lma_ld_plot = lma_ld_plot,
-  #       cv_pool_plot = cv_pool_plot,
-  #       cv_sep_plot = cv_sep_plot,
-  #       petiole_plot = petiole_plot
-  #     )) |>
-  #      mutate(width = c(6, 6, 6, 9, 6, 3, 6, 8)) |>
-  #      mutate(height = c(6, 6, 6, 3, 3, 3, 3, 5))
-  # ),
-
-  # tar_target(
-  #   test,
-  #   mcmapply(function(filename, plot, width, height)ggsave(filename = filename, plot = plot, width = width, height = height),
-  #     list(
-  #       "figs/lalt_pool_grid.tiff",
-  #       "figs/lalt_sep_grid.tiff",
-  #       "figs/lalt_tree_grid.tiff",
-  #       "figs/ratio.tiff",
-  #       "figs/lma_ld.tiff",
-  #       "figs/cv_pool.tiff",
-  #       "figs/cv_sep.tiff",
-  #       "figs/petiole.tiff"),
-  #     list(
-  #       lalt_pool_grid_plot,
-  #       lalt_sep_grid_plot,
-  #       lalt_tree_grid_plot,
-  #       ratio_plot,
-  #       lma_ld_plot,
-  #       cv_pool_plot,
-  #       cv_sep_plot,
-  #       petiole_plot),
-  #     list(6, 6, 6, 9, 6, 3, 6, 8),
-  #     list(6, 6, 6, 6, 3, 3, 3, 5)
-  # )),
-
+  tar_target(
+    petiole_png,
+    ggsave(
+      "figs/petiole.png",
+      petiole_plot,
+      dpi = 300,
+      width = 8,
+      height = 4
+    ),
+    format = "file"
+  ),
+  tar_target(
+    petiole_pdf,
+    ggsave(
+      "figs/petiole.pdf",
+      petiole_plot,
+      width = 8,
+      height = 4
+    ),
+    format = "file"
+  ),
 
   tar_render(
     report,
     "report.Rmd"
-  )
+   )
 )

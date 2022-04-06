@@ -38,11 +38,18 @@ library(kableExtra)
 
 ## Pooled
 
+```{r, include=FALSE}
+tar_load(lalt_pool_grid_png)
+```
+
 
 ![](figs/lalt_pool_grid.png)
 
 ## Seprated
 
+```{r, include=FALSE}
+tar_load(lalt_sep_grid_png)
+```
 
 ![](figs/lalt_sep_grid.png)
 
@@ -58,30 +65,49 @@ sma_tab |>
 
 # Leaf disc vs whole-leaf LMA (individual-level)
 
+```{r, include=FALSE}
+tar_load(lalt_tree_grid_png)
+```
 
 ![](figs/lalt_tree_grid.png)
 
 # Divergence (species-level)
 
+```{r, include=FALSE}
+tar_load(ratio_png)
+```
 
 ![](figs/ratio.png)
 
 
 # LMA and LD (species-level)
 
+```{r, include=FALSE}
+tar_load(lma_ld_png)
+```
 
 ![](figs/lma_ld.png)
 
 
 # CV
 
+```{r, include=FALSE}
+tar_load(cv_pool_png)
+```
 
 ![](figs/cv_pool.png)
+
+```{r, include=FALSE}
+tar_load(cv_sep_png)
+```
 
 ![](figs/cv_sep.png)
 
 # Leaf support cost (species-level)
 
+```{r, include=FALSE}
+tar_load(petiole_png)
+```
 
 ![](figs/petiole.png)
 

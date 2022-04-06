@@ -18,7 +18,9 @@ lalt_pool_grid_point <- function(data) {
     stat_cor(
       aes(label = paste(..rr.label.., ..n.label.., sep = "~`,`~"),
           family = "Helvetica")
-    )
+    ) +
+    theme_bw() +
+    theme(text = element_text(family = "Arial"))
 }
 
 
@@ -48,7 +50,9 @@ lalt_sep_grid_point <- function(data) {
       aes(label = paste(..rr.label.., ..n.label.., sep = "~`,`~"), family = "Arial"),
       show.legend = FALSE
     ) +
+    theme_bw() +
     theme(
+      text = element_text(family = "Arial"),
       legend.position = c(0.3, 0.1),
       legend.key.size = unit(0.5, "cm"),
       legend.spacing.y = unit(0.1, "cm"),
@@ -173,7 +177,10 @@ lma_ld_wrap_point <- function(sp_mean) {
         label = paste(..rr.label.., ..n.label.., sep = "~`,`~"),
         family = "Arial"
       )
-    )
+    ) +
+    theme_bw() +
+    theme(
+      text = element_text(family = "Arial"))
   p_all
 }
 
@@ -195,7 +202,10 @@ cv_pool_point <- function(sp_cv) {
       label.y.npc = 0,
       vjust = 1.5,
       aes(label = paste(..rr.label.., ..n.label.., sep = "~`,`~"), family = "Arial")
-    )
+    ) +
+    theme_bw() +
+    theme(
+      text = element_text(family = "Arial"))
 }
 
 cv_sep_point <- function(sp_cv) {
@@ -240,7 +250,10 @@ cv_sep_point <- function(sp_cv) {
     )
 
   (p_cv1 + p_cv2) +
-    plot_annotation(tag_levels = "a")
+    plot_annotation(tag_levels = "a") &
+    theme_bw() &
+    theme(
+      text = element_text(family = "Arial"))
 }
 
 
@@ -275,5 +288,6 @@ petiole_point <- function(yaku_sp) {
 
   pet2 + pet1 +
     plot_annotation(tag_levels = "a") &
+    theme_bw() &
     theme(plot.tag = element_text(face = "bold"))
 }

@@ -20,7 +20,9 @@ lalt_tree_grid <- function(tree) {
     stat_cor(
       aes(label = paste(..rr.label.., ..n.label.., sep = "~`,`~"), family = "Arial")
     ) +
+    theme_bw() +
     theme(
+      text = element_text(family = "Arial"),
       legend.position = c(0.39, 0.15),
       legend.key.size = unit(0.5, "cm"),
       legend.spacing.y = unit(0.1, "cm"),
@@ -48,6 +50,7 @@ ratio_combine <- function(tree) {
     ) +
     xlab("Total dry mass of leaf disc (g)") +
     ylab("Whole-leaf LMA / leaf disc LMA") +
+    theme_bw() +
     theme(
       legend.position = c(0.7, 0.75),
       legend.key.size = unit(0.5, "cm"),
@@ -73,6 +76,7 @@ ratio_combine <- function(tree) {
     scale_x_log10() +
     xlab("Leaf thickness (mm)") +
     ylab("Whole-leaf LMA / leaf disc LMA") +
+    theme_bw() +
     theme(
       legend.position = c(0.7, 0.75),
       legend.key.size = unit(0.5, "cm"),
@@ -98,6 +102,7 @@ ratio_combine <- function(tree) {
     scale_x_log10() +
     xlab(expression(Leaf ~ area ~ (m^2))) +
     ylab("Whole-leaf LMA / leaf disc LMA") +
+    theme_bw() +
     theme(
       legend.position = "none",
       # legend.position = c(0.2, 0.75),
@@ -110,7 +115,10 @@ ratio_combine <- function(tree) {
     )
 
   p_ratio <- ratio_mass + ratio_lt + ratio_la +
-    plot_annotation(tag_levels = "a")
+    plot_annotation(tag_levels = "a") &
+    #theme_bw() &
+    theme(
+      text = element_text(family = "Arial"))
 
   p_ratio
 }
