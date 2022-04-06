@@ -101,6 +101,7 @@ list(
     ggsave(
       "figs/lalt_pool_grid.pdf",
       lalt_pool_grid_plot,
+      device = cairo_pdf,
       width = 6,
       height = 6
     ),

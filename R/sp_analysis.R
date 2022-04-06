@@ -17,7 +17,7 @@ lalt_pool_grid_point <- function(data) {
     }))) +
     stat_cor(
       aes(label = paste(..rr.label.., ..n.label.., sep = "~`,`~"),
-          family = "Helvetica")
+          family = "Arial")
     ) +
     theme_bw() +
     theme(text = element_text(family = "Arial"))
