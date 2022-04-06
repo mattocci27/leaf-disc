@@ -7,6 +7,7 @@ source("R/data_clean.R")
 source("R/sp_analysis.R")
 source("R/ind_analysis.R")
 source("R/fig_write.R")
+source("R/yml.R")
 
 options(clustermq.scheduler = "multiprocess")
 
@@ -77,9 +78,12 @@ list(
     yaku_sp,
     create_yaku_sp(lma_yaku_re)
   ),
-
+  tar_target(
+    yml,
+    write_yml("values.yml",
+      sp_mean, full_data_cv_csv, tree, lma_yaku_re)
+  ),
   # analyses and figs ---------------------------------------------
-
   tar_target(
     lalt_pool_grid_plot,
     lalt_pool_grid_point(sp_mean)

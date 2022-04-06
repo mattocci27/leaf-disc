@@ -62,4 +62,6 @@ sp_mean|stem|5a25ed7eae469d38|c2d2f900b50fbd69|18b8547f7beb1745|-1139609546||t19
 tree|stem|46039bae9b88cb10|78bf1ce21634e8ad|dbf53a1c6cd39ec8|-804650366||t19088.3901836924s|6c83c5aa3ab81b0e|78786|rds|local|vector|||0.044||
 tree_dat_clean|function|339eb25ff0760d2d|||||||||||||||
 tree_data_csv|stem|edf116afcfd658e8|876f0812d5d5eecc|f9c646a697b9eaa7|580750189||t19088.3901829048s|b54c1165f64bfa66|69155|rds|local|vector|||0.811||
+write_yml|function|82d2a7252505973a|||||||||||||||
 yaku_sp|stem|0cd52e6d499a2f52|af2adebe8cc97f56|7dd28e068e36d6e4|-86370842||t19088.3901707653s|2c38b3e1787e95ec|6346|rds|local|vector|||0.027||
+yml|stem|2361694b1aa12b38|230b67ddf929f083|07161fb54d4c6b81|-788017771||t19088.6659266406s|44989414465ff33d|49|rds|local|vector|||0.836||
