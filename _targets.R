@@ -25,7 +25,7 @@ tar_option_set(packages = c(
 ))
 
 theme_set(theme_bw())
-#theme_update(text = element_text(family = "Arial"))
+theme_update(text = element_text(family = "Arial"))
 
 #
 list(
@@ -93,10 +93,48 @@ list(
     lalt_pool_grid_point(sp_mean)
   ),
 
+  tar_target(
+    lalt_pool_grid_png,
+    ggsave(
+      "figs/lalt_pool_grid.png",
+      lalt_pool_grid_plot,
+      dpi = 300,
+      width = 6,
+      height = 6
+    )
+  ),
+  tar_target(
+    lalt_pool_grid_pdf,
+    ggsave(
+      "figs/lalt_pool_grid.pdf",
+      lalt_pool_grid_plot,
+      width = 6,
+      height = 6
+    )
+  ),
 
   tar_target(
     lalt_sep_grid_plot,
     lalt_sep_grid_point(sp_mean)
+  ),
+  tar_target(
+    lalt_sep_grid_png,
+    ggsave(
+      "figs/lalt_sep_grid.png",
+      lalt_sep_grid_plot,
+      dpi = 300,
+      width = 6,
+      height = 6
+    )
+  ),
+  tar_target(
+    lalt_sep_grid_pdf,
+    ggsave(
+      "figs/lalt_sep_grid.pdf",
+      lalt_sep_grid_plot,
+      width = 6,
+      height = 6
+    )
   ),
 
   tar_target(
@@ -185,25 +223,7 @@ list(
   #     list(6, 6, 6, 6, 3, 3, 3, 5)
   # )),
 
-  tar_target(
-    test,
-    mapply(function(filename, plot, width, height)ggsave(filename = filename, plot = plot, width = width, height = height),
-      list(
-        "figs/lalt_pool_grid.tiff",
-        "figs/lalt_sep_grid.tiff"),
-      list(
-        lalt_pool_grid_plot,
-        lalt_sep_grid_plot),
-      list(6, 7),
-      list(6, 6)
-  )),
-   # tar_target(
-   #   fig_tiff,
-   #   mapply(save_tiff,
-   #            plot_dat$file_tiff,
-   #            plot_dat$plots,
-   #            plot_dat$width, plot_dat$height)
-   # ),
+
   tar_render(
     report,
     "report.Rmd"

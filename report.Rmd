@@ -1,5 +1,5 @@
 ---
-Title: "your title"
+title: Figures for "Sources and consequences of mismatch between leaf disc and whole-leaf leaf mass per area (LMA)"
 author: "Masatoshi Katabuchi"
 date: "`r format(Sys.time(), '%B %d, %Y')`"
 output:
@@ -36,32 +36,63 @@ library(kableExtra)
 
 # Leaf disc vs whole-leaf LMA (species-level)
 
-```{r}
-tar_read(lalt_pool_grid_plot)
-```
-
-```{r}
-theme_set(theme_bw())
-theme_update(text = element_text(family = "Arial"))
-```
-
 ## Pooled
 
-```{r}
-tar_read(lalt_pool_grid_plot)
-```
+
+![](figs/lalt_pool_grid.png)
 
 ## Seprated
 
-```{r}
-tar_read(lalt_sep_grid_plot)
-```
 
-## SMA table (species-level)
+![](figs/lalt_sep_grid.png)
+
+
+# SMA table (species-level)
 
 ```{r}
 tar_load(sma_tab)
 sma_tab |>
   kable() |>
   kable_styling()
+```
+
+# Leaf disc vs whole-leaf LMA (individual-level)
+
+
+![](figs/lalt_tree_grid.png)
+
+# Divergence (species-level)
+
+
+![](figs/ratio.png)
+
+
+# LMA and LD (species-level)
+
+
+![](figs/lma_ld.png)
+
+
+# CV
+
+
+![](figs/cv_pool.png)
+
+![](figs/cv_sep.png)
+
+# Leaf support cost (species-level)
+
+
+![](figs/petiole.png)
+
+
+# Computing Environment
+
+```{r}
+devtools::session_info()
+```
+
+
+```{r}
+tar_visnetwork()
 ```
