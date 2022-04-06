@@ -4,20 +4,20 @@ ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update \
   && apt-get install -y \
-    ttf-mscorefonts-installer \
+  ttf-mscorefonts-installer \
   && fc-cache -f \
   && apt-get autoremove -y \
   && apt-get autoclean -y
 
 RUN install2.r -n -4 --skipinstalled --error \
-    tictoc \
-    patchwork \
-    smatr \
-    ggrepel \
-    lavaan \
-    DT \
-    lmtest \
-    semPlot
+  tictoc \
+  patchwork \
+  smatr \
+  ggrepel \
+  lavaan \
+  DT \
+  lmtest \
+  semPlot
 
 RUN installGithub.r \
   mattocci27/ggsma \

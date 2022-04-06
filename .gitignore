@@ -148,3 +148,4 @@ ms/*.log
 .env
 
 test.R
+*.tiff

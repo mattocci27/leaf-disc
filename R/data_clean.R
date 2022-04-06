@@ -25,8 +25,8 @@ clean_lma_yaku <- function(lma_yaku) {
       ld_disc = td) |>
     mutate(ld_leaf = lma_leaf / lt * 10^-3) %>%
     mutate(ldmc_disc = NA) |>
-    mutate(lt_disc = NA)
-
+    mutate(lt_disc = NA) |>
+    mutate(petiole_ratio = petiole_dw / scanned_leaf_dw)
   yaku
 }
 
@@ -385,4 +385,25 @@ tree_dat_clean <- function(tree_data_csv) {
                            "Thick-leaved~individuals"))
 
   tree
+}
+
+create_yaku_sp <- function(lma_yaku_re) {
+  lma_yaku_re |>
+    group_by(species) |>
+    summarize_at(
+                 .vars = vars(
+               lma_disc,
+               lma_leaf,
+               ldmc_disc,
+               ldmc_leaf,
+               ld_disc,
+               ld_leaf,
+               lt,
+               lt_disc,
+               la,
+               petiole_ratio
+                 ),
+      .funs =  \(x)mean(x, na.rm = TRUE)) |>
+    filter(petiole_ratio > 0) |>
+    filter(!is.na(lma_disc))
 }
