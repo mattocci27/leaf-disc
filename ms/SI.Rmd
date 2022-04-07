@@ -61,11 +61,16 @@ output:
 library(knitr)
 library(tidyverse)
 library(methods)
-source("../scripts/rmd_func.R")
+library(targets)
 basename <- "LMA_method"
-opts_chunk$set(fig.path = paste("figs/", sep=""))
-opts_chunk$set(tidy=FALSE, warning=FALSE, message=FALSE,
-               comment = NA, verbose = TRUE, echo=FALSE)
+opts_chunk$set(fig.path = paste("figs/", sep = ""))
+opts_chunk$set(tidy = FALSE,
+               warning = FALSE,
+               message = FALSE,
+               comment = NA,
+               verbose = TRUE,
+               cache = FALSE,
+               echo = FALSE)
 # PDF-based figures
 opts_chunk$set(dev='pdf')
 
@@ -73,7 +78,7 @@ opts_chunk$set(dev='pdf')
 options(kableExtra.auto_format = FALSE)
 library(kableExtra)
 
-val <- yaml::yaml.load_file("../values.yml")
+val <- yaml::yaml.load_file("values.yml")
 ```
 
 # Appendix S1:
@@ -121,7 +126,7 @@ We have independent measurement for thickness for leaf discs and whole-leaves in
 If we use the same leaf thickness values for leaf discs and whole-leaves (i.e., LTw~i~/LTd~i~ =1), the scatter plots will be identical for LMA and LD.
 Consequently, we do not perform further analyses for LD, because differences between whole-leaf LD and leaf disc LD only depends on the ratio between whole-leaf LMA and leaf disc LMA and measurement errors of leaf thickness.
 
-![](../figs/fig1.png){ width="600" style="display: block; margin: 0 auto" }
+![](../figs/lma_ld.png){ width="600" style="display: block; margin: 0 auto" }
 
 Figure: Relationships between species mean leaf mass per area (LMA) and leaf tissue density (LD) determined by using whole leaves and leaf discs for the Yunnan dataset that has both leaf thickness for leaf discs and whole leaves.
 Dashed lines indicate 1:1 lines.
@@ -138,7 +143,7 @@ Relationships between whole-leaf LMA : disc leaf LMA and (a) total dry mass for 
 All the relationships were heteroscedastic (unequal variance, *p* < 0.001; all the samples were analyzed together in (a)).
 Samples with small total dry mass, thin leaves, and larger leaves tended to show greater variance.
 
-![](../figs/LMAratio2.png){style="display: block; margin: 0 auto" }
+![](../figs/ratio.png){style="display: block; margin: 0 auto" }
 
 \newpage
 
@@ -148,36 +153,9 @@ Summary of multiple regression for log-transformed total dry mass of leaf discs.
 The leaf punch size is described as an effect of '1.0 cm diameter' compared with '0.6 cm diameter'.
 
 ```{r, eval=TRUE, echo=FALSE}
-tree <- read_csv("../data/tree_data.csv")
-
-tree2 <- tree |>
-  filter(!is.na(LMAdisc)) |>
-  filter(!is.na(LMAleaf)) |>
-  filter(!is.na(LTleaf)) |>
-  rename(LT = LTleaf) |>
-  rename(LA = LAleaf) |>
-  mutate(Dry_mass_disc2 = case_when(
-   Location == "Yakushima" ~ LMAdisc * 1.57 * 10^-4 / 2,
-   TRUE ~ LMAdisc * 0.889 * 10^-4 / 3
-                )) |>
-  mutate(Dry_mass_disc = case_when(
-   Location == "Yakushima" ~ LMAdisc * 1.57 * 10^-4,
-   TRUE ~ LMAdisc * 0.889 * 10^-4
-                )) |>
-  mutate(PCH = ifelse(Location == "Yakushima", "1.0 cm", "0.6 cm"))
-
-fit <- lm(log(Dry_mass_disc) ~ scale(log(LT)) + scale(log(LA)) + PCH, tree2)
-
-s <- summary(fit)
-tb <- s$coefficients |> round(3) |> signif(3)
-colnames(tb) <- c("Estimate", "SE", "t-value", "*P* value")
-tb[,4] <- ifelse(tb[,4] < 0.001, "< 0.001", tb[,4])
-rownames(tb)[2] <- "log(Leaf thickness)"
-rownames(tb)[3] <- "log(Leaf area)"
-rownames(tb)[4] <- "Large leaf punch"
-
-tb |>
-  kable() |>
+tar_load(dm_lm_tab)
+dm_lm_tab |>
+  kable(format = "html") |>
   kable_styling()
 ```
 
@@ -190,7 +168,7 @@ Species groups are divided into four categories on the basis of the medians of t
 Estimates obtained by different leaf punches are plotted separately in different colors.
 All the correlations are significant (*P* < 0.001).
 
-![](../figs/LMA_sp_gr_both.png){ width="600" style="display: block; margin: 0 auto" }
+![](../figs/lalt_sep_grid.png){ width="600" style="display: block; margin: 0 auto" }
 
 # Appendix S6:
 
@@ -212,7 +190,7 @@ The 95% confidence intervals are presented as the shaded area.
 All the correlations are significant (*P* < 0.01).
 Note that the axes are square root scales.
 
-![](../figs/fig_cv2.png){ width="600" style="display: block; margin: 0 auto" }
+![](../figs/cv_sep.png){ width="600" style="display: block; margin: 0 auto" }
 
 \newpage
 # LITERATURE CITED
