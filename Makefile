@@ -1,28 +1,7 @@
-CV = data/full_data_cv.csv data/tree_data.csv docs/data_clean_cv.html
+all: ms/LMA_method.pdf
+docker: ms/LMA_method.pdf
 
-all: data/full_data.csv $(CV) values.yml docs/figs.html ms/leaf_disc.bib ms/LMA_method.pdf ms/diff.pdf ms/SI.html ms/cover.pdf ms/cover.docx ms/response_letter.pdf ms/response_letter.docx
-
-docker: data/full_data.csv $(CV) values.yml docs/figs.html ms/LMA_method.pdf ms/diff.pdf ms/SI.html ms/cover.pdf ms/cover.docx
-
-analysis: data/full_data.csv $(CV) values.yml docs/figs.html
-
-pandoc: ms/LMA_method.pdf ms/diff.pdf ms/SI.html ms/cover.pdf ms/cover.docx
-
-data/full_data.csv: docs/data_clean.Rmd
-	R -e 'system.time(rmarkdown::render("$<", "all"))'
-
-$(CV): emptytarget1
-emptytarget1: docs/data_clean_cv.Rmd
-	R -e 'system.time(rmarkdown::render("$<", "all"))'
-	touch $@
-
-docs/figs.html: docs/figs.Rmd
-	R -e 'system.time(rmarkdown::render("$<", "all"))'
-
-values.yml: scripts/yml.R data/full_data.csv
-	Rscript $<
-
-ms/LMA_method.pdf: ms/LMA_method.Rmd values.yml ms/leaf_disc.bib figs/*
+ms/LMA_method.pdf: ms/LMA_method.Rmd values.yml figs/*
 	R -e 'system.time(rmarkdown::render("$<", "all"))'
 
 ms/SI.html: ms/SI.Rmd values.yml
@@ -59,5 +38,8 @@ ms/response_letter.docx: ms/response_letter.Rmd
 .PHONY: clean
 clean:
 	rm -f ms/*.tuc \
-	ms/*.log
+	ms/*.log \
+	ms/*.aux \
+	ms/*.fdb_* \
+	ms/*.gz
 	rm -rf docs/components
