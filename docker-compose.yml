@@ -5,11 +5,12 @@ services:
     build:
       context: .
       dockerfile: ./docker/Dockerfile
-    command: Rscript run.R
-    #command: make docker
-    #command: ls /usr/share/fonts/truetype
-    #command: ls /usr/share/fonts/truetype/liberation
-    #command: R -e 'system.time(rmarkdown::render("test.Rmd"))'
+    #command: Rscript run.R
+    command: >
+      sh -c "
+        Rscript run.R &&
+        make docker
+      "
     container_name: leaf-disc
     environment:
       - LOCAL_UID=${LOCAL_UID}

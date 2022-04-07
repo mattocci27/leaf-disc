@@ -38,10 +38,11 @@ library(kableExtra)
 
 ## Pooled
 
+<!-- I put tar_load to use {{targets}} -->
+
 ```{r, include=FALSE}
 tar_load(lalt_pool_grid_png)
 ```
-
 
 ![](figs/lalt_pool_grid.png)
 

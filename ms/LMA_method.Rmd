@@ -33,7 +33,7 @@ output:
     number_sections: no
     template: templates/eisvogel2.tex
     #template: null
-    pandoc_args:
+    pandoc_arg:
       - "--filter"
       - "pandoc-crossref"
   word_document:
@@ -70,11 +70,11 @@ Sources and consequences of mismatch between leaf disc and whole-leaf leaf mass 
 
 $$ $$
 
-Phisamai Maenpuen^1,2,3\*^,
-Masatoshi Katabuchi^1,\*^,
+Phisamai Maenpuen^1,2,3^,
+Masatoshi Katabuchi^1\*^,
 Yusuke Onoda^4^,
 Cong Zhou^1,2^,
-Jiao-Lin Zhang^1,3^,
+Jiao-Lin Zhang^1,3\*^,
 Ya-Jun Chen^1,3,5^
 
 $$ $$
@@ -102,8 +102,6 @@ Jiao-Lin Zhang
 Tel: +86 691 871 3046;
 Fax: +86 691 871 5070;
 E-mail: zjl@xtbg.org.cn
-
-\* These authors contributed equally to this work.
 
 $$ $$
 
@@ -377,7 +375,7 @@ Blue solid lines indicate standardized major axis regressions.
 The 95% confidence intervals are presented as the shaded area.
 All the correlations are significant (*P* < 0.001).
 
-![](../figs/LMA_sp_gr.png)
+![](../figs/lalt_pool_grid.png)
 
 \newpage
 
@@ -387,7 +385,7 @@ Individual groups are divided into four categories based on the basis of the med
 All the correlations are significant (*P* < 0.001).
 Details as in Fig. 1.
 
-![](../figs/LMA_ind_gr.png)
+![](../figs/lalt_tree_grid.png)
 
 \newpage
 
@@ -397,4 +395,4 @@ The correlation is significant (*P* < 0.001).
 Details as in Fig. 1.
 Note that the axes are square root scales.
 
-![](../figs/fig_cv.png)
+![](../figs/cv_pool.png)
