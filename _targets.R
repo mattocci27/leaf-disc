@@ -306,8 +306,17 @@ list(
     format = "file"
   ),
 
+  tar_target(
+    dm_lm_tab,
+    dm_lm(tree)
+  ),
   tar_render(
     report,
     "report.Rmd"
+   ),
+  tar_render(
+    si,
+    "ms/SI.Rmd",
+    output_format = "html_document"
    )
 )

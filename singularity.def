@@ -27,3 +27,4 @@ From: mattocci/myenv:4.1.2
 
    Rscript -e 'extrafont::font_import'
 
+  install2.r targets

@@ -178,6 +178,8 @@ lma_ld_wrap_point <- function(sp_mean) {
         family = "Arial"
       )
     ) +
+    xlab("Leaf disc") +
+    ylab("Whole-leaf") +
     theme_bw() +
     theme(
       text = element_text(family = "Arial"))

@@ -122,3 +122,20 @@ ratio_combine <- function(tree) {
 
   p_ratio
 }
+
+#' @title Multiple regression for log-transformed total dry mass of leaf discs
+dm_lm <- function(tree) {
+  tree <- tree |>
+    mutate(pch = ifelse(location == "Yakushima", "1.0 cm", "0.6 cm"))
+
+  fit <- lm(log(dry_mass_disc) ~ scale(log(lt)) + scale(log(la)) + pch, tree)
+
+  s <- summary(fit)
+  tb <- s$coefficients |> round(3) |> signif(3)
+  colnames(tb) <- c("Estimate", "SE", "t-value", "*P* value")
+  tb[, 4] <- ifelse(tb[, 4] < 0.001, "< 0.001", tb[,4])
+  rownames(tb)[2] <- "log(Leaf thickness)"
+  rownames(tb)[3] <- "log(Leaf area)"
+  rownames(tb)[4] <- "Large leaf punch"
+  tb
+}
