@@ -56,10 +56,12 @@ ratio_combine|function|39af899c381a5781|||||||||||||||
 ratio_pdf|stem|7c1315a708e348f4|5c9e590c575821fd|fa252af2ba3ac272|-908551514|figs/ratio.pdf|t19090.4295302637s|b36f570b8103c9dd|192619|file|local|vector|||0.934||
 ratio_plot|stem|4ed70c2cf0e69866|deab1a5ab669067c|922d3142c28e477c|923082000||t19090.4042722707s|1e5cc5017dfb325b|917502|rds|local|vector|||0.081||
 ratio_png|stem|be298561d5620391|dd6023b40f942608|c90916a2c5e1143b|151564805|figs/ratio.png|t19090.4295302637s|746bf7684bb4ebb1|651604|file|local|vector|||1.197||
-report|stem|6cf93b5c8b6ae3fe|dd4bec689cfb0cf5|bbfc52c3b6d44bbd|-237041703|report.html*report.Rmd|t19090.6701417558s|976d93342380acf9|5484858|file|local|vector|||2.743||
+report|stem|7ff9610f724d962e|b73f3b1ad13a74b5|d5e2570f005f6511|-237041703|report.html*report.Rmd|t19090.686954433s|a733c294d9af8a89|5487481|file|local|vector|||2.652||
 save_tiff|function|5bae6d4d57942267|||||||||||||||
 si|stem|0298dfd7a75842fd|ebc7786f9ea1f783|2723bcc002d3a5fa|2093119568|ms/SI.html*ms/SI.Rmd|t19090.4449714816s|d630e90bd61d5e5e|3188163|file|local|vector|||0.76||
+sma_sp_tab|stem|47493763ad079317|4bf4bcf32224585e|b5aa4b0657e8fedf|-940233536||t19090.68691934s|b81895e14878e86f|359|rds|local|vector|||0.706||
 sma_tab|stem|47493763ad079317|4bf4bcf32224585e|b5aa4b0657e8fedf|-96450626||t19089.4222253143s|b81895e14878e86f|359|rds|local|vector|||0.93||
+sma_tree_tab|stem|087e6fdd8674b01e|edf17ed248c5d348|ba15551fa70dec6c|1514035256||t19090.6869183678s|b4cfbff6ad8d48ed|358|rds|local|vector|||0.745||
 sp_cv|stem|098578b60aaa4cb5|46b0126f11538483|a15aef5b0f0f60ec|1537666347||t19090.6433205491s|669ad20d6c868e5c|13843|rds|local|vector|||0.006||
 sp_dat_cv|function|c7f15cc84e015ff0|||||||||||||||
 sp_dat_mean|function|2e31ea0a3e438ecb|||||||||||||||

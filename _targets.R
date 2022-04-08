@@ -140,8 +140,13 @@ list(
   ),
 
   tar_target(
-    sma_tab,
+    sma_sp_tab,
     generate_sma_tab(sp_mean)
+  ),
+
+  tar_target(
+    sma_tree_tab,
+    generate_sma_tab(tree)
   ),
 
   tar_target(
