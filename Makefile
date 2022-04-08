@@ -1,10 +1,7 @@
 all: ms/LMA_method.pdf
-docker: ms/LMA_method.pdf
+docker: ms/LMA_method.pdf ms/diff.pdf
 
 ms/LMA_method.pdf: ms/LMA_method.Rmd values.yml figs/*
-	R -e 'system.time(rmarkdown::render("$<", "all"))'
-
-ms/SI.html: ms/SI.Rmd values.yml
 	R -e 'system.time(rmarkdown::render("$<", "all"))'
 
 ms/diff.pdf: ms/LMA_method_old.tex ms/LMA_method.tex
