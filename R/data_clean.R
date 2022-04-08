@@ -1,6 +1,22 @@
 #' @title CV
 cv <- \(x, na.rm = TRUE) sd(log(x), na.rm = TRUE) / mean(log(x), na.rm = TRUE)
 
+#' @title Bao's CV with log-transformation
+cv4 <- function(x, log = TRUE) {
+  x <- x[!is.na(x)]
+  if (log) x <- log(x)
+  n <- length(x)
+  mu <- mean(x)
+  sig <- sd(x)
+  cv1 <- sig / mu
+  gamma1 <- sum(((x - mu) / sig)^3) / n
+  gamma2 <- sum(((x - mu) / sig)^4) / n
+  cv4 <- cv1 - cv1^3 / n + cv1 / (4 * n)
+        + cv1^2 * gamma1 / (2 * n) + cv1 * gamma2 / (8 * n)
+  cv4
+}
+
+
 clean_lma_yaku <- function(lma_yaku) {
   d3 <- read_csv(lma_yaku) |>
     clean_names(abbreviations = c("LMA", "LD", "LDMC", "LT"))
@@ -165,7 +181,7 @@ data_clean_cv <- function(d, d3) {
         lt_disc,
         leaf_area_leaf
       ),
-      .funs = cv
+      .funs = cv4
     )
 
   sp_list <- d |>
@@ -188,15 +204,15 @@ data_clean_cv <- function(d, d3) {
       # mat,
       # map,
       data_contributor,
-      lma_disc = cv(lma_disc, na.rm = TRUE),
-      lma_leaf = cv(lma_leaf, na.rm = TRUE),
+      lma_disc = cv4(lma_disc),
+      lma_leaf = cv4(lma_leaf),
       # ldmc_disc = ldmc_disc,
-      # ldmc_leaf = cv(ldmc_leaf, na.rm = TRUE),
-      ld_disc = cv(ld_disc, na.rm = TRUE),
-      ld_leaf = cv(ld_leaf, na.rm = TRUE),
-      lt = cv(lt, na.rm = TRUE),
-      lt_disc = cv(lt_disc, na.rm = TRUE),
-      la = cv(la, na.rm = TRUE)
+      # ldmc_leaf = cv4(ldmc_leaf, na.rm = TRUE),
+      ld_disc = cv4(ld_disc),
+      ld_leaf = cv4(ld_leaf),
+      lt = cv4(lt),
+      lt_disc = cv4(lt_disc),
+      la = cv4(la)
     ) |>
     unique()
 
