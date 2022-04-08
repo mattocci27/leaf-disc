@@ -7,7 +7,7 @@ lalt_pool_grid_point <- function(data) {
     scale_x_log10() +
     scale_y_log10() +
     geom_abline(slope = 1, intercept = 0, lty = 2) +
-    geom_sma(se = TRUE) +
+    geom_sma(se = TRUE, nboot = 2000) +
     facet_grid(la_gr2 ~ lt_gr2, scale = "free", labeller = label_parsed) +
     xlab(expression(Leaf ~ disc ~ LMA ~ (g ~ m^{
       -2
@@ -170,7 +170,7 @@ lma_ld_wrap_point <- function(sp_mean) {
     geom_point(alpha = 0.6) +
     scale_x_log10() +
     scale_y_log10() +
-    geom_sma(se = TRUE) +
+    geom_sma(se = TRUE, nboot = 2000) +
     facet_wrap(~trait_lab, scale = "free", labeller = label_parsed) +
     stat_cor(
       aes(
@@ -195,7 +195,7 @@ cv_pool_point <- function(sp_cv) {
     geom_point(alpha = 0.6) +
     scale_x_continuous(trans = "sqrt", breaks = c(0.001, 0.01, 0.05, 0.1)) +
     scale_y_continuous(trans = "sqrt", breaks = c(0.001, 0.01, 0.05, 0.1)) +
-    geom_sma(se = TRUE) +
+    geom_sma(se = TRUE, nboot = 2000) +
     ylab("CV of whole-leaf LMA") +
     xlab("CV of leaf disc LMA") +
     coord_fixed() +
@@ -218,7 +218,7 @@ cv_sep_point <- function(sp_cv) {
     geom_point(alpha = 0.6) +
     scale_x_continuous(trans = "sqrt") +
     scale_y_continuous(trans = "sqrt") +
-    geom_sma(se = TRUE) +
+    geom_sma(se = TRUE, nboot = 2000) +
     ggtitle("Diameter: 0.6 cm") +
     ylab("CV of whole-leaf LMA") +
     xlab("CV of leaf disc LMA") +
