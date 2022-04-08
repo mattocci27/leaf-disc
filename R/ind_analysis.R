@@ -9,7 +9,7 @@ lalt_tree_grid <- function(tree) {
     scale_x_log10() +
     scale_y_log10() +
     geom_abline(slope = 1, intercept = 0, lty = 2) +
-    geom_sma(se = TRUE) +
+    geom_sma(se = TRUE, nboot = 2000) +
     facet_grid(la_gr2 ~ lt_gr2, scale = "free", labeller = label_parsed) +
     xlab(expression(Leaf ~ disc ~ LMA ~ (g ~ m^{
       -2
