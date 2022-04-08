@@ -1,8 +1,10 @@
 BootStrap: docker
 From: mattocci/myenv:4.1.2
+Registry: 210.72.93.96:5000
+
 
 %apprun R
-  exec R "${@}"
+exec R "${@}"
 
 %apprun Rscript
   exec Rscript "${@}"
@@ -13,18 +15,15 @@ From: mattocci/myenv:4.1.2
 %post
     DEBIAN_FRONTEND=noninteractive
 
-   installGithub.r \
+  installGithub.r \
       mattocci27/ggsma \
-      zeehio/facetscales
+      mattocci27/ggpubr
 
-   install2.r -n -1 --skipinstalled --error \
-      --deps TRUE \
-          egg \
-          ggcorrplot \
-          xlsx
+  install2.r -n -4 targets xfun cli rlang
 
-   Rscript -e 'remotes::install_version("Rttf2pt1", version = "1.3.8")'
+  #  install2.r -n -1 --skipinstalled --error \
+  #     --deps TRUE \
+  #         egg \
+  #         ggcorrplot \
+  #         xlsx
 
-   Rscript -e 'extrafont::font_import'
-
-  install2.r targets
