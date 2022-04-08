@@ -55,11 +55,23 @@ tar_load(lalt_sep_grid_png)
 ![](figs/lalt_sep_grid.png)
 
 
-# SMA table (species-level)
+# SMA table
+
+## species
 
 ```{r}
-tar_load(sma_tab)
-sma_tab |>
+tar_load(sma_sp_tab)
+sma_sp_tab |>
+  kable() |>
+  kable_styling()
+```
+
+
+## tree
+
+```{r}
+tar_load(sma_tree_tab)
+sma_tree_tab |>
   kable() |>
   kable_styling()
 ```
