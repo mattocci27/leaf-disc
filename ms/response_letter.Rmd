@@ -58,8 +58,12 @@ test
 
 > 2. A crucial thing for readers to know is how to "convert" one method's estimate of LMA to another: the authors could report an equation (or a few, accounting for some additional covariates such as leaf area and leaf thickness, which this paper identifies as important modifiers of the relationship) that scholars could use in the future if trying to compare LMA estimates collected using different methods. In other words, taking the eq from Appendix 2 and modifying it given the results of this study.
 
+- making stan
+
 
 > 3. I am confused and unconvinced by the inclusion and discussion of intraspecific trait variation on several levels. First, the authors do not clearly explain ITV, its importance, or its relevance to LMA. Secondly, the methods used to quantify ITV are not recommended (see Yang et al 2020. Large underestimation of intraspecific trait variation and its improvements. Frontiers in Plant Science); ideally the authors should use Bao's CV estimator. Finally, there is little interpretation of the results of their analysis. I think this metric needs to either be excluded entirely or significantly expanded upon.
+
+- Added Bao
 
 > Line comments:
 
@@ -77,17 +81,22 @@ test
 
 > L148-151 why were the species divided at all? Why not analyze the data as a single group, using leaf area and leaf thickness as (continuous) covariates? Dividing the species into groups this way turns a continuous variable into a categorical one, which is poor statistical practice.
 
+- making stan
+
 > L154-160 see major comment 3
 
 > L169-172 This is the major result of the paper. I suggest making it the first line of the results section (however I would modify it to fit the individual, rather than species-mean, level data: see below).
 
 > L175-176 Based on this, I am confused about the statistical approach. Did the authors separately run regressions for species-level means and individual level means? If so, it is almost a statistical inevitability that the individual level analysis would have a lower r2 than the species level analysis: therefore I would not report this as a result, per se. In addition, the species level means is more or less meaningless in the context of this paper: much more importantly is the comparison of individual based measurements. I would therefore remove the species level results form the manuscript, and instead only report on the individual level data.
 
+- need to think this
+
 > L182 I believe leaf punch size was something that varied between datasets, and was never measured on the same leaves. I'm therefore confused as to how the authors are interpreting the effect of "leaf punch size" in their models: could this not simply be a reflection of the different species represented in the different datasets?
 
 > L183-184 Which metric had higher ITV? That is a more relevant result than simply the R2 value.
 
 > L193 you mention "appropriate calibration": it would be extremely useful if the authors were to report an equation (or several) for converting LMA measured by one metric to the other, ideally that incorporate leaf area and thickness (see major comment).
+
 
 > L201-204 This is a result, and an important one (again, I'm thinking of readers who are looking for advice on how to measure LMA): it should be reported in the results section.
 

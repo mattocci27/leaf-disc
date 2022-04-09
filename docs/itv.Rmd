@@ -1,0 +1,117 @@
+---
+Title: "your title"
+author: "Masatoshi Katabuchi"
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+output:
+  html_document:
+    fig_caption: yes
+    theme: spacelab #readable #sandstone #spacelab #flatly
+    highlight: pygments #tango #kate
+    toc: TRUE
+    toc_depth: 2
+    number_sections: TRUE
+    toc_float:
+     collapsed: TRUE
+     smooth_scroll: TRUE
+     toc: true
+---
+
+```{r global_options, include=FALSE}
+library(knitr)
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  message = FALSE,
+  cache = FALSE,
+  fig.align = "center",
+  fig.show = "hold"
+)
+```
+
+- 100 sp
+- 5 trees each
+
+```{r}
+set.seed(123)
+n <- 100
+sigma <- diag(2)
+r <- sqrt(0.7)
+sigma[1, 2] <- sigma[2, 1] <- r
+
+xy <- mvtnorm::rmvnorm(n, mean = rep(0, 2), sigma = sigma)
+log_x_sp <- xy[, 1]
+log_y_sp <- xy[, 2]
+```
+
+```{r}
+sim_sp <- function(n, r) {
+  # sigma = 1
+  sigma <- diag(2)
+  r <- sqrt(r)
+  sigma[1, 2] <- sigma[2, 1] <- r
+  xy <- mvtnorm::rmvnorm(n, mean = rep(0, 2), sigma = sigma)
+  tibble(x = xy[, 1], y = xy[, 2])
+}
+```
+
+# uniform
+
+```{r}
+sigma_tree <- 0.3
+n_tree <- 3
+sigma2 <- diag(2) * 0.3^2
+r <- sqrt(0.7)
+sigma2[1, 2] <- sigma2[2, 1] <- r * sigma2[1,1]
+
+tmp <- NULL
+for (i in 1:n) {
+tmp <- rbind(
+  tmp,
+  mvtnorm::rmvnorm(n_tree, mean = rep(log_x_sp[i], 2), sigma = sigma))
+}
+
+log_x_tree <- tmp[, 1]
+log_y_tree <- tmp[, 2]
+
+cor(log_x_tree, log_y_tree)
+```
+
+```{r}
+sim_unif <- function(data, n_tree, r, sigma_tree) {
+  sigma2 <- diag(2) * sigma_tree^2
+  r <- sqrt(r)
+  sigma2[1, 2] <- sigma2[2, 1] <- r * sigma2[1,1]
+
+  tmp <- NULL
+  for (i in 1:nrow(data)) {
+  tmp <- rbind(
+    tmp,
+    mvtnorm::rmvnorm(n_tree, mean = rep(data$x[i], 2), sigma = sigma))
+  }
+  tibble(x = tmp[, 1], y = tmp[, 2] ,
+    sp = rep(1:nrow(data), each = n_tree))
+}
+
+sim_sp_dat <- sim_sp(10, r = 0.7)
+sim_unif(sim_sp_dat, 3, r = 0.7, sigma_tree = 0.3)
+```
+
+```{r}
+
+r_sp <- numeric(0)
+r_tree <- numeric(0)
+for (i in 1:100) {
+  sim_sp_dat <- sim_sp(100, r = 0.7)
+  r_sp[i] <- cor(sim_sp_dat$x, sim_sp_dat$y)
+  sim_tree_dat <- sim_unif(sim_sp_dat, 3, r = -0.8, sigma_tree = 1)
+  r_tree[i] <- cor(sim_tree_dat$x, sim_tree_dat$y)
+}
+
+plot(x ~ y , sim_tree_dat)
+plot(x ~ y , sim_sp_dat)
+
+summary(r_sp)
+summary(r_tree)
+
+```
+

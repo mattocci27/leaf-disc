@@ -1,6 +1,8 @@
 library(targets)
 library(tarchetypes)
 library(tidyverse)
+library(stantargets)
+library(cmdstanr)
 
 source("R/util.R")
 source("R/data_clean.R")
@@ -8,6 +10,7 @@ source("R/sp_analysis.R")
 source("R/ind_analysis.R")
 source("R/fig_write.R")
 source("R/yml.R")
+source("R/stan.R")
 
 options(clustermq.scheduler = "multiprocess")
 
@@ -17,9 +20,14 @@ tar_option_set(packages = c(
   "ggsma",
   "ggpubr",
   "smatr",
+  "parallel",
   "janitor",
   "extrafont"
 ))
+
+Sys.setenv(CMDSTAN = "/opt/cmdstan/cmdstan-2.29.0")
+set_cmdstan_path("/opt/cmdstan/cmdstan-2.29.0")
+cmdstan_version()
 
 list(
   # data cleaning ----------------------------------
@@ -84,6 +92,97 @@ list(
       sp_mean, full_data_cv_csv, tree, lma_yaku_re)
   ),
   # analyses and figs ---------------------------------------------
+
+  tar_target(
+    stan_sim_dat,
+    create_dummy_data(100)
+  ),
+  tar_target(
+    stan_sp_dat,
+    clean_stan_data(sp_mean)
+  ),
+
+  tar_target(
+    stan_tree_dat,
+    clean_stan_data(tree)
+  ),
+  tar_target(
+    stan_sp_dat_noint,
+    clean_stan_data(sp_mean, interaction = FALSE)
+  ),
+  tar_target(
+    stan_tree_dat_noint,
+    clean_stan_data(tree, interaction = FALSE)
+  ),
+  tar_stan_mcmc(
+    fit_sim,
+    "stan/model.stan",
+    data = stan_sim_dat,
+    refresh = 0,
+    chains = 4,
+    parallel_chains = getOption("mc.cores", 4),
+    iter_warmup = 1000,
+    iter_sampling = 1000,
+    seed = 123
+   ),
+  tar_stan_mcmc(
+    fit_sp,
+    "stan/model.stan",
+    data = stan_sp_dat,
+    refresh = 0,
+    chains = 4,
+    parallel_chains = getOption("mc.cores", 4),
+    iter_warmup = 1000,
+    iter_sampling = 1000,
+    seed = 123
+   ),
+  tar_stan_mcmc(
+    fit_tree,
+    "stan/model.stan",
+    data = stan_tree_dat,
+    refresh = 0,
+    chains = 4,
+    parallel_chains = getOption("mc.cores", 4),
+    iter_warmup = 1000,
+    iter_sampling = 1000,
+    seed = 123
+   ),
+  tar_stan_mcmc(
+    fit_sp_noint,
+    "stan/model.stan",
+    data = stan_sp_dat_noint,
+    refresh = 0,
+    chains = 4,
+    parallel_chains = getOption("mc.cores", 4),
+    iter_warmup = 1000,
+    iter_sampling = 1000,
+    seed = 123
+   ),
+  tar_stan_mcmc(
+    fit_tree_noint,
+    "stan/model.stan",
+    data = stan_tree_dat_noint,
+    refresh = 0,
+    chains = 4,
+    parallel_chains = getOption("mc.cores", 4),
+    iter_warmup = 1000,
+    iter_sampling = 1000,
+    seed = 123
+   ),
+
+  tar_target(
+    loo_,
+    lapply(
+      list(
+        fit_sp = fit_sp_mcmc_model,
+        fit_sp_noint = fit_sp_noint_mcmc_model,
+        fit_tree = fit_tree_mcmc_model,
+        fit_tree_noint = fit_tree_noint_mcmc_model
+        ),
+    \(x)x$loo(cores = parallel::detectCores())
+    )
+  ),
+
   tar_target(
     lalt_pool_grid_plot,
     lalt_pool_grid_point(sp_mean)
