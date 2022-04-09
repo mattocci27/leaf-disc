@@ -149,3 +149,5 @@ ms/*.log
 
 test.R
 *.tiff
+
+comments/
