@@ -151,3 +151,4 @@ test.R
 *.tiff
 
 comments/
+stan/model
