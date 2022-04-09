@@ -1,5 +1,7 @@
 all: ms/LMA_method.pdf
-docker: ms/LMA_method.pdf ms/diff.pdf
+docker: ms/LMA_method.pdf
+#docker: ms/LMA_method.pdf ms/diff.pdf
+local: ms/leaf_disc.bib
 
 ms/LMA_method.pdf: ms/LMA_method.Rmd values.yml figs/*
 	R -e 'system.time(rmarkdown::render("$<", "all"))'
@@ -31,6 +33,9 @@ ms/response_letter.docx: ms/response_letter.Rmd
 	R -e 'system.time(rmarkdown::render("$<", "all"))'
 # pandoc $< \
 	-o $@
+
+ms/leaf_disc.bib: ~/trait_method.bib
+	cp $< ./ms/
 
 .PHONY: clean
 clean:
