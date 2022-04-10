@@ -42,7 +42,7 @@
 ,,,,,,,,,,,,,,,,,,,,,,
 30,クロマツ,マツ,Pinus thunbergii Parl.,Pinus_thunbergii,Pinaceae,sp,gymnosperm,W,E,72,100,11.6905,8,1.4613125,0.624,0.624,0,0.945,533.7667337,0.366412214,,
 ,,,,,,,,,,,,,,,,,,,,,,
-31,カラスザンショウ,ミカン,Zanthoxylum ailanthoides Siebold et Zucc.,Zanthoxylum_ailanthoides,Rutaceae,sp,angiosperm,W,D,72,100,190.168,3,63.38933333,1.9105,1.8951,0.0154,0.2855,100.4638004,0.382942473,100.585924,0.35231497
+31,カラスザンショウ,ミカン,Zanthoxylum ailanthoides Siebold et Zucc.,Zanthoxylum_ailanthoides,Rutaceae,sp,angiosperm,W,D,72,100,190.168,3,63.38933333,1.9105,1.8951,,0.2855,100.4638004,0.382942473,100.585924,0.35231497
 ,,,,,,,,,,,,,,,,,,,,,,
 32,クスノキ,クスノキ,Cinnamomum camphora (L.) J.Presl,Cinnamomum_camphora,Lauraceae,sp,angiosperm,W,E,72,100,150.003,6,25.0005,1.7489,1.6341,0.1148,0.255,116.5910015,0.458187058,117.7746579,0.461861403
 ,,,,,,,,,,,,,,,,,,,,,,
@@ -246,7 +246,7 @@
 ,,,,,,,,,,,,,,,,,,,,,,
 139,ナナカマド,バラ,Sorbus commixta Hedl.,Sorbus_commixta,Rosaceae,sp,angiosperm,W,D,1649,100,77.782,17,4.575411765,0.6518,,,0.2175,83.79830809,0.431655629,87.85352859,0.403924269
 ,,,,,,,,,,,,,,,,,,,,,,
-140,ツルアジサイ,ユキノシタ,Hydrangea petiolaris Siebold et Zucc.,Hydrangea_petiolaris ,Hydrangeaceae,sp,angiosperm,W,D,1651,100,122.94,10,12.294,0.6691,,,0.3215,54.42492273,0.228361775,39.47042589,0.122769598
+140,ツルアジサイ,ユキノシタ,Hydrangea petiolaris Siebold et Zucc.,"Hydrangea_petiolaris ",Hydrangeaceae,sp,angiosperm,W,D,1651,100,122.94,10,12.294,0.6691,,,0.3215,54.42492273,0.228361775,39.47042589,0.122769598
 ,,,,,,,,,,,,,,,,,,,,,,
 141,ヤマグルマ,ヤマグルマ,Trochodendron aralioides Siebold et Zucc.,Trochodendron_aralioides,Trochodendraceae,sp,angiosperm,W,E,1651,100,124.468,11,11.31527273,1.6565,,,0.392,133.0864158,0.386130536,111.4084602,0.284205256
 ,,,,,,,,,,,,,,,,,,,,,,
@@ -528,7 +528,7 @@
 ,,,,,,,,,,,,,,,,,,,,,,
 313,ヤシャブシ,カバノキ,Alnus firma Siebold et Zucc.,Alnus_firma,Betulaceae,sp,angiosperm,W,D,1713,100,62.212,6,10.36866667,0.7535,,,0.27,121.1181123,0.485502577,107.5887415,0.39847682
 ,,,,,,,,,,,,,,,,,,,,,,
-314,ツルアジサイ,ユキノシタ,Hydrangea petiolaris Siebold et Zucc.,Hydrangea_petiolaris ,Hydrangeaceae,sp,angiosperm,W,D,1713,30,77.716,6,12.95266667,0.3011,,,0.166,38.74363066,0.255819881,35.01408748,0.210928238
+314,ツルアジサイ,ユキノシタ,Hydrangea petiolaris Siebold et Zucc.,"Hydrangea_petiolaris ",Hydrangeaceae,sp,angiosperm,W,D,1713,30,77.716,6,12.95266667,0.3011,,,0.166,38.74363066,0.255819881,35.01408748,0.210928238
 ,,,,,,,,,,,,,,,,,,,,,,
 315,ヤクシマホツツジ,ツツジ,Tripetalelia paniculata Sieb. et Zucc. f. paniculata T,Tripetaleia_paniculata,Ericaceae,sp,angiosperm,W,D,1712,50,31.816,10,3.1816,0.2254,,,0.19,70.84485793,0.392682927,73.21127382,0.385322494
 ,,,,,,,,,,,,,,,,,,,,,,
@@ -1108,7 +1108,7 @@
 ,,,,,,,,,,,,,,,,,,,,,,
 727,ヤクシマキイチゴ,バラ,Rubus palmatus Thunb.  var. yakumontanus (Masam.) Hatus. ex H.Ohba,Rubus_palmatus_var_yakumontanus,Rosaceae,var,angiosperm,W,D,1160,20,61.809,3,20.603,0.26116,,,0.2655,42.25274636,0.262208835,44.37239813,0.167127677
 ,,,,,,,,,,,,,,,,,,,,,,
-728,ツルアジサイ,ユキノシタ,Hydrangea petiolaris Siebold et Zucc.,Hydrangea_petiolaris ,Hydrangeaceae,sp,angiosperm,W,D,1741,30,33.457,5,6.6914,0.13337,,,0.359,39.86310787,0.209372057,49.88552536,0.138956895
+728,ツルアジサイ,ユキノシタ,Hydrangea petiolaris Siebold et Zucc.,"Hydrangea_petiolaris ",Hydrangeaceae,sp,angiosperm,W,D,1741,30,33.457,5,6.6914,0.13337,,,0.359,39.86310787,0.209372057,49.88552536,0.138956895
 ,,,,,,,,,,,,,,,,,,,,,,
 729,タラノキ,ウコギ,Aralia elata (Miq.) Seem.,Aralia_elata,Araliaceae,sp,angiosperm,W,D,156,50,184.59,9,20.51,0.78782,,,0.209,42.67945176,0.310409771,34.33927052,0.16430273
 ,,,,,,,,,,,,,,,,,,,,,,
@@ -1154,11 +1154,11 @@
 ,,,,,,,,,,,,,,,,,,,,,,
 752,アオツリバナ,ニシキギ,Euonymus yakushimensis Makino,Euonymus_yakushimensis,Celastraceae,sp,angiosperm,W,D,1305,20,90.468,4,22.617,0.29743,,,0.1445,32.87681832,0.238516439,26.89081918,0.186095634
 ,,,,,,,,,,,,,,,,,,,,,,
-753,ヤクシマヒメバライチゴ,バラ,Rubus illecebrosus var. yakushimensis ,Rubus_illecebrosus_var_yakushimensis,Rosaceae,var,angiosperm,W,,1292,10,7.001,15,0.466733333,0.01751,,,0.1175,25.01071276,0.229188482,,
+753,ヤクシマヒメバライチゴ,バラ,"Rubus illecebrosus var. yakushimensis ",Rubus_illecebrosus_var_yakushimensis,Rosaceae,var,angiosperm,W,,1292,10,7.001,15,0.466733333,0.01751,,,0.1175,25.01071276,0.229188482,,
 ,,,,,,,,,,,,,,,,,,,,,,
-754,ヤクシマヒメバライチゴ,バラ,Rubus illecebrosus var. yakushimensis ,Rubus_illecebrosus_var_yakushimensis,Rosaceae,var,angiosperm,W,,1053,50,29.683,19,1.562263158,0.11772,,,0.196,39.65906411,0.255746252,,
+754,ヤクシマヒメバライチゴ,バラ,"Rubus illecebrosus var. yakushimensis ",Rubus_illecebrosus_var_yakushimensis,Rosaceae,var,angiosperm,W,,1053,50,29.683,19,1.562263158,0.11772,,,0.196,39.65906411,0.255746252,,
 ,,,,,,,,,,,,,,,,,,,,,,
-755,ヤクシマヒメバライチゴ,バラ,Rubus illecebrosus var. yakushimensis ,Rubus_illecebrosus_var_yakushimensis,Rosaceae,var,angiosperm,W,,1053,10,16.486,15,1.099066667,0.03086,,,0.126,18.71891302,0.178072706,,
+755,ヤクシマヒメバライチゴ,バラ,"Rubus illecebrosus var. yakushimensis ",Rubus_illecebrosus_var_yakushimensis,Rosaceae,var,angiosperm,W,,1053,10,16.486,15,1.099066667,0.03086,,,0.126,18.71891302,0.178072706,,
 ,,,,,,,,,,,,,,,,,,,,,,
 756,ヤクシマガクウツギ,ユキノシタ,Hydrangea luteovenosa Koidz.  var. yakusimensis (Masam.) Sugim.,Hydrangea_luteovenosa_var_yakusimensis,Hydrangeaceae,var,angiosperm,W,D,1077,10,42.161,10,4.2161,0.16815,,,0.2895,39.8828301,0.17869288,,
 ,,,,,,,,,,,,,,,,,,,,,,
