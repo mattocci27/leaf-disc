@@ -97,19 +97,18 @@ list(
     stan_sim_dat,
     create_dummy_data(100)
   ),
-  tar_target(
-    stan_sp_dat,
-    clean_stan_data(sp_mean)
-  ),
-
+  # tar_target(
+  #   stan_sp_dat,
+  #   clean_stan_data(sp_mean)
+  # ),
   tar_target(
     stan_tree_dat,
     clean_stan_data(tree)
   ),
-  tar_target(
-    stan_sp_dat_noint,
-    clean_stan_data(sp_mean, interaction = FALSE)
-  ),
+  # tar_target(
+  #   stan_sp_dat_noint,
+  #   clean_stan_data(sp_mean, interaction = FALSE)
+  # ),
   tar_target(
     stan_tree_dat_noint,
     clean_stan_data(tree, interaction = FALSE)
@@ -126,58 +125,34 @@ list(
     seed = 123
    ),
   tar_stan_mcmc(
-    fit_sp,
-    "stan/model.stan",
-    data = stan_sp_dat,
-    refresh = 0,
-    chains = 4,
-    parallel_chains = getOption("mc.cores", 4),
-    iter_warmup = 1000,
-    iter_sampling = 1000,
-    seed = 123
-   ),
-  tar_stan_mcmc(
-    fit_tree,
-    "stan/model.stan",
-    data = stan_tree_dat,
-    refresh = 0,
-    chains = 4,
-    parallel_chains = getOption("mc.cores", 4),
-    iter_warmup = 1000,
-    iter_sampling = 1000,
-    seed = 123
-   ),
-  tar_stan_mcmc(
-    fit_sp_noint,
-    "stan/model.stan",
-    data = stan_sp_dat_noint,
-    refresh = 0,
-    chains = 4,
-    parallel_chains = getOption("mc.cores", 4),
-    iter_warmup = 1000,
-    iter_sampling = 1000,
-    seed = 123
-   ),
-  tar_stan_mcmc(
-    fit_tree_noint,
+    fit_tree_1,
     "stan/model.stan",
     data = stan_tree_dat_noint,
     refresh = 0,
     chains = 4,
     parallel_chains = getOption("mc.cores", 4),
-    iter_warmup = 1000,
-    iter_sampling = 1000,
+    iter_warmup = 2000,
+    iter_sampling = 2000,
+    seed = 123
+   ),
+  tar_stan_mcmc(
+    fit_tree_2,
+    "stan/model.stan",
+    data = stan_tree_dat,
+    refresh = 0,
+    chains = 4,
+    parallel_chains = getOption("mc.cores", 4),
+    iter_warmup = 2000,
+    iter_sampling = 2000,
     seed = 123
    ),
 
   tar_target(
     loo_,
-    lapply(
+    mclapply(
       list(
-        fit_sp = fit_sp_mcmc_model,
-        fit_sp_noint = fit_sp_noint_mcmc_model,
-        fit_tree = fit_tree_mcmc_model,
-        fit_tree_noint = fit_tree_noint_mcmc_model
+        fit_tree_1 = fit_tree_1_mcmc_model,
+        fit_tree_2 = fit_tree_2_mcmc_model
         ),
     \(x)x$loo(cores = parallel::detectCores())
     )
