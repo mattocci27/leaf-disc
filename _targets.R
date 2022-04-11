@@ -97,22 +97,26 @@ list(
     stan_sim_dat,
     create_dummy_data(100)
   ),
-  # tar_target(
-  #   stan_sp_dat,
-  #   clean_stan_data(sp_mean)
-  # ),
+  tar_target(
+    stan_sp_dat,
+    clean_stan_data(sp_mean, dry_mass = FALSE)
+  ),
   tar_target(
     stan_tree_dat,
-    clean_stan_data(tree)
+    clean_stan_data(tree, interaction = FALSE, dry_mass = TRUE, scale = TRUE)
+  ),
+  tar_target(
+    stan_tree_dat_noint,
+    clean_stan_data(tree, interaction = TRUE, dry_mass = FALSE, scale = TRUE)
+  ),
+  tar_target(
+    stan_tree_dat_simple,
+    clean_stan_data(tree, interaction = FALSE, dry_mass = FALSE, scale = TRUE)
   ),
   # tar_target(
   #   stan_sp_dat_noint,
   #   clean_stan_data(sp_mean, interaction = FALSE)
   # ),
-  tar_target(
-    stan_tree_dat_noint,
-    clean_stan_data(tree, interaction = FALSE)
-  ),
   tar_stan_mcmc(
     fit_sim,
     "stan/model.stan",
@@ -127,7 +131,8 @@ list(
   tar_stan_mcmc(
     fit_tree_1,
     "stan/model.stan",
-    data = stan_tree_dat_noint,
+    data = clean_stan_data(tree,
+      interaction = FALSE, dry_mass = FALSE, scale = TRUE),
     refresh = 0,
     chains = 4,
     parallel_chains = getOption("mc.cores", 4),
@@ -138,7 +143,8 @@ list(
   tar_stan_mcmc(
     fit_tree_2,
     "stan/model.stan",
-    data = stan_tree_dat,
+    data = clean_stan_data(tree,
+      interaction = TRUE, dry_mass = FALSE, scale = TRUE),
     refresh = 0,
     chains = 4,
     parallel_chains = getOption("mc.cores", 4),
@@ -146,13 +152,118 @@ list(
     iter_sampling = 2000,
     seed = 123
    ),
+  tar_stan_mcmc(
+    fit_tree_3,
+    "stan/punch.stan",
+    data = clean_stan_data(tree,
+      interaction = FALSE, dry_mass = TRUE, scale = TRUE),
+    refresh = 0,
+    chains = 4,
+    parallel_chains = getOption("mc.cores", 4),
+    iter_warmup = 2000,
+    iter_sampling = 2000,
+    seed = 123
+   ),
+  tar_stan_mcmc(
+    fit_tree_4,
+    "stan/model.stan",
+    data = clean_stan_data(tree,
+      interaction = FALSE, dry_mass = FALSE, scale = FALSE),
+    refresh = 0,
+    chains = 4,
+    parallel_chains = getOption("mc.cores", 4),
+    iter_warmup = 2000,
+    iter_sampling = 2000,
+    seed = 123
+   ),
+  tar_stan_mcmc(
+    fit_sp_1,
+    "stan/model.stan",
+    data = clean_stan_data(sp_mean,
+      interaction = FALSE, dry_mass = FALSE, scale = TRUE),
+    refresh = 0,
+    chains = 4,
+    parallel_chains = getOption("mc.cores", 4),
+    iter_warmup = 2000,
+    iter_sampling = 2000,
+    seed = 123
+   ),
+  tar_stan_mcmc(
+    fit_sp_4,
+    "stan/model.stan",
+    data = clean_stan_data(sp_mean,
+      interaction = FALSE, dry_mass = FALSE, scale = FALSE),
+    refresh = 0,
+    chains = 4,
+    parallel_chains = getOption("mc.cores", 4),
+    iter_warmup = 2000,
+    iter_sampling = 2000,
+    seed = 123
+  ),
+
+  tar_target(
+    coef_tree_tab,
+    create_stan_tab(fit_tree_1_draws_model)
+  ),
+
+  tar_target(
+    coef_tree_plot,
+    coef_pointrange(coef_tree_tab)
+  ),
+
+  tar_target(
+    coef_tree_png,
+    ggsave(
+      "figs/coef_tree.png",
+      coef_tree_plot,
+      dpi = 300,
+      width = 6,
+      height = 6
+    ),
+    format = "file"
+  ),
+  tar_target(
+    coef_tree_pdf,
+    ggsave(
+      "figs/coef_tree.pdf",
+      coef_tree_plot,
+      device = cairo_pdf,
+      width = 6,
+      height = 6
+    ),
+    format = "file"
+  ),
+  # tar_stan_mcmc(
+  # tar_stan_mcmc(
+  #   fit_sp_1,
+  #   "stan/model.stan",
+  #   data = stan_sp_dat_noint,
+  #   refresh = 0,
+  #   chains = 4,
+  #   parallel_chains = getOption("mc.cores", 4),
+  #   iter_warmup = 2000,
+  #   iter_sampling = 2000,
+  #   seed = 123
+  #  ),
+  # tar_stan_mcmc(
+  #   fit_sp_2,
+  #   "stan/model.stan",
+  #   data = stan_sp_dat,
+  #   refresh = 0,
+  #   chains = 4,
+  #   parallel_chains = getOption("mc.cores", 4),
+  #   iter_warmup = 2000,
+  #   iter_sampling = 2000,
+  #   seed = 123
+  #  ),
 
   tar_target(
     loo_,
     mclapply(
       list(
         fit_tree_1 = fit_tree_1_mcmc_model,
-        fit_tree_2 = fit_tree_2_mcmc_model
+        fit_tree_2 = fit_tree_2_mcmc_model,
+        fit_tree_3 = fit_tree_3_mcmc_punch
         ),
     \(x)x$loo(cores = parallel::detectCores())
     )
