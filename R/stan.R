@@ -100,8 +100,19 @@ coef_pointrange <- function(data) {
 
   ggplot(data2, aes(y = para)) +
     geom_vline(xintercept = 0, lty  = 2, color = "grey60") +
-    geom_linerange(aes(xmin = lwr2_5, xmax = upr97_5), color = "#3366FF") +
-    geom_linerange(aes(xmin = lwr5, xmax = upr95), size = 2, color = "#3366FF") +
+    geom_linerange(
+      aes(xmin = lwr2_5, xmax = upr97_5),
+      color = "#3366FF") +
+    geom_linerange(
+      aes(xmin = lwr5, xmax = upr95),
+      size = 1.5,
+      color = "#3366FF") +
+    geom_point(
+      aes(x = mean_),
+      color = "#3366FF",
+      fill =  "#33CCFF",
+      shape = 21,
+      size = 3) +
     ylab("") +
     xlab("Standardized coefficients") +
     theme_bw() +
