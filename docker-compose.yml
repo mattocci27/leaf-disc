@@ -1,17 +1,33 @@
 version: '3'
 
 services:
-  leaf-disc:
+  analysis:
     build:
       context: .
-      dockerfile: ./docker/Dockerfile
-    #command: Rscript run.R
-    command: >
-      sh -c "
-        Rscript run.R &&
-        make docker
-      "
-    container_name: leaf-disc
+      dockerfile: ./docker/analysis.Dockerfile
+    command: Rscript run.R
+    image: mattocci/leaf-disc-analysis
+    # command: >
+    #   sh -c "
+    #     Rscript run.R &&
+    #     make docker
+    #   "
+    container_name: leaf-disc-analysis
+    environment:
+      - LOCAL_UID=${LOCAL_UID}
+      - LOCAL_GID=${LOCAL_GID}
+    working_dir: /trait-methods
+    volumes:
+      - .:/trait-methods
+  pandoc:
+    build:
+      context: .
+      dockerfile: ./docker/pandoc.Dockerfile
+    command: make docker
+    image: mattocci/leaf-disc-pandoc
+    container_name: leaf-disc-pandoc
+    depends_on:
+      - "analysis"
     environment:
       - LOCAL_UID=${LOCAL_UID}
       - LOCAL_GID=${LOCAL_GID}

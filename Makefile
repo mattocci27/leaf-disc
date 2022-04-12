@@ -34,9 +34,6 @@ ms/response_letter.docx: ms/response_letter.Rmd
 # pandoc $< \
 	-o $@
 
-ms/leaf_disc.bib: ~/trait_method.bib
-	cp $< ./ms/
-
 .PHONY: clean
 clean:
 	rm -f ms/*.tuc \
