@@ -1,10 +1,9 @@
 BootStrap: docker
-From: mattocci/myenv:4.1.2
+From: mattocci/rstan:4.1.2
 Registry: 210.72.93.96:5000
 
-
 %apprun R
-exec R "${@}"
+  exec R "${@}"
 
 %apprun Rscript
   exec Rscript "${@}"
@@ -12,18 +11,31 @@ exec R "${@}"
 %runscript
   exec R "${@}"
 
+%environment
 %post
-    DEBIAN_FRONTEND=noninteractive
+  DEBIAN_FRONTEND=noninteractive
+  export RENV_VERSION=0.15.4
+  export R_VERSION=4.1.2
 
-  installGithub.r \
-      mattocci27/ggsma \
-      mattocci27/ggpubr
+  # Install python deps for radian
+  apt-get update -q -y \
+    && apt-get install --no-install-recommends --fix-missing -y \
+        libpython3-dev \
+        python3-dev \
+        python3-pip \
+    && apt-get autoremove -y \
+    && apt-get clean all
 
-  install2.r -n -4 targets xfun cli rlang
+  # Install radian
+  pip3 install --upgrade setuptools \
+    && pip3 install --default-timeout=100 -U radian
 
-  #  install2.r -n -1 --skipinstalled --error \
-  #     --deps TRUE \
-  #         egg \
-  #         ggcorrplot \
-  #         xlsx
+  # Add renv settings for global cache as well as linux distro specific
+	# directory hierarchy in cache (optional but useful)
+ 	echo "#renv settings\nRENV_PATHS_PREFIX_AUTO = TRUE\nRENV_PATHS_CACHE=/home/mattocci/renv" >> /usr/local/lib/R/etc/Renviron.site
+
+  # Install renv
+  R -e "install.packages('remotes', repos = c(CRAN = 'https://cloud.r-project.org'))"
+  R -e "remotes::install_github('rstudio/renv@${RENV_VERSION}')"
+
 
