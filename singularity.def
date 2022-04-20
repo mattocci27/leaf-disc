@@ -1,5 +1,5 @@
 BootStrap: docker
-From: mattocci/rstan:4.1.2
+From: mattocci/myenv-light:4.1.3
 Registry: 210.72.93.96:5000
 
 %apprun R
@@ -15,20 +15,7 @@ Registry: 210.72.93.96:5000
 %post
   DEBIAN_FRONTEND=noninteractive
   export RENV_VERSION=0.15.4
-  export R_VERSION=4.1.2
-
-  # Install python deps for radian
-  apt-get update -q -y \
-    && apt-get install --no-install-recommends --fix-missing -y \
-        libpython3-dev \
-        python3-dev \
-        python3-pip \
-    && apt-get autoremove -y \
-    && apt-get clean all
-
-  # Install radian
-  pip3 install --upgrade setuptools \
-    && pip3 install --default-timeout=100 -U radian
+  export R_VERSION=4.1.3
 
   # Add renv settings for global cache as well as linux distro specific
 	# directory hierarchy in cache (optional but useful)
@@ -37,5 +24,4 @@ Registry: 210.72.93.96:5000
   # Install renv
   R -e "install.packages('remotes', repos = c(CRAN = 'https://cloud.r-project.org'))"
   R -e "remotes::install_github('rstudio/renv@${RENV_VERSION}')"
-
 
