@@ -42,7 +42,7 @@ docker-compose up
 
 If you are not using docker, you will need the following dependencies.
 
-- R (4.1.2)
+- R (4.1.3)
 	- DT
 	- [mattocci27/ggpubr](https://github.com/mattocci27/ggpubr)
 	- [mattocci27/ggsma](https://github.com/mattocci27/ggsma)
