@@ -412,7 +412,7 @@ LMA matched well whole-leaf estimates. Thin and large leaves had weaker
 correlations between leaf disc and whole-leaf estimates. Variability of
 LMA estimates within species (i.e., amount of intraspecific variation)
 only weakly matched between whole-leaf and disc-based estimates
-(\emph{R\textsuperscript{2}} = 0.32). We also found that sample with
+(\emph{R\textsuperscript{2}} = 0.33). We also found that sample with
 small total dry mass of leaf discs tended to show greater differences
 between leaf disc and whole-leaf LMA.
 
@@ -598,6 +598,59 @@ and measurement errors of leaf thickness (Appendix S2).
 
 \emph{Statistical analyses}
 
+\emph{new subsection}
+
+To quantify the effect of leaf sizes and thicknesses on the relationship
+between whole-leaf and leaf disc LMA, we built hierarchical Bayes
+models. The whole-leaf LMA was assumed to follow a normal distribution
+(N) with the mean of leaf disc LMA and covariates of leaf size and leaf
+thickness on the log-scale;
+
+\[
+\mathrm{ln}(LMA_{Wi}) \sim N(\mathrm{ln}(LMA_{Di}) + \tilde{\mu_i}, \sigma_i)
+\]
+
+\[
+\tilde{\mu_i} = \beta_0 + \beta_1 \mathrm{ln}(LA_{i}) + \beta_2 \mathrm{ln}(LT_{i})
+\]
+
+where \(LMA_{Wi}\), \(LMA_{Di}\), \(LA_{i}\), \(LT_{i}\) are the
+whole-leaf LMA, leaf disc LMA, leaf area and leaf thickness for tree
+\emph{i}, respectively. \(\tilde{\mu_i}\) is the effect of leaf area and
+leaf thickness on the mean estimates for the whole-leaf LMA of tree
+\emph{i}, and \(\sigma_i\) is the variance of whole-leaf LMA for tree
+\emph{i}, and \(\beta\) are coefficients.
+
+The variance of whole-leaf LMA (\(\sigma_i\)) was assumed to follow a
+normal distribution;
+
+\[
+\mathrm{ln}(\sigma_i) \sim N(\mathrm{ln}(\tilde{\sigma_i}), \omega)
+\]
+
+\[
+\tilde{\sigma_i} = \gamma_0 + \gamma_1 \mathrm{ln}(LA_{i}) + \gamma_2 \mathrm{ln}(LT_{i})
+\]
+
+where \(\tilde{\sigma_i}\) is the effect of leaf area and leaf thickness
+on the variance of whole-leaf LMA, \(\omega\) is a scaling
+hyperparameter, and \(\gamma\) are coefficients. To allow comparisons
+among parameter estimates, \(\mathrm{ln}(LA)\) and \(\mathrm{ln}(LT)\)
+were scaled to a mean of 0 and standard deviation of 1.
+
+Posterior distributions of all parameters were estimated using the
+Hamiltonian Monte Carlo algorithm (HMC) implemented in Stan
+(\protect\hyperlink{ref-Carpenter2017}{Carpenter et al., 2017}) using
+the weakly-informative priors (\protect\hyperlink{ref-Gelman2008}{Gelman
+et al., 2008}). See supplement XXXX for more detail. The Stan code use
+to fit models is available from Github at:
+\url{https://github.com/mattocci27/leaf-disc}. Convergence of the
+posterior distribution was assessed with the Gelman-Rubin statistic with
+a convergence threshold of 1.1 for all parameters
+(\protect\hyperlink{ref-Gelman2013}{Gelman et al., 2013}).
+
+\emph{new subsection}
+
 Bivariate trait relationships between disc-based and whole-leaf
 log-transformed LMA were summarized with variance explained
 (\emph{R\textsuperscript{2}}) based on Pearson correlations and with
@@ -613,25 +666,29 @@ cm\textsuperscript{2}), thin-leaved species (LT \textless{} mm),
 small-leaved individuals (LA \textless{} cm\textsuperscript{2}), and
 thin-leaved individuals (LT \textless{} mm).
 
-The amount of intraspecific variation of LMA was calculated using
-coefficient of variation of log-normally distributed data;
-\(CV = \sqrt{exp(s_{\mathrm{ln}}^2) - 1}\), where \(s_{\mathrm{ln}}\) is
-the sample standard deviation in the log-transformed data
-(\protect\hyperlink{ref-Julious2000}{Julious and Debarnot, 2000}). We
-also considered CV on the arithmetic scale; \(CV = s/\bar{x}\), where
-\(s\) is the sample standard deviation and \(\bar{x}\) is the sample
-mean. However, these two different CV calculations only negligibly
-altered the bivariate relationship and did not change our conclusion,
-and thus we will report CV of log-normally distributed data in the main
-text.
+\emph{new subsection?}
+
+The amount of intraspecific variation (ITV) was calculated using Bao's
+CV estimator (\protect\hyperlink{ref-Yang2020}{Yang et al., 2020});
+
+\[
+CV = CV_1 - \frac{CV_1^3}{N} + \frac{CV_1}{4N} + \frac{CV_1^2 \gamma_1}{2N} + \frac{CV_1 \gamma_2}{8N}
+\]
+
+where \(CV_1 = s/\bar{x}\), \(s\) is the sample standard deviation and
+\(\bar{x}\) is the sample mean, \emph{N} is the sample size, and
+\(\gamma_1\) and \(\gamma_2\) are the skewness and kurtosis of the trait
+distribution. Bao's CV estimator is a robust method to quantify ITV
+based on coefficient of variation (CV) when sample size is small
+(\protect\hyperlink{ref-Yang2020}{Yang et al., 2020}).
 
 SMA analyses were run using the R package \emph{smatr}
 (\protect\hyperlink{ref-Warton2012a}{Warton et al., 2012}); this
 included tests for slope heterogeneity and elevation differences between
 disc-based and whole-leaf estimates of LMA values. Confidence intervals
-of SMA estimates were based on 1000 bootstraps. All statistical analyses
-were conducted in R version 4.1.2
-(\protect\hyperlink{ref-RCoreTeam2021}{R Core Team, 2021}).
+of SMA estimates were based on 2000 bootstraps. All statistical analyses
+were conducted in R version 4.1.3
+(\protect\hyperlink{ref-RCoreTeam2022}{R Core Team, 2022}).
 
 \hypertarget{results}{%
 \section{RESULTS}\label{results}}
@@ -664,7 +721,7 @@ variance (Fig. 2; Appendix S3). The total dry mass of leaf disc was
 positively correlated with both leaf thickness and leaf punch size
 (Appendix S4). Amounts of intraspecific variation (CV; coefficient of
 variation) only weakly matched between whole-leaf and disc-based
-estimates (Fig. 3; \emph{R\textsuperscript{2}} = 0.32).
+estimates (Fig. 3; \emph{R\textsuperscript{2}} = 0.33).
 
 \hypertarget{discussion}{%
 \section{DISCUSSION}\label{discussion}}
@@ -731,7 +788,7 @@ Even though we used the same species, the same individuals and the same
 trait (LMA) to estimate the extents of intraspecific trait variation
 (ITV), the explained variance of the relationship between whole-leaf and
 disc-based estimate was surprisingly small (Fig. 3;
-\emph{R\textsuperscript{2}} = 0.32). This is probably because leaf disc
+\emph{R\textsuperscript{2}} = 0.33). This is probably because leaf disc
 samples have more sources of ITV than whole-leaf samples (i.e.,
 variation among leaf discs within the same leaves). Although there are
 not many studies that quantified trait variation within a single leaf, a
@@ -851,6 +908,13 @@ Saccone, and S. Lavorel. 2010.
 functional variability: {Extent}, structure and sources of variation}.
 \emph{Journal of Ecology} 98: 604--613.
 
+\leavevmode\vadjust pre{\hypertarget{ref-Carpenter2017}{}}%
+Carpenter, B., A. Gelman, M. D. Hoffman, D. Lee, B. Goodrich, M.
+Betancourt, M. Brubaker, et al. 2017.
+\href{https://doi.org/10.18637/jss.v076.i01}{Stan : {A Probabilistic
+Programming Language}}. \emph{Journal of Statistical Software} 76:
+1--32.
+
 \leavevmode\vadjust pre{\hypertarget{ref-Diaz2004}{}}%
 Díaz, S., J. G. Hodgson, K. Thompson, M. Cabido, J. H. C. Cornelissen,
 A. Jalili, G. Montserrat-Martí, et al. 2004.
@@ -887,6 +951,17 @@ Garnier, E., and G. Laurent. 1994.
 specific mass and water content in congeneric annual and perennial grass
 species}. \emph{New Phytologist} 128: 725--736.
 
+\leavevmode\vadjust pre{\hypertarget{ref-Gelman2013}{}}%
+Gelman, A., J. B. Carlin, H. S. Stern, D. B. Dunson, A. Vehtari, and D.
+B. Rubin. 2013. Bayesian {Data Analysis}, {Third Edition}. {Taylor \&
+Francis}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-Gelman2008}{}}%
+Gelman, A., A. Jakulin, M. G. Pittau, and Y. S. Su. 2008.
+\href{https://doi.org/10.1214/08-AOAS191}{A weakly informative default
+prior distribution for logistic and other regression models}.
+\emph{Annals of Applied Statistics} 2: 1360--1383.
+
 \leavevmode\vadjust pre{\hypertarget{ref-Grubb1986}{}}%
 Grubb, P. 1986. Sclerophylls, pachyphylls, and pycnophylls: {The} nature
 and significance of hard leaf surface. \emph{Insects and the Plant
@@ -907,11 +982,6 @@ John, G. P., C. Scoffoni, T. N. Buckley, R. Villar, H. Poorter, and L.
 Sack. 2017. \href{https://doi.org/10.1111/ele.12739}{The anatomical and
 compositional basis of leaf mass per area}. \emph{Ecology Letters} 20:
 412--425.
-
-\leavevmode\vadjust pre{\hypertarget{ref-Julious2000}{}}%
-Julious, S. A., and C. A. Debarnot. 2000. Why are pharmacokinetic data
-summarized by arithmetic means? \emph{Journal of Biopharmaceutical
-Statistics} 10: 55--71.
 
 \leavevmode\vadjust pre{\hypertarget{ref-Katabuchi2015}{}}%
 Katabuchi, M. 2015.
@@ -1029,8 +1099,8 @@ Poorter, H., Ü. Niinemets, L. Poorter, I. J. Wright, and R. Villar.
 consequences of variation in leaf mass per area ({LMA}): {A}
 meta-analysis}. \emph{New Phytologist} 182: 565--588.
 
-\leavevmode\vadjust pre{\hypertarget{ref-RCoreTeam2021}{}}%
-R Core Team. 2021. R: {A} language and environment for statistical
+\leavevmode\vadjust pre{\hypertarget{ref-RCoreTeam2022}{}}%
+R Core Team. 2022. R: {A} language and environment for statistical
 computing. {R Foundation for Statistical Computing}, {Vienna, Austria}.
 
 \leavevmode\vadjust pre{\hypertarget{ref-Reich2014}{}}%
@@ -1083,14 +1153,19 @@ D. E. Bunker, R. Condit, et al. 2010.
 growth-mortality trade-off in tropical trees}. \emph{Ecology} 91:
 3664--3674.
 
+\leavevmode\vadjust pre{\hypertarget{ref-Yang2020}{}}%
+Yang, J., J. Lu, Y. Chen, E. Yan, J. Hu, X. Wang, and G. Shen. 2020.
+Large {Underestimation} of {Intraspecific Trait Variation} and {Its
+Improvements}. \emph{Frontiers in Plant Science} 11.
+
 \end{CSLReferences}
 
 \newpage
 
 \begin{longtable}[]{@{}lllr@{}}
-\toprule
+\toprule()
 Data & Slope & Intercept & \emph{R\textsuperscript{2}} \\
-\midrule
+\midrule()
 \endhead
 All & 0.97 {[}0.94, 1.01{]} & \textbf{0.09 {[}0.02, 0.16{]}} & 0.87 \\
 Thick-large & 0.93 {[}0.85, 1.03{]} & \textbf{0.19 {[}0.01, 0.37{]}} &
@@ -1099,7 +1174,7 @@ Thick-small & 1.02 {[}0.97, 1.07{]} & 0 {[}-0.11, 0.11{]} & 0.93 \\
 Thin-large & 0.91 {[}0.82, 1.02{]} & \textbf{0.2 {[}0.02, 0.37{]}} &
 0.71 \\
 Thin-small & 0.93 {[}0.83, 1.03{]} & 0.16 {[}-0.02, 0.35{]} & 0.84 \\
-\bottomrule
+\bottomrule()
 \end{longtable}
 
 \textbf{Table. 1.} Relationships between species mean leaf leaf mass per

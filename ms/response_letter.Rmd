@@ -58,10 +58,18 @@ test
 
 > 2. A crucial thing for readers to know is how to "convert" one method's estimate of LMA to another: the authors could report an equation (or a few, accounting for some additional covariates such as leaf area and leaf thickness, which this paper identifies as important modifiers of the relationship) that scholars could use in the future if trying to compare LMA estimates collected using different methods. In other words, taking the eq from Appendix 2 and modifying it given the results of this study.
 
-- making stan
+Thank you.
+This is an important thing to clarify.
+Leaf thickness and leaf area effect not only the mean LMA but also the standard deviation of LMA.
+XXX.
 
 
 > 3. I am confused and unconvinced by the inclusion and discussion of intraspecific trait variation on several levels. First, the authors do not clearly explain ITV, its importance, or its relevance to LMA. Secondly, the methods used to quantify ITV are not recommended (see Yang et al 2020. Large underestimation of intraspecific trait variation and its improvements. Frontiers in Plant Science); ideally the authors should use Bao's CV estimator. Finally, there is little interpretation of the results of their analysis. I think this metric needs to either be excluded entirely or significantly expanded upon.
+
+Thank you.
+We now use Bao's CV estimator (CV4) instead of  coefficient of variation of log-normally distributed data ($CV = \sqrt{exp(s_{\mathrm{ln}}^2) - 1}$).
+The pattern didn't change qualitatively.
+
 
 - Added Bao
 

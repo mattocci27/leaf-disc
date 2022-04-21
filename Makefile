@@ -21,7 +21,7 @@ ms/cover.docx: ms/cover.md
 	-o $@
 
 ms/leaf_disc.bib: ~/trait_method.bib
-	cp $< ./ms/
+	cp $< $@
 
 ms/response_letter.pdf: ms/response_letter.Rmd
 	R -e 'system.time(rmarkdown::render("$<", "all"))'
