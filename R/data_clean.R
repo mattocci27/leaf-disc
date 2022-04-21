@@ -192,6 +192,11 @@ data_clean_cv <- function(d, d3) {
     rename(la_leaf = leaf_area_leaf) |>
     mutate(garden = "NO")
 
+  yaku_sp_n <- d3 |>
+    group_by(species, location) |>
+    summarize(n = n()) |>
+    filter(n >= 3)
+
   yaku_sp <- d3 |>
     group_by(species) |>
     summarize(
@@ -215,6 +220,8 @@ data_clean_cv <- function(d, d3) {
       la = cv4(la)
     ) |>
     unique()
+
+  yaku_sp <- right_join(yaku_sp, yaku_sp_n, by = c("species", "location"))
 
   new_dat3 <- full_join(new_dat, yaku_sp,
     by = c("species", "family", "location", "biomes",
