@@ -25,7 +25,8 @@ header-includes:
 output:
   html_document:
     toc: FALSE
-  pdf_document:
+#  pdf_document:
+  bookdown::pdf_document2:
     keep_md: false
     fig_caption: yes
     keep_tex: yes
@@ -39,6 +40,7 @@ output:
   bookdown::word_document2:
     fig_width: 6
     fig_caption: yes
+    number_sections: no
     toc: FALSE
     reference_docx: templates/rmd_style.docx
     pandoc_args:
@@ -207,33 +209,25 @@ Dry mass for leaf discs were recorded 2-3 discs together for each leaf.
 Based on those measurements of whole-leaf and leaf disc samples, LMA (g m^-2^) was calculated as the ratio of leaf dry mass to fresh leaf area, and LD was calculated as the ratio of LMA to LT.
 We do not present results of LD in the main text, because differences between whole-leaf LD and leaf disc LD only depends on the ratio between whole-leaf LMA and leaf disc LMA and measurement errors of leaf thickness (Appendix S2).
 
-*Statistical analyses*
+*Effects of leaf sizes and thicknesses on the relationship between whole-leaf and leaf disc LMA*
 
-*new subsection*
+To quantify the effect of leaf area and thickness on the relationship between whole-leaf and leaf disc LMA, we built a hierarchical Bayesian model.
+The whole-leaf LMA was assumed to follow a normal distribution (N) with the mean of leaf disc LMA and covariates of  leaf area and leaf thickness on the log-scale;
 
-To quantify the effect of leaf sizes and thicknesses on the relationship between whole-leaf and leaf disc LMA, we built hierarchical Bayes models.
-The whole-leaf LMA was assumed to follow a normal distribution (N) with the mean of leaf disc LMA and covariates of  leaf size and leaf thickness on the log-scale;
-
-$$
-\mathrm{ln}(LMA_{Wi}) \sim N(\mathrm{ln}(LMA_{Di}) + \tilde{\mu_i}, \sigma_i)
-$$
-
-$$
-\tilde{\mu_i} = \beta_0 + \beta_1 \mathrm{ln}(LA_{i}) + \beta_2 \mathrm{ln}(LT_{i})
-$$
+\begin{align}
+\mathrm{ln}(LMA_{Wi}) & \sim N(\mathrm{ln}(LMA_{Di}) + \tilde{\mu_i}, \sigma_i) (\#eq:LMA)\\
+\tilde{\mu_i} & = \beta_0 + \beta_1 \mathrm{ln}(LA_{i}) + \beta_2 \mathrm{ln}(LT_{i}) (\#eq:mu)
+\end{align}
 
 where $LMA_{Wi}$, $LMA_{Di}$, $LA_{i}$, $LT_{i}$ are the whole-leaf LMA, leaf disc LMA, leaf area and leaf thickness for tree *i*, respectively.
 $\tilde{\mu_i}$ is the effect of leaf area and leaf thickness on the mean estimates for the whole-leaf LMA of tree *i*, and $\sigma_i$ is the variance of whole-leaf LMA for tree *i*, and $\beta$ are coefficients.
 
 The variance of whole-leaf LMA ($\sigma_i$) was assumed to follow a normal distribution;
 
-$$
-\mathrm{ln}(\sigma_i) \sim N(\mathrm{ln}(\tilde{\sigma_i}), \omega)
-$$
-
-$$
-\tilde{\sigma_i} = \gamma_0 + \gamma_1 \mathrm{ln}(LA_{i}) + \gamma_2 \mathrm{ln}(LT_{i})
-$$
+\begin{align}
+\mathrm{ln}(\sigma_i) & \sim N(\mathrm{ln}(\tilde{\sigma_i}), \omega) (\#eq:ln-sigma) \\
+\tilde{\sigma_i} & = \gamma_0 + \gamma_1 \mathrm{ln}(LA_{i}) + \gamma_2 \mathrm{ln}(LT_{i}) (\#eq:tilde-sigma)
+\end{align}
 
 where $\tilde{\sigma_i}$ is the effect of leaf area and leaf thickness on the variance of whole-leaf LMA,
 $\omega$ is a scaling hyperparameter, and $\gamma$ are coefficients.
@@ -244,7 +238,7 @@ See supplement XXXX for more detail.
 The Stan code use to fit models is available from Github at: [https://github.com/mattocci27/leaf-disc](https://github.com/mattocci27/leaf-disc).
 Convergence of the posterior distribution was assessed with the Gelman-Rubin statistic with a convergence threshold of 1.1 for all parameters [@Gelman2013].
 
-*new subsection*
+*Bivariate trait relationships for mean and CV*
 
 Bivariate trait relationships between disc-based and whole-leaf log-transformed LMA were summarized with variance explained (*R^2^*) based on Pearson correlations and with standardized major axis (SMA) regressions [@Warton2006] across all the samples and different leaf area and thickness groups.
 Species and individual groups were divided into four categories based on the medians of leaf area and leaf thickness across all species and all individuals, respectively:
@@ -255,13 +249,11 @@ thin-leaved species (LT < `r val$LT_mid` mm),
 small-leaved individuals (LA < `r val$LA_mid2` cm^2^),
 and thin-leaved individuals (LT < `r val$LT_mid2` mm).
 
-*new subsection?*
-
 The amount of intraspecific variation (ITV) was calculated using Bao's CV estimator [@Yang2020];
 
-$$
-CV = CV_1 - \frac{CV_1^3}{N} + \frac{CV_1}{4N} + \frac{CV_1^2 \gamma_1}{2N} + \frac{CV_1 \gamma_2}{8N}
-$$
+\begin{align}
+CV = CV_1 - \frac{CV_1^3}{N} + \frac{CV_1}{4N} + \frac{CV_1^2 \gamma_1}{2N} + \frac{CV_1 \gamma_2}{8N} (\#eq:CV)
+\end{align}
 
 where $CV_1 = s/\bar{x}$, $s$ is the sample standard deviation and $\bar{x}$ is the sample mean, *N* is the sample size, and $\gamma_1$ and $\gamma_2$ are the skewness and kurtosis of the trait distribution.
 Bao's CV estimator is a robust method to quantify ITV based on coefficient of variation (CV) when sample size is small [@Yang2020].
