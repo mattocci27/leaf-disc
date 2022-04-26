@@ -209,7 +209,7 @@ Dry mass for leaf discs were recorded 2-3 discs together for each leaf.
 Based on those measurements of whole-leaf and leaf disc samples, LMA (g m^-2^) was calculated as the ratio of leaf dry mass to fresh leaf area, and LD was calculated as the ratio of LMA to LT.
 We do not present results of LD in the main text, because differences between whole-leaf LD and leaf disc LD only depends on the ratio between whole-leaf LMA and leaf disc LMA and measurement errors of leaf thickness (Appendix S2).
 
-*Effects of leaf sizes and thicknesses on the relationship between whole-leaf and leaf disc LMA*
+*Effects of leaf area and thickness on the relationship between whole-leaf and leaf disc LMA*
 
 To quantify the effect of leaf area and thickness on the relationship between whole-leaf and leaf disc LMA, we built a hierarchical Bayesian model.
 The whole-leaf LMA was assumed to follow a normal distribution (N) with the mean of leaf disc LMA and covariates of  leaf area and leaf thickness on the log-scale;
@@ -219,7 +219,8 @@ The whole-leaf LMA was assumed to follow a normal distribution (N) with the mean
 \tilde{\mu_i} & = \beta_0 + \beta_1 \mathrm{ln}(LA_{i}) + \beta_2 \mathrm{ln}(LT_{i}) (\#eq:mu)
 \end{align}
 
-where $LMA_{Wi}$, $LMA_{Di}$, $LA_{i}$, $LT_{i}$ are the whole-leaf LMA, leaf disc LMA, leaf area and leaf thickness for tree *i*, respectively.
+where $LMA_{Wi}$, $LA_{i}$, $LT_{i}$ are the observed whole-leaf LMA, leaf area and leaf thickness for tree *i*, respectively,
+$LMA_{Di}$ is the true unobserved value of leaf disc LMA for tree *i*, which can be modeled using the observed leaf disc LMA.
 $\tilde{\mu_i}$ is the effect of leaf area and leaf thickness on the mean estimates for the whole-leaf LMA of tree *i*, and $\sigma_i$ is the variance of whole-leaf LMA for tree *i*, and $\beta$ are coefficients.
 
 The variance of whole-leaf LMA ($\sigma_i$) was assumed to follow a normal distribution;
