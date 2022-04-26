@@ -193,6 +193,20 @@ list(
     seed = 123
    ),
   tar_stan_mcmc(
+    fit_tree_6,
+    "stan/sma.stan",
+    data = clean_stan_data(tree,
+      interaction = FALSE, dry_mass = FALSE, scale = TRUE),
+    refresh = 0,
+    chains = 4,
+    parallel_chains = getOption("mc.cores", 4),
+    iter_warmup = 4000,
+    iter_sampling = 4000,
+    adapt_delta = 0.99,
+    max_treedepth = 15,
+    seed = 123
+   ),
+  tar_stan_mcmc(
     fit_sp_1,
     "stan/model.stan",
     data = clean_stan_data(sp_mean,
@@ -217,16 +231,15 @@ list(
     seed = 123
   ),
 
+  # coef for OLS stan
   tar_target(
     coef_tree_tab,
     create_stan_tab(fit_tree_1_draws_model)
   ),
-
   tar_target(
     coef_tree_plot,
     coef_pointrange(coef_tree_tab)
   ),
-
   tar_target(
     coef_tree_png,
     ggsave(
@@ -249,6 +262,39 @@ list(
     ),
     format = "file"
   ),
+
+  # coef for SMA stan
+  tar_target(
+    coef_tree_sma_tab,
+    create_stan_tab(fit_tree_6_draws_sma)
+  ),
+  tar_target(
+    coef_tree_sma_plot,
+    coef_pointrange(coef_tree_sma_tab)
+  ),
+  tar_target(
+    coef_tree_sma_png,
+    ggsave(
+      "figs/coef_tree_sma.png",
+      coef_tree_sma_plot,
+      dpi = 300,
+      width = 6,
+      height = 6
+    ),
+    format = "file"
+  ),
+  tar_target(
+    coef_tree_sma_pdf,
+    ggsave(
+      "figs/coef_tree_sma.pdf",
+      coef_tree_sma_plot,
+      device = cairo_pdf,
+      width = 6,
+      height = 6
+    ),
+    format = "file"
+  ),
+
   # tar_stan_mcmc(
   # tar_stan_mcmc(
   #   fit_sp_1,
