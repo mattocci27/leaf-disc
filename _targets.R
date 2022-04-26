@@ -181,6 +181,18 @@ list(
     seed = 123
    ),
   tar_stan_mcmc(
+    fit_tree_5,
+    "stan/model_glmm.stan",
+    data = clean_stan_data(tree,
+      interaction = FALSE, dry_mass = FALSE, scale = TRUE),
+    refresh = 0,
+    chains = 4,
+    parallel_chains = getOption("mc.cores", 4),
+    iter_warmup = 4000,
+    iter_sampling = 4000,
+    seed = 123
+   ),
+  tar_stan_mcmc(
     fit_sp_1,
     "stan/model.stan",
     data = clean_stan_data(sp_mean,

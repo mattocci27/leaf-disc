@@ -18,7 +18,7 @@ clean_stan_data <- function(sp_mean, interaction = TRUE, dry_mass = TRUE, scale 
 
   if (scale && dry_mass) {
     x2[, 4] <- x2[, 4] |> exp() |> log() |> scale() |> as.numeric()
-  }
+ }
 
   if (interaction){
     x <- cbind(x, x[, 2] * x[, 3])
@@ -34,6 +34,8 @@ clean_stan_data <- function(sp_mean, interaction = TRUE, dry_mass = TRUE, scale 
       N = nrow(sp_mean),
       K = ncol(x),
       K2 = ncol(x2),
+      J = unique(sp_mean$species) |> length(),
+      sp = sp_mean$species |> as.factor() |> as.numeric(),
       log_y = log_lma_leaf,
       log_lma_disc = log_lma_disc,
       x = x,
@@ -42,6 +44,8 @@ clean_stan_data <- function(sp_mean, interaction = TRUE, dry_mass = TRUE, scale 
     list(
       N = nrow(sp_mean),
       K = ncol(x),
+      J = unique(sp_mean$species) |> length(),
+      sp = sp_mean$species |> as.factor() |> as.numeric(),
       log_y = log_lma_leaf,
       log_lma_disc = log_lma_disc,
       x = x)
