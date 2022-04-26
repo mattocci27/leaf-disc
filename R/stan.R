@@ -119,6 +119,13 @@ coef_pointrange <- function(data) {
       size = 3) +
     ylab("") +
     xlab("Standardized coefficients") +
+    scale_y_discrete(labels = c(
+      "Intercept for mean" = expression(Intercept~of~mean~(beta[0])),
+      "Effect of LA on mean" = expression(Effect~of~LA~on~mean~(beta[1])),
+      "Effect of LT on mean" = expression(Effect~of~LT~on~mean~(beta[2])),
+      "Effect of LA on variance" = expression(Effect~of~LA~on~mean~(gamma[1])),
+      "Effect of LT on variance" = expression(Effect~of~LT~on~mean~(gamma[2]))
+    )) +
     theme_bw() +
     theme(
       text = element_text(family = "Arial"))

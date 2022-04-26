@@ -3,13 +3,13 @@ clean_lma_la|function|264963d2319eb466|||||||||||||||
 clean_lma_raw|function|6da1f00665d442c0|||||||||||||||
 clean_lma_yaku|function|e6368913aa97e0f2|||||||||||||||
 clean_stan_data|function|ed6268875518b3a2|||||||||||||||
-coef_pointrange|function|bafb0aae435040ba|||||||||||||||
-coef_tree_pdf|stem|cdfb7b0cf8dc9ac7|ab5e862ce4a0d15e|fb63254706d802ba|-1430864126|figs/coef_tree.pdf|t19094.6841349999s|d1c5037383de9b5b|11411|file|local|vector|||0.045||
-coef_tree_plot|stem|4ae6d51048fdd52d|fbc0e40ad232a2c7|f6f1e3c4535c5116|-1993865504||t19093.3992752546s|44f2d60cb0268713|43342|rds|local|vector|||0.114||
-coef_tree_png|stem|db709438358aa121|4a85054d90df6020|9bc2fc3f48e0cd98|506315422|figs/coef_tree.png|t19094.6841349999s|8c401922085f81b5|59234|file|local|vector|||0.155||
-coef_tree_sma_pdf|stem|b110cb5352deb1cf|22254aea1b7a5842|2d4315664086e762|-1018030401|figs/coef_tree_sma.pdf|t19108.3709546842s|8c6efb355d9853aa|11436|file|local|vector|||0.05||
-coef_tree_sma_plot|stem|b6dbdbd751c363f7|62aaf065106000ed|1642d227937fd573|1522379497||t19108.3709519064s|72a6c6c3b8b7d40d|43340|rds|local|vector|||0.061||
-coef_tree_sma_png|stem|42c2bc4be666302f|ca23cf84b672263a|edc69b0fa7af1e00|1228839430|figs/coef_tree_sma.png|t19108.3709539897s|a8b31c5983e38ece|59760|file|local|vector|||0.171||
+coef_pointrange|function|839e7c9f1dae90af|||||||||||||||
+coef_tree_pdf|stem|ddde2314a131a8c5|ab5e862ce4a0d15e|71674ac2e3b448cd|-1430864126|figs/coef_tree.pdf|t19108.4525481114s|4f9b176ff7226a7e|17643|file|local|vector|||0.064||
+coef_tree_plot|stem|a0161b036e06dda9|fbc0e40ad232a2c7|a24571b0598959e7|-1993865504||t19108.4525444076s|a4cbaa8714e1477a|56269|rds|local|vector|||0.011||
+coef_tree_png|stem|83b39a1dda482667|4a85054d90df6020|6bdafabcc31adc64|506315422|figs/coef_tree.png|t19108.4525498243s|4bedd3c29e19362c|70244|file|local|vector|||0.145||
+coef_tree_sma_pdf|stem|3e8dea70bc328c39|22254aea1b7a5842|309e752c76c5fa63|-1018030401|figs/coef_tree_sma.pdf|t19108.4525473243s|0155e5b251ac3bbe|17663|file|local|vector|||0.071||
+coef_tree_sma_plot|stem|4cedc2e6f5dd3ef9|62aaf065106000ed|c19534b7bd0c6a93|1522379497||t19108.4525440373s|33e00d5a26dba8a7|56276|rds|local|vector|||0.316||
+coef_tree_sma_png|stem|83ee9bc2eb33a0b2|ca23cf84b672263a|e9af5f38c4420bba|1228839430|figs/coef_tree_sma.png|t19108.452546491s|d1fb24f074da3faf|70707|file|local|vector|||0.179||
 coef_tree_sma_tab|stem|125ac0bd2f6dbf65|1af57b8011792c77|2bc2ba9577d0df3d|-1460001662||t19108.3709508878s|ddcf13ca978f2146|476|rds|local|vector|||0.668||
 coef_tree_tab|stem|d83a3d33bf5c19cb|f70e7ae4c0900e08|9733a148c575fb7f|1662822692||t19093.3828773895s|ddcf13ca978f2146|476|rds|local|vector|||0.103||
 create_dummy_data|function|d493e1b1c7b58ae0|||||||||||||||
@@ -84,7 +84,7 @@ fit_tree_5_summary_model_glmm|stem|ec96afd2dc256c8b|8a3235703c7937c3|807b8a8ea1f
 fit_tree_6_data|stem|55f8a50297f30a85|776c08768590e7cf|fc824305f737df68|1801695592||t19108.3298197532s|e287569ea55c7744|39549|qs|local|vector|||0.274||
 fit_tree_6_diagnostics_sma|stem|13e6cfb4146734b9|ba1b28ea49734e44|2a37ac20b003ff91|-1290973456||t19108.3706794942s|cfa315aeca86ad4d|313895|fst_tbl|local|vector|||0.002||
 fit_tree_6_draws_sma|stem|d42b2ea336fa9626|7cfe0a7729093538|2a37ac20b003ff91|1113557658||t19108.370851025s|32d2ec34b7802ccf|1054613300|fst_tbl|local|vector|||1.244||
-fit_tree_6_file_sma|stem|43d0a289563a9a34|892daed97878ef82|ef46db3751d8e999|743058837|stan/sma.stan|t19108.3676397647s|f3b5bd3807f83288|1054|file|local|vector|||0.001||
+fit_tree_6_file_sma|stem|43d0a289563a9a34|892daed97878ef82|ef46db3751d8e999|743058837|stan/sma.stan|t19108.3842566823s|f3b5bd3807f83288|1054|file|local|vector|||0.001||
 fit_tree_6_mcmc_sma|stem|a13488c408242957|a2d942ad12e5e6e4|9e2f4787480b5aa1|-156909233||t19108.3705882889s|a1771343c13139f3|867242706|qs|local|vector|||216.859|validate_csv is deprecated. Please use diagnostics instead.|
 fit_tree_6_summary_sma|stem|82ea72863b6f2f0d|d09f22b641c0b6c3|0d89577198fda791|191262541||t19108.3728877717s|4b14825306b0e22b|651718|fst_tbl|local|vector|||161.341||
 full_data_csv|stem|911aadd0cd915006|efb6fbf741102517|4eee1d8b40aadd73|-402441019||t19093.6897016067s|3b80ba1590d5d59f|32155|rds|local|vector|||0.81||
