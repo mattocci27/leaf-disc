@@ -60,7 +60,7 @@ test
 
 Thank you.
 This is an important thing to clarify.
-Leaf thickness and leaf area effect not only the mean LMA but also the standard deviation of LMA.
+Leaf thickness and leaf area effect not only the mean LMA but also the variance of LMA.
 XXX.
 
 
