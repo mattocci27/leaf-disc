@@ -36,7 +36,7 @@ output:
     pandoc_arg:
       - "--filter"
       - "pandoc-crossref"
-  word_document:
+  bookdown::word_document2:
     fig_width: 6
     fig_caption: yes
     toc: FALSE
@@ -53,11 +53,13 @@ library(tidyverse)
 library(methods)
 source("../scripts/rmd_func.R")
 basename <- "LMA_method"
-opts_chunk$set(fig.path = paste("figs/", sep=""))
-opts_chunk$set(tidy=FALSE, warning=FALSE, message=FALSE,
-               comment = NA, verbose = TRUE, echo=FALSE)
+opts_chunk$set(fig.path = paste("figs/", sep = ""))
+opts_chunk$set(
+  tidy = FALSE, warning = FALSE, message = FALSE,
+  comment = NA, verbose = TRUE, echo = FALSE
+)
 # PDF-based figures
-opts_chunk$set(dev='pdf')
+opts_chunk$set(dev = "pdf")
 
 # https://github.com/haozhu233/kableExtra/issues/477
 options(kableExtra.auto_format = FALSE)
@@ -379,12 +381,12 @@ colnames(tab1) <- c("Data", "Slope", "Intercept", "*R^2^*")
 
 tab1 <- tab1 |>
   mutate(Data = case_when(
-                        Data == "Thick~Large" ~ "Thick-large",
-                        Data == "Thick~Small" ~ "Thick-small",
-                        Data == "Thin~Large" ~ "Thin-large",
-                        Data == "Thin~Small" ~ "Thin-small",
-                        TRUE ~ Data
-                        ))
+    Data == "Thick~Large" ~ "Thick-large",
+    Data == "Thick~Small" ~ "Thick-small",
+    Data == "Thin~Large" ~ "Thin-large",
+    Data == "Thin~Small" ~ "Thin-small",
+    TRUE ~ Data
+  ))
 if ("html" == knitr::opts_knit$get("rmarkdown.pandoc.to")) {
   tab1 |>
     kable(format = "html") |>
@@ -396,7 +398,6 @@ if ("html" == knitr::opts_knit$get("rmarkdown.pandoc.to")) {
   tab1 |>
     kable(format = "pipe")
 }
-
 ```
 
 **Table. 1.**
