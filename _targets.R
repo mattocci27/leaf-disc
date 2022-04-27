@@ -22,7 +22,9 @@ tar_option_set(packages = c(
   "smatr",
   "parallel",
   "janitor",
-  "extrafont"
+  "extrafont",
+  "modelr",
+  "performance"
 ))
 
 # check if it's inside a container
@@ -207,6 +209,20 @@ list(
     seed = 123
    ),
   tar_stan_mcmc(
+    fit_tree_7,
+    "stan/sma_full.stan",
+    data = clean_stan_data(tree,
+      interaction = FALSE, dry_mass = FALSE, scale = TRUE),
+    refresh = 0,
+    chains = 4,
+    parallel_chains = getOption("mc.cores", 4),
+    iter_warmup = 4000,
+    iter_sampling = 4000,
+    adapt_delta = 0.99,
+    max_treedepth = 15,
+    seed = 123
+   ),
+  tar_stan_mcmc(
     fit_sp_1,
     "stan/model.stan",
     data = clean_stan_data(sp_mean,
@@ -230,6 +246,18 @@ list(
     iter_sampling = 2000,
     seed = 123
   ),
+  tar_stan_mcmc(
+    fit_sp_6,
+    "stan/sma.stan",
+    data = clean_stan_data(sp_mean,
+      interaction = FALSE, dry_mass = FALSE, scale = TRUE),
+    refresh = 0,
+    chains = 4,
+    parallel_chains = getOption("mc.cores", 4),
+    iter_warmup = 2000,
+    iter_sampling = 2000,
+    seed = 123
+   ),
 
   # coef for OLS stan
   tar_target(
@@ -295,6 +323,29 @@ list(
     format = "file"
   ),
 
+  tar_target(
+    coef_tree_sma_full_tab,
+    create_stan_tab(fit_tree_7_draws_sma_full)
+  ),
+
+  tar_target(
+    cv_tree,
+    create_cv_fit(tree, k = 10, seed = 123)
+  ),
+  tar_target(
+    cv_sp,
+    create_cv_fit(sp_mean, k = 10, seed = 123)
+  ),
+
+  # coef for SMA stan for sp
+  tar_target(
+    coef_sp_sma_tab,
+    create_stan_tab(fit_sp_6_draws_sma)
+  ),
+  tar_target(
+    coef_sp_sma_plot,
+    coef_pointrange(coef_sp_sma_tab)
+  ),
   # tar_stan_mcmc(
   # tar_stan_mcmc(
   #   fit_sp_1,

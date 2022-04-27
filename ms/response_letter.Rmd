@@ -52,7 +52,6 @@ output:
 
 test
 
-
 > 1. Framing: I think the paper misses an opportunity to provide a bit more context for why the study is important. The authors could provide more concrete examples of why standardizing LMA techniques across studies matters: e.g. what is the ecological significance of an LMA measurement difference between the two methods?  This could also be set up in the introduction by providing more context for LMA as a functional trait. For example, by citing the TRY database, the authors could provide readers with the importance and ubiquity of LMA relative to other plant traits (e.g. of all the studies of plant traits in TRY, how many report LMA?)
 
 
@@ -60,8 +59,9 @@ test
 
 Thank you.
 This is an important thing to clarify.
-Leaf thickness and leaf area effect not only the mean LMA but also the variance of LMA.
-XXX.
+Leaf thickness and leaf area effect not only the mean LMA but also the variance of LMA, and that is why R2 values changed among the four groups (thin vs. think and small vs. large leaves).
+
+
 
 
 > 3. I am confused and unconvinced by the inclusion and discussion of intraspecific trait variation on several levels. First, the authors do not clearly explain ITV, its importance, or its relevance to LMA. Secondly, the methods used to quantify ITV are not recommended (see Yang et al 2020. Large underestimation of intraspecific trait variation and its improvements. Frontiers in Plant Science); ideally the authors should use Bao's CV estimator. Finally, there is little interpretation of the results of their analysis. I think this metric needs to either be excluded entirely or significantly expanded upon.

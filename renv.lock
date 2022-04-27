@@ -340,6 +340,17 @@
         "backports"
       ]
     },
+    "bayestestR": {
+      "Package": "bayestestR",
+      "Version": "0.11.5",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Hash": "a1ac15e988cbeea3524f1f371ad13964",
+      "Requirements": [
+        "datawizard",
+        "insight"
+      ]
+    },
     "bit": {
       "Package": "bit",
       "Version": "4.0.4",
@@ -717,6 +728,16 @@
       "Hash": "36b67b5adf57b292923f5659f5f0c853",
       "Requirements": []
     },
+    "datawizard": {
+      "Package": "datawizard",
+      "Version": "0.4.0",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Hash": "80574954d62f0764830aa79144e82344",
+      "Requirements": [
+        "insight"
+      ]
+    },
     "dbplyr": {
       "Package": "dbplyr",
       "Version": "2.1.1",
@@ -976,19 +997,6 @@
         "Rcpp"
       ]
     },
-    "future": {
-      "Package": "future",
-      "Version": "1.24.0",
-      "Source": "Repository",
-      "Repository": "RSPM",
-      "Hash": "5cc7addaa73372fbee0a7d06c880068e",
-      "Requirements": [
-        "digest",
-        "globals",
-        "listenv",
-        "parallelly"
-      ]
-    },
     "gargle": {
       "Package": "gargle",
       "Version": "1.2.0",
@@ -1161,16 +1169,6 @@
       "Repository": "RSPM",
       "Hash": "1e1217c1b472d1dbffda819b57dc6d8d",
       "Requirements": []
-    },
-    "globals": {
-      "Package": "globals",
-      "Version": "0.14.0",
-      "Source": "Repository",
-      "Repository": "RSPM",
-      "Hash": "eca8023ed5ca6372479ebb9b3207f5ae",
-      "Requirements": [
-        "codetools"
-      ]
     },
     "glue": {
       "Package": "glue",
@@ -1377,6 +1375,14 @@
       "Source": "Repository",
       "Repository": "RSPM",
       "Hash": "6154ec2223172bce8162d4153cda21f7",
+      "Requirements": []
+    },
+    "insight": {
+      "Package": "insight",
+      "Version": "0.17.0",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Hash": "1d3b65d1cb9ee56a3df596e2012e0fb2",
       "Requirements": []
     },
     "isoband": {
@@ -1603,14 +1609,6 @@
       "Source": "Repository",
       "Repository": "RSPM",
       "Hash": "a1ace2ca925d2f6c0acb15f48cf464d0",
-      "Requirements": []
-    },
-    "listenv": {
-      "Package": "listenv",
-      "Version": "0.8.0",
-      "Source": "Repository",
-      "Repository": "RSPM",
-      "Hash": "0bde42ee282efb18c7c4e63822f5b4f7",
       "Requirements": []
     },
     "lme4": {
@@ -1856,14 +1854,6 @@
         "zip"
       ]
     },
-    "parallelly": {
-      "Package": "parallelly",
-      "Version": "1.31.0",
-      "Source": "Repository",
-      "Repository": "RSPM",
-      "Hash": "ceef6586b2539fd15f4cdf87061bfa04",
-      "Requirements": []
-    },
     "patchwork": {
       "Package": "patchwork",
       "Version": "1.1.1",
@@ -1906,6 +1896,18 @@
         "lme4",
         "magrittr",
         "numDeriv"
+      ]
+    },
+    "performance": {
+      "Package": "performance",
+      "Version": "0.9.0",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Hash": "32cae2f2159734e18e2e03ff20652656",
+      "Requirements": [
+        "bayestestR",
+        "datawizard",
+        "insight"
       ]
     },
     "pillar": {

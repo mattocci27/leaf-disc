@@ -139,3 +139,48 @@ dm_lm <- function(tree) {
   rownames(tb)[4] <- "Large leaf punch"
   tb
 }
+
+create_cv_fit <- function(tree, k = 10, seed = 123)  {
+  set.seed(seed)
+  cv <- crossv_kfold(tree, k = k)
+  y_bar <- mean(log(tree$lma_leaf))
+
+  models1 <- map(cv$train,
+    ~lm(log(lma_leaf) ~ log(lma_disc), data = .))
+  models2 <- map(cv$train,
+    ~lm(log(lma_leaf) ~ log(la) + log(lt),
+        offset = log(lma_disc), data = .))
+  models3  <- map(cv$train,
+    ~lm(log(lma_leaf) ~ log(lma_disc) + log(la) + log(lt),
+        data = .))
+  fit1 <- lm(log(lma_leaf) ~ log(lma_disc), data = tree)
+  fit2 <- lm(log(lma_leaf) ~ log(la) + log(lt),
+        offset = log(lma_disc), data = tree)
+  fit3 <- lm(log(lma_leaf) ~ log(lma_disc) + log(la) + log(lt), data = tree)
+
+  get_pred  <- function(model, test_data){
+    data  <- as.data.frame(test_data)
+    pred  <- add_predictions(data, model)
+    return(pred)
+  }
+
+  pred <- map(list(models1, models2, models3),
+    \(x) map2_df(x, cv$test, get_pred, .id = "Run"))
+
+  tmp_fun <- function(x) {
+    x |>
+    group_by(Run) |>
+    summarise(
+      MSE = mean((log(lma_leaf) - pred)^2),
+      R2 = 1 - sum((log(lma_leaf) - pred)^2) / sum((log(lma_leaf) - y_bar)^2) )
+  }
+
+  mse_dat <- map(pred, tmp_fun)
+  r2 <- map_dbl(mse_dat, \(x)mean(x$R2))
+  mse_ <- map_dbl(mse_dat, \(x)mean(x$MSE))
+  list(
+    table = tibble(model = paste("fit", 1:3), r2 = r2, mse = mse_),
+    fit1 = fit1,
+    fit2 = fit2,
+    fit3 = fit3)
+}
