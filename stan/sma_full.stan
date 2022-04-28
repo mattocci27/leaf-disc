@@ -7,10 +7,12 @@ data{
 }
 
 transformed data{
-  vector[N] log_lma_disc_s; // scaled
+  // vector[N] log_lma_disc_s; // scaled
+  // vector[N] log_y_s; // scaled
   int<lower=0> K2;
   K2 = K + 1;
-  log_lma_disc_s = (log_lma_disc - mean(log_lma_disc)) / sd(log_lma_disc);
+  // log_lma_disc_s = (log_lma_disc - mean(log_lma_disc)) / sd(log_lma_disc);
+  // log_y_s = (log_y - mean(log_y)) / sd(log_y);
 }
 
 parameters{
@@ -27,7 +29,7 @@ transformed parameters {
   real<lower=0> sigma_x;
   matrix[N, K2] x2; // predictors
   sigma_x = 2.5 * tan(sigma_x_unif);
-  log_lma_disc_true = log_lma_disc_s + z * sigma_x_unif;
+  log_lma_disc_true = log_lma_disc + z * sigma_x_unif;
   // (int, la, lt, lma_disc)
   x2 = append_col(x, log_lma_disc_true);
 }

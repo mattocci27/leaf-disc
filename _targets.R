@@ -23,6 +23,7 @@ tar_option_set(packages = c(
   "parallel",
   "janitor",
   "extrafont",
+  "loo",
   "modelr",
   "performance"
 ))
@@ -376,7 +377,9 @@ list(
       list(
         fit_tree_1 = fit_tree_1_mcmc_model,
         fit_tree_2 = fit_tree_2_mcmc_model,
-        fit_tree_3 = fit_tree_3_mcmc_punch
+        fit_tree_3 = fit_tree_3_mcmc_punch,
+        fit_tree_6 = fit_tree_6_mcmc_sma,
+        fit_tree_7 = fit_tree_7_mcmc_sma_full
         ),
     \(x)x$loo(cores = parallel::detectCores())
     )
