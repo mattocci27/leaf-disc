@@ -108,18 +108,6 @@ list(
     stan_sp_dat,
     clean_stan_data(sp_mean, dry_mass = FALSE)
   ),
-  tar_target(
-    stan_tree_dat,
-    clean_stan_data(tree, interaction = FALSE, dry_mass = TRUE, scale = TRUE)
-  ),
-  tar_target(
-    stan_tree_dat_noint,
-    clean_stan_data(tree, interaction = TRUE, dry_mass = FALSE, scale = TRUE)
-  ),
-  tar_target(
-    stan_tree_dat_simple,
-    clean_stan_data(tree, interaction = FALSE, dry_mass = FALSE, scale = TRUE)
-  ),
   # tar_target(
   #   stan_sp_dat_noint,
   #   clean_stan_data(sp_mean, interaction = FALSE)
@@ -139,67 +127,19 @@ list(
     fit_tree_1,
     "stan/model.stan",
     data = clean_stan_data(tree,
-      interaction = FALSE, dry_mass = FALSE, scale = TRUE),
+      dry_mass = FALSE, scale = TRUE),
     refresh = 0,
     chains = 4,
     parallel_chains = getOption("mc.cores", 4),
-    iter_warmup = 2000,
-    iter_sampling = 2000,
+    iter_warmup = 1000,
+    iter_sampling = 1000,
     seed = 123
    ),
-  tar_stan_mcmc(
+   tar_stan_mcmc(
     fit_tree_2,
-    "stan/model.stan",
-    data = clean_stan_data(tree,
-      interaction = TRUE, dry_mass = FALSE, scale = TRUE),
-    refresh = 0,
-    chains = 4,
-    parallel_chains = getOption("mc.cores", 4),
-    iter_warmup = 2000,
-    iter_sampling = 2000,
-    seed = 123
-   ),
-  tar_stan_mcmc(
-    fit_tree_3,
-    "stan/punch.stan",
-    data = clean_stan_data(tree,
-      interaction = FALSE, dry_mass = TRUE, scale = TRUE),
-    refresh = 0,
-    chains = 4,
-    parallel_chains = getOption("mc.cores", 4),
-    iter_warmup = 2000,
-    iter_sampling = 2000,
-    seed = 123
-   ),
-  tar_stan_mcmc(
-    fit_tree_4,
-    "stan/model.stan",
-    data = clean_stan_data(tree,
-      interaction = FALSE, dry_mass = FALSE, scale = FALSE),
-    refresh = 0,
-    chains = 4,
-    parallel_chains = getOption("mc.cores", 4),
-    iter_warmup = 2000,
-    iter_sampling = 2000,
-    seed = 123
-   ),
-  tar_stan_mcmc(
-    fit_tree_5,
-    "stan/model_glmm.stan",
-    data = clean_stan_data(tree,
-      interaction = FALSE, dry_mass = FALSE, scale = TRUE),
-    refresh = 0,
-    chains = 4,
-    parallel_chains = getOption("mc.cores", 4),
-    iter_warmup = 4000,
-    iter_sampling = 4000,
-    seed = 123
-   ),
-  tar_stan_mcmc(
-    fit_tree_6,
     "stan/sma.stan",
     data = clean_stan_data(tree,
-      interaction = FALSE, dry_mass = FALSE, scale = TRUE),
+      dry_mass = FALSE, scale = TRUE),
     refresh = 0,
     chains = 4,
     parallel_chains = getOption("mc.cores", 4),
@@ -209,11 +149,11 @@ list(
     max_treedepth = 15,
     seed = 123
    ),
-  tar_stan_mcmc(
-    fit_tree_7,
-    "stan/sma_full.stan",
+   tar_stan_mcmc(
+    fit_tree_3,
+    "stan/sma.stan",
     data = clean_stan_data(tree,
-      interaction = FALSE, dry_mass = FALSE, scale = TRUE),
+      dry_mass = FALSE, scale = TRUE, ld = TRUE),
     refresh = 0,
     chains = 4,
     parallel_chains = getOption("mc.cores", 4),
@@ -223,40 +163,54 @@ list(
     max_treedepth = 15,
     seed = 123
    ),
+   tar_stan_mcmc(
+    fit_tree_4,
+    "stan/sma.stan",
+    data = clean_stan_data(tree,
+      dry_mass = FALSE, scale = FALSE, ld = TRUE),
+    refresh = 0,
+    chains = 4,
+    parallel_chains = getOption("mc.cores", 4),
+    iter_warmup = 2000,
+    iter_sampling = 2000,
+    adapt_delta = 0.99,
+    max_treedepth = 15,
+    seed = 123
+   ),
+  # tar_stan_mcmc(
+  #   fit_tree_3,
+  #   "stan/punch.stan",
+  #   data = clean_stan_data(tree,
+  #     dry_mass = TRUE, scale = TRUE),
+  #   refresh = 0,
+  #   chains = 4,
+  #   parallel_chains = getOption("mc.cores", 4),
+  #   iter_warmup = 1,
+  #   iter_sampling = 1,
+  #   seed = 123
+  #  ),
   tar_stan_mcmc(
     fit_sp_1,
     "stan/model.stan",
     data = clean_stan_data(sp_mean,
-      interaction = FALSE, dry_mass = FALSE, scale = TRUE),
+      dry_mass = FALSE, scale = TRUE),
     refresh = 0,
     chains = 4,
     parallel_chains = getOption("mc.cores", 4),
-    iter_warmup = 2000,
-    iter_sampling = 2000,
+    iter_warmup = 1000,
+    iter_sampling = 1000,
     seed = 123
    ),
   tar_stan_mcmc(
-    fit_sp_4,
-    "stan/model.stan",
-    data = clean_stan_data(sp_mean,
-      interaction = FALSE, dry_mass = FALSE, scale = FALSE),
-    refresh = 0,
-    chains = 4,
-    parallel_chains = getOption("mc.cores", 4),
-    iter_warmup = 2000,
-    iter_sampling = 2000,
-    seed = 123
-  ),
-  tar_stan_mcmc(
-    fit_sp_6,
+    fit_sp_2,
     "stan/sma.stan",
     data = clean_stan_data(sp_mean,
-      interaction = FALSE, dry_mass = FALSE, scale = TRUE),
+      dry_mass = FALSE, scale = TRUE),
     refresh = 0,
     chains = 4,
     parallel_chains = getOption("mc.cores", 4),
-    iter_warmup = 2000,
-    iter_sampling = 2000,
+    iter_warmup = 1000,
+    iter_sampling = 1000,
     seed = 123
    ),
 
@@ -295,7 +249,7 @@ list(
   # coef for SMA stan
   tar_target(
     coef_tree_sma_tab,
-    create_stan_tab(fit_tree_6_draws_sma)
+    create_stan_tab(fit_tree_2_draws_sma)
   ),
   tar_target(
     coef_tree_sma_plot,
@@ -323,10 +277,54 @@ list(
     ),
     format = "file"
   ),
-
   tar_target(
-    coef_tree_sma_full_tab,
-    create_stan_tab(fit_tree_7_draws_sma_full)
+    coef_tree_ld_sma_tab,
+    create_stan_tab(fit_tree_3_draws_sma)
+  ),
+  tar_target(
+    coef_tree_ld_sma_plot,
+    coef_pointrange(coef_tree_ld_sma_tab, ld = TRUE)
+  ),
+  tar_target(
+    coef_tree_ld_sma_png,
+    ggsave(
+      "figs/coef_tree_ld_sma.png",
+      coef_tree_ld_sma_plot,
+      dpi = 300,
+      width = 6,
+      height = 6
+    ),
+    format = "file"
+  ),
+  # tar_target(
+  #   coef_tree_sma_pdf,
+  #   ggsave(
+  #     "figs/coef_tree_sma.pdf",
+  #     coef_tree_sma_plot,
+  #     device = cairo_pdf,
+  #     width = 6,
+  #     height = 6
+  #   ),
+  #   format = "file"
+  # ),
+  tar_target(
+    coef_tree_ld_ori_sma_tab,
+    create_stan_tab(fit_tree_4_draws_sma)
+  ),
+  tar_target(
+    coef_tree_ld_ori_sma_plot,
+    coef_pointrange(coef_tree_ld_ori_sma_tab, ld = TRUE)
+  ),
+  tar_target(
+    coef_tree_ld_ori_sma_png,
+    ggsave(
+      "figs/coef_tree_ld_ori_sma.png",
+      coef_tree_ld_ori_sma_plot,
+      dpi = 300,
+      width = 6,
+      height = 6
+    ),
+    format = "file"
   ),
 
   tar_target(
@@ -341,7 +339,7 @@ list(
   # coef for SMA stan for sp
   tar_target(
     coef_sp_sma_tab,
-    create_stan_tab(fit_sp_6_draws_sma)
+    create_stan_tab(fit_sp_2_draws_sma)
   ),
   tar_target(
     coef_sp_sma_plot,
@@ -376,10 +374,9 @@ list(
     mclapply(
       list(
         fit_tree_1 = fit_tree_1_mcmc_model,
-        fit_tree_2 = fit_tree_2_mcmc_model,
-        fit_tree_3 = fit_tree_3_mcmc_punch,
-        fit_tree_6 = fit_tree_6_mcmc_sma,
-        fit_tree_7 = fit_tree_7_mcmc_sma_full
+        fit_tree_2 = fit_tree_2_mcmc_sma,
+        fit_tree_3 = fit_tree_3_mcmc_sma,
+        fit_tree_4 = fit_tree_4_mcmc_sma
         ),
     \(x)x$loo(cores = parallel::detectCores())
     )
@@ -451,6 +448,11 @@ list(
   ),
 
   tar_target(
+    sma_tree_ld_tab,
+    generate_sma_ld_tab(tree)
+  ),
+
+  tar_target(
     lalt_tree_grid_plot,
     lalt_tree_grid(tree)
   ),
@@ -477,6 +479,21 @@ list(
     format = "file"
   ),
 
+  tar_target(
+    lalt_tree_grid_plot_dense,
+    lalt_tree_grid_dense(tree)
+  ),
+  tar_target(
+    lalt_tree_grid_dense_png,
+    ggsave(
+      "figs/lalt_tree_grid_dense.png",
+      lalt_tree_grid_plot_dense,
+      dpi = 300,
+      width = 12,
+      height = 6
+    ),
+    format = "file"
+  ),
   tar_target(
     ratio_plot,
     ratio_combine(tree)

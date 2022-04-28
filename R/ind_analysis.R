@@ -1,5 +1,7 @@
 lalt_tree_grid <- function(tree) {
   tree |>
+    mutate(la_gr2 = factor(la_gr2, levels = c("Small-leaved~individuals",
+                           "Large-leaved~individuals") |> rev())) |>
     ggplot(aes(x = lma_disc, y = lma_leaf, col = dry_mass_disc)) +
     geom_point(alpha = 0.8) +
     scale_color_viridis_c(
@@ -23,7 +25,7 @@ lalt_tree_grid <- function(tree) {
     theme_bw() +
     theme(
       text = element_text(family = "Arial"),
-      legend.position = c(0.39, 0.15),
+      legend.position = "none",
       legend.key.size = unit(0.5, "cm"),
       legend.spacing.y = unit(0.1, "cm"),
       legend.text.align = 0,
@@ -33,6 +35,21 @@ lalt_tree_grid <- function(tree) {
     )
 }
 
+lalt_tree_grid_dense <- function(tree) {
+  p1 <- tree |>
+      filter(ld_gr2 == "Nondense-leaved~individuals") |>
+      lalt_tree_grid() +
+      ggtitle("Nondense-leaved individuals") +
+      theme(legend.position = c(0.88, 0.65))
+  p2 <- tree |>
+      filter(ld_gr2 == "Dense-leaved~individuals") |>
+      lalt_tree_grid() +
+      ggtitle("Dense-leaved individuals")
+  p1 + p2 +
+    plot_annotation(tag_levels = "a") &
+    theme(
+      text = element_text(family = "Arial"))
+}
 
 ratio_combine <- function(tree) {
   my_col <- RColorBrewer::brewer.pal(4, "RdBu")
@@ -152,11 +169,13 @@ create_cv_fit <- function(tree, k = 10, seed = 123)  {
         offset = log(lma_disc), data = .))
   models3  <- map(cv$train,
     ~lm(log(lma_leaf) ~ log(lma_disc) + log(la) + log(lt),
+        offset = log(lma_disc),
         data = .))
   fit1 <- lm(log(lma_leaf) ~ log(lma_disc), data = tree)
   fit2 <- lm(log(lma_leaf) ~ log(la) + log(lt),
         offset = log(lma_disc), data = tree)
-  fit3 <- lm(log(lma_leaf) ~ log(lma_disc) + log(la) + log(lt), data = tree)
+  fit3 <- lm(log(lma_leaf) ~ log(lma_disc) + log(la) + log(lt),
+          offset = log(lma_disc), data = tree)
 
   get_pred  <- function(model, test_data){
     data  <- as.data.frame(test_data)

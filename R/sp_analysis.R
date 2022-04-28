@@ -140,6 +140,43 @@ generate_sma_tab <- function(sp_mean) {
   tb
 }
 
+#' @title SMA table (species-level)
+generate_sma_ld_tab <- function(sp_mean) {
+  sp_mean <- sp_mean |>
+    mutate(lalt_gr = paste(ld_gr, "~", lalt_gr))
+
+  sma_lma <- sma(log10(lma_leaf) ~ log10(lma_disc),
+    data = sp_mean,
+    elev.test = 0,
+    slope.test = 1
+  )
+
+  sma_lma_lalt_gr <- sma(log10(lma_leaf) ~ log10(lma_disc) * lalt_gr,
+    data = sp_mean,
+    elev.test = 0,
+    slope.test = 1
+  )
+
+  # we don't need leaf density
+  tb0 <- lapply(
+    list(
+      lma = sma_lma,
+      lma_gr = sma_lma_lalt_gr
+    ),
+    extract_sma
+  )
+
+  tb <- rbind(tb0$lma[[2]], tb0$lma_gr[[2]])
+  tb <- cbind(c("All", tb0$lma_gr$group), tb) |>
+    as_tibble() |>
+    rename(Slope = slope, Intercept = intercept)
+
+  colnames(tb)[1] <- "Data"
+
+  tb
+}
+
+
 #' @title LMA and LD (species-level)
 lma_ld_wrap_point <- function(sp_mean) {
   d_leaf <- sp_mean |>

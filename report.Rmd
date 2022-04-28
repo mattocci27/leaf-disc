@@ -76,6 +76,16 @@ sma_tree_tab |>
   kable_styling()
 ```
 
+## tree LD
+
+```{r}
+tar_load(sma_tree_ld_tab)
+sma_tree_ld_tab |>
+  kable() |>
+  kable_styling()
+```
+
+
 # Leaf disc vs whole-leaf LMA (individual-level)
 
 ```{r, include=FALSE}

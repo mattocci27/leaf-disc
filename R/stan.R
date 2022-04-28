@@ -1,13 +1,19 @@
-clean_stan_data <- function(sp_mean, interaction = TRUE, dry_mass = TRUE, scale = FALSE) {
+clean_stan_data <- function(sp_mean, dry_mass = TRUE, scale = FALSE, ld = FALSE) {
   x <- cbind(
     intercept = rep(1, nrow(sp_mean)),
-    la = sp_mean$la |> log(),
-    lt = sp_mean$lt |> log()
+    lma_disc = sp_mean$lma_disc,
+    la = sp_mean$la,
+    lt = sp_mean$lt
   )
+  if (ld) {
+    # unit doesn't matter after scaling but I'll use /1000 anyway
+    x[,2] <- sp_mean$lma_disc / sp_mean$lt / 1000
+  }
+
+  x[, 2:4] <- apply(x[, 2:4], 2, \(x)log(x))
 
   if (scale) {
-    x[, 2] <- x[, 2] |> exp() |> log() |> scale() |> as.numeric()
-    x[ ,3] <- x[, 3] |> exp() |> log() |> scale() |> as.numeric()
+    x[, 2:4] <- apply(x[, 2:4], 2, \(x)scale(x))
   }
 
   if (dry_mass) {
@@ -17,13 +23,8 @@ clean_stan_data <- function(sp_mean, interaction = TRUE, dry_mass = TRUE, scale 
   }
 
   if (scale && dry_mass) {
-    x2[, 4] <- x2[, 4] |> exp() |> log() |> scale() |> as.numeric()
+    x2[, 5] <- x2[, 5] |> exp() |> log() |> scale() |> as.numeric()
  }
-
-  if (interaction){
-    x <- cbind(x, x[, 2] * x[, 3])
-    colnames(x) <- c("intercept", "la", "lt", "lalt")
-  }
 
   # use non-scaled value for LMA
   log_lma_disc <- sp_mean$lma_disc |> log()
@@ -71,7 +72,6 @@ create_dummy_data <- function(n) {
     x = x)
 }
 
-
 create_stan_tab <- function(draws) {
   tmp <- draws |>
     dplyr::select(contains(c("beta", "gamma")))
@@ -83,50 +83,68 @@ create_stan_tab <- function(draws) {
   tibble(para = names(mean_), mean_, lwr2_5, lwr5, upr95, upr97_5)
 }
 
-coef_pointrange <- function(data) {
+coef_pointrange <- function(data, ld = FALSE) {
   data2 <- data |>
     filter(para != "gamma[1]") |>
     mutate(para = case_when(
       para == "beta[1]" ~ "Intercept for mean",
-      para == "beta[2]" ~ "Effect of LA on mean",
-      para == "beta[3]" ~ "Effect of LT on mean",
-      para == "gamma[2]" ~ "Effect of LA on variance",
-      para == "gamma[3]" ~ "Effect of LT on variance"
+      para == "beta[2]" ~ "Effect of disc LMA on mean",
+      para == "beta[3]" ~ "Effect of LA on mean",
+      para == "beta[4]" ~ "Effect of LT on mean",
+      para == "gamma[2]" ~ "Effect of disc LMA on variance",
+      para == "gamma[3]" ~ "Effect of LA on variance",
+      para == "gamma[4]" ~ "Effect of LT on variance"
     )) |>
     mutate(para = factor(para,
       levels = c(
       "Intercept for mean",
+      "Effect of disc LMA on mean",
       "Effect of LA on mean",
       "Effect of LT on mean",
+      "Effect of disc LMA on variance",
       "Effect of LA on variance",
       "Effect of LT on variance"
     ) |> rev()))
 
-  ggplot(data2, aes(y = para)) +
-    geom_vline(xintercept = 0, lty  = 2, color = "grey60") +
-    geom_linerange(
-      aes(xmin = lwr2_5, xmax = upr97_5),
-      color = "#3366FF") +
-    geom_linerange(
-      aes(xmin = lwr5, xmax = upr95),
-      size = 1.5,
-      color = "#3366FF") +
-    geom_point(
-      aes(x = mean_),
-      color = "#3366FF",
-      fill =  "#33CCFF",
-      shape = 21,
-      size = 3) +
-    ylab("") +
-    xlab("Standardized coefficients") +
-    scale_y_discrete(labels = c(
-      "Intercept for mean" = expression(Intercept~of~mean~(beta[0])),
-      "Effect of LA on mean" = expression(Effect~of~LA~on~mean~(beta[1])),
-      "Effect of LT on mean" = expression(Effect~of~LT~on~mean~(beta[2])),
-      "Effect of LA on variance" = expression(Effect~of~LA~on~mean~(gamma[1])),
-      "Effect of LT on variance" = expression(Effect~of~LT~on~mean~(gamma[2]))
-    )) +
-    theme_bw() +
-    theme(
-      text = element_text(family = "Arial"))
+    p <- ggplot(data2, aes(y = para)) +
+      geom_vline(xintercept = 0, lty  = 2, color = "grey60") +
+      geom_linerange(
+        aes(xmin = lwr2_5, xmax = upr97_5),
+        color = "#3366FF") +
+      geom_linerange(
+        aes(xmin = lwr5, xmax = upr95),
+        size = 1.5,
+        color = "#3366FF") +
+      geom_point(
+        aes(x = mean_),
+        color = "#3366FF",
+        fill =  "#33CCFF",
+        shape = 21,
+        size = 3) +
+      ylab("") +
+      xlab("Standardized coefficients") +
+      scale_y_discrete(labels = c(
+        "Intercept for mean" = expression(Intercept~of~mean~(beta[0])),
+        "Effect of disc LMA on mean" = expression(Effect~of~LMA~on~mean~(beta[1])),
+        "Effect of LA on mean" = expression(Effect~of~LA~on~mean~(beta[2])),
+        "Effect of LT on mean" = expression(Effect~of~LT~on~mean~(beta[3])),
+        "Effect of disc LMA on variance" = expression(Effect~of~LMA~on~variance~(gamma[1])),
+        "Effect of LA on variance" = expression(Effect~of~LA~on~variance~(gamma[2])),
+        "Effect of LT on variance" = expression(Effect~of~LT~on~variance~(gamma[3]))
+      )) +
+      theme_bw() +
+      theme(
+        text = element_text(family = "Arial"))
+    if(ld) {
+      p <- p + scale_y_discrete(labels = c(
+        "Intercept for mean" = expression(Intercept~of~mean~(beta[0])),
+        "Effect of disc LMA on mean" = expression(Effect~of~LD~on~mean~(beta[1])),
+        "Effect of LA on mean" = expression(Effect~of~LA~on~mean~(beta[2])),
+        "Effect of LT on mean" = expression(Effect~of~LT~on~mean~(beta[3])),
+        "Effect of disc LMA on variance" = expression(Effect~of~LD~on~variance~(gamma[1])),
+        "Effect of LA on variance" = expression(Effect~of~LA~on~variance~(gamma[2])),
+        "Effect of LT on variance" = expression(Effect~of~LT~on~variance~(gamma[3]))
+      ))
+    }
+    p
 }

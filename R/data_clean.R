@@ -379,6 +379,7 @@ tree_dat_clean <- function(tree_data_csv) {
 
   la_mid_tree <- median(tree$la, na.rm = TRUE)
   lt_mid_tree <- median(tree$lt, na.rm = TRUE)
+  ld_mid_tree <- median(tree$ld_leaf, na.rm = TRUE)
 
   tree <- tree |>
     mutate(lt_gr = case_when(
@@ -405,7 +406,18 @@ tree_dat_clean <- function(tree_data_csv) {
     mutate(la_gr2 = ifelse(la < la_mid_tree, "Small-leaved~individuals",
                            "Large-leaved~individuals")) |>
     mutate(lt_gr2 = ifelse(lt < lt_mid_tree, "Thin-leaved~individuals",
-                           "Thick-leaved~individuals"))
+                           "Thick-leaved~individuals")) |>
+    mutate(ld_gr = ifelse(ld_leaf < ld_mid_tree, "Dense",
+                           "Nondense")) |>
+    mutate(ld_gr2 = ifelse(ld_leaf < ld_mid_tree, "Dense-leaved~individuals",
+                           "Nondense-leaved~individuals")) |>
+    mutate(la_gr2 = factor(la_gr2, levels = c("Small-leaved~individuals",
+                           "Large-leaved~individuals"))) |>
+    mutate(lt_gr2 = factor(lt_gr2, levels = c("Thin-leaved~individuals",
+                           "Thick-leaved~individuals"))) |>
+    mutate(ld_gr2 = factor(ld_gr2, levels = c("Nondense-leaved~individuals",
+                           "Dense-leaved~individuals")))
+
 
   tree
 }
