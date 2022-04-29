@@ -26,7 +26,7 @@ coef_tree_sma_plot|stem|30a20fa49f7106e3|62aaf065106000ed|de4d68a626c96cf7|15223
 coef_tree_sma_png|stem|28fdc6fae841837d|ca23cf84b672263a|28be6c5e6261225c|1228839430|figs/coef_tree_sma.png|t19110.3060413409s|0098cd804a9e9332|90002|file|local|vector|||0.178||
 coef_tree_sma_tab|stem|d4cdf3a5dfe5afd0|729aac02957a8a35|5d140eb4599908c9|-1460001662||t19110.3060366186s|ddcd1827c84cc0ba|573|rds|local|vector|||0.636||
 coef_tree_tab|stem|cdab5dca9892c815|f70e7ae4c0900e08|5955da744b8360bf|1662822692||t19110.2936512074s|ddcd1827c84cc0ba|573|rds|local|vector|||0.844||
-create_cv_fit|function|15fa70d5badccbce|||||||||||||||
+create_cv_fit|function|ebc6c8fc9a7589ca|||||||||||||||
 create_cv_tree|function|050a46bc8dbaa952|||||||||||||||
 create_dummy_data|function|d493e1b1c7b58ae0|||||||||||||||
 create_plot_dat|function|38bc368e32cf3db7|||||||||||||||
@@ -42,8 +42,8 @@ cv_sep_pdf|stem|6a1be6210f92a257|dfc3d81381f40794|e4317ac4741ddc98|-1066609951|f
 cv_sep_plot|stem|766837636bb5005b|8e450d503fca535e|310e9770bfe7787b|-1499911496||t19103.2994639709s|c410f2c32d14256c|166722|rds|local|vector|||0.042||
 cv_sep_png|stem|3742d1dbc142c441|d16dea827d827052|a89c1f6a5acd825a|-1868371106|figs/cv_sep.png|t19103.299521102s|b63975d9c4f8b7d8|230342|file|local|vector|||4.916||
 cv_sep_point|function|0c99e7fec96eed70|||||||||||||||
-cv_sp|stem|2bba358a265b25f8|8f04e6f49966f5c8|95c3b1f3efbbd0d2|2052014169||t19111.2883425125s|734eb37700c39126|3472795|rds|local|vector|||0.096||
-cv_tree|stem|25a8d0935dca169a|096344cee75af4c7|c3ff2aa2c22b052b|959240014||t19110.4087923231s|fa2c6d79adbd4b05|9592718|rds|local|vector|||1.178||
+cv_sp|stem|0f7ff9efea6425ac|8f04e6f49966f5c8|7c76a931e57df45e|2052014169||t19111.3481496408s|40d21637bb2f2c55|3502229|rds|local|vector|||0.89||
+cv_tree|stem|0cf2c890e6a61a71|096344cee75af4c7|8c543a19450a3b58|959240014||t19111.3481347794s|5a3f8a6528f209d3|9759962|rds|local|vector|||0.997||
 cv4|function|1368c850832a861c|||||||||||||||
 data_clean|function|38387d5858ced629|||||||||||||||
 data_clean_cv|function|7f858502358e7bcb|||||||||||||||
@@ -193,7 +193,7 @@ ratio_combine|function|39af899c381a5781|||||||||||||||
 ratio_pdf|stem|1d8eb06a4d66f455|5c9e590c575821fd|5c99af3478960f01|-908551514|figs/ratio.pdf|t19110.4087968139s|d4d860dc3fbf1237|190852|file|local|vector|||1.108||
 ratio_plot|stem|674b42c48834f7f9|deab1a5ab669067c|da1225818fb447a0|923082000||t19110.4087814433s|278d4fb2026adeef|919531|rds|local|vector|||1.156||
 ratio_png|stem|d2b7a6c9c2263744|dd6023b40f942608|e50de79b52e5c647|151564805|figs/ratio.png|t19110.408797462s|547eeb4f8a1b7184|648995|file|local|vector|||1.207||
-report|stem|79bc6a44042ad6aa|6a097922e4bcbcbc|14e0bfa06bfd3c24|-237041703|report.html*report.Rmd|t19111.2944071309s|1c3cb6fa6d968160|5588694|file|local|vector|||5.484||
+report|stem|064feba1bd105c91|1bd0545956b931d3|a2d99007a48c2325|-237041703|report.html*report.Rmd|t19111.3482174199s|ac1a674a292ca21a|5599564|file|local|vector|||5.836||
 save_tiff|function|5bae6d4d57942267|||||||||||||||
 si|stem|c03590befeaf2070|ebc7786f9ea1f783|255ce018fec97f34|2093119568|ms/SI.html*ms/SI.Rmd|t19110.3721237715s|dc9b5f2411439370|3176376|file|local|vector|||0.919||
 sma_sp_ld_tab|stem|36cbe53672a5042e|41ca7688546adcad|02d308b6cf950d6b|1506123938||t19111.2883357068s|e679a715c680f96d|492|rds|local|vector|||0.062||

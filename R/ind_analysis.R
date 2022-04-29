@@ -168,13 +168,13 @@ create_cv_fit <- function(tree, k = 10, seed = 123)  {
     ~lm(log(lma_leaf) ~ log(la) + log(lt),
         offset = log(lma_disc), data = .))
   models3  <- map(cv$train,
-    ~lm(log(lma_leaf) ~ log(lma_disc) + log(la) + log(lt),
+    ~lm(log(lma_leaf) ~ log(ld_leaf) + log(la) + log(lt),
         offset = log(lma_disc),
         data = .))
   fit1 <- lm(log(lma_leaf) ~ log(lma_disc), data = tree)
   fit2 <- lm(log(lma_leaf) ~ log(la) + log(lt),
         offset = log(lma_disc), data = tree)
-  fit3 <- lm(log(lma_leaf) ~ log(lma_disc) + log(la) + log(lt),
+  fit3 <- lm(log(lma_leaf) ~ log(ld_leaf) + log(la) + log(lt),
           offset = log(lma_disc), data = tree)
 
   get_pred  <- function(model, test_data){

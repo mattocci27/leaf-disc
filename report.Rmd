@@ -101,6 +101,18 @@ sma_tree_ld_tab |>
   kable_styling()
 ```
 
+# Validation
+
+```{r}
+tar_load(cv_sp)
+cv_sp
+```
+
+```{r}
+tar_load(cv_tree)
+cv_tree
+```
+
 
 # Leaf disc vs whole-leaf LMA (individual-level)
 
