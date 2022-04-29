@@ -2,6 +2,8 @@
 #' @title Leaf disc vs whole-leaf LMA (pooled species-level)
 lalt_pool_grid_point <- function(data) {
   data |>
+    mutate(la_gr2 = factor(la_gr2, levels = c("Small-leaved~species",
+                           "Large-leaved~species") |> rev())) |>
     ggplot(aes(x = lma_disc, y = lma_leaf)) +
     geom_point(alpha = 0.8) +
     scale_x_log10() +
@@ -23,6 +25,21 @@ lalt_pool_grid_point <- function(data) {
     theme(text = element_text(family = "Arial"))
 }
 
+lalt_sp_grid_dense <- function(data) {
+  p1 <- data |>
+      filter(ld_gr2 == "Nondense-leaved~species") |>
+      lalt_pool_grid_point() +
+      ggtitle("Nondense-leaved species") +
+      theme(legend.position = c(0.88, 0.65))
+  p2 <- data |>
+      filter(ld_gr2 == "Dense-leaved~species") |>
+      lalt_pool_grid_point() +
+      ggtitle("Dense-leaved species")
+  p1 + p2 +
+    plot_annotation(tag_levels = "a") &
+    theme(
+      text = element_text(family = "Arial"))
+}
 
 #' @title Leaf disc vs whole-leaf LMA (separted species-level)
 lalt_sep_grid_point <- function(data) {

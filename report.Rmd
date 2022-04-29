@@ -54,6 +54,14 @@ tar_load(lalt_sep_grid_png)
 
 ![](figs/lalt_sep_grid.png)
 
+## coef
+
+```{r, include=FALSE}
+tar_load(lcoef_sp_ld_sma_png)
+```
+
+![](figs/coef_sp_ld_sma.png)
+
 
 # SMA table
 
@@ -66,6 +74,14 @@ sma_sp_tab |>
   kable_styling()
 ```
 
+## species LD
+
+```{r}
+tar_load(sma_sp_ld_tab)
+sma_sp_ld_tab |>
+  kable() |>
+  kable_styling()
+```
 
 ## tree
 

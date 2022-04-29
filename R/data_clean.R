@@ -315,6 +315,7 @@ sp_dat_mean <- function(full_data_csv){
 
   la_mid <- median(d$la)
   lt_mid <- median(d$lt, na.rm = TRUE)
+  ld_mid <- median(d$ld_leaf, na.rm = TRUE)
 
   d <- d |>
     mutate(lt_gr = case_when(
@@ -341,7 +342,18 @@ sp_dat_mean <- function(full_data_csv){
     mutate(la_gr2 = ifelse(la < la_mid, "Small-leaved~species",
                            "Large-leaved~species")) |>
     mutate(lt_gr2 = ifelse(lt < lt_mid, "Thin-leaved~species",
-                           "Thick-leaved~species"))
+                           "Thick-leaved~species")) |>
+    mutate(ld_gr = ifelse(ld_leaf < ld_mid, "Dense",
+                           "Nondense")) |>
+    mutate(ld_gr2 = ifelse(ld_leaf < ld_mid, "Dense-leaved~species",
+                           "Nondense-leaved~species")) |>
+    mutate(la_gr2 = factor(la_gr2, levels = c("Small-leaved~species",
+                           "Large-leaved~species"))) |>
+    mutate(lt_gr2 = factor(lt_gr2, levels = c("Thin-leaved~species",
+                           "Thick-leaved~species"))) |>
+    mutate(ld_gr2 = factor(ld_gr2, levels = c("Nondense-leaved~species",
+                           "Dense-leaved~species")))
+
   d
 }
 

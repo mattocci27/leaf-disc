@@ -201,7 +201,7 @@ list(
     iter_sampling = 1000,
     seed = 123
    ),
-  tar_stan_mcmc(
+   tar_stan_mcmc(
     fit_sp_2,
     "stan/sma.stan",
     data = clean_stan_data(sp_mean,
@@ -209,8 +209,38 @@ list(
     refresh = 0,
     chains = 4,
     parallel_chains = getOption("mc.cores", 4),
-    iter_warmup = 1000,
-    iter_sampling = 1000,
+    iter_warmup = 4000,
+    iter_sampling = 4000,
+    adapt_delta = 0.99,
+    max_treedepth = 15,
+    seed = 123
+   ),
+   tar_stan_mcmc(
+    fit_sp_3,
+    "stan/sma.stan",
+    data = clean_stan_data(sp_mean,
+      dry_mass = FALSE, scale = TRUE, ld = TRUE),
+    refresh = 0,
+    chains = 4,
+    parallel_chains = getOption("mc.cores", 4),
+    iter_warmup = 4000,
+    iter_sampling = 4000,
+    adapt_delta = 0.99,
+    max_treedepth = 15,
+    seed = 123
+   ),
+   tar_stan_mcmc(
+    fit_sp_4,
+    "stan/sma.stan",
+    data = clean_stan_data(sp_mean,
+      dry_mass = FALSE, scale = FALSE, ld = TRUE),
+    refresh = 0,
+    chains = 4,
+    parallel_chains = getOption("mc.cores", 4),
+    iter_warmup = 2000,
+    iter_sampling = 2000,
+    adapt_delta = 0.99,
+    max_treedepth = 15,
     seed = 123
    ),
 
@@ -343,8 +373,41 @@ list(
   ),
   tar_target(
     coef_sp_sma_plot,
-    coef_pointrange(coef_sp_sma_tab)
+    coef_pointrange2(coef_sp_sma_tab)
   ),
+
+  tar_target(
+    coef_sp_sma_png,
+    ggsave(
+      "figs/coef_sp_sma.png",
+      coef_sp_sma_plot,
+      dpi = 300,
+      width = 8,
+      height = 4
+    ),
+    format = "file"
+  ),
+
+  tar_target(
+    coef_sp_ld_sma_tab,
+    create_stan_tab(fit_sp_3_draws_sma)
+  ),
+  tar_target(
+    coef_sp_ld_sma_plot,
+    coef_pointrange2(coef_sp_ld_sma_tab, ld = TRUE)
+  ),
+  tar_target(
+    coef_sp_ld_sma_png,
+    ggsave(
+      "figs/coef_sp_ld_sma.png",
+      coef_sp_ld_sma_plot,
+      dpi = 300,
+      width = 8,
+      height = 4
+    ),
+    format = "file"
+  ),
+
   # tar_stan_mcmc(
   # tar_stan_mcmc(
   #   fit_sp_1,
@@ -437,9 +500,15 @@ list(
     format = "file"
   ),
 
+
   tar_target(
     sma_sp_tab,
     generate_sma_tab(sp_mean)
+  ),
+
+  tar_target(
+    sma_sp_ld_tab,
+    generate_sma_ld_tab(sp_mean)
   ),
 
   tar_target(
@@ -494,6 +563,23 @@ list(
     ),
     format = "file"
   ),
+
+  tar_target(
+    lalt_sp_grid_plot_dense,
+    lalt_sp_grid_dense(sp_mean)
+  ),
+  tar_target(
+    lalt_sp_grid_dense_png,
+    ggsave(
+      "figs/lalt_sp_grid_dense.png",
+      lalt_sp_grid_plot_dense,
+      dpi = 300,
+      width = 12,
+      height = 6
+    ),
+    format = "file"
+  ),
+
   tar_target(
     ratio_plot,
     ratio_combine(tree)
