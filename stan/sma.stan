@@ -6,11 +6,33 @@ data{
   matrix[N, K] x; // predictors
 }
 
-parameters{
-  vector[K] beta;
-  vector[K] gamma;
-  real<lower=0> omega;
-  vector[N] log_sigma;
+// parameters {
+//   vector[2] beta;
+//   real<lower=0> sigma;
+//   real mu_x;
+//   real<lower=0> sigma_x;
+//   real<lower=0> omega;
+//   vector[N] log_lma_disc_true; // whole-leaf LMA / disc LMA
+// }
+
+// model {
+//   vector[N] log_mu;
+//   beta ~ normal(0, 5);
+//   mu_x ~ normal(0, 5);
+//   log_lma_disc_true ~ normal(mu_x, sigma_x);
+//   log_lma_disc ~ normal(log_lma_disc_true, omega);
+//   log_mu = beta[1] + beta[2] * log_lma_disc_true;
+//   log_y ~ normal(log_mu, sigma);
+//}
+
+// transformed data {
+//   vector[N] log_lma_disc_s;
+//   log_lma_disc_s = (log_lma_disc - mean(log_lma_disc)) / sd(log_lma_disc);
+// }
+
+parameters {
+  vector[2] beta;
+  real<lower=0> sigma;
   real<lower=0,upper=pi()/2> sigma_x_unif;
   vector[N] z;
 }
@@ -19,19 +41,15 @@ transformed parameters {
   vector[N] log_lma_disc_true;
   real<lower=0> sigma_x;
   sigma_x = 2.5 * tan(sigma_x_unif);
-  log_lma_disc_true = log_lma_disc + z * sigma_x_unif;
+  log_lma_disc_true = log_lma_disc + z * sigma_x;
 }
 
-model{
+
+model {
   vector[N] log_mu;
-  vector[N] sigma;
-  sigma = exp(log_sigma);
   z ~ std_normal();
   beta ~ normal(0, 5);
-  gamma ~ normal(0, 5);
-  omega ~ cauchy(0, 5);
-  log_sigma ~ normal(x * gamma, omega);
-  log_mu = x * beta + log_lma_disc_true ;
+  log_mu = beta[1] + beta[2] * log_lma_disc_true;
   log_y ~ normal(log_mu, sigma);
 }
 
@@ -39,10 +57,8 @@ model{
 generated quantities {
   vector[N] log_lik;
   vector[N] log_mu;
-  vector[N] sigma;
-  sigma = exp(log_sigma);
-  log_mu = x * beta + log_lma_disc_true ;
+  log_mu = beta[1] + beta[2] * log_lma_disc_true;
   for (n in 1:N) {
-    log_lik[n] = normal_lpdf(log_y[n] | log_mu[n], sigma[n]);
+    log_lik[n] = normal_lpdf(log_y[n] | log_mu[n], sigma);
   }
 }

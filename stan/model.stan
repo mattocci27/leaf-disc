@@ -9,8 +9,15 @@ data{
 parameters{
   vector[K] beta;
   vector[K] gamma;
+  real<lower=0,upper=pi()/2> omega_unif;
+  vector[N] z;
+}
+
+transformed parameters {
   real<lower=0> omega;
   vector[N] log_sigma;
+  omega = 2.5 * tan(omega_unif);
+  log_sigma = x * gamma + z * omega;
 }
 
 model{
@@ -18,10 +25,9 @@ model{
   vector[N] sigma;
   sigma = exp(log_sigma);
   log_mu = x * beta + log_lma_disc ;
+  z ~ std_normal();
   beta ~ normal(0, 5);
   gamma ~ normal(0, 5);
-  log_sigma ~ normal(x * gamma, omega);
-  omega ~ cauchy(0, 5);
   log_y ~ normal(log_mu, sigma);
 }
 

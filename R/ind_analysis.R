@@ -171,11 +171,17 @@ create_cv_fit <- function(tree, k = 10, seed = 123)  {
     ~lm(log(lma_leaf) ~ log(ld_leaf) + log(la) + log(lt),
         offset = log(lma_disc),
         data = .))
+  models4 <- map(cv$train,
+    ~lm(log(lma_leaf) ~ log(lma_disc) + log(la) + log(lt),
+        data = .))
+
   fit1 <- lm(log(lma_leaf) ~ log(lma_disc), data = tree)
   fit2 <- lm(log(lma_leaf) ~ log(la) + log(lt),
         offset = log(lma_disc), data = tree)
   fit3 <- lm(log(lma_leaf) ~ log(ld_leaf) + log(la) + log(lt),
           offset = log(lma_disc), data = tree)
+  fit4 <- lm(log(lma_leaf) ~ log(lma_disc) + log(la) + log(lt),
+          data = tree)
 
   get_pred  <- function(model, test_data){
     data  <- as.data.frame(test_data)
@@ -183,7 +189,7 @@ create_cv_fit <- function(tree, k = 10, seed = 123)  {
     return(pred)
   }
 
-  pred <- map(list(models1, models2, models3),
+  pred <- map(list(models1, models2, models3, models4),
     \(x) map2_df(x, cv$test, get_pred, .id = "Run"))
 
   tmp_fun <- function(x) {
@@ -198,8 +204,10 @@ create_cv_fit <- function(tree, k = 10, seed = 123)  {
   r2 <- map_dbl(mse_dat, \(x)mean(x$R2))
   mse_ <- map_dbl(mse_dat, \(x)mean(x$MSE))
   list(
-    table = tibble(model = paste("fit", 1:3), r2 = r2, mse = mse_),
+    table = tibble(model = paste("fit", 1:4), r2 = r2, mse = mse_),
     fit1 = fit1,
     fit2 = fit2,
-    fit3 = fit3)
+    fit3 = fit3,
+    fit4 = fit4
+    )
 }

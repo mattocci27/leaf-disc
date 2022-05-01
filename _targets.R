@@ -104,10 +104,6 @@ list(
     stan_sim_dat,
     create_dummy_data(100)
   ),
-  tar_target(
-    stan_sp_dat,
-    clean_stan_data(sp_mean, dry_mass = FALSE)
-  ),
   # tar_target(
   #   stan_sp_dat_noint,
   #   clean_stan_data(sp_mean, interaction = FALSE)
@@ -123,141 +119,171 @@ list(
     iter_sampling = 1000,
     seed = 123
    ),
-  tar_stan_mcmc(
-    fit_tree_1,
+
+  # tar_stan_mcmc(
+  #   fit_tree_1,
+  #   "stan/model.stan",
+  #   data = clean_stan_data(tree,
+  #     dry_mass = FALSE, scale = TRUE),
+  #   refresh = 0,
+  #   chains = 4,
+  #   parallel_chains = getOption("mc.cores", 4),
+  #   iter_warmup = 1000,
+  #   iter_sampling = 1000,
+  #   seed = 123
+  #  ),
+  #  tar_stan_mcmc(
+  #   fit_tree_2,
+  #   "stan/sma.stan",
+  #   data = clean_stan_data(tree,
+  #     dry_mass = FALSE, scale = TRUE),
+  #   refresh = 0,
+  #   chains = 4,
+  #   parallel_chains = getOption("mc.cores", 4),
+  #   iter_warmup = 4000,
+  #   iter_sampling = 4000,
+  #   adapt_delta = 0.99,
+  #   max_treedepth = 15,
+  #   seed = 123
+  #  ),
+  #  tar_stan_mcmc(
+  #   fit_tree_3,
+  #   "stan/sma.stan",
+  #   data = clean_stan_data(tree,
+  #     dry_mass = FALSE, scale = TRUE, ld = TRUE),
+  #   refresh = 0,
+  #   chains = 4,
+  #   parallel_chains = getOption("mc.cores", 4),
+  #   iter_warmup = 4000,
+  #   iter_sampling = 4000,
+  #   adapt_delta = 0.99,
+  #   max_treedepth = 15,
+  #   seed = 123
+  #  ),
+  #  tar_stan_mcmc(
+  #   fit_tree_4,
+  #   "stan/sma.stan",
+  #   data = clean_stan_data(tree,
+  #     dry_mass = FALSE, scale = FALSE, ld = TRUE),
+  #   refresh = 0,
+  #   chains = 4,
+  #   parallel_chains = getOption("mc.cores", 4),
+  #   iter_warmup = 2000,
+  #   iter_sampling = 2000,
+  #   adapt_delta = 0.99,
+  #   max_treedepth = 15,
+  #   seed = 123
+  #  ),
+
+   tar_stan_mcmc(
+    fit_sp_1,
     "stan/model.stan",
-    data = clean_stan_data(tree,
-      dry_mass = FALSE, scale = TRUE),
-    refresh = 0,
-    chains = 4,
-    parallel_chains = getOption("mc.cores", 4),
-    iter_warmup = 1000,
-    iter_sampling = 1000,
-    seed = 123
-   ),
-   tar_stan_mcmc(
-    fit_tree_2,
-    "stan/sma.stan",
-    data = clean_stan_data(tree,
-      dry_mass = FALSE, scale = TRUE),
-    refresh = 0,
-    chains = 4,
-    parallel_chains = getOption("mc.cores", 4),
-    iter_warmup = 4000,
-    iter_sampling = 4000,
-    adapt_delta = 0.99,
-    max_treedepth = 15,
-    seed = 123
-   ),
-   tar_stan_mcmc(
-    fit_tree_3,
-    "stan/sma.stan",
-    data = clean_stan_data(tree,
-      dry_mass = FALSE, scale = TRUE, ld = TRUE),
-    refresh = 0,
-    chains = 4,
-    parallel_chains = getOption("mc.cores", 4),
-    iter_warmup = 4000,
-    iter_sampling = 4000,
-    adapt_delta = 0.99,
-    max_treedepth = 15,
-    seed = 123
-   ),
-   tar_stan_mcmc(
-    fit_tree_4,
-    "stan/sma.stan",
-    data = clean_stan_data(tree,
-      dry_mass = FALSE, scale = FALSE, ld = TRUE),
+    data = clean_stan_data(sp_mean, model = "no"),
     refresh = 0,
     chains = 4,
     parallel_chains = getOption("mc.cores", 4),
     iter_warmup = 2000,
     iter_sampling = 2000,
-    adapt_delta = 0.99,
-    max_treedepth = 15,
-    seed = 123
-   ),
-  # tar_stan_mcmc(
-  #   fit_tree_3,
-  #   "stan/punch.stan",
-  #   data = clean_stan_data(tree,
-  #     dry_mass = TRUE, scale = TRUE),
-  #   refresh = 0,
-  #   chains = 4,
-  #   parallel_chains = getOption("mc.cores", 4),
-  #   iter_warmup = 1,
-  #   iter_sampling = 1,
-  #   seed = 123
-  #  ),
-  tar_stan_mcmc(
-    fit_sp_1,
-    "stan/model.stan",
-    data = clean_stan_data(sp_mean,
-      dry_mass = FALSE, scale = TRUE),
-    refresh = 0,
-    chains = 4,
-    parallel_chains = getOption("mc.cores", 4),
-    iter_warmup = 1000,
-    iter_sampling = 1000,
+    # adapt_delta = 0.99,
+    # max_treedepth = 15,
     seed = 123
    ),
    tar_stan_mcmc(
     fit_sp_2,
-    "stan/sma.stan",
-    data = clean_stan_data(sp_mean,
-      dry_mass = FALSE, scale = TRUE),
-    refresh = 0,
-    chains = 4,
-    parallel_chains = getOption("mc.cores", 4),
-    iter_warmup = 4000,
-    iter_sampling = 4000,
-    adapt_delta = 0.99,
-    max_treedepth = 15,
-    seed = 123
-   ),
-   tar_stan_mcmc(
-    fit_sp_3,
-    "stan/sma.stan",
-    data = clean_stan_data(sp_mean,
-      dry_mass = FALSE, scale = TRUE, ld = TRUE),
-    refresh = 0,
-    chains = 4,
-    parallel_chains = getOption("mc.cores", 4),
-    iter_warmup = 4000,
-    iter_sampling = 4000,
-    adapt_delta = 0.99,
-    max_treedepth = 15,
-    seed = 123
-   ),
-   tar_stan_mcmc(
-    fit_sp_4,
-    "stan/sma.stan",
-    data = clean_stan_data(sp_mean,
-      dry_mass = FALSE, scale = FALSE, ld = TRUE),
+    "stan/model.stan",
+    data = clean_stan_data(sp_mean, model = "LMA"),
     refresh = 0,
     chains = 4,
     parallel_chains = getOption("mc.cores", 4),
     iter_warmup = 2000,
     iter_sampling = 2000,
-    adapt_delta = 0.99,
+    # adapt_delta = 0.99,
+    # max_treedepth = 15,
+    seed = 123
+   ),
+   tar_stan_mcmc(
+    fit_sp_3,
+    "stan/model.stan",
+    data = clean_stan_data(sp_mean, model = "LD"),
+    refresh = 0,
+    chains = 4,
+    parallel_chains = getOption("mc.cores", 4),
+    iter_warmup = 2000,
+    iter_sampling = 2000,
+    # adapt_delta = 0.99,
+    # max_treedepth = 15,
+    seed = 123
+   ),
+
+   tar_stan_mcmc(
+    fit_sp_0,
+    "stan/simple.stan",
+    data = clean_stan_data(sp_mean, model = "LMA"),
+    refresh = 0,
+    chains = 4,
+    parallel_chains = getOption("mc.cores", 4),
+    iter_warmup = 2000,
+    iter_sampling = 2000,
+    # adapt_delta = 0.95,
+    # max_treedepth = 15,
+    seed = 123
+   ),
+
+   tar_stan_mcmc(
+    fit_sp_4,
+    "stan/sma.stan",
+    data = clean_stan_data(sp_mean, model = "no"),
+    refresh = 0,
+    chains = 4,
+    parallel_chains = getOption("mc.cores", 4),
+    iter_warmup = 2000,
+    iter_sampling = 4000,
+    adapt_delta = 0.95,
+    max_treedepth = 15,
+    seed = 123
+   ),
+
+  #  tar_stan_mcmc(
+  #   fit_sp_5,
+  #   "stan/sma.stan",
+  #   data = clean_stan_data(sp_mean, model = "LMA"),
+  #   refresh = 0,
+  #   chains = 4,
+  #   parallel_chains = getOption("mc.cores", 4),
+  #   iter_warmup = 2000,
+  #   iter_sampling = 2000,
+  #   adapt_delta = 0.99,
+  #   max_treedepth = 15,
+  #   seed = 123
+  #  ),
+   tar_stan_mcmc(
+    fit_sp_6,
+    "stan/sma_err.stan",
+    data = clean_stan_data(sp_mean, model = "LD"),
+    refresh = 0,
+    chains = 4,
+    parallel_chains = getOption("mc.cores", 4),
+    iter_warmup = 2000,
+    iter_sampling = 2000,
+    adapt_delta = 0.95,
     max_treedepth = 15,
     seed = 123
    ),
 
   # coef for OLS stan
   tar_target(
-    coef_tree_tab,
-    create_stan_tab(fit_tree_1_draws_model)
+    coef_sp_tab,
+    create_stan_tab(fit_sp_0_draws_simple)
   ),
   tar_target(
-    coef_tree_plot,
-    coef_pointrange(coef_tree_tab)
+    coef_sp_plot,
+    coef_pointrange2(coef_sp_tab, ld = FALSE)
   ),
   tar_target(
-    coef_tree_png,
+    coef_sp_png,
     ggsave(
-      "figs/coef_tree.png",
-      coef_tree_plot,
+      "figs/coef_sp.png",
+      coef_sp_plot,
       dpi = 300,
       width = 6,
       height = 6
@@ -265,10 +291,10 @@ list(
     format = "file"
   ),
   tar_target(
-    coef_tree_pdf,
+    coef_sp_pdf,
     ggsave(
-      "figs/coef_tree.pdf",
-      coef_tree_plot,
+      "figs/coef_sp.pdf",
+      coef_sp_plot,
       device = cairo_pdf,
       width = 6,
       height = 6
@@ -276,56 +302,67 @@ list(
     format = "file"
   ),
 
-  # coef for SMA stan
+  # coef for OLS stan 2
   tar_target(
-    coef_tree_sma_tab,
-    create_stan_tab(fit_tree_2_draws_sma)
+    coef_sp_tab2,
+    create_stan_tab(fit_sp_2_draws_model)
   ),
   tar_target(
-    coef_tree_sma_plot,
-    coef_pointrange(coef_tree_sma_tab)
+    coef_sp_plot2,
+    coef_pointrange2(coef_sp_tab2, ld = FALSE)
   ),
   tar_target(
-    coef_tree_sma_png,
+    coef_sp_png2,
     ggsave(
-      "figs/coef_tree_sma.png",
-      coef_tree_sma_plot,
+      "figs/coef_sp2.png",
+      coef_sp_plot2,
       dpi = 300,
       width = 6,
       height = 6
     ),
     format = "file"
   ),
+  # coef for OLS stan 2
   tar_target(
-    coef_tree_sma_pdf,
+    coef_sp_tab3,
+    create_stan_tab(fit_sp_3_draws_model)
+  ),
+  tar_target(
+    coef_sp_plot3,
+    coef_pointrange2(coef_sp_tab3, ld = TRUE)
+  ),
+  tar_target(
+    coef_sp_png3,
     ggsave(
-      "figs/coef_tree_sma.pdf",
-      coef_tree_sma_plot,
-      device = cairo_pdf,
-      width = 6,
-      height = 6
-    ),
-    format = "file"
-  ),
-  tar_target(
-    coef_tree_ld_sma_tab,
-    create_stan_tab(fit_tree_3_draws_sma)
-  ),
-  tar_target(
-    coef_tree_ld_sma_plot,
-    coef_pointrange(coef_tree_ld_sma_tab, ld = TRUE)
-  ),
-  tar_target(
-    coef_tree_ld_sma_png,
-    ggsave(
-      "figs/coef_tree_ld_sma.png",
-      coef_tree_ld_sma_plot,
+      "figs/coef_sp3.png",
+      coef_sp_plot3,
       dpi = 300,
       width = 6,
       height = 6
     ),
     format = "file"
   ),
+
+  # # coef for SMA stan
+  # tar_target(
+  #   coef_tree_sma_tab,
+  #   create_stan_tab(fit_tree_2_draws_ma)
+  # ),
+  # tar_target(
+  #   coef_tree_sma_plot,
+  #   coef_pointrange(coef_tree_sma_tab)
+  # ),
+  # tar_target(
+  #   coef_tree_sma_png,
+  #   ggsave(
+  #     "figs/coef_tree_sma.png",
+  #     coef_tree_sma_plot,
+  #     dpi = 300,
+  #     width = 6,
+  #     height = 6
+  #   ),
+  #   format = "file"
+  # ),
   # tar_target(
   #   coef_tree_sma_pdf,
   #   ggsave(
@@ -337,25 +374,55 @@ list(
   #   ),
   #   format = "file"
   # ),
-  tar_target(
-    coef_tree_ld_ori_sma_tab,
-    create_stan_tab(fit_tree_4_draws_sma)
-  ),
-  tar_target(
-    coef_tree_ld_ori_sma_plot,
-    coef_pointrange(coef_tree_ld_ori_sma_tab, ld = TRUE)
-  ),
-  tar_target(
-    coef_tree_ld_ori_sma_png,
-    ggsave(
-      "figs/coef_tree_ld_ori_sma.png",
-      coef_tree_ld_ori_sma_plot,
-      dpi = 300,
-      width = 6,
-      height = 6
-    ),
-    format = "file"
-  ),
+  # tar_target(
+  #   coef_tree_ld_sma_tab,
+  #   create_stan_tab(fit_tree_3_draws_sma)
+  # ),
+  # tar_target(
+  #   coef_tree_ld_sma_plot,
+  #   coef_pointrange(coef_tree_ld_sma_tab, ld = TRUE)
+  # ),
+  # tar_target(
+  #   coef_tree_ld_sma_png,
+  #   ggsave(
+  #     "figs/coef_tree_ld_sma.png",
+  #     coef_tree_ld_sma_plot,
+  #     dpi = 300,
+  #     width = 6,
+  #     height = 6
+  #   ),
+  #   format = "file"
+  # ),
+  # # tar_target(
+  # #   coef_tree_sma_pdf,
+  # #   ggsave(
+  # #     "figs/coef_tree_sma.pdf",
+  # #     coef_tree_sma_plot,
+  # #     device = cairo_pdf,
+  # #     width = 6,
+  # #     height = 6
+  # #   ),
+  # #   format = "file"
+  # # ),
+  # tar_target(
+  #   coef_tree_ld_ori_sma_tab,
+  #   create_stan_tab(fit_tree_4_draws_sma)
+  # ),
+  # tar_target(
+  #   coef_tree_ld_ori_sma_plot,
+  #   coef_pointrange(coef_tree_ld_ori_sma_tab, ld = TRUE)
+  # ),
+  # tar_target(
+  #   coef_tree_ld_ori_sma_png,
+  #   ggsave(
+  #     "figs/coef_tree_ld_ori_sma.png",
+  #     coef_tree_ld_ori_sma_plot,
+  #     dpi = 300,
+  #     width = 6,
+  #     height = 6
+  #   ),
+  #   format = "file"
+  # ),
 
   tar_target(
     cv_tree,
@@ -367,46 +434,46 @@ list(
   ),
 
   # coef for SMA stan for sp
-  tar_target(
-    coef_sp_sma_tab,
-    create_stan_tab(fit_sp_2_draws_sma)
-  ),
-  tar_target(
-    coef_sp_sma_plot,
-    coef_pointrange2(coef_sp_sma_tab)
-  ),
+  # tar_target(
+  #   coef_sp_sma_tab,
+  #   create_stan_tab(fit_sp_2_draws_sma)
+  # ),
+  # tar_target(
+  #   coef_sp_sma_plot,
+  #   coef_pointrange2(coef_sp_sma_tab)
+  # ),
 
-  tar_target(
-    coef_sp_sma_png,
-    ggsave(
-      "figs/coef_sp_sma.png",
-      coef_sp_sma_plot,
-      dpi = 300,
-      width = 8,
-      height = 4
-    ),
-    format = "file"
-  ),
+  # tar_target(
+  #   coef_sp_sma_png,
+  #   ggsave(
+  #     "figs/coef_sp_sma.png",
+  #     coef_sp_sma_plot,
+  #     dpi = 300,
+  #     width = 4,
+  #     height = 5
+  #   ),
+  #   format = "file"
+  # ),
 
-  tar_target(
-    coef_sp_ld_sma_tab,
-    create_stan_tab(fit_sp_3_draws_sma)
-  ),
-  tar_target(
-    coef_sp_ld_sma_plot,
-    coef_pointrange2(coef_sp_ld_sma_tab, ld = TRUE)
-  ),
-  tar_target(
-    coef_sp_ld_sma_png,
-    ggsave(
-      "figs/coef_sp_ld_sma.png",
-      coef_sp_ld_sma_plot,
-      dpi = 300,
-      width = 8,
-      height = 4
-    ),
-    format = "file"
-  ),
+  # tar_target(
+  #   coef_sp_ld_sma_tab,
+  #   create_stan_tab(fit_sp_3_draws_sma)
+  # ),
+  # tar_target(
+  #   coef_sp_ld_sma_plot,
+  #   coef_pointrange2(coef_sp_ld_sma_tab, ld = TRUE)
+  # ),
+  # tar_target(
+  #   coef_sp_ld_sma_png,
+  #   ggsave(
+  #     "figs/coef_sp_ld_sma.png",
+  #     coef_sp_ld_sma_plot,
+  #     dpi = 300,
+  #     width = 4,
+  #     height = 5
+  #   ),
+  #   format = "file"
+  # ),
 
   # tar_stan_mcmc(
   # tar_stan_mcmc(
@@ -433,17 +500,29 @@ list(
   #  ),
 
   tar_target(
-    loo_,
+    loo_model,
     mclapply(
       list(
-        fit_tree_1 = fit_tree_1_mcmc_model,
-        fit_tree_2 = fit_tree_2_mcmc_sma,
-        fit_tree_3 = fit_tree_3_mcmc_sma,
-        fit_tree_4 = fit_tree_4_mcmc_sma
+        fit_sp_0 = fit_sp_0_mcmc_simple,
+        fit_sp_1 = fit_sp_1_mcmc_model,
+        fit_sp_2 = fit_sp_2_mcmc_model,
+        fit_sp_3 = fit_sp_3_mcmc_model
         ),
     \(x)x$loo(cores = parallel::detectCores())
     )
   ),
+
+  # tar_target(
+  #   loo_sma,
+  #   mclapply(
+  #     list(
+  #       fit_sp_4 = fit_sp_4_mcmc_sma,
+  #       fit_sp_5 = fit_sp_5_mcmc_sma,
+  #       fit_sp_6 = fit_sp_6_mcmc_sma
+  #       ),
+  #   \(x)x$loo(cores = parallel::detectCores())
+  #   )
+  # ),
 
   tar_target(
     lalt_pool_grid_plot,

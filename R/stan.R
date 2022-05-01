@@ -1,10 +1,51 @@
-clean_stan_data <- function(sp_mean, dry_mass = TRUE, scale = FALSE, ld = FALSE) {
+clean_stan_data <- function(sp_mean, model = c("no", "LMA", "LD")) {
+  if (model == "no") {
+    x <- cbind(
+      intercept = rep(1, nrow(sp_mean)),
+      la = sp_mean$la,
+      lt = sp_mean$lt
+    )
+  } else if (model == "LMA") {
+    x <- cbind(
+      intercept = rep(1, nrow(sp_mean)),
+      lma_disc = sp_mean$lma_disc,
+      la = sp_mean$la,
+      lt = sp_mean$lt
+    )
+  } else {
+    x <- cbind(
+      intercept = rep(1, nrow(sp_mean)),
+      lma_disc = sp_mean$lma_disc / sp_mean$lt / 1000,
+      la = sp_mean$la,
+      lt = sp_mean$lt
+    )
+  }
+
+  x[, -1] <- apply(x[, -1], 2, \(x)scale(log(x)))
+
+  # use non-scaled value for LMA
+  log_lma_disc <- sp_mean$lma_disc |> log()
+  log_lma_leaf <- sp_mean$lma_leaf |> log()
+
+  list(
+    N = nrow(sp_mean),
+    K = ncol(x),
+    J = unique(sp_mean$species) |> length(),
+    sp = sp_mean$species |> as.factor() |> as.numeric(),
+    log_y = log_lma_leaf,
+    log_lma_disc = log_lma_disc,
+    x = x)
+
+}
+
+clean_stan_data2 <- function(sp_mean, dry_mass = TRUE, scale = FALSE, ld = FALSE) {
   x <- cbind(
     intercept = rep(1, nrow(sp_mean)),
     lma_disc = sp_mean$lma_disc,
     la = sp_mean$la,
     lt = sp_mean$lt
   )
+
   if (ld) {
     # unit doesn't matter after scaling but I'll use /1000 anyway
     x[,2] <- sp_mean$lma_disc / sp_mean$lt / 1000
@@ -52,7 +93,6 @@ clean_stan_data <- function(sp_mean, dry_mass = TRUE, scale = FALSE, ld = FALSE)
       x = x)
   }
 }
-
 create_dummy_data <- function(n) {
   xx1 <- rnorm(n)
   xx2 <- rnorm(n)
@@ -253,8 +293,17 @@ coef_pointrange2 <- function(data, ld = FALSE) {
       ))
     }
 
-    p1 + p2 +
+    p1 / p2 +
     plot_annotation(tag_levels = "a") &
     theme(
       text = element_text(family = "Arial"))
+}
+
+div_check <- function(diags) {
+  n1 <- diags |>
+    filter(divergent__ == 1) |>
+    nrow()
+  n2 <- diags |>
+    nrow()
+  print(paste(n1, "of", n2, "iterations ended with a divergence", n1/n2 * 100, "%" ))
 }
