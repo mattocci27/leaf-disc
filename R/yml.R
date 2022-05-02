@@ -4,6 +4,7 @@ write_yml <- function(path, sp_mean, full_data_cv_csv, tree, lma_yaku_re) {
 
   la_mid <- median(sp_mean$la, na.rm = TRUE) |> round(1)
   lt_mid <- median(sp_mean$lt, na.rm = TRUE) |> round(2)
+  ld_mid <- median(sp_mean$ld_leaf, na.rm = TRUE) |> round(2)
   la_mid2 <- median(tree$la, na.rm = TRUE) |> round(1)
   lt_mid2 <- median(tree$lt, na.rm = TRUE) |> round(2)
 
@@ -60,6 +61,10 @@ write_yml <- function(path, sp_mean, full_data_cv_csv, tree, lma_yaku_re) {
              sep = "\n")
   writeLines(paste0("lt_mid: ",
              lt_mid),
+             out,
+             sep = "\n")
+  writeLines(paste0("ld_mid: ",
+             ld_mid),
              out,
              sep = "\n")
   writeLines(paste0("la_mid2: ",
