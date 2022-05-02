@@ -41,6 +41,124 @@ lalt_sp_grid_dense <- function(data) {
       text = element_text(family = "Arial"))
 }
 
+
+# ldlalt_sp_col <- function(data) {
+
+  # tar_load(sp_mean)
+  # data <- sp_mean
+  # data <- data |>
+  #   mutate(la_gr3 = ifelse(str_detect(la_gr2, "Large"), "Large", "Small")) |>
+  #   mutate(lt_gr3 = ifelse(str_detect(lt_gr2, "Thick"), "Thick", "Thin")) |>
+  #   mutate(ld_gr3 = ifelse(str_detect(ld_gr2, "Dense"), "Dense", "Less dense"))
+
+  # my_col <- RColorBrewer::brewer.pal(4, "RdBu")
+
+  # p1 <- data |>
+  #   ggplot(aes(x = lma_disc, y = lma_leaf, col = ld_gr3)) +
+  #   geom_point(alpha = 0.6) +
+  #   scale_x_log10() +
+  #   scale_y_log10() +
+  #   geom_abline(slope = 1, intercept = 0, lty = 2) +
+  #   geom_sma(se = FALSE) +
+  #   scale_color_manual(
+  #     values = my_col[c(2, 4)],
+  #     name = "Diameter of the leaf punch"
+  #   ) +
+  #   xlab(expression(Leaf ~ disc ~ LMA ~ (g ~ m^{
+  #     -2
+  #   }))) +
+  #   ylab(expression(Whole - leaf ~ LMA ~ (g ~ m^{
+  #     -2
+  #   }))) +
+  #   stat_cor(
+  #     aes(label = paste(..rr.label.., ..n.label.., sep = "~`,`~"), family = "Arial"),
+  #     show.legend = FALSE
+  #   ) +
+  #   theme_bw() +
+  #   theme(
+  #     text = element_text(family = "Arial"),
+  #     legend.position = c(0.3, 0.1),
+  #     legend.key.size = unit(0.5, "cm"),
+  #     legend.spacing.y = unit(0.1, "cm"),
+  #     legend.text.align = 0,
+  #     legend.key.height = unit(0.2, "cm"),
+  #     legend.text = element_text(size = 9),
+  #     legend.title = element_text(size = 9)
+  #   )
+
+  # p2 <- data |>
+  #   ggplot(aes(x = lma_disc, y = lma_leaf, col = la_gr3)) +
+  #   geom_point(alpha = 0.6) +
+  #   scale_x_log10() +
+  #   scale_y_log10() +
+  #   geom_abline(slope = 1, intercept = 0, lty = 2) +
+  #   geom_sma(se = FALSE) +
+  #   scale_color_manual(
+  #     values = my_col[c(2, 4)],
+  #     name = "Diameter of the leaf punch"
+  #   ) +
+  #   xlab(expression(Leaf ~ disc ~ LMA ~ (g ~ m^{
+  #     -2
+  #   }))) +
+  #   ylab(expression(Whole - leaf ~ LMA ~ (g ~ m^{
+  #     -2
+  #   }))) +
+  #   stat_cor(
+  #     aes(label = paste(..rr.label.., ..n.label.., sep = "~`,`~"), family = "Arial"),
+  #     show.legend = FALSE
+  #   ) +
+  #   theme_bw() +
+  #   theme(
+  #     text = element_text(family = "Arial"),
+  #     legend.position = c(0.3, 0.1),
+  #     legend.key.size = unit(0.5, "cm"),
+  #     legend.spacing.y = unit(0.1, "cm"),
+  #     legend.text.align = 0,
+  #     legend.key.height = unit(0.2, "cm"),
+  #     legend.text = element_text(size = 9),
+  #     legend.title = element_text(size = 9)
+  #   )
+
+  # p3 <- data |>
+  #   ggplot(aes(x = lma_disc, y = lma_leaf, col = lt_gr3)) +
+  #   geom_point(alpha = 0.6) +
+  #   scale_x_log10() +
+  #   scale_y_log10() +
+  #   geom_abline(slope = 1, intercept = 0, lty = 2) +
+  #   geom_sma(se = FALSE) +
+  #   scale_color_manual(
+  #     values = my_col[c(2, 4)],
+  #     name = "Diameter of the leaf punch"
+  #   ) +
+  #   xlab(expression(Leaf ~ disc ~ LMA ~ (g ~ m^{
+  #     -2
+  #   }))) +
+  #   ylab(expression(Whole - leaf ~ LMA ~ (g ~ m^{
+  #     -2
+  #   }))) +
+  #   stat_cor(
+  #     aes(label = paste(..rr.label.., ..n.label.., sep = "~`,`~"), family = "Arial"),
+  #     show.legend = FALSE
+  #   ) +
+  #   theme_bw() +
+  #   theme(
+  #     text = element_text(family = "Arial"),
+  #     legend.position = c(0.3, 0.1),
+  #     legend.key.size = unit(0.5, "cm"),
+  #     legend.spacing.y = unit(0.1, "cm"),
+  #     legend.text.align = 0,
+  #     legend.key.height = unit(0.2, "cm"),
+  #     legend.text = element_text(size = 9),
+  #     legend.title = element_text(size = 9)
+  #   )
+
+  # p1 + p2 + p3
+  #   plot_annotation(tag_levels = "a") &
+  #   theme(
+  #     text = element_text(family = "Arial"))
+
+# }
+
 #' @title Leaf disc vs whole-leaf LMA (separted species-level)
 lalt_sep_grid_point <- function(data) {
   my_col <- RColorBrewer::brewer.pal(4, "RdBu")

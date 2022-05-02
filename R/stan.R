@@ -1,4 +1,4 @@
-clean_stan_data <- function(sp_mean, model = c("no", "LMA", "LD"), int = FALSE) {
+clean_stan_data <- function(sp_mean, model = c("no", "LMA", "LD", "LD2"), int = FALSE) {
   if (model == "no") {
     x <- cbind(
       intercept = rep(1, nrow(sp_mean)),
@@ -12,12 +12,22 @@ clean_stan_data <- function(sp_mean, model = c("no", "LMA", "LD"), int = FALSE) 
       la = sp_mean$la,
       lt = sp_mean$lt
     )
-  } else {
+  } else if (model == "LD") {
     x <- cbind(
       intercept = rep(1, nrow(sp_mean)),
-      lma_disc = sp_mean$lma_disc / sp_mean$lt / 1000,
+      lma_disc = sp_mean$ld_leaf,
       la = sp_mean$la,
       lt = sp_mean$lt
+    )
+  } else if (model == "LD2") {
+    x <- cbind(
+      intercept = rep(1, nrow(sp_mean)),
+      lma_disc = sp_mean$ld_leaf,
+      la = sp_mean$la,
+      lt = sp_mean$lt,
+      int1 = sp_mean$ld_leaf * sp_mean$la,
+      int2 = sp_mean$ld_leaf * sp_mean$lt,
+      int3 = sp_mean$la * sp_mean$lt
     )
   }
 
