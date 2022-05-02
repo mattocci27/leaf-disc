@@ -1,4 +1,4 @@
-clean_stan_data <- function(sp_mean, model = c("no", "LMA", "LD")) {
+clean_stan_data <- function(sp_mean, model = c("no", "LMA", "LD"), int = FALSE) {
   if (model == "no") {
     x <- cbind(
       intercept = rep(1, nrow(sp_mean)),
@@ -22,6 +22,10 @@ clean_stan_data <- function(sp_mean, model = c("no", "LMA", "LD")) {
   }
 
   x[, -1] <- apply(x[, -1], 2, \(x)scale(log(x)))
+
+  if (int) {
+   x <- cbind(x, lalt = x[,2] * x[,3])
+  }
 
   # use non-scaled value for LMA
   log_lma_disc <- sp_mean$lma_disc |> log()

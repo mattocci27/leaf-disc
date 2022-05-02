@@ -57,6 +57,7 @@ tar_load(lalt_sep_grid_png)
 ```{r}
 targets::tar_load("fit_sp_0_summary_simple")
 targets::tar_load("fit_sp_1_summary_model")
+targets::tar_load("fit_sp_11_summary_model")
 targets::tar_load("fit_sp_2_summary_model")
 targets::tar_load("fit_sp_3_summary_model")
 targets::tar_load("fit_sp_4_summary_sma")
@@ -65,6 +66,7 @@ targets::tar_load("fit_sp_6_summary_sma_err")
 
 targets::tar_load("fit_sp_0_diagnostics_simple")
 targets::tar_load("fit_sp_1_diagnostics_model")
+targets::tar_load("fit_sp_11_diagnostics_model")
 targets::tar_load("fit_sp_2_diagnostics_model")
 targets::tar_load("fit_sp_3_diagnostics_model")
 targets::tar_load("fit_sp_4_diagnostics_sma")
@@ -76,6 +78,7 @@ targets::tar_load("fit_sp_6_diagnostics_sma_err")
 ```{r}
 fit_sp_0_summary_simple |> filter(rhat > 1.1)
 fit_sp_1_summary_model |> filter(rhat > 1.1)
+fit_sp_11_summary_model |> filter(rhat > 1.1)
 fit_sp_2_summary_model |> filter(rhat > 1.1)
 fit_sp_3_summary_model |> filter(rhat > 1.1)
 fit_sp_4_summary_sma |> filter(rhat > 1.1)
@@ -88,6 +91,7 @@ It is difficult to model heteroskedasticity and measurement errors at the same t
 ```{r}
 div_check(fit_sp_0_diagnostics_simple)
 div_check(fit_sp_1_diagnostics_model)
+div_check(fit_sp_11_diagnostics_model)
 div_check(fit_sp_2_diagnostics_model)
 div_check(fit_sp_3_diagnostics_model)
 div_check(fit_sp_4_diagnostics_sma)
@@ -97,7 +101,7 @@ div_check(fit_sp_6_diagnostics_sma_err)
 
 ```{r}
 targets::tar_load(loo_model)
-loo::loo_compare(loo_model[[1]], loo_model[[2]], loo_model[[3]], loo_model[[4]])
+loo::loo_compare(loo_model[[1]], loo_model[[2]], loo_model[[3]], loo_model[[4]], loo_model[[5]])
 ```
 
 ```{r}

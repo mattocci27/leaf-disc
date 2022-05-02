@@ -203,6 +203,21 @@ list(
     # max_treedepth = 15,
     seed = 123
    ),
+
+   tar_stan_mcmc(
+    fit_sp_11,
+    "stan/model.stan",
+    data = clean_stan_data(sp_mean, model = "no", int = TRUE),
+    refresh = 0,
+    chains = 4,
+    parallel_chains = getOption("mc.cores", 4),
+    iter_warmup = 2000,
+    iter_sampling = 2000,
+    # adapt_delta = 0.99,
+    # max_treedepth = 15,
+    seed = 123
+   ),
+
    tar_stan_mcmc(
     fit_sp_2,
     "stan/model.stan",
@@ -521,6 +536,7 @@ list(
       list(
         fit_sp_0 = fit_sp_0_mcmc_simple,
         fit_sp_1 = fit_sp_1_mcmc_model,
+        fit_sp_11 = fit_sp_11_mcmc_model,
         fit_sp_2 = fit_sp_2_mcmc_model,
         fit_sp_3 = fit_sp_3_mcmc_model
         ),
