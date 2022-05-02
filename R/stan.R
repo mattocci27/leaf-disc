@@ -93,6 +93,7 @@ clean_stan_data2 <- function(sp_mean, dry_mass = TRUE, scale = FALSE, ld = FALSE
       x = x)
   }
 }
+
 create_dummy_data <- function(n) {
   xx1 <- rnorm(n)
   xx2 <- rnorm(n)
@@ -110,6 +111,24 @@ create_dummy_data <- function(n) {
     log_y = yy,
     log_lma_disc = xx1,
     x = x)
+}
+
+create_dummy_sma_data <- function(n, seed = 123) {
+  set.seed(seed)
+  beta1 <- 1
+  beta2 <- 1.5
+  x_true <- rnorm(n)
+  sig_x <- 0.4
+  sig <- 0.8
+  x <- rnorm(n, x_true, sig_x)
+  y <- rnorm(n, beta1 + beta2 * x_true, sig)
+
+  list(
+    N = n,
+    y = y,
+    x = x,
+    x_true = x_true
+    )
 }
 
 create_stan_tab <- function(draws) {

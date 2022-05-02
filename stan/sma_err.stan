@@ -13,8 +13,8 @@ parameters {
   real<lower=0,upper=pi()/2> omega_unif;
   vector[N] z;
   vector[N] z2;
+  real log_lma_disc_hat;
 }
-
 transformed parameters {
   vector[N] log_lma_disc_true;
   vector[N] log_sigma;
@@ -22,7 +22,7 @@ transformed parameters {
   real<lower=0> omega;
   sigma_x = 2.5 * tan(sigma_x_unif);
   omega = 2.5 * tan(omega_unif);
-  log_lma_disc_true = log_lma_disc + z * sigma_x;
+  log_lma_disc_true = log_lma_disc_hat + z * sigma_x;
   log_sigma = x * gamma + z2 * omega;
 }
 
@@ -32,6 +32,7 @@ model {
   sigma = exp(log_sigma);
   z ~ std_normal();
   z2 ~ std_normal();
+  log_lma_disc_hat ~ normal(0, 5);
   beta ~ normal(0, 5);
   gamma ~ normal(0, 5);
   log_mu = x * beta + log_lma_disc_true;

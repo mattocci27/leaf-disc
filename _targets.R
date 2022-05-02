@@ -108,6 +108,7 @@ list(
   #   stan_sp_dat_noint,
   #   clean_stan_data(sp_mean, interaction = FALSE)
   # ),
+
   tar_stan_mcmc(
     fit_sim,
     "stan/model.stan",
@@ -117,6 +118,20 @@ list(
     parallel_chains = getOption("mc.cores", 4),
     iter_warmup = 1000,
     iter_sampling = 1000,
+    seed = 123
+   ),
+
+  tar_stan_mcmc(
+    fit_sim_sma,
+    "stan/test.stan",
+    data = create_dummy_sma_data(300),
+    refresh = 0,
+    chains = 4,
+    parallel_chains = getOption("mc.cores", 4),
+    iter_warmup = 2000,
+    iter_sampling = 2000,
+    adapt_delta = 0.99,
+    max_treedepth = 15,
     seed = 123
    ),
 
@@ -237,25 +252,26 @@ list(
     chains = 4,
     parallel_chains = getOption("mc.cores", 4),
     iter_warmup = 2000,
-    iter_sampling = 4000,
-    adapt_delta = 0.95,
+    iter_sampling = 2000,
+    adapt_delta = 0.99,
     max_treedepth = 15,
     seed = 123
    ),
 
-  #  tar_stan_mcmc(
-  #   fit_sp_5,
-  #   "stan/sma.stan",
-  #   data = clean_stan_data(sp_mean, model = "LMA"),
-  #   refresh = 0,
-  #   chains = 4,
-  #   parallel_chains = getOption("mc.cores", 4),
-  #   iter_warmup = 2000,
-  #   iter_sampling = 2000,
-  #   adapt_delta = 0.99,
-  #   max_treedepth = 15,
-  #   seed = 123
-  #  ),
+   tar_stan_mcmc(
+    fit_sp_5,
+    "stan/sma.stan",
+    data = clean_stan_data(sp_mean, model = "LMA"),
+    refresh = 0,
+    chains = 4,
+    parallel_chains = getOption("mc.cores", 4),
+    iter_warmup = 2000,
+    iter_sampling = 2000,
+    adapt_delta = 0.99,
+    max_treedepth = 15,
+    seed = 123
+   ),
+
    tar_stan_mcmc(
     fit_sp_6,
     "stan/sma_err.stan",
@@ -265,7 +281,7 @@ list(
     parallel_chains = getOption("mc.cores", 4),
     iter_warmup = 2000,
     iter_sampling = 2000,
-    adapt_delta = 0.95,
+    adapt_delta = 0.99,
     max_treedepth = 15,
     seed = 123
    ),
