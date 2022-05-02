@@ -212,16 +212,17 @@ coef_pointrange2 <- function(data, ld = FALSE) {
 
   data1 <- data |>
     filter(para != "gamma[1]") |>
+    filter(para != "beta[1]") |>
     filter(str_detect(para, "beta")) |>
     mutate(para = case_when(
-      para == "beta[1]" ~ "Intercept for mean",
+    #  para == "beta[1]" ~ "Intercept for mean",
       para == "beta[2]" ~ "Effect of disc LMA on mean",
       para == "beta[3]" ~ "Effect of LA on mean",
       para == "beta[4]" ~ "Effect of LT on mean"
     )) |>
     mutate(para = factor(para,
       levels = c(
-      "Intercept for mean",
+    #  "Intercept for mean",
       "Effect of disc LMA on mean",
       "Effect of LA on mean",
       "Effect of LT on mean"
@@ -229,6 +230,7 @@ coef_pointrange2 <- function(data, ld = FALSE) {
 
   data2 <- data |>
     filter(para != "gamma[1]") |>
+    filter(para != "beta[1]") |>
     filter(str_detect(para, "gamma")) |>
     mutate(para = case_when(
       para == "gamma[2]" ~ "Effect of disc LMA on variance",
@@ -262,7 +264,7 @@ coef_pointrange2 <- function(data, ld = FALSE) {
       ylab("") +
       xlab("Standardized coefficients") +
       scale_y_discrete(labels = c(
-        "Intercept for mean" = expression(Intercept~of~mean~(beta[0])),
+    #    "Intercept for mean" = expression(Intercept~of~mean~(beta[0])),
         "Effect of disc LMA on mean" = expression(Effect~of~LMA~on~mean~(beta[1])),
         "Effect of LA on mean" = expression(Effect~of~LA~on~mean~(beta[2])),
         "Effect of LT on mean" = expression(Effect~of~LT~on~mean~(beta[3]))
@@ -300,7 +302,7 @@ coef_pointrange2 <- function(data, ld = FALSE) {
 
     if(ld) {
       p1 <- p1 + scale_y_discrete(labels = c(
-        "Intercept for mean" = expression(Intercept~of~mean~(beta[0])),
+    #    "Intercept for mean" = expression(Intercept~of~mean~(beta[0])),
         "Effect of disc LMA on mean" = expression(Effect~of~LD~on~mean~(beta[1])),
         "Effect of LA on mean" = expression(Effect~of~LA~on~mean~(beta[2])),
         "Effect of LT on mean" = expression(Effect~of~LT~on~mean~(beta[3]))
