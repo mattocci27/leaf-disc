@@ -246,12 +246,14 @@ ratio_combine|function|39af899c381a5781|||||||||||||||
 ratio_pdf|stem|1d8eb06a4d66f455|5c9e590c575821fd|5c99af3478960f01|-908551514|figs/ratio.pdf|t19110.4087968139s|d4d860dc3fbf1237|190852|file|local|vector|||1.108||
 ratio_plot|stem|674b42c48834f7f9|deab1a5ab669067c|da1225818fb447a0|923082000||t19110.4087814433s|278d4fb2026adeef|919531|rds|local|vector|||1.156||
 ratio_png|stem|d2b7a6c9c2263744|dd6023b40f942608|e50de79b52e5c647|151564805|figs/ratio.png|t19110.408797462s|547eeb4f8a1b7184|648995|file|local|vector|||1.207||
-report|stem|b46f18f0c29b4e6a|30e6bff4065c979c|8db420cc754ecc03|-237041703|report.html*report.Rmd|t19115.4131993419s|556d67d630401738|5773584|file|local|vector|||6.532||
+report|stem|9be8962bf0ae9dc9|30e6bff4065c979c|8db420cc754ecc03|-237041703|report.html*report.Rmd|t19115.4278339352s|ea50ef5001131ba4|5775513|file|local|vector|||6.559||
 save_tiff|function|5bae6d4d57942267|||||||||||||||
 si|stem|c03590befeaf2070|ebc7786f9ea1f783|255ce018fec97f34|2093119568|ms/SI.html*ms/SI.Rmd|t19110.3721237715s|dc9b5f2411439370|3176376|file|local|vector|||0.919||
 sma_sp_2_tab|stem|ea0769f15e4b7057|1f4d83471e58ad60|9696f7aa13a52912|-569310508||t19115.3629553427s|9ea571d1cd313787|411|rds|local|vector|||0.41||
 sma_sp_ld_tab|stem|36cbe53672a5042e|41ca7688546adcad|02d308b6cf950d6b|1506123938||t19111.2883357068s|e679a715c680f96d|492|rds|local|vector|||0.062||
+sma_sp_ld_tab_csv|stem||7101cbdf83611ba8|aa6fc2900b726a44|-23473435||t19115.4265547353s||0|file|local|vector|||||_build_ target sma_sp_ld_tab_csv did not return a character. dynamic files targets with format  file must return character vectors of file or directory paths.
 sma_sp_tab|stem|17f2c9b5368eb418|4bf4bcf32224585e|ba44bcbb77a1a9f1|-940233536||t19111.2883364938s|b81895e14878e86f|359|rds|local|vector|||0.063||
+sma_tab_csv|stem||9d592f5e7844f60e|71af42a5a4e6c50c|1877675701||t19115.4257464472s||0|file|local|vector|||0.319||object sma_tab not found
 sma_tree_ld_tab|stem|472c0ba2f7781e1b|229f9c2d75d5dbc6|2707c2a108b78369|1264731883||t19110.4117520852s|495b46c240e9807d|480|rds|local|vector|||0.994||
 sma_tree_tab|stem|56dcd19e958d392d|edf17ed248c5d348|2f0254c0e47c19b5|1514035256||t19110.4087797766s|b4cfbff6ad8d48ed|358|rds|local|vector|||1.16||
 sp_cv|stem|00d9c8336f94058f|46b0126f11538483|30d91e1b4cc2de19|1537666347||t19103.2994624431s|f81e8ee025375b34|12931|rds|local|vector|||0.007||

@@ -167,6 +167,11 @@ sma_sp_tab |>
   kable() |>
   kable_styling()
 ```
+```{r}
+sma_sp_tab |>
+  write_csv("data/sma_sp_tab.csv")
+```
+
 
 ## species LD
 
@@ -177,6 +182,11 @@ sma_sp_ld_tab |>
   kable_styling()
 ```
 
+```{r}
+sma_sp_ld_tab |>
+  write_csv("data/sma_sp_ld_tab.csv")
+```
+
 ## species simple
 
 ```{r, eval=TRUE}
@@ -185,6 +195,12 @@ sma_sp_2_tab |>
   kable() |>
   kable_styling()
 ```
+
+```{r}
+sma_sp_2_tab |>
+  write_csv("data/sma_sp_2_tab.csv")
+```
+
 
 ## tree
 
