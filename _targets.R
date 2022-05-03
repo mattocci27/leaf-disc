@@ -231,6 +231,19 @@ list(
     # max_treedepth = 15,
     seed = 123
    ),
+   tar_stan_mcmc(
+    fit_sp_21,
+    "stan/model2.stan",
+    data = clean_stan_data(sp_mean, model = "LMA"),
+    refresh = 0,
+    chains = 4,
+    parallel_chains = getOption("mc.cores", 4),
+    iter_warmup = 2000,
+    iter_sampling = 2000,
+    # adapt_delta = 0.99,
+    # max_treedepth = 15,
+    seed = 123
+   ),
 
    tar_stan_mcmc(
     fit_sp_3,
@@ -246,7 +259,21 @@ list(
     seed = 123
    ),
    tar_stan_mcmc(
-    fit_sp_33,
+    fit_sp_31,
+    "stan/model.stan",
+    data = clean_stan_data(sp_mean, model = "LD3"),
+    refresh = 0,
+    chains = 4,
+    parallel_chains = getOption("mc.cores", 4),
+    iter_warmup = 2000,
+    iter_sampling = 2000,
+    # adapt_delta = 0.99,
+    # max_treedepth = 15,
+    seed = 123
+   ),
+
+   tar_stan_mcmc(
+    fit_sp_32,
     "stan/model.stan",
     data = clean_stan_data(sp_mean, model = "LD2"),
     refresh = 0,
@@ -287,47 +314,48 @@ list(
     seed = 123
    ),
 
-   tar_stan_mcmc(
-    fit_sp_4,
-    "stan/sma.stan",
-    data = clean_stan_data(sp_mean, model = "no"),
-    refresh = 0,
-    chains = 4,
-    parallel_chains = getOption("mc.cores", 4),
-    iter_warmup = 2000,
-    iter_sampling = 2000,
-    adapt_delta = 0.99,
-    max_treedepth = 15,
-    seed = 123
-   ),
+  # sma works but error models do not work
+  #  tar_stan_mcmc(
+  #   fit_sp_4,
+  #   "stan/sma.stan",
+  #   data = clean_stan_data(sp_mean, model = "no"),
+  #   refresh = 0,
+  #   chains = 4,
+  #   parallel_chains = getOption("mc.cores", 4),
+  #   iter_warmup = 2000,
+  #   iter_sampling = 2000,
+  #   adapt_delta = 0.99,
+  #   max_treedepth = 15,
+  #   seed = 123
+  #  ),
 
-   tar_stan_mcmc(
-    fit_sp_5,
-    "stan/sma.stan",
-    data = clean_stan_data(sp_mean, model = "LMA"),
-    refresh = 0,
-    chains = 4,
-    parallel_chains = getOption("mc.cores", 4),
-    iter_warmup = 2000,
-    iter_sampling = 2000,
-    adapt_delta = 0.99,
-    max_treedepth = 15,
-    seed = 123
-   ),
+  #  tar_stan_mcmc(
+  #   fit_sp_5,
+  #   "stan/sma.stan",
+  #   data = clean_stan_data(sp_mean, model = "LMA"),
+  #   refresh = 0,
+  #   chains = 4,
+  #   parallel_chains = getOption("mc.cores", 4),
+  #   iter_warmup = 2000,
+  #   iter_sampling = 2000,
+  #   adapt_delta = 0.99,
+  #   max_treedepth = 15,
+  #   seed = 123
+  #  ),
 
-   tar_stan_mcmc(
-    fit_sp_6,
-    "stan/sma_err.stan",
-    data = clean_stan_data(sp_mean, model = "LD"),
-    refresh = 0,
-    chains = 4,
-    parallel_chains = getOption("mc.cores", 4),
-    iter_warmup = 2000,
-    iter_sampling = 2000,
-    adapt_delta = 0.99,
-    max_treedepth = 15,
-    seed = 123
-   ),
+  #  tar_stan_mcmc(
+  #   fit_sp_6,
+  #   "stan/sma_err.stan",
+  #   data = clean_stan_data(sp_mean, model = "LD"),
+  #   refresh = 0,
+  #   chains = 4,
+  #   parallel_chains = getOption("mc.cores", 4),
+  #   iter_warmup = 2000,
+  #   iter_sampling = 2000,
+  #   adapt_delta = 0.99,
+  #   max_treedepth = 15,
+  #   seed = 123
+  #  ),
 
   # coef for OLS stan
   tar_target(
@@ -424,6 +452,29 @@ list(
     ),
     format = "file"
   ),
+
+  # coef for OLS stan 2
+  tar_target(
+    coef_sp_tab31,
+    create_stan_tab(fit_sp_31_draws_model)
+  ),
+  tar_target(
+    coef_sp_plot31,
+    coef_pointrange2(coef_sp_tab31, ld = TRUE)
+  ),
+  tar_target(
+    coef_sp_png31,
+    ggsave(
+      "figs/coef_sp31.png",
+      coef_sp_plot31,
+      dpi = 300,
+      width = 6,
+      height = 6
+    ),
+    format = "file"
+  ),
+
+
   # coef for OLS stan 2
   tar_target(
     coef_sp_tab333,
@@ -609,8 +660,10 @@ list(
         fit_sp_1 = fit_sp_1_mcmc_model,
         fit_sp_11 = fit_sp_11_mcmc_model,
         fit_sp_2 = fit_sp_2_mcmc_model,
+        fit_sp_21 = fit_sp_2_mcmc_model,
         fit_sp_3 = fit_sp_3_mcmc_model,
-        fit_sp_33 = fit_sp_33_mcmc_model
+        fit_sp_31 = fit_sp_31_mcmc_model,
+        fit_sp_32 = fit_sp_32_mcmc_model
         ),
     \(x)x$loo(cores = parallel::detectCores())
     )

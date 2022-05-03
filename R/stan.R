@@ -19,6 +19,14 @@ clean_stan_data <- function(sp_mean, model = c("no", "LMA", "LD", "LD2"), int = 
       la = sp_mean$la,
       lt = sp_mean$lt
     )
+  } else if (model == "LD3") {
+    x <- cbind(
+      intercept = rep(1, nrow(sp_mean)),
+      #lma_disc = sp_mean$lma_disc / sp_mean$lt,
+      lma_disc = sp_mean$ld_disc,
+      la = sp_mean$la,
+      lt = sp_mean$lt
+    )
   } else if (model == "LD2") {
     x <- cbind(
       intercept = rep(1, nrow(sp_mean)),
@@ -55,7 +63,9 @@ clean_stan_data <- function(sp_mean, model = c("no", "LMA", "LD", "LD2"), int = 
     sp = sp_mean$species |> as.factor() |> as.numeric(),
     log_y = log_lma_leaf,
     log_lma_disc = log_lma_disc,
-    x = x)
+    x = x,
+    x2 = x[,-2]
+    )
 
 }
 

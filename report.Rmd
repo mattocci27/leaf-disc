@@ -59,21 +59,25 @@ targets::tar_load("fit_sp_0_summary_simple")
 targets::tar_load("fit_sp_1_summary_model")
 targets::tar_load("fit_sp_11_summary_model")
 targets::tar_load("fit_sp_2_summary_model")
+targets::tar_load("fit_sp_21_summary_model2")
 targets::tar_load("fit_sp_3_summary_model")
-targets::tar_load("fit_sp_33_summary_model")
-targets::tar_load("fit_sp_4_summary_sma")
-targets::tar_load("fit_sp_5_summary_sma")
-targets::tar_load("fit_sp_6_summary_sma_err")
+targets::tar_load("fit_sp_31_summary_model")
+targets::tar_load("fit_sp_32_summary_model")
+# targets::tar_load("fit_sp_4_summary_sma")
+# targets::tar_load("fit_sp_5_summary_sma")
+# targets::tar_load("fit_sp_6_summary_sma_err")
 
 targets::tar_load("fit_sp_0_diagnostics_simple")
 targets::tar_load("fit_sp_1_diagnostics_model")
 targets::tar_load("fit_sp_11_diagnostics_model")
 targets::tar_load("fit_sp_2_diagnostics_model")
+targets::tar_load("fit_sp_21_diagnostics_model2")
 targets::tar_load("fit_sp_3_diagnostics_model")
-targets::tar_load("fit_sp_33_diagnostics_model")
-targets::tar_load("fit_sp_4_diagnostics_sma")
-targets::tar_load("fit_sp_5_diagnostics_sma")
-targets::tar_load("fit_sp_6_diagnostics_sma_err")
+targets::tar_load("fit_sp_31_diagnostics_model")
+targets::tar_load("fit_sp_32_diagnostics_model")
+# targets::tar_load("fit_sp_4_diagnostics_sma")
+# targets::tar_load("fit_sp_5_diagnostics_sma")
+# targets::tar_load("fit_sp_6_diagnostics_sma_err")
 ```
 
 
@@ -82,11 +86,13 @@ fit_sp_0_summary_simple |> filter(rhat > 1.1)
 fit_sp_1_summary_model |> filter(rhat > 1.1)
 fit_sp_11_summary_model |> filter(rhat > 1.1)
 fit_sp_2_summary_model |> filter(rhat > 1.1)
+fit_sp_21_summary_model2 |> filter(rhat > 1.1)
 fit_sp_3_summary_model |> filter(rhat > 1.1)
-fit_sp_33_summary_model |> filter(rhat > 1.1)
-fit_sp_4_summary_sma |> filter(rhat > 1.1)
-fit_sp_5_summary_sma |> filter(rhat > 1.1)
-fit_sp_6_summary_sma_err |> filter(rhat > 1.1)
+fit_sp_31_summary_model |> filter(rhat > 1.1)
+fit_sp_32_summary_model |> filter(rhat > 1.1)
+# fit_sp_4_summary_sma |> filter(rhat > 1.1)
+# fit_sp_5_summary_sma |> filter(rhat > 1.1)
+# fit_sp_6_summary_sma_err |> filter(rhat > 1.1)
 ```
 
 It is difficult to model heteroskedasticity and measurement errors at the same time.
@@ -96,17 +102,19 @@ div_check(fit_sp_0_diagnostics_simple)
 div_check(fit_sp_1_diagnostics_model)
 div_check(fit_sp_11_diagnostics_model)
 div_check(fit_sp_2_diagnostics_model)
+div_check(fit_sp_21_diagnostics_model2)
 div_check(fit_sp_3_diagnostics_model)
-div_check(fit_sp_33_diagnostics_model)
-div_check(fit_sp_4_diagnostics_sma)
-div_check(fit_sp_5_diagnostics_sma)
-div_check(fit_sp_6_diagnostics_sma_err)
+div_check(fit_sp_31_diagnostics_model)
+div_check(fit_sp_32_diagnostics_model)
+# div_check(fit_sp_4_diagnostics_sma)
+# div_check(fit_sp_5_diagnostics_sma)
+# div_check(fit_sp_6_diagnostics_sma_err)
 ```
 
 ```{r}
 targets::tar_load(loo_model)
 loo::loo_compare(loo_model[[1]], loo_model[[2]], loo_model[[3]],
-  loo_model[[4]], loo_model[[5]], loo_model[[6]])
+  loo_model[[4]], loo_model[[5]], loo_model[[6]], loo_model[[7]], loo_model[[8]])
 ```
 
 ```{r}
@@ -139,6 +147,12 @@ tar_load(coef_sp_png3)
 ```
 
 ![](figs/coef_sp3.png)
+
+```{r, eval=TRUE}
+tar_load(coef_sp_png31)
+```
+
+![](figs/coef_sp31.png)
 
 
 ```{r, eval=TRUE}
