@@ -277,16 +277,13 @@ generate_sma_tab <- function(sp_mean) {
 
 #' @title SMA table (species-level)
 generate_sma_ld_tab <- function(sp_mean) {
-  sp_mean <- sp_mean |>
-    mutate(lalt_gr = paste0(ld_gr, "~", lalt_gr))
-
   sma_lma <- sma(log10(lma_leaf) ~ log10(lma_disc),
     data = sp_mean,
     elev.test = 0,
     slope.test = 1
   )
 
-  sma_lma_lalt_gr <- sma(log10(lma_leaf) ~ log10(lma_disc) * lalt_gr,
+  sma_lma_gr <- sma(log10(lma_leaf) ~ log10(lma_disc) * ldlalt_gr,
     data = sp_mean,
     elev.test = 0,
     slope.test = 1
@@ -296,7 +293,7 @@ generate_sma_ld_tab <- function(sp_mean) {
   tb0 <- lapply(
     list(
       lma = sma_lma,
-      lma_gr = sma_lma_lalt_gr
+      lma_gr = sma_lma_gr
     ),
     extract_sma
   )

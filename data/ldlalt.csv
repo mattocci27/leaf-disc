@@ -1,0 +1,9 @@
+ldlalt_gr,ld_mean,la_mean,lt_mean
+Dense~Thick~Large,0.225,62.7,0.393
+Dense~Thick~Small,0.244,15.9,0.405
+Dense~Thin~Large,0.244,75.7,0.225
+Dense~Thin~Small,0.266,15.4,0.226
+Nondense~Thick~Large,0.351,92.5,0.332
+Nondense~Thick~Small,0.363,12.4,0.388
+Nondense~Thin~Large,0.367,66.2,0.21
+Nondense~Thin~Small,0.377,17.9,0.218

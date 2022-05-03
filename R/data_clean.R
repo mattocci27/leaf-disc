@@ -352,7 +352,8 @@ sp_dat_mean <- function(full_data_csv){
     mutate(lt_gr2 = factor(lt_gr2, levels = c("Thin-leaved~species",
                            "Thick-leaved~species"))) |>
     mutate(ld_gr2 = factor(ld_gr2, levels = c("Nondense-leaved~species",
-                           "Dense-leaved~species")))
+                           "Dense-leaved~species"))) |>
+    mutate(ldlalt_gr = paste0(ld_gr, "~", lalt_gr))
 
   d
 }
@@ -428,8 +429,8 @@ tree_dat_clean <- function(tree_data_csv) {
     mutate(lt_gr2 = factor(lt_gr2, levels = c("Thin-leaved~individuals",
                            "Thick-leaved~individuals"))) |>
     mutate(ld_gr2 = factor(ld_gr2, levels = c("Nondense-leaved~individuals",
-                           "Dense-leaved~individuals")))
-
+                           "Dense-leaved~individuals"))) |>
+    mutate(ldlalt_gr = paste0(ld_gr, "~", lalt_gr))
 
   tree
 }

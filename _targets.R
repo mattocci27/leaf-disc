@@ -98,8 +98,8 @@ list(
     write_yml("values.yml",
       sp_mean, full_data_cv_csv, tree, lma_yaku_re)
   ),
-  # analyses and figs ---------------------------------------------
 
+  # analyses and figs ---------------------------------------------
   tar_target(
     stan_sim_dat,
     create_dummy_data(100)
