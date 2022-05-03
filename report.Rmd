@@ -128,11 +128,24 @@ tar_load(coef_sp_png2)
 ![](figs/coef_sp2.png)
 
 ```{r, eval=TRUE}
+tar_load(coef_sp_png1)
+```
+
+![](figs/coef_sp1.png)
+
+
+```{r, eval=TRUE}
 tar_load(coef_sp_png3)
 ```
 
 ![](figs/coef_sp3.png)
 
+
+```{r, eval=TRUE}
+tar_load(coef_sp_png333)
+```
+
+![](figs/coef_sp333.png)
 
 # SMA table
 

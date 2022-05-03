@@ -29,6 +29,13 @@ clean_stan_data <- function(sp_mean, model = c("no", "LMA", "LD", "LD2"), int = 
       int2 = sp_mean$ld_leaf * sp_mean$lt,
       int3 = sp_mean$la * sp_mean$lt
     )
+  } else if (model == "LM") {
+    x <- cbind(
+      intercept = rep(1, nrow(sp_mean)),
+      lma_disc = sp_mean$ld_leaf * sp_mean$lt,
+      la = sp_mean$la,
+      lt = sp_mean$lt
+    )
   }
 
   x[, -1] <- apply(x[, -1], 2, \(x)scale(log(x)))
@@ -219,10 +226,21 @@ coef_pointrange <- function(data, ld = FALSE) {
         "Effect of LT on variance" = expression(Effect~of~LT~on~variance~(gamma[3]))
       ))
     }
+    if(ld) {
+      p <- p + scale_y_discrete(labels = c(
+        "Intercept for mean" = expression(Intercept~of~mean~(beta[0])),
+        "Effect of disc LMA on mean" = expression(Effect~of~LD~on~mean~(beta[1])),
+        "Effect of LA on mean" = expression(Effect~of~LA~on~mean~(beta[2])),
+        "Effect of LT on mean" = expression(Effect~of~LT~on~mean~(beta[3])),
+        "Effect of disc LMA on variance" = expression(Effect~of~LD~on~variance~(gamma[1])),
+        "Effect of LA on variance" = expression(Effect~of~LA~on~variance~(gamma[2])),
+        "Effect of LT on variance" = expression(Effect~of~LT~on~variance~(gamma[3]))
+      ))
+    }
     p
 }
 
-coef_pointrange2 <- function(data, ld = FALSE) {
+coef_pointrange2 <- function(data, ld = FALSE, lm = FALSE, lalt = FALSE) {
 
   data1 <- data |>
     filter(para != "gamma[1]") |>
@@ -325,6 +343,31 @@ coef_pointrange2 <- function(data, ld = FALSE) {
         "Effect of disc LMA on variance" = expression(Effect~of~LD~on~variance~(gamma[1])),
         "Effect of LA on variance" = expression(Effect~of~LA~on~variance~(gamma[2])),
         "Effect of LT on variance" = expression(Effect~of~LT~on~variance~(gamma[3]))
+      ))
+    }
+    if(lm) {
+      p1 <- p1 + scale_y_discrete(labels = c(
+    #    "Intercept for mean" = expression(Intercept~of~mean~(beta[0])),
+        "Effect of disc LMA on mean" = expression(Effect~of~LM~on~mean~(beta[1])),
+        "Effect of LA on mean" = expression(Effect~of~LA~on~mean~(beta[2])),
+        "Effect of LT on mean" = expression(Effect~of~LT~on~mean~(beta[3]))
+      ))
+      p2 <- p2 + scale_y_discrete(labels = c(
+        "Effect of disc LMA on variance" = expression(Effect~of~LM~on~variance~(gamma[1])),
+        "Effect of LA on variance" = expression(Effect~of~LA~on~variance~(gamma[2])),
+        "Effect of LT on variance" = expression(Effect~of~LT~on~variance~(gamma[3]))
+      ))
+    }
+    if(lalt) {
+      # label is correct
+      p1 <- p1 + scale_y_discrete(labels = c(
+        "Effect of disc LMA on mean" = expression(Effect~of~LA~on~mean~(beta[1])),
+        "Effect of LA on mean" = expression(Effect~of~LT~on~mean~(beta[2]))
+      ))
+      # label is correct
+      p2 <- p2 + scale_y_discrete(labels = c(
+        "Effect of disc LMA on variance" = expression(Effect~of~LA~on~variance~(gamma[1])),
+        "Effect of LA on variance" = expression(Effect~of~LT~on~variance~(gamma[2]))
       ))
     }
 

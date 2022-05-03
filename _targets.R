@@ -258,6 +258,20 @@ list(
     # max_treedepth = 15,
     seed = 123
    ),
+   tar_stan_mcmc(
+    fit_sp_333,
+    "stan/model.stan",
+    data = clean_stan_data(sp_mean, model = "LM"),
+    refresh = 0,
+    chains = 4,
+    parallel_chains = getOption("mc.cores", 4),
+    iter_warmup = 2000,
+    iter_sampling = 2000,
+    # adapt_delta = 0.99,
+    # max_treedepth = 15,
+    seed = 123
+   ),
+
 
    tar_stan_mcmc(
     fit_sp_0,
@@ -347,6 +361,28 @@ list(
     format = "file"
   ),
 
+       # coef for OLS stan 2
+  tar_target(
+    coef_sp_tab1,
+    create_stan_tab(fit_sp_1_draws_model)
+  ),
+  tar_target(
+    coef_sp_plot1,
+    coef_pointrange2(coef_sp_tab1, lalt = TRUE)
+  ),
+  tar_target(
+    coef_sp_png1,
+    ggsave(
+      "figs/coef_sp1.png",
+      coef_sp_plot1,
+      dpi = 300,
+      width = 6,
+      height = 6
+    ),
+    format = "file"
+  ),
+
+
   # coef for OLS stan 2
   tar_target(
     coef_sp_tab2,
@@ -367,6 +403,7 @@ list(
     ),
     format = "file"
   ),
+
   # coef for OLS stan 2
   tar_target(
     coef_sp_tab3,
@@ -381,6 +418,26 @@ list(
     ggsave(
       "figs/coef_sp3.png",
       coef_sp_plot3,
+      dpi = 300,
+      width = 6,
+      height = 6
+    ),
+    format = "file"
+  ),
+  # coef for OLS stan 2
+  tar_target(
+    coef_sp_tab333,
+    create_stan_tab(fit_sp_333_draws_model)
+  ),
+  tar_target(
+    coef_sp_plot333,
+    coef_pointrange2(coef_sp_tab333, lm = TRUE)
+  ),
+  tar_target(
+    coef_sp_png333,
+    ggsave(
+      "figs/coef_sp333.png",
+      coef_sp_plot333,
       dpi = 300,
       width = 6,
       height = 6
