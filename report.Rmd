@@ -39,9 +39,8 @@ tar_load(sp_mean)
 sp_mean |>
   group_by(ldlalt_gr) |>
   summarise(
-          ld_mean = mean(ld_disc) |> round(3),
-          la_mean = mean(la) |> round(1),
-          lt_mean = mean(lt) |> round(3)) |>
+    lma_leaf = mean(lma_leaf) |> round(1),
+    lma_disc = mean(lma_disc) |> round(1)) |>
   write_csv("data/ldlalt.csv")
 ```
 
