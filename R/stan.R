@@ -33,8 +33,8 @@ clean_stan_data <- function(sp_mean, model = c("no", "LMA", "LD", "LD2"), int = 
       lma_disc = sp_mean$ld_disc,
       la = sp_mean$la,
       lt = sp_mean$lt,
-      int1 = sp_mean$ld_disc * sp_mean$la,
-      int2 = sp_mean$ld_disc * sp_mean$lt,
+      # int1 = sp_mean$ld_disc * sp_mean$la,
+      # int2 = sp_mean$ld_disc * sp_mean$lt,
       int3 = sp_mean$la * sp_mean$lt
     )
   } else if (model == "LM") {
@@ -46,6 +46,14 @@ clean_stan_data <- function(sp_mean, model = c("no", "LMA", "LD", "LD2"), int = 
     )
   }
 
+  x2 <- cbind(
+      intercept = rep(1, nrow(sp_mean)),
+      lma_disc = sp_mean$ld_leaf,
+      la = sp_mean$la,
+      lt = sp_mean$lt
+    )
+
+  x2[, -1] <- apply(x2[, -1], 2, \(x)scale(log(x)))
   x[, -1] <- apply(x[, -1], 2, \(x)scale(log(x)))
 
   if (int) {
@@ -59,12 +67,13 @@ clean_stan_data <- function(sp_mean, model = c("no", "LMA", "LD", "LD2"), int = 
   list(
     N = nrow(sp_mean),
     K = ncol(x),
+    K2 = ncol(x2),
     J = unique(sp_mean$species) |> length(),
     sp = sp_mean$species |> as.factor() |> as.numeric(),
     log_y = log_lma_leaf,
     log_lma_disc = log_lma_disc,
     x = x,
-    x2 = x[,-2]
+    x2 = x2
     )
 
 }

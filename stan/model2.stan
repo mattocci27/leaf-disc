@@ -1,15 +1,16 @@
 data{
   int<lower=0> N;
   int<lower=0> K;
+  int<lower=0> K2;
   vector[N] log_y; // whole-leaf LMA / disc LMA
   vector[N] log_lma_disc; // whole-leaf LMA / disc LMA
   matrix[N, K] x; // predictors
-  matrix[N, K-1] x2; // predictors
+  matrix[N, K2] x2; // predictors
 }
 
 parameters{
   vector[K] beta;
-  vector[K-1] gamma;
+  vector[K2] gamma;
   real<lower=0,upper=pi()/2> omega_unif;
   vector[N] z;
 }

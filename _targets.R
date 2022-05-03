@@ -274,7 +274,7 @@ list(
 
    tar_stan_mcmc(
     fit_sp_ld2,
-    "stan/model.stan",
+    "stan/model2.stan",
     data = clean_stan_data(sp_mean, model = "LD2"),
     refresh = 0,
     chains = 4,
@@ -282,7 +282,7 @@ list(
     iter_warmup = 2000,
     iter_sampling = 2000,
     # adapt_delta = 0.99,
-    # max_treedepth = 15,
+    max_treedepth = 15,
     seed = 123
    ),
    tar_stan_mcmc(
@@ -661,7 +661,7 @@ list(
         fit_sp_lma_mcmc_model = fit_sp_lma_mcmc_model,
         fit_sp_lma2_mcmc_model2 = fit_sp_lma2_mcmc_model2,
         fit_sp_ld_mcmc_model = fit_sp_ld_mcmc_model,
-        fit_sp_ld2_mcmc_model = fit_sp_ld2_mcmc_model,
+        fit_sp_ld2_mcmc_model2 = fit_sp_ld2_mcmc_model2,
         fit_sp_ld3_mcmc_model = fit_sp_ld3_mcmc_model,
         fit_sp_lm_mcmc_model = fit_sp_lm_mcmc_model,
         fit_sp_lma0_mcmc_simple = fit_sp_lma0_mcmc_simple
