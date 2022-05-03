@@ -95,6 +95,9 @@ The pattern didn't change qualitatively.
 
 > L169-172 This is the major result of the paper. I suggest making it the first line of the results section (however I would modify it to fit the individual, rather than species-mean, level data: see below).
 
+
+
+
 > L175-176 Based on this, I am confused about the statistical approach. Did the authors separately run regressions for species-level means and individual level means? If so, it is almost a statistical inevitability that the individual level analysis would have a lower r2 than the species level analysis: therefore I would not report this as a result, per se. In addition, the species level means is more or less meaningless in the context of this paper: much more importantly is the comparison of individual based measurements. I would therefore remove the species level results form the manuscript, and instead only report on the individual level data.
 
 - need to think this

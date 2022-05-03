@@ -483,36 +483,37 @@ Dry mass for leaf discs were recorded 2-3 discs together for each leaf.
 Based on those measurements of whole-leaf and leaf disc samples, LMA (g m\textsuperscript{-2}) was calculated as the ratio of leaf dry mass to fresh leaf area, and LD was calculated as the ratio of LMA to LT.
 We do not present results of LD in the main text, because differences between whole-leaf LD and leaf disc LD only depends on the ratio between whole-leaf LMA and leaf disc LMA and measurement errors of leaf thickness (Appendix S2).
 
-\emph{Effects of leaf sizes and thicknesses on the relationship between whole-leaf and leaf disc LMA}
+\emph{Effects of leaf morphology on the relationship between whole-leaf and leaf disc LMA}
 
-To quantify the effect of leaf sizes and thicknesses on the relationship between whole-leaf and leaf disc LMA, we built hierarchical Bayes models.
-The whole-leaf LMA was assumed to follow a normal distribution (N) with the mean of leaf disc LMA and covariates of leaf size and leaf thickness on the log-scale;
+To quantify the effect of leaf morphology on the relationship between whole-leaf and leaf disc LMA, we built a hierarchical Bayesian model.
+The whole-leaf LMA was assumed to follow a normal distribution (N) with the mean of leaf disc LMA and covariates of leaf tissue density, leaf area and leaf thickness on the log-scale;
 
 \begin{align}
-\mathrm{ln}(LMA_{Wi}) & \sim N(\mathrm{ln}(LMA_{Di}) + \tilde{\mu_i}, \sigma_i) \label{eq:LMA}\\
-\tilde{\mu_i} & = \beta_0 + \beta_1 \mathrm{ln}(LA_{i}) + \beta_2 \mathrm{ln}(LT_{i}) \label{eq:mu}
+\mathrm{ln}(LMA_{Wi}) & \sim N(\mathrm{ln}(LMA_{Di}) + \tilde{\mu_i}, \sigma_i^2) \label{eq:LMA}\\
+\tilde{\mu_i} & = \beta_0 + \beta_1 \mathrm{ln}(LD_{i}) + \beta_2 \mathrm{ln}(LA_{i}) + \beta_3 \mathrm{ln}(LT_{i}) \label{eq:mu}
 \end{align}
 
-where \(LMA_{Wi}\), \(LMA_{Di}\), \(LA_{i}\), \(LT_{i}\) are the whole-leaf LMA, leaf disc LMA, leaf area and leaf thickness for tree \emph{i}, respectively.
-\(\tilde{\mu_i}\) is the effect of leaf area and leaf thickness on the mean estimates for the whole-leaf LMA of tree \emph{i}, and \(\sigma_i\) is the variance of whole-leaf LMA for tree \emph{i}, and \(\beta\) are coefficients.
+where \(LMA_{Wi}\), \(LD_{i}\), \(LA_{i}\), \(LT_{i}\) are the observed whole-leaf LMA, leaf tissue density, leaf area and leaf thickness for tree \emph{i}, respectively,
+\(LMA_{Di}\) is the true unobserved value of leaf disc LMA for tree \emph{i}, which can be modeled using the observed leaf disc LMA.
+\(\tilde{\mu_i}\) is the effect of leaf tissue density, leaf area and leaf thickness on the mean estimates for the whole-leaf LMA of tree \emph{i}, and \(\sigma_i^2\) is the variance of whole-leaf LMA for tree \emph{i}, and \(\beta\) are coefficients.
 
-The variance of whole-leaf LMA (\(\sigma_i\)) was assumed to follow a normal distribution;
+The standard deviation of whole-leaf LMA (\(\sigma_i\)) was assumed to follow a normal distribution;
 
 \begin{align}
-\mathrm{ln}(\sigma_i) & \sim N(\mathrm{ln}(\tilde{\sigma_i}), \omega) \label{eq:ln-sigma} \\
-\tilde{\sigma_i} & = \gamma_0 + \gamma_1 \mathrm{ln}(LA_{i}) + \gamma_2 \mathrm{ln}(LT_{i}) \label{eq:tilde-sigma}
+\mathrm{ln}(\sigma_i) & \sim N(\mathrm{ln}(\tilde{\sigma_i}), \omega^2) \label{eq:ln-sigma} \\
+\tilde{\sigma_i} & = \gamma_0 + \gamma_1 \mathrm{ln}(LD_{i}) + \gamma_2 \mathrm{ln}(LA_{i}) + \gamma_3 \mathrm{ln}(LT_{i}) \label{eq:tilde-sigma}
 \end{align}
 
 where \(\tilde{\sigma_i}\) is the effect of leaf area and leaf thickness on the variance of whole-leaf LMA,
-\(\omega\) is a scaling hyperparameter, and \(\gamma\) are coefficients.
-To allow comparisons among parameter estimates, \(\mathrm{ln}(LA)\) and \(\mathrm{ln}(LT)\) were scaled to a mean of 0 and standard deviation of 1.
+\(\omega^2\) is a scaling hyperparameter, and \(\gamma\) are coefficients.
+To allow comparisons among parameter estimates, \(\mathrm{ln}(LD)\), \(\mathrm{ln}(LA)\) and \(\mathrm{ln}(LT)\) were scaled to a mean of 0 and standard deviation of 1.
 
 Posterior distributions of all parameters were estimated using the Hamiltonian Monte Carlo algorithm (HMC) implemented in Stan (\protect\hyperlink{ref-Carpenter2017}{Carpenter et al., 2017}) using the weakly-informative priors (\protect\hyperlink{ref-Gelman2008}{Gelman et al., 2008}).
 See supplement XXXX for more detail.
 The Stan code use to fit models is available from Github at: \url{https://github.com/mattocci27/leaf-disc}.
 Convergence of the posterior distribution was assessed with the Gelman-Rubin statistic with a convergence threshold of 1.1 for all parameters (\protect\hyperlink{ref-Gelman2013}{Gelman et al., 2013}).
 
-\emph{Bivariate trait relationships}
+\emph{Bivariate trait relationships for mean and CV}
 
 Bivariate trait relationships between disc-based and whole-leaf log-transformed LMA were summarized with variance explained (\emph{R\textsuperscript{2}}) based on Pearson correlations and with standardized major axis (SMA) regressions (\protect\hyperlink{ref-Warton2006}{Warton et al., 2006}) across all the samples and different leaf area and thickness groups.
 Species and individual groups were divided into four categories based on the medians of leaf area and leaf thickness across all species and all individuals, respectively:
@@ -522,8 +523,6 @@ small-leaved species (LA \textless{} cm\textsuperscript{2}),
 thin-leaved species (LT \textless{} mm),
 small-leaved individuals (LA \textless{} cm\textsuperscript{2}),
 and thin-leaved individuals (LT \textless{} mm).
-
-\emph{Intraspecifc variation}
 
 The amount of intraspecific variation (ITV) was calculated using Bao's CV estimator (\protect\hyperlink{ref-Yang2020}{Yang et al., 2020});
 
