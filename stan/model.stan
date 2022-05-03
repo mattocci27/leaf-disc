@@ -20,7 +20,7 @@ transformed parameters {
   log_sigma = x * gamma + z * omega;
 }
 
-model{
+model {
   vector[N] log_mu;
   vector[N] sigma;
   sigma = exp(log_sigma);
