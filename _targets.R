@@ -191,7 +191,7 @@ list(
   #  ),
 
    tar_stan_mcmc(
-    fit_sp_1,
+    fit_sp_no_lma,
     "stan/model.stan",
     data = clean_stan_data(sp_mean, model = "no"),
     refresh = 0,
@@ -205,7 +205,7 @@ list(
    ),
 
    tar_stan_mcmc(
-    fit_sp_11,
+    fit_sp_no_lma_int,
     "stan/model.stan",
     data = clean_stan_data(sp_mean, model = "no", int = TRUE),
     refresh = 0,
@@ -219,7 +219,7 @@ list(
    ),
 
    tar_stan_mcmc(
-    fit_sp_2,
+    fit_sp_lma,
     "stan/model.stan",
     data = clean_stan_data(sp_mean, model = "LMA"),
     refresh = 0,
@@ -232,7 +232,7 @@ list(
     seed = 123
    ),
    tar_stan_mcmc(
-    fit_sp_21,
+    fit_sp_lma2,
     "stan/model2.stan",
     data = clean_stan_data(sp_mean, model = "LMA"),
     refresh = 0,
@@ -246,7 +246,7 @@ list(
    ),
 
    tar_stan_mcmc(
-    fit_sp_3,
+    fit_sp_ld,
     "stan/model.stan",
     data = clean_stan_data(sp_mean, model = "LD"),
     refresh = 0,
@@ -259,7 +259,7 @@ list(
     seed = 123
    ),
    tar_stan_mcmc(
-    fit_sp_31,
+    fit_sp_ld3,
     "stan/model.stan",
     data = clean_stan_data(sp_mean, model = "LD3"),
     refresh = 0,
@@ -273,7 +273,7 @@ list(
    ),
 
    tar_stan_mcmc(
-    fit_sp_32,
+    fit_sp_ld2,
     "stan/model.stan",
     data = clean_stan_data(sp_mean, model = "LD2"),
     refresh = 0,
@@ -286,7 +286,7 @@ list(
     seed = 123
    ),
    tar_stan_mcmc(
-    fit_sp_333,
+    fit_sp_lm,
     "stan/model.stan",
     data = clean_stan_data(sp_mean, model = "LM"),
     refresh = 0,
@@ -301,7 +301,7 @@ list(
 
 
    tar_stan_mcmc(
-    fit_sp_0,
+    fit_sp_lma0,
     "stan/simple.stan",
     data = clean_stan_data(sp_mean, model = "LMA"),
     refresh = 0,
@@ -360,7 +360,7 @@ list(
   # coef for OLS stan
   tar_target(
     coef_sp_tab,
-    create_stan_tab(fit_sp_0_draws_simple)
+    create_stan_tab(fit_sp_lma0_draws_simple)
   ),
   tar_target(
     coef_sp_plot,
@@ -392,7 +392,7 @@ list(
        # coef for OLS stan 2
   tar_target(
     coef_sp_tab1,
-    create_stan_tab(fit_sp_1_draws_model)
+    create_stan_tab(fit_sp_no_lma_draws_model)
   ),
   tar_target(
     coef_sp_plot1,
@@ -414,7 +414,7 @@ list(
   # coef for OLS stan 2
   tar_target(
     coef_sp_tab2,
-    create_stan_tab(fit_sp_2_draws_model)
+    create_stan_tab(fit_sp_lma_draws_model)
   ),
   tar_target(
     coef_sp_plot2,
@@ -435,7 +435,7 @@ list(
   # coef for OLS stan 2
   tar_target(
     coef_sp_tab3,
-    create_stan_tab(fit_sp_3_draws_model)
+    create_stan_tab(fit_sp_ld_draws_model)
   ),
   tar_target(
     coef_sp_plot3,
@@ -456,7 +456,7 @@ list(
   # coef for OLS stan 2
   tar_target(
     coef_sp_tab31,
-    create_stan_tab(fit_sp_31_draws_model)
+    create_stan_tab(fit_sp_ld3_draws_model)
   ),
   tar_target(
     coef_sp_plot31,
@@ -478,7 +478,7 @@ list(
   # coef for OLS stan 2
   tar_target(
     coef_sp_tab333,
-    create_stan_tab(fit_sp_333_draws_model)
+    create_stan_tab(fit_sp_lm_draws_model)
   ),
   tar_target(
     coef_sp_plot333,
@@ -656,14 +656,15 @@ list(
     loo_model,
     mclapply(
       list(
-        fit_sp_0 = fit_sp_0_mcmc_simple,
-        fit_sp_1 = fit_sp_1_mcmc_model,
-        fit_sp_11 = fit_sp_11_mcmc_model,
-        fit_sp_2 = fit_sp_2_mcmc_model,
-        fit_sp_21 = fit_sp_2_mcmc_model,
-        fit_sp_3 = fit_sp_3_mcmc_model,
-        fit_sp_31 = fit_sp_31_mcmc_model,
-        fit_sp_32 = fit_sp_32_mcmc_model
+        fit_sp_no_lma_mcmc_model = fit_sp_no_lma_mcmc_model,
+        fit_sp_no_lma_int_mcmc_model = fit_sp_no_lma_int_mcmc_model,
+        fit_sp_lma_mcmc_model = fit_sp_lma_mcmc_model,
+        fit_sp_lma2_mcmc_model2 = fit_sp_lma2_mcmc_model2,
+        fit_sp_ld_mcmc_model = fit_sp_ld_mcmc_model,
+        fit_sp_ld2_mcmc_model = fit_sp_ld2_mcmc_model,
+        fit_sp_ld3_mcmc_model = fit_sp_ld3_mcmc_model,
+        fit_sp_lm_mcmc_model = fit_sp_lm_mcmc_model,
+        fit_sp_lma0_mcmc_simple = fit_sp_lma0_mcmc_simple
         ),
     \(x)x$loo(cores = parallel::detectCores())
     )
@@ -746,6 +747,12 @@ list(
     sma_sp_ld_tab,
     generate_sma_ld_tab(sp_mean)
   ),
+
+  tar_target(
+    sma_sp_2_tab,
+    generate_sma_2_tab(sp_mean)
+  ),
+
 
   tar_target(
     sma_tree_tab,

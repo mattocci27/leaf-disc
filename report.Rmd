@@ -54,67 +54,63 @@ tar_load(lalt_sep_grid_png)
 
 ## MCMC check
 
-```{r}
-targets::tar_load("fit_sp_0_summary_simple")
-targets::tar_load("fit_sp_1_summary_model")
-targets::tar_load("fit_sp_11_summary_model")
-targets::tar_load("fit_sp_2_summary_model")
-targets::tar_load("fit_sp_21_summary_model2")
-targets::tar_load("fit_sp_3_summary_model")
-targets::tar_load("fit_sp_31_summary_model")
-targets::tar_load("fit_sp_32_summary_model")
-# targets::tar_load("fit_sp_4_summary_sma")
-# targets::tar_load("fit_sp_5_summary_sma")
-# targets::tar_load("fit_sp_6_summary_sma_err")
+```{r,eval=TRUE}
 
-targets::tar_load("fit_sp_0_diagnostics_simple")
-targets::tar_load("fit_sp_1_diagnostics_model")
-targets::tar_load("fit_sp_11_diagnostics_model")
-targets::tar_load("fit_sp_2_diagnostics_model")
-targets::tar_load("fit_sp_21_diagnostics_model2")
-targets::tar_load("fit_sp_3_diagnostics_model")
-targets::tar_load("fit_sp_31_diagnostics_model")
-targets::tar_load("fit_sp_32_diagnostics_model")
-# targets::tar_load("fit_sp_4_diagnostics_sma")
-# targets::tar_load("fit_sp_5_diagnostics_sma")
-# targets::tar_load("fit_sp_6_diagnostics_sma_err")
+targets::tar_load(fit_sp_no_lma_summary_model)
+targets::tar_load(fit_sp_no_lma_int_summary_model)
+targets::tar_load(fit_sp_lma_summary_model)
+targets::tar_load(fit_sp_lma2_summary_model2)
+targets::tar_load(fit_sp_ld_summary_model)
+targets::tar_load(fit_sp_ld2_summary_model)
+targets::tar_load(fit_sp_ld3_summary_model)
+targets::tar_load(fit_sp_lm_summary_model)
+targets::tar_load(fit_sp_lma0_summary_simple)
+
+targets::tar_load(fit_sp_no_lma_diagnostics_model)
+targets::tar_load(fit_sp_no_lma_int_diagnostics_model)
+targets::tar_load(fit_sp_lma_diagnostics_model)
+targets::tar_load(fit_sp_lma2_diagnostics_model2)
+targets::tar_load(fit_sp_ld_diagnostics_model)
+targets::tar_load(fit_sp_ld2_diagnostics_model)
+targets::tar_load(fit_sp_ld3_diagnostics_model)
+targets::tar_load(fit_sp_lm_diagnostics_model)
+targets::tar_load(fit_sp_lma0_diagnostics_simple)
+
 ```
 
 
-```{r}
-fit_sp_0_summary_simple |> filter(rhat > 1.1)
-fit_sp_1_summary_model |> filter(rhat > 1.1)
-fit_sp_11_summary_model |> filter(rhat > 1.1)
-fit_sp_2_summary_model |> filter(rhat > 1.1)
-fit_sp_21_summary_model2 |> filter(rhat > 1.1)
-fit_sp_3_summary_model |> filter(rhat > 1.1)
-fit_sp_31_summary_model |> filter(rhat > 1.1)
-fit_sp_32_summary_model |> filter(rhat > 1.1)
-# fit_sp_4_summary_sma |> filter(rhat > 1.1)
-# fit_sp_5_summary_sma |> filter(rhat > 1.1)
-# fit_sp_6_summary_sma_err |> filter(rhat > 1.1)
+```{r,eval=TRUE}
+fit_sp_no_lma_summary_model  |> filter(rhat > 1.1)
+fit_sp_no_lma_int_summary_model |> filter(rhat > 1.1)
+fit_sp_lma_summary_model |> filter(rhat > 1.1)
+fit_sp_lma2_summary_model2 |> filter(rhat > 1.1)
+fit_sp_ld_summary_model |> filter(rhat > 1.1)
+fit_sp_ld2_summary_model |> filter(rhat > 1.1)
+fit_sp_ld3_summary_model |> filter(rhat > 1.1)
+fit_sp_lm_summary_model |> filter(rhat > 1.1)
+fit_sp_lma0_summary_simple |> filter(rhat > 1.1)
 ```
 
 It is difficult to model heteroskedasticity and measurement errors at the same time.
 
-```{r}
-div_check(fit_sp_0_diagnostics_simple)
-div_check(fit_sp_1_diagnostics_model)
-div_check(fit_sp_11_diagnostics_model)
-div_check(fit_sp_2_diagnostics_model)
-div_check(fit_sp_21_diagnostics_model2)
-div_check(fit_sp_3_diagnostics_model)
-div_check(fit_sp_31_diagnostics_model)
-div_check(fit_sp_32_diagnostics_model)
-# div_check(fit_sp_4_diagnostics_sma)
-# div_check(fit_sp_5_diagnostics_sma)
-# div_check(fit_sp_6_diagnostics_sma_err)
+```{r,eval=TRUE}
+div_check(fit_sp_no_lma_diagnostics_model)
+div_check(fit_sp_no_lma_int_diagnostics_model)
+div_check(fit_sp_lma_diagnostics_model)
+div_check(fit_sp_lma2_diagnostics_model2)
+div_check(fit_sp_ld_diagnostics_model)
+div_check(fit_sp_ld2_diagnostics_model)
+div_check(fit_sp_ld3_diagnostics_model)
+div_check(fit_sp_lm_diagnostics_model)
+div_check(fit_sp_lma0_diagnostics_simple)
 ```
 
 ```{r}
 targets::tar_load(loo_model)
-loo::loo_compare(loo_model[[1]], loo_model[[2]], loo_model[[3]],
-  loo_model[[4]], loo_model[[5]], loo_model[[6]], loo_model[[7]], loo_model[[8]])
+loo::loo_compare(
+  loo_model[[1]], loo_model[[2]], loo_model[[3]],
+  loo_model[[4]], loo_model[[5]], loo_model[[6]],
+  loo_model[[7]], loo_model[[8]], loo_model[[9]])
 ```
 
 ```{r}
@@ -177,6 +173,15 @@ sma_sp_tab |>
 ```{r, eval=TRUE}
 tar_load(sma_sp_ld_tab)
 sma_sp_ld_tab |>
+  kable() |>
+  kable_styling()
+```
+
+## species simple
+
+```{r, eval=TRUE}
+tar_load(sma_sp_2_tab)
+sma_sp_2_tab |>
   kable() |>
   kable_styling()
 ```

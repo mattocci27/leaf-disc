@@ -277,6 +277,7 @@ generate_sma_tab <- function(sp_mean) {
 
 #' @title SMA table (species-level)
 generate_sma_ld_tab <- function(sp_mean) {
+
   sp_mean <- sp_mean |>
     mutate(lalt_gr = paste(ld_gr, "~", lalt_gr))
 
@@ -303,6 +304,56 @@ generate_sma_ld_tab <- function(sp_mean) {
 
   tb <- rbind(tb0$lma[[2]], tb0$lma_gr[[2]])
   tb <- cbind(c("All", tb0$lma_gr$group), tb) |>
+    as_tibble() |>
+    rename(Slope = slope, Intercept = intercept)
+
+  colnames(tb)[1] <- "Data"
+
+  tb
+}
+
+#' @title SMA table (species-level)
+generate_sma_2_tab <- function(sp_mean) {
+  sp_mean <- sp_mean |>
+     mutate(la_gr3 = ifelse(str_detect(la_gr2, "Large"), "Large", "Small")) |>
+     mutate(lt_gr3 = ifelse(str_detect(lt_gr2, "Thick"), "Thick", "Thin")) |>
+     mutate(ld_gr3 = ifelse(str_detect(ld_gr2, "Dense"), "Dense", "Less dense"))
+
+  sma_lma <- sma(log10(lma_leaf) ~ log10(lma_disc),
+    data = sp_mean,
+    elev.test = 0,
+    slope.test = 1
+  )
+
+  sma_la <- sma(log10(lma_leaf) ~ log10(lma_disc) * la_gr3,
+    data = sp_mean,
+    elev.test = 0,
+    slope.test = 1
+  )
+  sma_ld <- sma(log10(lma_leaf) ~ log10(lma_disc) * ld_gr3,
+    data = sp_mean,
+    elev.test = 0,
+    slope.test = 1
+  )
+  sma_lt <- sma(log10(lma_leaf) ~ log10(lma_disc) * lt_gr3,
+    data = sp_mean,
+    elev.test = 0,
+    slope.test = 1
+  )
+
+  # we don't need leaf density
+  tb0 <- lapply(
+    list(
+      lma = sma_lma,
+      ld_gr = sma_ld,
+      la_gr = sma_la,
+      lt_gr = sma_lt
+    ),
+    extract_sma
+  )
+
+  tb <- rbind(tb0$lma[[2]], tb0$ld_gr[[2]], tb0$la_gr[[2]], tb0$lt_gr[[2]])
+  tb <- cbind(c("All", tb0$ld_gr$group, tb0$la_gr$group, tb0$lt_gr$group), tb) |>
     as_tibble() |>
     rename(Slope = slope, Intercept = intercept)
 
