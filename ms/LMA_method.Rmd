@@ -264,12 +264,12 @@ All statistical analyses were conducted in R version 4.1.3 [@RCoreTeam2022].
 # RESULTS
 
 Leaf tissue density, leaf area and leaf thickness influenced the relationship between the whole-leaf LMA and leaf disc LMA (Fig. 1).
-Specifically, species with greater leaf tissue density (Fig. 1a, $\beta_1$), and larger (Fig. 1a, $\beta_2$) and thicker leaves (Fig. 1a, $\beta_3$) had greater whole-leaf LMA than leaf disc LMA.
-Species with lower leaf tissue density (Fig. 1b, $\gamma_1$), larger leaf area (Fig. 1b, $\gamma_2$), and thinner leaves (Fig. 1b, $\gamma_3$) had larger variance in the relationship between the whole-leaf LMA and leaf disc LMA.
-
-
+Specifically, species with lower leaf tissue density (Fig. 1a, $\beta_1$) and larger leaves (Fig. 1a, $\beta_2$) had greater whole-leaf LMA than leaf disc LMA.
+Species with lower leaf tissue density (Fig. 1b, $\gamma_1$) and larger larger leaves (Fig. 1b, $\gamma_2$) also had larger variance in the relationship between the whole-leaf LMA and leaf disc LMA.
+Thinner-leaved species (Fig. 1b, $\gamma_3$) tended to have larger variance in the relationship (i.e., the 90% credible interval did not include zero).
 
 When we pooled all the species, there were significant differences in intercepts for species mean LMA (Table 1), suggesting that the whole-leaf estimates of LMA were 9.4% greater than disc-based estimates in the arithmetic scale.
+
 Large-leaved species also had significant positive intercepts, suggesting that whole-leaf estimates of LMA were 22.1% greater than disc-based estimates in the arithmetic scale (Table 1).
 Intercepts did not differ for small-leaved species (Table 1).
 
@@ -423,7 +423,7 @@ The leaf disc LMA was used for the baseline mean of the whole-leaf LMA.
 Circles show posterior means of coefficients.
 Thick and thin lines indicate 90% and 95% credible intervals, respectively.
 
-![](../figs/coef_sp3.png)
+![](../figs/coef_sp31.png)
 
 \newpage
 
