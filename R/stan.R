@@ -597,12 +597,12 @@ coef_pointrange4 <- function(data) {
     xlab("Standardized coefficients") +
     scale_y_discrete(labels = c(
       "beta[2]" = expression(paste("Effect of LD on mean (large punch; ", beta[1], ")")),
-      "beta[3]" = expression(paste("Effect of LA on mean (large punch; ", beta[1], ")")),
-      "beta[4]" = expression(paste("Effect of LT on mean (large punch; ", beta[1], ")")),
+      "beta[3]" = expression(paste("Effect of LA on mean (large punch; ", beta[2], ")")),
+      "beta[4]" = expression(paste("Effect of LT on mean (large punch; ", beta[3], ")")),
       "beta[5]" = expression(Effect~of~small~punch~on~mean~(beta[4])),
       "beta[6]" = expression(paste("Effect of LD on mean (small punch; ", beta[1]+beta[5], ")")),
-      "beta[7]" = expression(paste("Effect of LA on mean (small punch; ", beta[1]+beta[6], ")")),
-      "beta[8]" = expression(paste("Effect of LT on mean (small punch; ", beta[1]+beta[7], ")"))
+      "beta[7]" = expression(paste("Effect of LA on mean (small punch; ", beta[2]+beta[6], ")")),
+      "beta[8]" = expression(paste("Effect of LT on mean (small punch; ", beta[3]+beta[7], ")"))
     ))
 
   p2 <- data2 |>
@@ -630,12 +630,12 @@ coef_pointrange4 <- function(data) {
     xlab("Standardized coefficients") +
     scale_y_discrete(labels = c(
       "gamma[2]" = expression(paste("Effect of LD on variance (large punch; ", gamma[1], ")")),
-      "gamma[3]" = expression(paste("Effect of LA on variance (large punch; ", gamma[1], ")")),
-      "gamma[4]" = expression(paste("Effect of LT on variance (large punch; ", gamma[1], ")")),
+      "gamma[3]" = expression(paste("Effect of LA on variance (large punch; ", gamma[2], ")")),
+      "gamma[4]" = expression(paste("Effect of LT on variance (large punch; ", gamma[3], ")")),
       "gamma[5]" = expression(Effect~of~small~punch~on~variance~(gamma[4])),
       "gamma[6]" = expression(paste("Effect of LD on variance (small punch; ", gamma[1]+gamma[5], ")")),
-      "gamma[7]" = expression(paste("Effect of LA on variance (small punch; ", gamma[1]+gamma[6], ")")),
-      "gamma[8]" = expression(paste("Effect of LT on variance (small punch; ", gamma[1]+gamma[7], ")"))
+      "gamma[7]" = expression(paste("Effect of LA on variance (small punch; ", gamma[2]+gamma[6], ")")),
+      "gamma[8]" = expression(paste("Effect of LT on variance (small punch; ", gamma[3]+gamma[7], ")"))
     ))
 
     p1 / p2 +
