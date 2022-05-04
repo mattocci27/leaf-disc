@@ -507,7 +507,7 @@ petiole_point <- function(yaku_sp) {
       )
     )
 
-  pet2 + pet1 +
+  pet1 + pet2 +
     plot_annotation(tag_levels = "a") &
     theme_bw() &
     theme(plot.tag = element_text(face = "bold"))
