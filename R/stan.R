@@ -78,6 +78,36 @@ clean_stan_data <- function(sp_mean, model = c("no", "LMA", "LD", "LD2"), int = 
 
 }
 
+clean_stan_data_sep <- function(sp_mean, yaku = TRUE) {
+  if (yaku) {
+    sp_mean <- sp_mean |> filter(location == "Yakushima")
+  } else {
+    sp_mean <- sp_mean |> filter(location != "Yakushima")
+  }
+
+  x <- cbind(
+    intercept = rep(1, nrow(sp_mean)),
+    #lma_disc = sp_mean$lma_disc / sp_mean$lt,
+    lma_disc = sp_mean$ld_disc,
+    la = sp_mean$la,
+    lt = sp_mean$lt
+  )
+
+  x[, -1] <- apply(x[, -1], 2, \(x)scale(log(x)))
+
+  # use non-scaled value for LMA
+  log_lma_disc <- sp_mean$lma_disc |> log()
+  log_lma_leaf <- sp_mean$lma_leaf |> log()
+
+  list(
+    N = nrow(sp_mean),
+    K = ncol(x),
+    log_y = log_lma_leaf,
+    log_lma_disc = log_lma_disc,
+    x = x
+  )
+}
+
 clean_stan_data2 <- function(sp_mean, dry_mass = TRUE, scale = FALSE, ld = FALSE) {
   x <- cbind(
     intercept = rep(1, nrow(sp_mean)),

@@ -258,10 +258,38 @@ list(
     # max_treedepth = 15,
     seed = 123
    ),
+
    tar_stan_mcmc(
     fit_sp_ld3,
     "stan/model.stan",
     data = clean_stan_data(sp_mean, model = "LD3"),
+    refresh = 0,
+    chains = 4,
+    parallel_chains = getOption("mc.cores", 4),
+    iter_warmup = 2000,
+    iter_sampling = 2000,
+    # adapt_delta = 0.99,
+    # max_treedepth = 15,
+    seed = 123
+   ),
+
+   tar_stan_mcmc(
+    fit_sp_ld3_yaku,
+    "stan/model.stan",
+    data = clean_stan_data_sep(sp_mean, yaku = TRUE),
+    refresh = 0,
+    chains = 4,
+    parallel_chains = getOption("mc.cores", 4),
+    iter_warmup = 2000,
+    iter_sampling = 2000,
+    # adapt_delta = 0.99,
+    # max_treedepth = 15,
+    seed = 123
+   ),
+   tar_stan_mcmc(
+    fit_sp_ld3_noyaku,
+    "stan/model.stan",
+    data = clean_stan_data_sep(sp_mean, yaku = FALSE),
     refresh = 0,
     chains = 4,
     parallel_chains = getOption("mc.cores", 4),

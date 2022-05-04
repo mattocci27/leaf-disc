@@ -2571,7 +2571,7 @@
     },
     "stantargets": {
       "Package": "stantargets",
-      "Version": "0.0.3.9001",
+      "Version": "0.0.4",
       "Source": "GitHub",
       "Remotes": "stan-dev/cmdstanr,",
       "RemoteType": "github",
@@ -2579,8 +2579,8 @@
       "RemoteRepo": "stantargets",
       "RemoteUsername": "ropensci",
       "RemoteRef": "HEAD",
-      "RemoteSha": "0df1163085685cffa5ba38904b9725445e0116b0",
-      "Hash": "1a93e4f40ced3ef8e6da4f5087829461",
+      "RemoteSha": "aa3f941715d19ef2bdbdcf6acc29f2a1600ec399",
+      "Hash": "56cced679cf46073516cb6288c8d427c",
       "Requirements": [
         "cmdstanr",
         "digest",
@@ -2686,10 +2686,10 @@
     },
     "tarchetypes": {
       "Package": "tarchetypes",
-      "Version": "0.5.0",
+      "Version": "0.6.0",
       "Source": "Repository",
       "Repository": "RSPM",
-      "Hash": "69e05d6f7e98f843b1a94266cfd2d2ed",
+      "Hash": "4d76a20b57bc46b0be7ef6ca3cb68e2f",
       "Requirements": [
         "digest",
         "dplyr",
@@ -2704,10 +2704,10 @@
     },
     "targets": {
       "Package": "targets",
-      "Version": "0.11.0",
+      "Version": "0.12.0",
       "Source": "Repository",
       "Repository": "RSPM",
-      "Hash": "bcb5125b621b728d8dc23e39f2f07428",
+      "Hash": "197fd95f9f9c6ac7e0be2d0ffbdd932f",
       "Requirements": [
         "R6",
         "base64url",
