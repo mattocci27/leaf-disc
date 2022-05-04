@@ -19,7 +19,7 @@ clean_stan_data <- function(sp_mean, model = c("no", "LMA", "LD", "LD2"), int = 
       la = sp_mean$la,
       lt = sp_mean$lt
     )
-  } else if (model == "LD3") {
+  } else if (model == "LD3" | model == "punch" | model == "punch2") {
     x <- cbind(
       intercept = rep(1, nrow(sp_mean)),
       #lma_disc = sp_mean$lma_disc / sp_mean$lt,
@@ -45,7 +45,6 @@ clean_stan_data <- function(sp_mean, model = c("no", "LMA", "LD", "LD2"), int = 
       lt = sp_mean$lt
     )
   }
-
   x2 <- cbind(
       intercept = rep(1, nrow(sp_mean)),
       lma_disc = sp_mean$ld_leaf,
@@ -55,6 +54,22 @@ clean_stan_data <- function(sp_mean, model = c("no", "LMA", "LD", "LD2"), int = 
 
   x2[, -1] <- apply(x2[, -1], 2, \(x)scale(log(x)))
   x[, -1] <- apply(x[, -1], 2, \(x)scale(log(x)))
+
+  if (model == "punch") {
+    yaku <- ifelse(sp_mean$location == "Yakushima", 0.5^2 * pi, 0.3^2*pi)
+    yaku <- scale(yaku) |> as.numeric()
+    x <- cbind(x,
+    punch = yaku,
+    int1 = x[,2] * yaku,
+    int2 = x[,3] * yaku,
+    int3 = x[,4] * yaku
+    )
+  } else if (model == "punch2") {
+    yaku <- ifelse(sp_mean$location == "Yakushima", 0, 1)
+    x <- cbind(x,
+    punch = yaku
+    )
+  }
 
   if (int) {
    x <- cbind(x, lalt = x[,2] * x[,3])
@@ -290,7 +305,6 @@ coef_pointrange <- function(data, ld = FALSE) {
 }
 
 coef_pointrange2 <- function(data, ld = FALSE, lm = FALSE, lalt = FALSE) {
-
   data1 <- data |>
     filter(para != "gamma[1]") |>
     filter(para != "beta[1]") |>
@@ -423,6 +437,99 @@ coef_pointrange2 <- function(data, ld = FALSE, lm = FALSE, lalt = FALSE) {
     p1 / p2 +
     plot_annotation(tag_levels = "a") &
     theme(
+      text = element_text(family = "Arial"))
+}
+
+coef_pointrange3 <- function(data, ld = FALSE, lm = FALSE, lalt = FALSE) {
+
+  data <- data |>
+    mutate(ci_sig = case_when(
+      lwr2_5 * upr97_5 > 0 ~ "sig95",
+      lwr5 * upr95 > 0 ~ "sig90",
+      TRUE ~ "ns"
+      ))
+
+  data1 <- data |>
+    filter(str_detect(para, "beta")) |>
+    filter(para != "beta[1]") |>
+    mutate(para = factor(para, levels = rev(para)))
+
+  data2 <- data |>
+    filter(str_detect(para, "gamma")) |>
+    filter(para != "gamma[1]") |>
+    mutate(para = factor(para, levels = rev(para)))
+
+  p1 <- data1 |>
+    ggplot(aes(y = para)) +
+    geom_vline(xintercept = 0, lty  = 2, color = "grey60") +
+    geom_linerange(
+      aes(xmin = lwr2_5, xmax = upr97_5),
+      color = "#3366FF") +
+    geom_linerange(
+      aes(xmin = lwr5, xmax = upr95),
+      size = 1.5,
+      color = "#3366FF") +
+    geom_point(
+      aes(x = mean_, fill = ci_sig),
+      color = "#3366FF",
+      shape = 21,
+      size = 3) +
+    ylab("") +
+    scale_fill_manual(
+      values = c(
+        "sig95" = "#33CCFF",
+        "sig90" = "grey",
+        "ns" = "#FFFFFF"
+      )) +
+    xlab("Standardized coefficients") +
+    scale_y_discrete(labels = c(
+      "beta[2]" = expression(Effect~of~LD~on~mean~(beta[1])),
+      "beta[3]" = expression(Effect~of~LA~on~mean~(beta[2])),
+      "beta[4]" = expression(Effect~of~LT~on~mean~(beta[3])),
+      "beta[5]" = expression(Effect~of~punch~size~on~mean~(beta[4])),
+      "beta[6]" = expression(Effect~of~LD%*%punch~size~on~mean~(beta[5])),
+      "beta[7]" = expression(Effect~of~LA%*%punch~size~on~mean~(beta[6])),
+      "beta[8]" = expression(Effect~of~LT%*%punch~size~on~mean~(beta[7]))
+    ))
+
+  p2 <- data2 |>
+    ggplot(aes(y = para)) +
+    geom_vline(xintercept = 0, lty  = 2, color = "grey60") +
+    geom_linerange(
+      aes(xmin = lwr2_5, xmax = upr97_5),
+      color = "#3366FF") +
+    geom_linerange(
+      aes(xmin = lwr5, xmax = upr95),
+      size = 1.5,
+      color = "#3366FF") +
+    geom_point(
+      aes(x = mean_, fill = ci_sig),
+      color = "#3366FF",
+      shape = 21,
+      size = 3) +
+    scale_fill_manual(
+      values = c(
+        "sig95" = "#33CCFF",
+        "sig90" = "grey",
+        "ns" = "#FFFFFF"
+      )) +
+    ylab("") +
+    xlab("Standardized coefficients") +
+    scale_y_discrete(labels = c(
+      "gamma[2]" = expression(Effect~of~LD~on~variance~(gamma[1])),
+      "gamma[3]" = expression(Effect~of~LA~on~variance~(gamma[2])),
+      "gamma[4]" = expression(Effect~of~LT~on~variance~(gamma[3])),
+      "gamma[5]" = expression(Effect~of~punch~size~on~variance~(gamma[4])),
+      "gamma[6]" = expression(Effect~of~LD%*%punch~size~on~variance~(gamma[5])),
+      "gamma[7]" = expression(Effect~of~LA%*%punch~size~on~variance~(gamma[6])),
+      "gamma[8]" = expression(Effect~of~LT%*%punch~size~on~variance~(gamma[7]))
+    ))
+
+    p1 / p2 +
+    plot_annotation(tag_levels = "a") &
+    theme_bw() &
+    theme(
+      legend.position = "none",
       text = element_text(family = "Arial"))
 }
 

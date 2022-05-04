@@ -272,6 +272,32 @@ list(
     # max_treedepth = 15,
     seed = 123
    ),
+   tar_stan_mcmc(
+    fit_sp_punch,
+    "stan/model.stan",
+    data = clean_stan_data(sp_mean, model = "punch"),
+    refresh = 0,
+    chains = 4,
+    parallel_chains = getOption("mc.cores", 4),
+    iter_warmup = 2000,
+    iter_sampling = 2000,
+    # adapt_delta = 0.99,
+    # max_treedepth = 15,
+    seed = 123
+   ),
+   tar_stan_mcmc(
+    fit_sp_punch2,
+    "stan/model.stan",
+    data = clean_stan_data(sp_mean, model = "punch2"),
+    refresh = 0,
+    chains = 4,
+    parallel_chains = getOption("mc.cores", 4),
+    iter_warmup = 2000,
+    iter_sampling = 2000,
+    # adapt_delta = 0.99,
+    # max_treedepth = 15,
+    seed = 123
+   ),
 
    tar_stan_mcmc(
     fit_sp_ld3_yaku,
@@ -384,6 +410,41 @@ list(
   #   max_treedepth = 15,
   #   seed = 123
   #  ),
+  tar_target(
+    coef_sp_tab_punch1,
+    create_stan_tab(fit_sp_punch_draws_model)
+  ),
+  tar_target(
+    coef_sp_tab_punch2,
+    create_stan_tab(fit_sp_punch2_draws_model)
+  ),
+
+  tar_target(
+    coef_sp_plot_punch1,
+    coef_pointrange3(coef_sp_tab_punch1)
+  ),
+  tar_target(
+    coef_sp_png_punch1,
+    ggsave(
+      "figs/coef_sp_punch1.png",
+      coef_sp_plot_punch1,
+      dpi = 300,
+      width = 6,
+      height = 6
+    ),
+    format = "file"
+  ),
+  tar_target(
+    coef_sp_pdf_punch1,
+    ggsave(
+      "figs/coef_sp_punch1.pdf",
+      coef_sp_plot,
+      device = cairo_pdf,
+      width = 6,
+      height = 6
+    ),
+    format = "file"
+  ),
 
   # coef for OLS stan
   tar_target(
@@ -692,7 +753,9 @@ list(
         fit_sp_ld2_mcmc_model2 = fit_sp_ld2_mcmc_model2,
         fit_sp_ld3_mcmc_model = fit_sp_ld3_mcmc_model,
         fit_sp_lm_mcmc_model = fit_sp_lm_mcmc_model,
-        fit_sp_lma0_mcmc_simple = fit_sp_lma0_mcmc_simple
+        fit_sp_lma0_mcmc_simple = fit_sp_lma0_mcmc_simple,
+        fit_sp_punch_mcmc_model = fit_sp_punch_mcmc_model,
+        fit_sp_punch2_mcmc_model = fit_sp_punch2_mcmc_model
         ),
     \(x)x$loo(cores = parallel::detectCores())
     )
