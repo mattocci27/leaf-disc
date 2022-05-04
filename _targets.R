@@ -802,12 +802,26 @@ list(
   #   \(x)x$loo(cores = parallel::detectCores())
   #   )
   # ),
+  tar_target(
+    sma_grid_col3_plot,
+    sma_grid_col3(sp_mean)
+  ),
+  tar_target(
+    sma_grid_col3_png,
+    ggsave(
+      "figs/sma_grid_col3.png",
+      sma_grid_col3_plot,
+      dpi = 300,
+      width = 6,
+      height = 9.5
+    ),
+    format = "file"
+  ),
 
   tar_target(
     lalt_pool_grid_plot,
     lalt_pool_grid_point(sp_mean)
   ),
-
   tar_target(
     lalt_pool_grid_png,
     ggsave(
