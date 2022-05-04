@@ -556,6 +556,7 @@ coef_pointrange3 <- function(data, ld = FALSE, lm = FALSE, lalt = FALSE) {
 coef_pointrange4 <- function(data) {
 
   data <- data |>
+    mutate(sig = ifelse(lwr2_5 * upr97_5 > 0, "sig", "ns")) |>
     mutate(ci_sig = case_when(
       lwr2_5 * upr97_5 > 0 ~ "sig95",
       lwr5 * upr95 > 0 ~ "sig90",
@@ -583,15 +584,16 @@ coef_pointrange4 <- function(data) {
       size = 1.5,
       color = "#3366FF") +
     geom_point(
-      aes(x = mean_, fill = ci_sig),
+      aes(x = mean_, fill = sig),
       color = "#3366FF",
       shape = 21,
       size = 3) +
     ylab("") +
     scale_fill_manual(
       values = c(
-        "sig95" = "#33CCFF",
-        "sig90" = "grey",
+        "sig" = "#33CCFF",
+        # "sig95" = "#33CCFF",
+        # "sig90" = "grey",
         "ns" = "#FFFFFF"
       )) +
     xlab("Standardized coefficients") +
@@ -616,14 +618,15 @@ coef_pointrange4 <- function(data) {
       size = 1.5,
       color = "#3366FF") +
     geom_point(
-      aes(x = mean_, fill = ci_sig),
+      aes(x = mean_, fill = sig),
       color = "#3366FF",
       shape = 21,
       size = 3) +
     scale_fill_manual(
       values = c(
-        "sig95" = "#33CCFF",
-        "sig90" = "grey",
+        "sig" = "#33CCFF",
+        # "sig95" = "#33CCFF",
+        # "sig90" = "grey",
         "ns" = "#FFFFFF"
       )) +
     ylab("") +
