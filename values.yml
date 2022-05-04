@@ -1,3 +1,7 @@
+sma_all: 9.7
+dens_thin_large: 5.7
+nondens_thin_large: 12.3
+nondens_thick_large: 14
 tree_no: 519
 r2_lma: 0.87
 r2_ld: 0.79

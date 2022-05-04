@@ -1,4 +1,4 @@
-write_yml <- function(path, sp_mean, full_data_cv_csv, tree, lma_yaku_re) {
+write_yml <- function(path, sp_mean, full_data_cv_csv, tree, lma_yaku_re, sma_sp_ld_tab) {
   r2_lma <- cor.test(log(sp_mean$lma_leaf), log(sp_mean$lma_disc))$estimate^2 |> round(2)
   r2_ld <- cor.test(log(sp_mean$ld_leaf), log(sp_mean$ld_disc))$estimate^2 |> round(2)
 
@@ -20,8 +20,61 @@ write_yml <- function(path, sp_mean, full_data_cv_csv, tree, lma_yaku_re) {
     filter(!is.na(lma_disc)) |>
     filter(!is.na(lma_leaf))
 
+  lma_mean <- sp_mean |>
+    group_by(ldlalt_gr) |>
+    summarise(
+      lma_leaf = mean(lma_leaf),
+      lma_disc = mean(lma_disc))
+
+  sma_lma <- sma(log10(lma_leaf) ~ log10(lma_disc),
+    data = sp_mean,
+    elev.test = 0,
+    slope.test = 1
+  )
+
+  sma_lma_gr <- sma(log10(lma_leaf) ~ log10(lma_disc) * ldlalt_gr,
+    data = sp_mean,
+    elev.test = 0,
+    slope.test = 1
+  )
+
+
+  lma_mean2 <- left_join(lma_mean, sma_lma_gr$groupsummary, by = c("ldlalt_gr" = "group"))
+
+  dens_thin_large <- lma_mean2 |>
+    filter(ldlalt_gr == "Dense~Thin~Large")
+  nondens_thin_large <- lma_mean2 |>
+    filter(ldlalt_gr == "Nondense~Thin~Large")
+  nondens_thick_large <- lma_mean2 |>
+    filter(ldlalt_gr == "Nondense~Thick~Large")
+
+  lma_disc_mean <- median(sp_mean$lma_disc, na.rm = TRUE) |> round(1)
+  sma_all <- cbind(lma_disc = lma_disc_mean, sma_lma$groupsummary)
+
+  my_fun <- function(data) {
+    tmp <- ((data$lma_disc^data$Slope * 10^data$Int) / data$lma_disc - 1) * 100
+    #tmp <- ((lma_disc_mean^data$Slope * 10^data$Int) / lma_disc_mean - 1) * 100
+    round(tmp, 1)
+  }
+
   output <- path
   out <- file(paste(output), "w") # write
+  writeLines(paste0("sma_all: " ,
+             my_fun(sma_all)),
+             out,
+             sep = "\n")
+  writeLines(paste0("dens_thin_large: " ,
+             my_fun(dens_thin_large)),
+             out,
+             sep = "\n")
+  writeLines(paste0("nondens_thin_large: " ,
+             my_fun(nondens_thin_large)),
+             out,
+             sep = "\n")
+  writeLines(paste0("nondens_thick_large: " ,
+             my_fun(nondens_thick_large)),
+             out,
+             sep = "\n")
   writeLines(paste0("tree_no: " ,
              tree |>
               filter(location == "Yakushima") |>
