@@ -415,6 +415,10 @@ list(
     create_stan_tab(fit_sp_punch_draws_model)
   ),
   tar_target(
+    coef_sp_tab_punch1_add,
+    create_stan_tab_add(fit_sp_punch_draws_model)
+  ),
+  tar_target(
     coef_sp_tab_punch2,
     create_stan_tab(fit_sp_punch2_draws_model)
   ),
@@ -438,7 +442,33 @@ list(
     coef_sp_pdf_punch1,
     ggsave(
       "figs/coef_sp_punch1.pdf",
-      coef_sp_plot,
+      coef_sp_plot_punch1,
+      device = cairo_pdf,
+      width = 6,
+      height = 6
+    ),
+    format = "file"
+  ),
+  tar_target(
+    coef_sp_plot_punch1_add,
+    coef_pointrange4(coef_sp_tab_punch1_add)
+  ),
+  tar_target(
+    coef_sp_png_punch1_add,
+    ggsave(
+      "figs/coef_sp_punch1_add.png",
+      coef_sp_plot_punch1_add,
+      dpi = 300,
+      width = 6,
+      height = 6
+    ),
+    format = "file"
+  ),
+  tar_target(
+    coef_sp_pdf_punch1_add,
+    ggsave(
+      "figs/coef_sp_punch1_add.pdf",
+      coef_sp_plot_punch1_add,
       device = cairo_pdf,
       width = 6,
       height = 6

@@ -56,8 +56,9 @@ clean_stan_data <- function(sp_mean, model = c("no", "LMA", "LD", "LD2"), int = 
   x[, -1] <- apply(x[, -1], 2, \(x)scale(log(x)))
 
   if (model == "punch") {
-    yaku <- ifelse(sp_mean$location == "Yakushima", 0.5^2 * pi, 0.3^2*pi)
-    yaku <- scale(yaku) |> as.numeric()
+    yaku <- ifelse(sp_mean$location == "Yakushima", 0, 1)
+    #yaku <- ifelse(sp_mean$location == "Yakushima", 0.5^2 * pi, 0.3^2*pi)
+    #yaku <- scale(yaku) |> as.numeric()
     x <- cbind(x,
     punch = yaku,
     int1 = x[,2] * yaku,
@@ -65,9 +66,9 @@ clean_stan_data <- function(sp_mean, model = c("no", "LMA", "LD", "LD2"), int = 
     int3 = x[,4] * yaku
     )
   } else if (model == "punch2") {
-    #yaku <- ifelse(sp_mean$location == "Yakushima", 0, 1)
-    yaku <- ifelse(sp_mean$location == "Yakushima", 0.5^2 * pi, 0.3^2*pi)
-    yaku <- scale(yaku) |> as.numeric()
+    yaku <- ifelse(sp_mean$location == "Yakushima", 0, 1)
+    # yaku <- ifelse(sp_mean$location == "Yakushima", 0.5^2 * pi, 0.3^2*pi)
+    # yaku <- scale(yaku) |> as.numeric()
     x <- cbind(x,
     punch = yaku
     )
@@ -221,6 +222,23 @@ create_dummy_sma_data <- function(n, seed = 123) {
 create_stan_tab <- function(draws) {
   tmp <- draws |>
     dplyr::select(contains(c("beta", "gamma")))
+  mean_ <- apply(tmp, 2, mean)
+  lwr2_5 <- apply(tmp, 2, \(x)(quantile(x, 0.025)))
+  lwr5 <- apply(tmp, 2, \(x)(quantile(x, 0.05)))
+  upr97_5 <- apply(tmp, 2, \(x)(quantile(x, 0.975)))
+  upr95 <- apply(tmp, 2, \(x)(quantile(x, 0.9)))
+  tibble(para = names(mean_), mean_, lwr2_5, lwr5, upr95, upr97_5)
+}
+
+create_stan_tab_add <- function(draws) {
+  tmp <- draws |>
+    dplyr::select(contains(c("beta", "gamma"))) |>
+    mutate(`beta[6]` = `beta[6]` + `beta[2]`) |>
+    mutate(`beta[7]` = `beta[7]` + `beta[3]`) |>
+    mutate(`beta[8]` = `beta[8]` + `beta[4]`) |>
+    mutate(`gamma[6]` = `gamma[6]` + `gamma[2]`) |>
+    mutate(`gamma[7]` = `gamma[7]` + `gamma[3]`) |>
+    mutate(`gamma[8]` = `gamma[8]` + `gamma[4]`)
   mean_ <- apply(tmp, 2, mean)
   lwr2_5 <- apply(tmp, 2, \(x)(quantile(x, 0.025)))
   lwr5 <- apply(tmp, 2, \(x)(quantile(x, 0.05)))
@@ -443,7 +461,6 @@ coef_pointrange2 <- function(data, ld = FALSE, lm = FALSE, lalt = FALSE) {
 }
 
 coef_pointrange3 <- function(data, ld = FALSE, lm = FALSE, lalt = FALSE) {
-
   data <- data |>
     mutate(ci_sig = case_when(
       lwr2_5 * upr97_5 > 0 ~ "sig95",
@@ -525,6 +542,100 @@ coef_pointrange3 <- function(data, ld = FALSE, lm = FALSE, lalt = FALSE) {
       "gamma[6]" = expression(Effect~of~LD%*%punch~size~on~variance~(gamma[5])),
       "gamma[7]" = expression(Effect~of~LA%*%punch~size~on~variance~(gamma[6])),
       "gamma[8]" = expression(Effect~of~LT%*%punch~size~on~variance~(gamma[7]))
+    ))
+
+    p1 / p2 +
+    plot_annotation(tag_levels = "a") &
+    theme_bw() &
+    theme(
+      legend.position = "none",
+      text = element_text(family = "Arial"))
+}
+
+#' @title use mean estiamte
+coef_pointrange4 <- function(data) {
+
+  data <- data |>
+    mutate(ci_sig = case_when(
+      lwr2_5 * upr97_5 > 0 ~ "sig95",
+      lwr5 * upr95 > 0 ~ "sig90",
+      TRUE ~ "ns"
+      ))
+
+  data1 <- data |>
+    filter(str_detect(para, "beta")) |>
+    filter(para != "beta[1]") |>
+    mutate(para = factor(para, levels = rev(para)))
+
+  data2 <- data |>
+    filter(str_detect(para, "gamma")) |>
+    filter(para != "gamma[1]") |>
+    mutate(para = factor(para, levels = rev(para)))
+
+  p1 <- data1 |>
+    ggplot(aes(y = para)) +
+    geom_vline(xintercept = 0, lty  = 2, color = "grey60") +
+    geom_linerange(
+      aes(xmin = lwr2_5, xmax = upr97_5),
+      color = "#3366FF") +
+    geom_linerange(
+      aes(xmin = lwr5, xmax = upr95),
+      size = 1.5,
+      color = "#3366FF") +
+    geom_point(
+      aes(x = mean_, fill = ci_sig),
+      color = "#3366FF",
+      shape = 21,
+      size = 3) +
+    ylab("") +
+    scale_fill_manual(
+      values = c(
+        "sig95" = "#33CCFF",
+        "sig90" = "grey",
+        "ns" = "#FFFFFF"
+      )) +
+    xlab("Standardized coefficients") +
+    scale_y_discrete(labels = c(
+      "beta[2]" = expression(paste("Effect of LD on mean (large punch; ", beta[1], ")")),
+      "beta[3]" = expression(paste("Effect of LA on mean (large punch; ", beta[1], ")")),
+      "beta[4]" = expression(paste("Effect of LT on mean (large punch; ", beta[1], ")")),
+      "beta[5]" = expression(Effect~of~small~punch~on~mean~(beta[4])),
+      "beta[6]" = expression(paste("Effect of LD on mean (small punch; ", beta[1]+beta[5], ")")),
+      "beta[7]" = expression(paste("Effect of LA on mean (small punch; ", beta[1]+beta[6], ")")),
+      "beta[8]" = expression(paste("Effect of LT on mean (small punch; ", beta[1]+beta[7], ")"))
+    ))
+
+  p2 <- data2 |>
+    ggplot(aes(y = para)) +
+    geom_vline(xintercept = 0, lty  = 2, color = "grey60") +
+    geom_linerange(
+      aes(xmin = lwr2_5, xmax = upr97_5),
+      color = "#3366FF") +
+    geom_linerange(
+      aes(xmin = lwr5, xmax = upr95),
+      size = 1.5,
+      color = "#3366FF") +
+    geom_point(
+      aes(x = mean_, fill = ci_sig),
+      color = "#3366FF",
+      shape = 21,
+      size = 3) +
+    scale_fill_manual(
+      values = c(
+        "sig95" = "#33CCFF",
+        "sig90" = "grey",
+        "ns" = "#FFFFFF"
+      )) +
+    ylab("") +
+    xlab("Standardized coefficients") +
+    scale_y_discrete(labels = c(
+      "gamma[2]" = expression(paste("Effect of LD on variance (large punch; ", gamma[1], ")")),
+      "gamma[3]" = expression(paste("Effect of LA on variance (large punch; ", gamma[1], ")")),
+      "gamma[4]" = expression(paste("Effect of LT on variance (large punch; ", gamma[1], ")")),
+      "gamma[5]" = expression(Effect~of~small~punch~on~variance~(gamma[4])),
+      "gamma[6]" = expression(paste("Effect of LD on variance (small punch; ", gamma[1]+gamma[5], ")")),
+      "gamma[7]" = expression(paste("Effect of LA on variance (small punch; ", gamma[1]+gamma[6], ")")),
+      "gamma[8]" = expression(paste("Effect of LT on variance (small punch; ", gamma[1]+gamma[7], ")"))
     ))
 
     p1 / p2 +
