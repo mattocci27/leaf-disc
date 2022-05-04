@@ -65,7 +65,9 @@ clean_stan_data <- function(sp_mean, model = c("no", "LMA", "LD", "LD2"), int = 
     int3 = x[,4] * yaku
     )
   } else if (model == "punch2") {
-    yaku <- ifelse(sp_mean$location == "Yakushima", 0, 1)
+    #yaku <- ifelse(sp_mean$location == "Yakushima", 0, 1)
+    yaku <- ifelse(sp_mean$location == "Yakushima", 0.5^2 * pi, 0.3^2*pi)
+    yaku <- scale(yaku) |> as.numeric()
     x <- cbind(x,
     punch = yaku
     )
