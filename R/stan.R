@@ -748,7 +748,7 @@ pred_mcmc <- function(draws, sp_mean, n = 80) {
 
   # LD for small
   mu_mat <- exp(rep(1, n) %*% t(draws$`beta[1]`) + x_lt %*% t(draws$`beta[2]` + draws$`beta[6]`))
-  sig_mat <- exp(rep(1, n) %*% t(draws$`gamma[1]`))
+  sig_mat <- exp(rep(1, n) %*% t(draws$`gamma[1]` + draws$`gamma[5]`))
   mean_mu <- apply(mu_mat, 1, mean)
   mean_sig <- apply(sig_mat, 1, mean)
   lwr_sig <- apply(sig_mat, 1, \(x)quantile(x, 0.025))
