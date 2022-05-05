@@ -865,6 +865,22 @@ list(
   #   )
   # ),
   tar_target(
+    sma_plot,
+    sma_point(sp_mean)
+  ),
+  tar_target(
+    sma_png,
+    ggsave(
+      "figs/sma.png",
+      sma_plot,
+      dpi = 300,
+      width = 4,
+      height = 4
+    ),
+    format = "file"
+  ),
+
+  tar_target(
     sma_grid_col3_plot,
     sma_grid_col3(sp_mean)
   ),

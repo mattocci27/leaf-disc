@@ -24,7 +24,7 @@ model {
   vector[N] log_mu;
   vector[N] sigma;
   sigma = exp(log_sigma);
-  log_mu = x * beta + log_lma_disc ;
+  log_mu = x * beta + log_lma_disc;
   z ~ std_normal();
   beta ~ normal(0, 5);
   gamma ~ normal(0, 5);

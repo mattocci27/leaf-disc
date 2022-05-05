@@ -1,3 +1,12 @@
+ols_int_raw: 1.62
+ols_int: 1.64
+ols_slope: 0.911
+ols_var2: 1.01
+ols_int_inv_raw: 1
+ols_int_inv: 1.01
+ols_slope_inv: 0.958
+ols_sig_inv: 0.142
+ols_var2_inv: 1.01
 sma_all: 9.7
 dens_thin_large: 5.7
 nondens_thin_large: 12.3
