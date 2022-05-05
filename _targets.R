@@ -286,6 +286,19 @@ list(
     seed = 123
    ),
    tar_stan_mcmc(
+    fit_sp_punch_ori,
+    "stan/model.stan",
+    data = clean_stan_data(sp_mean, model = "punch", scale = FALSE),
+    refresh = 0,
+    chains = 4,
+    parallel_chains = getOption("mc.cores", 4),
+    iter_warmup = 2000,
+    iter_sampling = 2000,
+    # adapt_delta = 0.99,
+    # max_treedepth = 15,
+    seed = 123
+   ),
+   tar_stan_mcmc(
     fit_sp_punch2,
     "stan/model.stan",
     data = clean_stan_data(sp_mean, model = "punch2"),
@@ -440,15 +453,31 @@ list(
     coef_sp_tab_punch3,
     create_stan_tab(fit_sp_punch3_draws_model2)
   ),
-
   tar_target(
     coef_sp_tab_punch1,
     create_stan_tab(fit_sp_punch_draws_model)
   ),
+
   tar_target(
     coef_sp_tab_punch1_add,
     create_stan_tab_add(fit_sp_punch_draws_model)
   ),
+  tar_target(
+    pred_mcmc_plot,
+    pred_mcmc(fit_sp_punch_draws_model, sp_mean)
+  ),
+  tar_target(
+    pred_mcmc_plot_png,
+    ggsave(
+      "figs/pred_mcmc.png",
+      pred_mcmc_plot,
+      dpi = 300,
+      width = 9,
+      height = 3
+    ),
+    format = "file"
+  ),
+
   tar_target(
     coef_sp_tab_punch2,
     create_stan_tab(fit_sp_punch2_draws_model)

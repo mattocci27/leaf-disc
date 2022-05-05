@@ -587,6 +587,7 @@ petiole_point <- function(yaku_sp) {
 }
 
 generate_sma_punch_tab <- function(data) {
+  data <- sp_mean
   data <- data |>
     mutate(size_gr = ifelse(location == "Yakushima", "Large punch (1.0-cm)", "Small punch (0.6-cm)")) |>
     mutate(la_gr3 = ifelse(str_detect(la_gr2, "Large"), "Large", "Small")) |>
@@ -598,12 +599,26 @@ generate_sma_punch_tab <- function(data) {
 
   small_punch <- data |> filter(location != "Yakushima")
   large_punch <- data |> filter(location == "Yakushima")
-
   la_mid_yaku <- median(large_punch$la)
-
   large_punch <- large_punch |>
-    mutate(la_gr3 = ifelse(la >= la_mid_yaku, "Large", "Small"
+    mutate(la_gr4 = ifelse(la >= la_mid_yaku, "Large", "Small"
     ))
+  large_la <- sma(log10(lma_leaf) ~ log10(lma_disc) * la_gr3,
+    data = large_punch,
+    elev.test = 0,
+    slope.test = 1
+  )
+  extract_sma(large_la)
+
+  tar_load(lma_yaku_re)
+
+  # lma_yaku_re |>
+  #   arrange(la) |>
+  #   filter(!is.na(petiole_dw)) |>
+  #   filter(!is.na(lma_disc)) |>
+  #   filter(petiole_ratio > 0) |>
+  #   dplyr::select(species, location, la, lma_leaf, lma_disc, lamina_dw, petiole_dw, petiole_ratio)
+
 
   sma_lma <- sma(log10(lma_leaf) ~ log10(lma_disc),
     data = sp_mean,
@@ -663,7 +678,6 @@ generate_sma_punch_tab <- function(data) {
     slope.test = 1
   )
   extract_sma(fit)
-
 
   tb_s <- rbind(tb0$small_ld[[2]], tb0$small_la[[2]], tb0$small_lt[[2]])
   tb_l <- rbind(tb0$large_ld[[2]], tb0$large_la[[2]], tb0$large_lt[[2]])

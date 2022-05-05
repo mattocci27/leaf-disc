@@ -1,4 +1,5 @@
-clean_stan_data <- function(sp_mean, model = c("no", "LMA", "LD", "LD2"), int = FALSE) {
+clean_stan_data <- function(sp_mean, model = c("no", "LMA", "LD", "LD2"),
+  int = FALSE, scale = TRUE) {
   if (model == "no") {
     x <- cbind(
       intercept = rep(1, nrow(sp_mean)),
@@ -54,8 +55,10 @@ clean_stan_data <- function(sp_mean, model = c("no", "LMA", "LD", "LD2"), int = 
       lt = sp_mean$lt
     )
 
-  x2[, -1] <- apply(x2[, -1], 2, \(x)scale(log(x)))
-  x[, -1] <- apply(x[, -1], 2, \(x)scale(log(x)))
+  if (scale) {
+    x2[, -1] <- apply(x2[, -1], 2, \(x)scale(log(x)))
+    x[, -1] <- apply(x[, -1], 2, \(x)scale(log(x)))
+  }
 
   if (model == "punch") {
     yaku <- ifelse(sp_mean$location == "Yakushima", 0, 1)
@@ -660,6 +663,137 @@ coef_pointrange4 <- function(data) {
       text = element_text(family = "Arial"))
 }
 
+#' @title pred
+pred_mcmc <- function(draws, sp_mean, n = 80) {
+# LT for small
+  x_lt <- seq(-2, 2, length = n)
+  my_col <- RColorBrewer::brewer.pal(4, "RdBu")
+  sig_mat <- exp(rep(1, n) %*% t(draws$`gamma[1]` + draws$`gamma[5]`) + x_lt %*% t(draws$`gamma[4]` + draws$`gamma[8]`))
+  mean_sig <- apply(sig_mat, 1, mean)
+  lwr_sig <- apply(sig_mat, 1, \(x) quantile(x, 0.025))
+  upr_sig <- apply(sig_mat, 1, \(x) quantile(x, 0.975))
+  pred_up <- 1 + upr_sig
+  pred_lo <- 1 - upr_sig
+  x_bar <- log(sp_mean$lt) |> mean()
+  x_s <- log(sp_mean$lt) |> sd()
+  fig_d1 <- tibble(pred = 1, pred_up, pred_lo, x = exp(x_bar + x_s * x_lt), punch = "0.6-cm")
+
+  p1 <- ggplot(fig_d1, aes(x = x, fill = punch)) +
+    geom_hline(yintercept = 1, lty = 2) +
+    geom_ribbon(aes(ymax = pred_up, ymin = pred_lo), alpha = 0.5) +
+    geom_line(aes(y = pred, col = punch)) +
+    xlab("Leaf thickness (mm)") +
+    ylab("Whole-leaf / leaf disc LMA ratio") +
+    scale_x_log10() +
+    scale_color_manual(
+      values = my_col[c(2)],
+      name = "Leaf punch size"
+    ) +
+    scale_fill_manual(
+      values = my_col[c(2)],
+      name = "Leaf punch size"
+    ) +
+    coord_cartesian(ylim = c(0.5, 1.5)) +
+    theme_bw() +
+    theme(legend.position = "none")
+
+#  LA for large
+  mu_mat <- exp(rep(1, n) %*% t(draws$`beta[1]`) + x_lt %*% t(draws$`beta[4]`))
+  sig_mat <- exp(rep(1, n) %*% t(draws$`gamma[1]`))
+  mean_mu <- apply(mu_mat, 1, mean)
+  mean_sig <- apply(sig_mat, 1, mean)
+  lwr_sig <- apply(sig_mat, 1, \(x) quantile(x, 0.025))
+  upr_sig <- apply(sig_mat, 1, \(x) quantile(x, 0.975))
+  pred_up <- mean_mu + upr_sig
+  pred_lo <- mean_mu - upr_sig
+  x_bar <- log(sp_mean$la) |> mean()
+  x_s <- log(sp_mean$la) |> sd()
+  fig_d2 <- tibble(pred = mean_mu, pred_up, pred_lo,
+  x = exp(x_bar + x_s * x_lt), punch = "1.0-cm")
+
+  p2 <- ggplot(fig_d2, aes(x = x, fill = punch)) +
+    geom_hline(yintercept = 1, lty = 2) +
+    geom_ribbon(aes(ymax = pred_up, ymin = pred_lo), alpha = 0.5) +
+    geom_line(aes(y = pred, col = punch)) +
+    scale_x_log10() +
+    xlab(expression(paste("Leaf area (", cm^2,")"))) +
+    ylab("Whole-leaf / leaf disc LMA ratio") +
+    scale_color_manual(
+      values = my_col[c(4)],
+      name = "Leaf punch size"
+    ) +
+    scale_fill_manual(
+      values = my_col[c(4)],
+      name = "Leaf punch size"
+    ) +
+   coord_cartesian(ylim = c(0.5, 1.5)) +
+   theme_bw() +
+   theme(legend.position = "none")
+
+  # LD for large
+  sig_mat <- exp(rep(1, n) %*% t(draws$`gamma[1]`) + x_lt %*% t(draws$`gamma[2]`))
+  mean_sig <- apply(sig_mat, 1, mean)
+  lwr_sig <- apply(sig_mat, 1, \(x)quantile(x, 0.025))
+  upr_sig <- apply(sig_mat, 1, \(x)quantile(x, 0.975))
+  pred_up <- 1 + mean_sig
+  pred_lo <- 1 - mean_sig
+  x_bar <- log(sp_mean$ld_leaf) |> mean()
+  x_s <- log(sp_mean$ld_leaf) |> sd()
+  fig_d3_1 <- tibble(pred = 1, pred_up, pred_lo,
+    x = exp(x_bar + x_s * x_lt), punch = "1.0-cm")
+
+  # LD for small
+  mu_mat <- exp(rep(1, n) %*% t(draws$`beta[1]`) + x_lt %*% t(draws$`beta[2]` + draws$`beta[6]`))
+  sig_mat <- exp(rep(1, n) %*% t(draws$`gamma[1]`))
+  mean_mu <- apply(mu_mat, 1, mean)
+  mean_sig <- apply(sig_mat, 1, mean)
+  lwr_sig <- apply(sig_mat, 1, \(x)quantile(x, 0.025))
+  upr_sig <- apply(sig_mat, 1, \(x)quantile(x, 0.975))
+  pred_up <- mean_mu + upr_sig
+  pred_lo <- mean_mu - upr_sig
+  x_bar <- log(sp_mean$ld_leaf) |> mean()
+  x_s <- log(sp_mean$ld_leaf) |> sd()
+  fig_d3_2 <- tibble(pred = mean_mu, pred_up, pred_lo,
+    x = exp(x_bar + x_s * x_lt), punch = "0.6-cm")
+
+  fig_d3 <- bind_rows(fig_d3_1, fig_d3_2)
+
+  p3 <- ggplot(fig_d3, aes(x = x, fill = punch)) +
+    geom_hline(yintercept = 1, lty = 2) +
+    geom_ribbon(aes(ymax = pred_up, ymin = pred_lo), alpha = 0.5) +
+    geom_line(aes(y = pred, col = punch)) +
+    xlab("Leaf tissue density") +
+    xlab(expression(paste("Leaf tissue density (g ", cm^-3,")"))) +
+    ylab("Whole-leaf / leaf disc LMA ratio") +
+    scale_x_log10() +
+    scale_color_manual(
+      values = my_col[c(2, 4)],
+      name = "Leaf punch size"
+    ) +
+    scale_fill_manual(
+      values = my_col[c(2, 4)],
+      name = "Leaf punch size"
+    ) +
+    coord_cartesian(ylim = c(0.5, 1.5)) +
+    theme_bw() +
+    theme(
+      text = element_text(family = "Arial"),
+      legend.position = c(0.35, 0.2),
+      legend.key.size = unit(0.5, "cm"),
+      legend.spacing.y = unit(0.1, "cm"),
+      legend.text.align = 0,
+      legend.key.height = unit(0.2, "cm"),
+      legend.text = element_text(size = 9),
+      legend.title = element_text(size = 9)
+    )
+
+  p3 + p2 + p1 +
+      plot_annotation(tag_levels = "a") &
+      theme(
+        text = element_text(family = "Arial"),
+      )
+
+}
 
 
 div_check <- function(diags) {
