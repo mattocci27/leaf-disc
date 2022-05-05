@@ -585,3 +585,149 @@ petiole_point <- function(yaku_sp) {
     theme_bw() &
     theme(plot.tag = element_text(face = "bold"))
 }
+
+generate_sma_punch_tab <- function(data) {
+  data <- data |>
+    mutate(size_gr = ifelse(location == "Yakushima", "Large punch (1.0-cm)", "Small punch (0.6-cm)")) |>
+    mutate(la_gr3 = ifelse(str_detect(la_gr2, "Large"), "Large", "Small")) |>
+    mutate(lt_gr3 = ifelse(str_detect(lt_gr2, "Thick"), "Thick", "Thin")) |>
+    mutate(ld_gr3 = ifelse(str_detect(ld_gr2, "Dense"), "Dense", "Less dense")) |>
+    mutate(punch_size = ifelse(location == "Yakushima", "1.0cm", "0.6cm")) |>
+    mutate(all_gr = paste(ld_gr3, la_gr3, lt_gr3, punch_size, sep = "-")) |>
+    mutate(all_gr2 = paste(ld_gr3, la_gr3, lt_gr3, sep = "-"))
+
+  small_punch <- data |> filter(location != "Yakushima")
+  large_punch <- data |> filter(location == "Yakushima")
+
+  la_mid_yaku <- median(large_punch$la)
+
+  large_punch <- large_punch |>
+    mutate(la_gr3 = ifelse(la >= la_mid_yaku, "Large", "Small"
+    ))
+
+  sma_lma <- sma(log10(lma_leaf) ~ log10(lma_disc),
+    data = sp_mean,
+    elev.test = 0,
+    slope.test = 1
+  )
+  small_ld <- sma(log10(lma_leaf) ~ log10(lma_disc) * ld_gr3,
+    data = small_punch,
+    elev.test = 0,
+    slope.test = 1
+  )
+  small_la <- sma(log10(lma_leaf) ~ log10(lma_disc) * la_gr3,
+    data = small_punch,
+    elev.test = 0,
+    slope.test = 1
+  )
+  small_lt <- sma(log10(lma_leaf) ~ log10(lma_disc) * lt_gr3,
+    data = small_punch,
+    elev.test = 0,
+    slope.test = 1
+  )
+  large_ld <- sma(log10(lma_leaf) ~ log10(lma_disc) * ld_gr3,
+    data = large_punch,
+    elev.test = 0,
+    slope.test = 1
+  )
+
+  large_la <- sma(log10(lma_leaf) ~ log10(lma_disc) * la_gr3,
+    data = data,
+    elev.test = 0,
+    slope.test = 1
+  )
+  extract_sma(large_la)
+
+  large_lt <- sma(log10(lma_leaf) ~ log10(lma_disc) * lt_gr3,
+    data = large_punch,
+    elev.test = 0,
+    slope.test = 1
+  )
+
+  tb0 <- lapply(
+    list(
+      lma = sma_lma,
+      small_ld = small_ld,
+      small_la = small_la,
+      small_lt = small_lt,
+      large_ld = large_ld,
+      large_la = large_la,
+      large_lt = large_lt
+    ),
+    extract_sma
+  )
+
+  fit <- sma(log10(lma_leaf) ~ log10(lma_disc) * all_gr,
+    data = data |> filter(location != "Yakushima"),
+    elev.test = 0,
+    slope.test = 1
+  )
+  extract_sma(fit)
+
+
+  tb_s <- rbind(tb0$small_ld[[2]], tb0$small_la[[2]], tb0$small_lt[[2]])
+  tb_l <- rbind(tb0$large_ld[[2]], tb0$large_la[[2]], tb0$large_lt[[2]])
+
+  tb <- cbind(c("All", tb0$ld_gr$group, tb0$la_gr$group, tb0$lt_gr$group), tb) |>
+    as_tibble() |>
+    rename(Slope = slope, Intercept = intercept)
+
+  colnames(tb)[1] <- "Data"
+
+  tb
+
+}
+
+# sma_grid_col <- function(data, trait, legend_title) {
+#   data <- data |>
+#     mutate(size_gr = ifelse(location == "Yakushima", "Large punch (1.0-cm)", "Small punch (0.6-cm)")) |>
+#     mutate(la_gr3 = ifelse(str_detect(la_gr2, "Large"), "Large", "Small")) |>
+#     mutate(lt_gr3 = ifelse(str_detect(lt_gr2, "Thick"), "Thick", "Thin")) |>
+#     mutate(ld_gr3 = ifelse(str_detect(ld_gr2, "Dense"), "Dense", "Less dense"))
+#   my_col <- RColorBrewer::brewer.pal(4, "RdBu")
+#   p <- data |>
+#    # ggplot(aes(x = lma_disc, y = lma_leaf))+
+#     ggplot(aes(x = lma_disc, y = lma_leaf, col = {{trait}}, fill = {{trait}})) +
+#     geom_point(alpha = 0.6) +
+#     facet_grid(~ size_gr, scale = "fixed") +
+#     #facet_grid(~ld_gr3, scale = "fixed", labeller = label_parsed) +
+#     scale_x_log10() +
+#     scale_y_log10() +
+#     #ggtitle(legend_title) +
+#     geom_abline(slope = 1, intercept = 0, lty = 2) +
+#     geom_sma(se = TRUE, nboot = 1000) +
+#     # scale_color_manual(
+#     #   values = my_col[c(2, 4)],
+#     #   name = legend_title
+#     # ) +
+#     # scale_fill_manual(
+#     #   values = my_col[c(2, 4)],
+#     #   name = legend_title
+#     # ) +
+#     xlab(expression(Leaf ~ disc ~ LMA ~ (g ~ m^{
+#       -2
+#     }))) +
+#     ylab(expression(Whole - leaf ~ LMA ~ (g ~ m^{
+#       -2
+#     }))) +
+#     stat_cor(
+#       aes(label = paste(..rr.label.., ..n.label.., sep = "~`,`~"), family = "Arial"),
+#       show.legend = FALSE
+#     ) +
+#     theme_bw() +
+#     theme(
+#       text = element_text(family = "Arial"),
+#       legend.position = c(0.35, 0.2),
+#       legend.key.size = unit(0.5, "cm"),
+#       legend.spacing.y = unit(0.1, "cm"),
+#       legend.text.align = 0,
+#       legend.key.height = unit(0.2, "cm"),
+#       legend.text = element_text(size = 9),
+#       legend.title = element_text(size = 9)
+#     )
+#    p
+# }
+
+# tic()
+# sma_grid_col(sp_mean, lt_gr, "leaf thickness")
+# toc()

@@ -19,7 +19,7 @@ clean_stan_data <- function(sp_mean, model = c("no", "LMA", "LD", "LD2"), int = 
       la = sp_mean$la,
       lt = sp_mean$lt
     )
-  } else if (model == "LD3" | model == "punch" | model == "punch2") {
+  } else if (model == "LD3" | model == "punch" | model == "punch2" | model == "punch3") {
     x <- cbind(
       intercept = rep(1, nrow(sp_mean)),
       #lma_disc = sp_mean$lma_disc / sp_mean$lt,
@@ -65,12 +65,17 @@ clean_stan_data <- function(sp_mean, model = c("no", "LMA", "LD", "LD2"), int = 
     int2 = x[,3] * yaku,
     int3 = x[,4] * yaku
     )
-  } else if (model == "punch2") {
+  } else if (model == "punch2" | model == "punch3") {
     yaku <- ifelse(sp_mean$location == "Yakushima", 0, 1)
     # yaku <- ifelse(sp_mean$location == "Yakushima", 0.5^2 * pi, 0.3^2*pi)
     # yaku <- scale(yaku) |> as.numeric()
     x <- cbind(x,
     punch = yaku
+    )
+    x2 <- cbind(x,
+    int1 = x[,2] * yaku,
+    int2 = x[,3] * yaku,
+    int3 = x[,4] * yaku
     )
   }
 
@@ -93,7 +98,6 @@ clean_stan_data <- function(sp_mean, model = c("no", "LMA", "LD", "LD2"), int = 
     x = x,
     x2 = x2
     )
-
 }
 
 clean_stan_data_sep <- function(sp_mean, yaku = TRUE) {
@@ -598,9 +602,9 @@ coef_pointrange4 <- function(data) {
       )) +
     xlab("Standardized coefficients") +
     scale_y_discrete(labels = c(
-      "beta[2]" = expression(paste("Effect of LD on mean (large punch; ", beta[1], ")")),
-      "beta[3]" = expression(paste("Effect of LA on mean (large punch; ", beta[2], ")")),
-      "beta[4]" = expression(paste("Effect of LT on mean (large punch; ", beta[3], ")")),
+      "beta[2]" = expression(paste("Effect of LD on mean (", beta[1], ")")),
+      "beta[3]" = expression(paste("Effect of LA on mean (", beta[2], ")")),
+      "beta[4]" = expression(paste("Effect of LT on mean (", beta[3], ")")),
       "beta[5]" = expression(Effect~of~small~punch~on~mean~(beta[4])),
       "beta[6]" = expression(paste("Effect of LD on mean (small punch; ", beta[1]+beta[5], ")")),
       "beta[7]" = expression(paste("Effect of LA on mean (small punch; ", beta[2]+beta[6], ")")),
@@ -632,9 +636,9 @@ coef_pointrange4 <- function(data) {
     ylab("") +
     xlab("Standardized coefficients") +
     scale_y_discrete(labels = c(
-      "gamma[2]" = expression(paste("Effect of LD on variance (large punch; ", gamma[1], ")")),
-      "gamma[3]" = expression(paste("Effect of LA on variance (large punch; ", gamma[2], ")")),
-      "gamma[4]" = expression(paste("Effect of LT on variance (large punch; ", gamma[3], ")")),
+      "gamma[2]" = expression(paste("Effect of LD on variance (", gamma[1], ")")),
+      "gamma[3]" = expression(paste("Effect of LA on variance (", gamma[2], ")")),
+      "gamma[4]" = expression(paste("Effect of LT on variance (", gamma[3], ")")),
       "gamma[5]" = expression(Effect~of~small~punch~on~variance~(gamma[4])),
       "gamma[6]" = expression(paste("Effect of LD on variance (small punch; ", gamma[1]+gamma[5], ")")),
       "gamma[7]" = expression(paste("Effect of LA on variance (small punch; ", gamma[2]+gamma[6], ")")),

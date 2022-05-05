@@ -298,6 +298,19 @@ list(
     # max_treedepth = 15,
     seed = 123
    ),
+   tar_stan_mcmc(
+    fit_sp_punch3,
+    "stan/model2.stan",
+    data = clean_stan_data(sp_mean, model = "punch3"),
+    refresh = 0,
+    chains = 4,
+    parallel_chains = getOption("mc.cores", 4),
+    iter_warmup = 2000,
+    iter_sampling = 2000,
+    # adapt_delta = 0.99,
+    # max_treedepth = 15,
+    seed = 123
+   ),
 
    tar_stan_mcmc(
     fit_sp_ld3_yaku,
@@ -410,6 +423,11 @@ list(
   #   max_treedepth = 15,
   #   seed = 123
   #  ),
+  tar_target(
+    coef_sp_tab_punch3,
+    create_stan_tab(fit_sp_punch3_draws_model2)
+  ),
+
   tar_target(
     coef_sp_tab_punch1,
     create_stan_tab(fit_sp_punch_draws_model)
@@ -785,7 +803,8 @@ list(
         fit_sp_lm_mcmc_model = fit_sp_lm_mcmc_model,
         fit_sp_lma0_mcmc_simple = fit_sp_lma0_mcmc_simple,
         fit_sp_punch_mcmc_model = fit_sp_punch_mcmc_model,
-        fit_sp_punch2_mcmc_model = fit_sp_punch2_mcmc_model
+        fit_sp_punch2_mcmc_model = fit_sp_punch2_mcmc_model,
+        fit_sp_punch3_mcmc_model2 = fit_sp_punch3_mcmc_model2
         ),
     \(x)x$loo(cores = parallel::detectCores())
     )
