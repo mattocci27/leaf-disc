@@ -678,6 +678,18 @@ pred_mcmc <- function(draws, sp_mean, n = 80) {
   x_s <- log(sp_mean$lt) |> sd()
   fig_d1 <- tibble(pred = 1, pred_up, pred_lo, x = exp(x_bar + x_s * x_lt), punch = "0.6-cm")
 
+  # LT for large
+  sig_mat <- exp(rep(1, n) %*% t(draws$`gamma[1]`))
+  upr_sig <- apply(sig_mat, 1, \(x)quantile(x, 0.975))
+  mean_sig <- apply(sig_mat, 1, mean)
+  pred_up <- 1 + mean_sig
+  pred_lo <- 1 - mean_sig
+  x_bar <- log(sp_mean$lt) |> mean()
+  x_s <- log(sp_mean$lt) |> sd()
+  fig_d1_2 <- tibble(pred = 1, pred_up, pred_lo,
+    x = exp(x_bar + x_s * x_lt), punch = "1.0-cm")
+  fig_d1 <- bind_rows(fig_d1, fig_d1_2)
+
   p1 <- ggplot(fig_d1, aes(x = x, fill = punch)) +
     geom_hline(yintercept = 1, lty = 2) +
     geom_ribbon(aes(ymax = pred_up, ymin = pred_lo), alpha = 0.5) +
@@ -686,11 +698,11 @@ pred_mcmc <- function(draws, sp_mean, n = 80) {
     ylab("Whole-leaf / leaf disc LMA ratio") +
     scale_x_log10() +
     scale_color_manual(
-      values = my_col[c(2)],
+      values = my_col[c(2, 4)],
       name = "Leaf punch size"
     ) +
     scale_fill_manual(
-      values = my_col[c(2)],
+      values = my_col[c(2, 4)],
       name = "Leaf punch size"
     ) +
     coord_cartesian(ylim = c(0.5, 1.5)) +
@@ -700,7 +712,6 @@ pred_mcmc <- function(draws, sp_mean, n = 80) {
 #  LA for large
   mu_mat <- exp(rep(1, n) %*% t(draws$`beta[1]`) + x_lt %*% t(draws$`beta[4]`))
   sig_mat <- exp(rep(1, n) %*% t(draws$`gamma[1]`))
-
   #mu_sig_mat <- mu_mat + sig_mat
   mean_mu <- apply(mu_mat, 1, mean)
   mean_sig <- apply(sig_mat, 1, mean)
@@ -715,6 +726,17 @@ pred_mcmc <- function(draws, sp_mean, n = 80) {
   fig_d2 <- tibble(pred = mean_mu, pred_up, pred_lo,
   x = exp(x_bar + x_s * x_lt), punch = "1.0-cm")
 
+  # LA for small
+  sig_mat <- exp(rep(1, n) %*% t(draws$`gamma[1]` + draws$`gamma[5]`))
+  upr_sig <- apply(sig_mat, 1, \(x)quantile(x, 0.975))
+  pred_up <- 1 + mean_sig
+  pred_lo <- 1 - mean_sig
+  x_bar <- log(sp_mean$la) |> mean()
+  x_s <- log(sp_mean$la) |> sd()
+  fig_d2_2 <- tibble(pred = 1, pred_up, pred_lo,
+    x = exp(x_bar + x_s * x_lt), punch = "0.6-cm")
+  fig_d2 <- bind_rows(fig_d2, fig_d2_2)
+
   p2 <- ggplot(fig_d2, aes(x = x, fill = punch)) +
     geom_hline(yintercept = 1, lty = 2) +
     geom_ribbon(aes(ymax = pred_up, ymin = pred_lo), alpha = 0.5) +
@@ -723,11 +745,11 @@ pred_mcmc <- function(draws, sp_mean, n = 80) {
     xlab(expression(paste("Leaf area (", cm^2,")"))) +
     ylab("Whole-leaf / leaf disc LMA ratio") +
     scale_color_manual(
-      values = my_col[c(4)],
+      values = my_col[c(2, 4)],
       name = "Leaf punch size"
     ) +
     scale_fill_manual(
-      values = my_col[c(4)],
+      values = my_col[c(2, 4)],
       name = "Leaf punch size"
     ) +
    coord_cartesian(ylim = c(0.5, 1.5)) +
