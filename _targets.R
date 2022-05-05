@@ -490,7 +490,7 @@ list(
       "figs/coef_sp_punch1_add.png",
       coef_sp_plot_punch1_add,
       dpi = 300,
-      width = 6,
+      width = 5,
       height = 6
     ),
     format = "file"
@@ -501,7 +501,7 @@ list(
       "figs/coef_sp_punch1_add.pdf",
       coef_sp_plot_punch1_add,
       device = cairo_pdf,
-      width = 6,
+      width = 5,
       height = 6
     ),
     format = "file"
