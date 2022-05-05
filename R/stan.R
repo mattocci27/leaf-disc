@@ -672,8 +672,8 @@ pred_mcmc <- function(draws, sp_mean, n = 80) {
   mean_sig <- apply(sig_mat, 1, mean)
   lwr_sig <- apply(sig_mat, 1, \(x) quantile(x, 0.025))
   upr_sig <- apply(sig_mat, 1, \(x) quantile(x, 0.975))
-  pred_up <- 1 + upr_sig
-  pred_lo <- 1 - upr_sig
+  pred_up <- 1 + mean_sig
+  pred_lo <- 1 - mean_sig
   x_bar <- log(sp_mean$lt) |> mean()
   x_s <- log(sp_mean$lt) |> sd()
   fig_d1 <- tibble(pred = 1, pred_up, pred_lo, x = exp(x_bar + x_s * x_lt), punch = "0.6-cm")
@@ -700,12 +700,16 @@ pred_mcmc <- function(draws, sp_mean, n = 80) {
 #  LA for large
   mu_mat <- exp(rep(1, n) %*% t(draws$`beta[1]`) + x_lt %*% t(draws$`beta[4]`))
   sig_mat <- exp(rep(1, n) %*% t(draws$`gamma[1]`))
+
+  #mu_sig_mat <- mu_mat + sig_mat
   mean_mu <- apply(mu_mat, 1, mean)
   mean_sig <- apply(sig_mat, 1, mean)
   lwr_sig <- apply(sig_mat, 1, \(x) quantile(x, 0.025))
   upr_sig <- apply(sig_mat, 1, \(x) quantile(x, 0.975))
-  pred_up <- mean_mu + upr_sig
-  pred_lo <- mean_mu - upr_sig
+  # pred_up <- apply(mu_sig_mat, 1, \(x) quantile(x, 0.025))
+  # pred_lo <- apply(mu_sig_mat, 1, \(x) quantile(x, 0.975))
+  pred_up <- mean_mu + mean_sig
+  pred_lo <- mean_mu - mean_sig
   x_bar <- log(sp_mean$la) |> mean()
   x_s <- log(sp_mean$la) |> sd()
   fig_d2 <- tibble(pred = mean_mu, pred_up, pred_lo,
@@ -749,8 +753,8 @@ pred_mcmc <- function(draws, sp_mean, n = 80) {
   mean_sig <- apply(sig_mat, 1, mean)
   lwr_sig <- apply(sig_mat, 1, \(x)quantile(x, 0.025))
   upr_sig <- apply(sig_mat, 1, \(x)quantile(x, 0.975))
-  pred_up <- mean_mu + upr_sig
-  pred_lo <- mean_mu - upr_sig
+  pred_up <- mean_mu + mean_sig
+  pred_lo <- mean_mu - mean_sig
   x_bar <- log(sp_mean$ld_leaf) |> mean()
   x_s <- log(sp_mean$ld_leaf) |> sd()
   fig_d3_2 <- tibble(pred = mean_mu, pred_up, pred_lo,
@@ -794,7 +798,6 @@ pred_mcmc <- function(draws, sp_mean, n = 80) {
       )
 
 }
-
 
 div_check <- function(diags) {
   n1 <- diags |>

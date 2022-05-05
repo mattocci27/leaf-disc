@@ -309,9 +309,9 @@ petiole_pdf|stem|c1fce38348520e5e|c3b1eaf48d80037c|b52311aa0b3525f6|1647562864|f
 petiole_plot|stem|6d8c75f2c12ee3e3|0a6ea68e2f9e7916|30fcf758360feec7|-1986186134||t19116.153123199s|a6061241c267c8f5|141278|rds|local|vector|||0.875||
 petiole_png|stem|e5edc47c6a83b240|6913fa251858265e|49c842cbc6581ef0|-1645330511|figs/petiole.png|t19116.1531341251s|ff67cb63ff3a29f4|169672|file|local|vector|||0.928||
 petiole_point|function|4111b1d40232f2af|||||||||||||||
-pred_mcmc|function|f032ba45c2db0ab5|||||||||||||||
-pred_mcmc_plot|stem|6907e058a6d1077b|f6c167c6573fdc2f|c327036ca05f28ee|-458926008||t19117.4479948338s|dfc87c06c2c836df|76514009|rds|local|vector|||0.527||
-pred_mcmc_plot_png|stem|d4c4297694c6f08f|038a5172b9c26df6|05db1a51afb92fdd|1994164657|figs/pred_mcmc.png|t19117.4480005283s|23982085f18ff5f7|94219|file|local|vector|||0.351||
+pred_mcmc|function|de9ba57c90c8844d|||||||||||||||
+pred_mcmc_plot|stem|bf9ced9340e2d579|f6c167c6573fdc2f|2ed74f3191c9abcf|-458926008||t19117.5790593071s|410c8e679af99eca|76514005|rds|local|vector|||0.519||
+pred_mcmc_plot_png|stem|c02b504b06cdd805|038a5172b9c26df6|28eed2a21fc835d2|1994164657|figs/pred_mcmc.png|t19117.5790653259s|f4d80744f683378c|93821|file|local|vector|||0.35||
 ratio_combine|function|39af899c381a5781|||||||||||||||
 ratio_pdf|stem|962cf362485c1c6d|5c9e590c575821fd|0ae9c2a63d8e3b4b|-908551514|figs/ratio.pdf|t19115.6953139091s|d4d860dc3fbf1237|190852|file|local|vector|||0.27||
 ratio_plot|stem|c9cb76670b2d564b|deab1a5ab669067c|608e5405bcf52c22|923082000||t19115.6943608372s|57dc38c7a228d3a1|930766|rds|local|vector|||0.06||
