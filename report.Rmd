@@ -122,7 +122,9 @@ loo::loo_compare(
   loo_model[[1]], loo_model[[2]], loo_model[[3]],
   loo_model[[4]], loo_model[[5]], loo_model[[6]],
   loo_model[[7]], loo_model[[8]], loo_model[[9]],
-  loo_model[[10]], loo_model[[11]])
+  loo_model[[10]], loo_model[[11]],
+  loo_model[[12]], loo_model[[13]]
+  )
 ```
 
 ```{r}

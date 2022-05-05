@@ -311,6 +311,19 @@ list(
     # max_treedepth = 15,
     seed = 123
    ),
+   tar_stan_mcmc(
+    fit_sp_punch4,
+    "stan/model2.stan",
+    data = clean_stan_data(sp_mean, model = "punch"),
+    refresh = 0,
+    chains = 4,
+    parallel_chains = getOption("mc.cores", 4),
+    iter_warmup = 2000,
+    iter_sampling = 2000,
+    # adapt_delta = 0.99,
+    # max_treedepth = 15,
+    seed = 123
+   ),
 
    tar_stan_mcmc(
     fit_sp_ld3_yaku,
@@ -451,7 +464,7 @@ list(
       "figs/coef_sp_punch1.png",
       coef_sp_plot_punch1,
       dpi = 300,
-      width = 6,
+      width = 5,
       height = 6
     ),
     format = "file"
@@ -571,20 +584,20 @@ list(
 
   # coef for OLS stan 2
   tar_target(
-    coef_sp_tab3,
+    coef_sp_ld_tab,
     create_stan_tab(fit_sp_ld_draws_model)
   ),
   tar_target(
-    coef_sp_plot3,
-    coef_pointrange2(coef_sp_tab3, ld = TRUE)
+    coef_sp_ld_plot,
+    coef_pointrange2(coef_sp_ld_tab, ld = TRUE)
   ),
   tar_target(
-    coef_sp_png3,
+    coef_sp_ld_png,
     ggsave(
-      "figs/coef_sp3.png",
-      coef_sp_plot3,
+      "figs/coef_sp_ld.png",
+      coef_sp_ld_plot,
       dpi = 300,
-      width = 6,
+      width = 5,
       height = 6
     ),
     format = "file"
@@ -804,7 +817,8 @@ list(
         fit_sp_lma0_mcmc_simple = fit_sp_lma0_mcmc_simple,
         fit_sp_punch_mcmc_model = fit_sp_punch_mcmc_model,
         fit_sp_punch2_mcmc_model = fit_sp_punch2_mcmc_model,
-        fit_sp_punch3_mcmc_model2 = fit_sp_punch3_mcmc_model2
+        fit_sp_punch3_mcmc_model2 = fit_sp_punch3_mcmc_model2,
+        fit_sp_punch4_mcmc_model2 = fit_sp_punch4_mcmc_model2
         ),
     \(x)x$loo(cores = parallel::detectCores())
     )

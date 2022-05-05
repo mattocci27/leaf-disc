@@ -18,11 +18,13 @@ clean_stan_data <- function(sp_mean, model = c("no", "LMA", "LD", "LD2"), int = 
       lma_disc = sp_mean$ld_leaf,
       la = sp_mean$la,
       lt = sp_mean$lt
-    )
-  } else if (model == "LD3" | model == "punch" | model == "punch2" | model == "punch3") {
+   )
+  } else if (model == "LD3" | model == "punch" |
+      model == "punch2" | model == "punch3" | model == "punch4") {
     x <- cbind(
       intercept = rep(1, nrow(sp_mean)),
-      #lma_disc = sp_mean$lma_disc / sp_mean$lt,
+      # lma_disc = sp_mean$lma_disc / sp_mean$lt,
+      # lma_disc = sp_mean$lma_disc,
       lma_disc = sp_mean$ld_disc,
       la = sp_mean$la,
       lt = sp_mean$lt
@@ -382,6 +384,7 @@ coef_pointrange2 <- function(data, ld = FALSE, lm = FALSE, lalt = FALSE) {
         size = 3) +
       ylab("") +
       xlab("Standardized coefficients") +
+      ggtitle("Effects on mean") +
       scale_y_discrete(labels = c(
     #    "Intercept for mean" = expression(Intercept~of~mean~(beta[0])),
         "Effect of disc LMA on mean" = expression(Effect~of~LMA~on~mean~(beta[1])),
@@ -409,6 +412,7 @@ coef_pointrange2 <- function(data, ld = FALSE, lm = FALSE, lalt = FALSE) {
         shape = 21,
         size = 3) +
       ylab("") +
+      ggtitle("Effects on variance") +
       xlab("Standardized coefficients") +
       scale_y_discrete(labels = c(
         "Effect of disc LMA on variance" = expression(Effect~of~LMA~on~variance~(gamma[1])),
@@ -422,14 +426,14 @@ coef_pointrange2 <- function(data, ld = FALSE, lm = FALSE, lalt = FALSE) {
     if(ld) {
       p1 <- p1 + scale_y_discrete(labels = c(
     #    "Intercept for mean" = expression(Intercept~of~mean~(beta[0])),
-        "Effect of disc LMA on mean" = expression(Effect~of~LD~on~mean~(beta[1])),
-        "Effect of LA on mean" = expression(Effect~of~LA~on~mean~(beta[2])),
-        "Effect of LT on mean" = expression(Effect~of~LT~on~mean~(beta[3]))
+        "Effect of disc LMA on mean" = expression(Leaf~tissue~density~(beta[1])),
+        "Effect of LA on mean" = expression(Leaf~area~(beta[2])),
+        "Effect of LT on mean" = expression(Leaf~thickness~(beta[3]))
       ))
       p2 <- p2 + scale_y_discrete(labels = c(
-        "Effect of disc LMA on variance" = expression(Effect~of~LD~on~variance~(gamma[1])),
-        "Effect of LA on variance" = expression(Effect~of~LA~on~variance~(gamma[2])),
-        "Effect of LT on variance" = expression(Effect~of~LT~on~variance~(gamma[3]))
+        "Effect of disc LMA on variance" = expression(Leaf~tissue~density~(gamma[1])),
+        "Effect of LA on variance" = expression(Leaf~area~(gamma[2])),
+        "Effect of LT on variance" = expression(Leaf~thickness~(gamma[3]))
       ))
     }
     if(lm) {
@@ -498,6 +502,7 @@ coef_pointrange3 <- function(data, ld = FALSE, lm = FALSE, lalt = FALSE) {
       shape = 21,
       size = 3) +
     ylab("") +
+    ggtitle("Effects on mean") +
     scale_fill_manual(
       values = c(
         "sig95" = "#33CCFF",
@@ -506,13 +511,13 @@ coef_pointrange3 <- function(data, ld = FALSE, lm = FALSE, lalt = FALSE) {
       )) +
     xlab("Standardized coefficients") +
     scale_y_discrete(labels = c(
-      "beta[2]" = expression(Effect~of~LD~on~mean~(beta[1])),
-      "beta[3]" = expression(Effect~of~LA~on~mean~(beta[2])),
-      "beta[4]" = expression(Effect~of~LT~on~mean~(beta[3])),
-      "beta[5]" = expression(Effect~of~punch~size~on~mean~(beta[4])),
-      "beta[6]" = expression(Effect~of~LD%*%punch~size~on~mean~(beta[5])),
-      "beta[7]" = expression(Effect~of~LA%*%punch~size~on~mean~(beta[6])),
-      "beta[8]" = expression(Effect~of~LT%*%punch~size~on~mean~(beta[7]))
+      "beta[2]" = expression(Leaf~tissue~density~(beta[1])),
+      "beta[3]" = expression(Leaf~area~(beta[2])),
+      "beta[4]" = expression(Leaf~thickness~(beta[3])),
+      "beta[5]" = expression(Small~punch~(beta[4])),
+      "beta[6]" = expression(Leaf~tissue~density%*%small~punch~(beta[5])),
+      "beta[7]" = expression(Leaf~area%*%small~punch~(beta[6])),
+      "beta[8]" = expression(Leaf~thickness%*%small~punch~(beta[7]))
     ))
 
   p2 <- data2 |>
@@ -537,17 +542,17 @@ coef_pointrange3 <- function(data, ld = FALSE, lm = FALSE, lalt = FALSE) {
         "ns" = "#FFFFFF"
       )) +
     ylab("") +
+    ggtitle("Effects on variance") +
     xlab("Standardized coefficients") +
     scale_y_discrete(labels = c(
-      "gamma[2]" = expression(Effect~of~LD~on~variance~(gamma[1])),
-      "gamma[3]" = expression(Effect~of~LA~on~variance~(gamma[2])),
-      "gamma[4]" = expression(Effect~of~LT~on~variance~(gamma[3])),
-      "gamma[5]" = expression(Effect~of~punch~size~on~variance~(gamma[4])),
-      "gamma[6]" = expression(Effect~of~LD%*%punch~size~on~variance~(gamma[5])),
-      "gamma[7]" = expression(Effect~of~LA%*%punch~size~on~variance~(gamma[6])),
-      "gamma[8]" = expression(Effect~of~LT%*%punch~size~on~variance~(gamma[7]))
+      "gamma[2]" = expression(Leaf~tissue~density~(gamma[1])),
+      "gamma[3]" = expression(Leaf~area~(gamma[2])),
+      "gamma[4]" = expression(Leaf~thickness~(gamma[3])),
+      "gamma[5]" = expression(Small~punch~(gamma[4])),
+      "gamma[6]" = expression(Leaf~tissue~density%*%small~punch~(gamma[5])),
+      "gamma[7]" = expression(Leaf~area%*%small~punch~(gamma[6])),
+      "gamma[8]" = expression(Leaf~thickness%*%small~punch~(gamma[7]))
     ))
-
     p1 / p2 +
     plot_annotation(tag_levels = "a") &
     theme_bw() &
@@ -634,6 +639,7 @@ coef_pointrange4 <- function(data) {
         "ns" = "#FFFFFF"
       )) +
     ylab("") +
+    ggtitle("Effects on variance") +
     xlab("Standardized coefficients") +
     scale_y_discrete(labels = c(
       "gamma[2]" = expression(paste("Effect of LD on variance (", gamma[1], ")")),
