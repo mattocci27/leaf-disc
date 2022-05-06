@@ -710,11 +710,11 @@ pred_mcmc <- function(draws, sp_mean, n = 80) {
     scale_x_log10() +
     scale_color_manual(
       values = my_col[c(2)],
-      name = "Leaf punch size"
+      name = "Leaf punch diameter"
     ) +
     scale_fill_manual(
       values = my_col[c(2)],
-      name = "Leaf punch size"
+      name = "Leaf punch diameter"
     ) +
     coord_cartesian(ylim = c(0.5, 1.5)) +
     theme_bw() +
@@ -757,11 +757,11 @@ pred_mcmc <- function(draws, sp_mean, n = 80) {
     ylab("Whole-leaf / leaf disc LMA ratio") +
     scale_color_manual(
       values = my_col[c(4)],
-      name = "Leaf punch size"
+      name = "Leaf punch diameter"
     ) +
     scale_fill_manual(
       values = my_col[c(4)],
-      name = "Leaf punch size"
+      name = "Leaf punch diameter"
     ) +
    coord_cartesian(ylim = c(0.5, 1.5)) +
    theme_bw() +
@@ -805,11 +805,11 @@ pred_mcmc <- function(draws, sp_mean, n = 80) {
     scale_x_log10() +
     scale_color_manual(
       values = my_col[c(2, 4)],
-      name = "Leaf punch size"
+      name = "Leaf punch diameter"
     ) +
     scale_fill_manual(
       values = my_col[c(2, 4)],
-      name = "Leaf punch size"
+      name = "Leaf punch diameter"
     ) +
     coord_cartesian(ylim = c(0.5, 1.5)) +
     theme_bw() +
