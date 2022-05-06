@@ -94,38 +94,63 @@ write_yml <- function(path, sp_mean, full_data_cv_csv, tree, lma_yaku_re, sma_sp
     out,
     sep = "\n")
   writeLines(
-    paste0("sma_slope_all: ",
-           sma_lma$groupsummary$Slope |> round(3),
-           " [95% CI: ",
-           sma_lma$groupsummary$Slope_lowCI |> round(3),
-           ", ",
-           sma_lma$groupsummary$Slope_highCI |> round(3),
-           "]"
+    paste0("sma_slope_all_mean: ",
+           sma_lma$groupsummary$Slope |> round(3)
            ),
     out,
     sep = "\n")
   writeLines(
-    paste0("sma_int_all: ",
-           sma_lma$groupsummary$Int |> round(3)|> format(nsmall = 3),
-           " [95% CI: ",
-           sma_lma$groupsummary$Int_lowCI |> round(3)|> format(nsmall = 3),
-           ", ",
-           sma_lma$groupsummary$Int_highCI |> round(3) |> format(nsmall = 3),
-           "]"
+    paste0("sma_slope_all_lwr: ",
+           sma_lma$groupsummary$Slope_lowCI |> round(3)
            ),
     out,
     sep = "\n")
   writeLines(
-    paste0("sma_all_per: ",
-           lma_mean_per |> round(2),
-           "% [95% CI: ",
-           lma_lwr_per |> round(2),
-           ", ",
-           lma_upr_per |> round(2),
-           "]"
+    paste0("sma_slope_all_upr: ",
+           sma_lma$groupsummary$Slope_highCI |> round(3)
            ),
     out,
     sep = "\n")
+
+  writeLines(
+    paste0("sma_int_all_mean: ",
+           sma_lma$groupsummary$Int |> round(4)|> format(nsmall = 4)
+           ),
+    out,
+    sep = "\n")
+  writeLines(
+    paste0("sma_int_all_lwr: ",
+           sma_lma$groupsummary$Int_lowCI |> round(4)|> format(nsmall = 4)
+           ),
+    out,
+    sep = "\n")
+  writeLines(
+    paste0("sma_int_all_upr: ",
+           sma_lma$groupsummary$Int_highCI |> round(3) |> format(nsmall = 3)
+           ),
+    out,
+    sep = "\n")
+  writeLines(
+    paste0("sma_all_per_mean: ",
+           lma_mean_per |> round(2)
+           ),
+    out,
+    sep = "\n")
+  writeLines(
+    paste0("sma_all_per_lwr: ",
+           lma_lwr_per |> round(2)
+           ),
+    out,
+    sep = "\n")
+  writeLines(
+    paste0("sma_all_per_upr: ",
+           lma_upr_per |> round(1)
+           ),
+    out,
+    sep = "\n")
+
+
+
   writeLines(
     paste0("ols_int_raw: ",
            coef(fit_ols)[1] |> exp()|> round(2)),

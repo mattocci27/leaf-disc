@@ -1,7 +1,13 @@
 mean_lma_disc: 88.2
-sma_slope_all: 0.975 [95% CI: 0.938, 1.013]
-sma_int_all: 0.088 [95% CI: 0.016, 0.160]
-sma_all_per: 9.69% [95% CI: 8.07, 11.36]
+sma_slope_all_mean: 0.975
+sma_slope_all_lwr: 0.938
+sma_slope_all_upr: 1.013
+sma_int_all_mean: 0.0881
+sma_int_all_lwr: 0.0160
+sma_int_all_upr: 0.160
+sma_all_per_mean: 9.69
+sma_all_per_lwr: 8.07
+sma_all_per_upr: 11.4
 ols_int_raw: 1.62
 ols_int: 1.64
 ols_slope: 0.911
