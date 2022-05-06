@@ -82,6 +82,17 @@ clean_stan_data <- function(sp_mean, model = c("no", "LMA", "LD", "LD2"),
     int2 = x[,3] * yaku,
     int3 = x[,4] * yaku
     )
+  } else if (model == "punch4") {
+    yaku <- ifelse(sp_mean$location == "Yakushima", 0, 1)
+    # yaku <- ifelse(sp_mean$location == "Yakushima", 0.5^2 * pi, 0.3^2*pi)
+    # yaku <- scale(yaku) |> as.numeric()
+    # remove densitt
+    x <- x[,-2]
+    x <- cbind(x,
+    punch = yaku,
+    int1 = x[,2] * yaku,
+    int2 = x[,3] * yaku
+    )
   }
 
   if (int) {
@@ -688,7 +699,7 @@ pred_mcmc <- function(draws, sp_mean, n = 80) {
   x_s <- log(sp_mean$lt) |> sd()
   fig_d1_2 <- tibble(pred = 1, pred_up, pred_lo,
     x = exp(x_bar + x_s * x_lt), punch = "1.0-cm")
-  fig_d1 <- bind_rows(fig_d1, fig_d1_2)
+  #fig_d1 <- bind_rows(fig_d1, fig_d1_2)
 
   p1 <- ggplot(fig_d1, aes(x = x, fill = punch)) +
     geom_hline(yintercept = 1, lty = 2) +
@@ -698,11 +709,11 @@ pred_mcmc <- function(draws, sp_mean, n = 80) {
     ylab("Whole-leaf / leaf disc LMA ratio") +
     scale_x_log10() +
     scale_color_manual(
-      values = my_col[c(2, 4)],
+      values = my_col[c(2)],
       name = "Leaf punch size"
     ) +
     scale_fill_manual(
-      values = my_col[c(2, 4)],
+      values = my_col[c(2)],
       name = "Leaf punch size"
     ) +
     coord_cartesian(ylim = c(0.5, 1.5)) +
@@ -735,7 +746,7 @@ pred_mcmc <- function(draws, sp_mean, n = 80) {
   x_s <- log(sp_mean$la) |> sd()
   fig_d2_2 <- tibble(pred = 1, pred_up, pred_lo,
     x = exp(x_bar + x_s * x_lt), punch = "0.6-cm")
-  fig_d2 <- bind_rows(fig_d2, fig_d2_2)
+  #fig_d2 <- bind_rows(fig_d2, fig_d2_2)
 
   p2 <- ggplot(fig_d2, aes(x = x, fill = punch)) +
     geom_hline(yintercept = 1, lty = 2) +
@@ -745,11 +756,11 @@ pred_mcmc <- function(draws, sp_mean, n = 80) {
     xlab(expression(paste("Leaf area (", cm^2,")"))) +
     ylab("Whole-leaf / leaf disc LMA ratio") +
     scale_color_manual(
-      values = my_col[c(2, 4)],
+      values = my_col[c(4)],
       name = "Leaf punch size"
     ) +
     scale_fill_manual(
-      values = my_col[c(2, 4)],
+      values = my_col[c(4)],
       name = "Leaf punch size"
     ) +
    coord_cartesian(ylim = c(0.5, 1.5)) +

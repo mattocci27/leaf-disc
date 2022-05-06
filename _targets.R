@@ -326,8 +326,8 @@ list(
    ),
    tar_stan_mcmc(
     fit_sp_punch4,
-    "stan/model2.stan",
-    data = clean_stan_data(sp_mean, model = "punch"),
+    "stan/model.stan",
+    data = clean_stan_data(sp_mean, model = "punch4"),
     refresh = 0,
     chains = 4,
     parallel_chains = getOption("mc.cores", 4),
@@ -457,6 +457,25 @@ list(
     coef_sp_tab_punch1,
     create_stan_tab(fit_sp_punch_draws_model)
   ),
+  tar_target(
+    coef_sp_tab_punch4,
+    create_stan_tab(fit_sp_punch4_draws_model)
+  ),
+  # tar_target(
+  #   coef_sp_plot_punch1,
+  #   coef_pointrange3(coef_sp_tab_punch1)
+  # ),
+  # tar_target(
+  #   coef_sp_png_punch1,
+  #   ggsave(
+  #     "figs/coef_sp_punch1.png",
+  #     coef_sp_plot_punch1,
+  #     dpi = 300,
+  #     width = 5,
+  #     height = 6
+  #   ),
+  #   format = "file"
+  # ),
 
   tar_target(
     coef_sp_tab_punch1_add,
@@ -847,7 +866,7 @@ list(
         fit_sp_punch_mcmc_model = fit_sp_punch_mcmc_model,
         fit_sp_punch2_mcmc_model = fit_sp_punch2_mcmc_model,
         fit_sp_punch3_mcmc_model2 = fit_sp_punch3_mcmc_model2,
-        fit_sp_punch4_mcmc_model2 = fit_sp_punch4_mcmc_model2
+        fit_sp_punch4_mcmc_model = fit_sp_punch4_mcmc_model
         ),
     \(x)x$loo(cores = parallel::detectCores())
     )
