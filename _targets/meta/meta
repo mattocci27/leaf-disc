@@ -1,4 +1,5 @@
 name|type|data|command|depend|seed|path|time|size|bytes|format|repository|iteration|parent|children|seconds|warnings|error
+boot_fit|function|e85c5cf223e6bd01|||||||||||||||
 clean_lma_la|function|264963d2319eb466|||||||||||||||
 clean_lma_raw|function|6da1f00665d442c0|||||||||||||||
 clean_lma_yaku|function|e6368913aa97e0f2|||||||||||||||
@@ -325,6 +326,7 @@ ratio_png|stem|d2b7a6c9c2263744|dd6023b40f942608|6eddea1531a864e7|151564805|figs
 report|stem|cd151c072d753f58|e4f5dbf98f739189|e0592b958dd92f29|-237041703|report.html*report.Rmd|t19118.1231655274s|598fa8d0bd3c89c3|5854787|file|local|vector|||7.293||
 save_tiff|function|5bae6d4d57942267|||||||||||||||
 si|stem|c03590befeaf2070|ebc7786f9ea1f783|255ce018fec97f34|2093119568|ms/SI.html*ms/SI.Rmd|t19110.3721237715s|dc9b5f2411439370|3176376|file|local|vector|||0.919||
+sma_fun|function|276e65d7f92ddb7a|||||||||||||||
 sma_grid_col|function|c0ff224d38bd3275|||||||||||||||
 sma_grid_col3|function|7c6018722e82454e|||||||||||||||
 sma_grid_col3_plot|stem|062768d0b3d58da4|52363d9ded78d51f|196ca0d474868d7f|-314061674||t19117.1595752813s|de067b6d4e2911ca|639324|rds|local|vector|||0.085||
@@ -347,6 +349,6 @@ stan_sim_dat|stem|6ff424d559440551|6cbd445fac0dd607|322f868164cbc3ba|-295261224|
 tree|stem|89bcb4f7e14e1163|78bf1ce21634e8ad|b03b66c69b425bda|-804650366||t19115.6943437998s|b30827c082a147d8|80270|rds|local|vector|||0.381||
 tree_dat_clean|function|c1e3d4841d2641d0|||||||||||||||
 tree_data_csv|stem|edf116afcfd658e8|876f0812d5d5eecc|138c3070a670f001|580750189||t19093.6897002641s|b54c1165f64bfa66|69155|rds|local|vector|||0.686||
-write_yml|function|3f1b6fcdc8fe1b8d|||||||||||||||
+write_yml|function|14762a3406e77f57|||||||||||||||
 yaku_sp|stem|dcd64ec53be467cc|af2adebe8cc97f56|2d28bf5cbb3498c0|-86370842||t19093.6896998012s|1f884c31953f3cbe|6270|rds|local|vector|||0.654||
-yml|stem|35712d0e479112ad|230b67ddf929f083|f2d17b044c0cbba8|-788017771||t19117.7220121792s|44989414465ff33d|49|rds|local|vector|||0.127||
+yml|stem|35712d0e479112ad|230b67ddf929f083|8db6f5537b2c4451|-788017771||t19118.353140942s|44989414465ff33d|49|rds|local|vector|||3.026||

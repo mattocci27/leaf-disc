@@ -26,7 +26,6 @@ write_yml <- function(path, sp_mean, full_data_cv_csv, tree, lma_yaku_re, sma_sp
       lma_leaf = mean(lma_leaf),
       lma_disc = mean(lma_disc))
 
-
   fit_ols <- lm(log(lma_leaf) ~ log(lma_disc), sp_mean)
   var_fun <- function(fit) {
     sig_ols <- sqrt(deviance(fit_ols) / df.residual(fit_ols))
@@ -75,138 +74,210 @@ write_yml <- function(path, sp_mean, full_data_cv_csv, tree, lma_yaku_re, sma_sp
   sma_all <- cbind(lma_disc = lma_disc_mean, sma_lma$groupsummary)
 
   my_fun <- function(data) {
-    tmp <- ((data$lma_disc^data$Slope * 10^data$Int) / data$lma_disc - 1) * 100
+    mean_ <- ((data$lma_disc^data$Slope * 10^data$Int) / data$lma_disc - 1) * 100
+    #lwr_ <- ((data$lma_disc^data$Slope * 10^data$Int_lowCI) / data$lma_disc - 1) * 100
+    #upr_ <- ((data$lma_disc^data$Slope * 10^data$Int_hihgCI) / data$lma_disc - 1) * 100
     #tmp <- ((lma_disc_mean^data$Slope * 10^data$Int) / lma_disc_mean - 1) * 100
-    round(tmp, 1)
+    round(mean_, 1)
   }
+
+  boot_fit_dat <- boot_fit(sp_mean)
+  lma_mean_per <- ((boot_fit_dat$conf_mean / boot_fit_dat$xseq) - 1) * 100
+  lma_lwr_per <- ((boot_fit_dat$conf_low / boot_fit_dat$xseq) - 1) * 100
+  lma_upr_per <- ((boot_fit_dat$conf_high / boot_fit_dat$xseq) - 1) * 100
 
   output <- path
   out <- file(paste(output), "w") # write
-  writeLines(paste0("ols_int_raw: " ,
-             coef(fit_ols)[1] |> exp()|> round(2)),
-             out,
-             sep = "\n")
-  writeLines(paste0("ols_int: " ,
-             exp(coef(fit_ols)[1] + log(var_fun(fit_ols))) |> round(2)),
-             out,
-             sep = "\n")
-  writeLines(paste0("ols_slope: " ,
-             coef(fit_ols)[2] |> round(3)),
-             out,
-             sep = "\n")
-  writeLines(paste0("ols_var2: " ,
-             var_fun(fit_ols) |> round(3)),
-             #0.5 * sig_ols^2 |> round(3)),
-             out,
-             sep = "\n")
-  writeLines(paste0("ols_int_inv_raw: " ,
-             1),
-             out,
-             sep = "\n")
-  writeLines(paste0("ols_int_inv: " ,
-             exp(0 + log(var_fun(fit_ols_inv))) |> round(2)),
-             out,
-             sep = "\n")
-  writeLines(paste0("ols_slope_inv: " ,
-             coef(fit_ols_inv)[2] |> round(3)),
-             out,
-             sep = "\n")
-  writeLines(paste0("ols_sig_inv: " ,
-             sig_ols_inv |> round(3)),
-             out,
-             sep = "\n")
-  writeLines(paste0("ols_var2_inv: " ,
-             var_fun(fit_ols_inv) |> round(3)),
-             #0.5 * sig_ols^2 |> round(3)),
-             out,
-             sep = "\n")
+  writeLines(
+    paste0("mean_lma_disc: ",
+           mean(sp_mean$lma_disc) |> round(1) |> format(nsmall = 1)),
+    out,
+    sep = "\n")
+  writeLines(
+    paste0("sma_slope_all: ",
+           sma_lma$groupsummary$Slope |> round(3),
+           " [95% CI: ",
+           sma_lma$groupsummary$Slope_lowCI |> round(3),
+           ", ",
+           sma_lma$groupsummary$Slope_highCI |> round(3),
+           "]"
+           ),
+    out,
+    sep = "\n")
+  writeLines(
+    paste0("sma_int_all: ",
+           sma_lma$groupsummary$Int |> round(3)|> format(nsmall = 3),
+           " [95% CI: ",
+           sma_lma$groupsummary$Int_lowCI |> round(3)|> format(nsmall = 3),
+           ", ",
+           sma_lma$groupsummary$Int_highCI |> round(3) |> format(nsmall = 3),
+           "]"
+           ),
+    out,
+    sep = "\n")
+  writeLines(
+    paste0("sma_all_per: ",
+           lma_mean_per |> round(2),
+           "% [95% CI: ",
+           lma_lwr_per |> round(2),
+           ", ",
+           lma_upr_per |> round(2),
+           "]"
+           ),
+    out,
+    sep = "\n")
+  writeLines(
+    paste0("ols_int_raw: ",
+           coef(fit_ols)[1] |> exp()|> round(2)),
+    out,
+    sep = "\n")
+  writeLines(
+    paste0("ols_int: ",
+           exp(coef(fit_ols)[1] + log(var_fun(fit_ols))) |> round(2)),
+    out,
+    sep = "\n")
+  writeLines(
+    paste0("ols_slope: ",
+           coef(fit_ols)[2] |> round(3)),
+    out,
+    sep = "\n")
+  writeLines(
+    paste0("ols_var2: ",
+           var_fun(fit_ols) |> round(3)),
+    #0.5 * sig_ols^2 |> round(3)),
+    out,
+    sep = "\n")
+  writeLines(
+    paste0("ols_int_inv_raw: ",
+           1),
+    out,
+    sep = "\n")
+  writeLines(
+    paste0("ols_int_inv: ",
+           exp(0 + log(var_fun(fit_ols_inv))) |> round(2)),
+    out,
+    sep = "\n")
+  writeLines(
+    paste0("ols_slope_inv: ",
+           coef(fit_ols_inv)[2] |> round(3)),
+    out,
+    sep = "\n")
+  writeLines(
+    paste0("ols_sig_inv: ",
+           sig_ols_inv |> round(3)),
+    out,
+    sep = "\n")
+  writeLines(
+    paste0("ols_var2_inv: ",
+           var_fun(fit_ols_inv) |> round(3)),
+    #0.5 * sig_ols^2 |> round(3)),
+    out,
+    sep = "\n")
 
-
-  writeLines(paste0("sma_all: " ,
-             my_fun(sma_all)),
-             out,
-             sep = "\n")
-  writeLines(paste0("dens_thin_large: " ,
-             my_fun(dens_thin_large)),
-             out,
-             sep = "\n")
-  writeLines(paste0("nondens_thin_large: " ,
-             my_fun(nondens_thin_large)),
-             out,
-             sep = "\n")
-  writeLines(paste0("nondens_thick_large: " ,
-             my_fun(nondens_thick_large)),
-             out,
-             sep = "\n")
-  writeLines(paste0("tree_no: " ,
-             tree |>
-              filter(location == "Yakushima") |>
-              nrow()),
-             out,
-             sep = "\n")
-  writeLines(paste0("r2_lma: ",
-             r2_lma),
-             out,
-             sep = "\n")
-  writeLines(paste0("r2_ld: ",
-             r2_ld),
-             out,
-             sep = "\n")
-  writeLines(paste0("all_sp: ",
-             sp_mean |>
+  writeLines(
+    paste0("sma_all: ",
+           my_fun(sma_all)),
+    out,
+    sep = "\n")
+  writeLines(
+    paste0("dens_thin_large: ",
+           my_fun(dens_thin_large)),
+    out,
+    sep = "\n")
+  writeLines(
+    paste0("nondens_thin_large: ",
+           my_fun(nondens_thin_large)),
+    out,
+    sep = "\n")
+  writeLines(
+    paste0("nondens_thick_large: ",
+           my_fun(nondens_thick_large)),
+    out,
+    sep = "\n")
+  writeLines(
+    paste0("tree_no: ",
+           tree |>
+             filter(location == "Yakushima") |>
+             nrow()),
+    out,
+    sep = "\n")
+  writeLines(
+    paste0("r2_lma: ",
+           r2_lma),
+    out,
+    sep = "\n")
+  writeLines(
+    paste0("r2_ld: ",
+           r2_ld),
+    out,
+    sep = "\n")
+  writeLines(
+    paste0("all_sp: ",
+           sp_mean |>
              pull(species) |>
              unique() |>
              length()),
-             out,
-             sep = "\n")
-  writeLines(paste0("yaku_sp: ",
-             sp_mean |>
-              filter(location == "Yakushima") |>
+    out,
+    sep = "\n")
+  writeLines(
+    paste0("yaku_sp: ",
+           sp_mean |>
+             filter(location == "Yakushima") |>
              pull(species) |>
              unique() |>
              length()),
-             out,
-             sep = "\n")
-  writeLines(paste0("pet_sp: ",
-             pet$species |> unique() |> length()),
-             out,
-             sep = "\n")
-  writeLines(paste0("la_mid: ",
-             la_mid),
-             out,
-             sep = "\n")
-  writeLines(paste0("lt_mid: ",
-             lt_mid),
-             out,
-             sep = "\n")
-  writeLines(paste0("ld_mid: ",
-             ld_mid),
-             out,
-             sep = "\n")
-  writeLines(paste0("la_mid2: ",
-             la_mid2),
-             out,
-             sep = "\n")
-  writeLines(paste0("lt_mid2: ",
-             lt_mid2),
-             out,
-             sep = "\n")
-  writeLines(paste0("la_lt_r: ",
-             res$estimate %>% round(2)),
-             out,
-             sep = "\n")
-  writeLines(paste0("la_lt_p: ",
-             la_lt_p),
-             out,
-             sep = "\n")
-  writeLines(paste0("la_lt_n: ",
-             nrow(sp_mean)),
-             out,
-             sep = "\n")
-  writeLines(paste0("cv_r2: " ,
-             cor(sqrt(d_cv$lma_leaf),
-             sqrt(d_cv$lma_disc))^2 |> round(2)),
-             out,
-             sep = "\n")
+    out,
+    sep = "\n")
+  writeLines(
+    paste0("pet_sp: ",
+           pet$species |> unique() |> length()),
+    out,
+    sep = "\n")
+  writeLines(
+    paste0("la_mid: ",
+           la_mid),
+    out,
+    sep = "\n")
+  writeLines(
+    paste0("lt_mid: ",
+           lt_mid),
+    out,
+    sep = "\n")
+  writeLines(
+    paste0("ld_mid: ",
+           ld_mid),
+    out,
+    sep = "\n")
+  writeLines(
+    paste0("la_mid2: ",
+           la_mid2),
+    out,
+    sep = "\n")
+  writeLines(
+    paste0("lt_mid2: ",
+           lt_mid2),
+    out,
+    sep = "\n")
+  writeLines(
+    paste0("la_lt_r: ",
+           res$estimate %>% round(2)),
+    out,
+    sep = "\n")
+  writeLines(
+    paste0("la_lt_p: ",
+           la_lt_p),
+    out,
+    sep = "\n")
+  writeLines(
+    paste0("la_lt_n: ",
+           nrow(sp_mean)),
+    out,
+    sep = "\n")
+  writeLines(
+    paste0("cv_r2: ",
+           cor(sqrt(d_cv$lma_leaf),
+               sqrt(d_cv$lma_disc))^2 |> round(2)),
+    out,
+    sep = "\n")
   close(out)
 }

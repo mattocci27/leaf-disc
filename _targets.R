@@ -11,6 +11,7 @@ source("R/ind_analysis.R")
 source("R/fig_write.R")
 source("R/yml.R")
 source("R/stan.R")
+source("R/predictdf.R")
 
 options(clustermq.scheduler = "multiprocess")
 
