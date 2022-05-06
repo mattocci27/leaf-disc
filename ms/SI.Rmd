@@ -101,6 +101,23 @@ The 6-month-SPEI data were extracted from the Global SPEI database (http://spei.
 
 \newpage
 
+**Fig. SX.**
+Standardized regression coefficients modelig the effects of leaf tissue density,
+leaf area,
+leaf thickness,
+punch size, and
+their interactios
+(a) on the mean estimates of whole-leaf LMA, and
+(b) on the estimated variance of whole-leaf LMA.
+The leaf disc LMA was used for the baseline mean of the whole-leaf LMA.
+Thick and thin lines indicate 90% and 95% credible intervals, respectively.
+Circles show posterior means of coefficients.
+Circles filled with blue indicate significant effects and white indicate non-significance effects.
+
+![](../figs/coef_sp_punch1_add.png)
+
+\newpage
+
 # Appendix S2:
 
 Generalization for a relationship between ratios of disc-based and whole-leaf estimates of leaf mass per area (LMA), leaf tissue density (LD), and leaf thickness (LT).

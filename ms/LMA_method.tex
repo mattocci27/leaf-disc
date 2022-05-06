@@ -341,7 +341,7 @@
 
 
 
-Sources and consequences of mismatch between leaf disc and whole-leaf leaf mass per area (LMA)
+Sources and consequences of mismatch between leaf disc and whole-leaf leaf mass per are (LMA)
 
 \[ \]
 
@@ -485,28 +485,30 @@ We do not present results of LD in the main text, because differences between wh
 
 \emph{Effects of leaf morphology on the relationship between whole-leaf and leaf disc LMA}
 
-To quantify the effect of leaf morphology on the relationship between whole-leaf and leaf disc LMA, we built a hierarchical Bayesian model.
+To quantify the effect of leaf morphology and leaf punch size on the relationship between whole-leaf and leaf disc LMA, we built a hierarchical Bayesian model.
 The whole-leaf LMA was assumed to follow a normal distribution (N) with the mean of leaf disc LMA and covariates of leaf tissue density, leaf area and leaf thickness on the log-scale;
 
 \begin{align}
 \mathrm{ln}(LMA_{Wi}) & \sim N(\mathrm{ln}(LMA_{Di}) + \tilde{\mu_i}, \sigma_i^2) \label{eq:LMA}\\
-\tilde{\mu_i} & = \beta_0 + \beta_1 \mathrm{ln}(LD_{i}) + \beta_2 \mathrm{ln}(LA_{i}) + \beta_3 \mathrm{ln}(LT_{i}) \label{eq:mu}
+\tilde{\mu_i} & = \beta_0 + \beta_1 \mathrm{ln}(LD_{i}) + \beta_2 \mathrm{ln}(LA_{i}) + \beta_3 \mathrm{ln}(LT_{i}) + \beta_4 PS_{i} \nonumber \\
+& + PS_{i} \times \bigl\{ \beta_5 \mathrm{ln}(LD_{i}) + \beta_6 \mathrm{ln}(LA_{i}) + \beta_7 \mathrm{ln}(LT_{i})\bigr\}\label{eq:mu}
 \end{align}
 
-where \(LMA_{Wi}\), \(LD_{i}\), \(LA_{i}\), \(LT_{i}\) are the observed whole-leaf LMA, leaf tissue density, leaf area and leaf thickness for tree \emph{i}, respectively,
-\(LMA_{Di}\) is the true unobserved value of leaf disc LMA for tree \emph{i}, which can be modeled using the observed leaf disc LMA.
-\(\tilde{\mu_i}\) is the effect of leaf tissue density, leaf area and leaf thickness on the mean estimates for the whole-leaf LMA of tree \emph{i}, and \(\sigma_i^2\) is the variance of whole-leaf LMA for tree \emph{i}, and \(\beta\) are coefficients.
-
+where \(LMA_{Wi}\), \(LMA_{Di}\), \(LD_{i}\), \(LA_{i}\), and \(LT_{i}\) are the observed whole-leaf LMA, leaf disc LMA, leaf tissue density, leaf area, and leaf thickness for species \emph{i}, respectively,
+The dummy variable \(PS_i\) is set to 1 for samples obtained with a small leaf punch (0.6-cm diameter) and 0 for samples obtained with a large leaf punch (1.0-cm diameter).
+\(\tilde{\mu_i}\) is the effect of leaf tissue density, leaf area, leaf thickness and leaf punch size on the mean estimates for the whole-leaf LMA of species \emph{i}, \(\sigma_i^2\) is the variance of whole-leaf LMA for species \emph{i}, and \(\beta\) are coefficients.
 The standard deviation of whole-leaf LMA (\(\sigma_i\)) was assumed to follow a normal distribution;
 
 \begin{align}
 \mathrm{ln}(\sigma_i) & \sim N(\mathrm{ln}(\tilde{\sigma_i}), \omega^2) \label{eq:ln-sigma} \\
-\tilde{\sigma_i} & = \gamma_0 + \gamma_1 \mathrm{ln}(LD_{i}) + \gamma_2 \mathrm{ln}(LA_{i}) + \gamma_3 \mathrm{ln}(LT_{i}) \label{eq:tilde-sigma}
+\mathrm{ln}(\tilde{\sigma_i}) & = \gamma_0 + \gamma_1 \mathrm{ln}(LD_{i}) + \gamma_2 \mathrm{ln}(LA_{i}) + \gamma_3 \mathrm{ln}(LT_{i}) + \gamma_4 PS_{i} \nonumber \\
+& + PS_{i} \times \bigl\{\gamma_5 \mathrm{ln}(LD_{i}) + \gamma_6 \mathrm{ln}(LA_{i}) + \gamma_7 \mathrm{ln}(LT_{i})\bigr\}\label{eq:tilde-sigma}
 \end{align}
 
-where \(\tilde{\sigma_i}\) is the effect of leaf area and leaf thickness on the variance of whole-leaf LMA,
+where \(\tilde{\sigma_i}\) is a hyperparameter for \(\sigma_i\) ,
 \(\omega^2\) is a scaling hyperparameter, and \(\gamma\) are coefficients.
-To allow comparisons among parameter estimates, \(\mathrm{ln}(LD)\), \(\mathrm{ln}(LA)\) and \(\mathrm{ln}(LT)\) were scaled to a mean of 0 and standard deviation of 1.
+To allow comparisons among parameter estimates, \(\mathrm{ln}(LD)\), \(\mathrm{ln}(LA)\), and \(\mathrm{ln}(LT)\) were scaled to a mean of 0 and standard deviation of 1.
+Note that this model does not include measurement errors of leaf disc LMA implemented in the following analysis, because there are too many scaling parameters
 
 Posterior distributions of all parameters were estimated using the Hamiltonian Monte Carlo algorithm (HMC) implemented in Stan (\protect\hyperlink{ref-Carpenter2017}{Carpenter et al., 2017}) using the weakly-informative priors (\protect\hyperlink{ref-Gelman2008}{Gelman et al., 2008}).
 See supplement XXXX for more detail.
@@ -515,14 +517,13 @@ Convergence of the posterior distribution was assessed with the Gelman-Rubin sta
 
 \emph{Bivariate trait relationships for mean and CV}
 
-Bivariate trait relationships between disc-based and whole-leaf log-transformed LMA were summarized with variance explained (\emph{R\textsuperscript{2}}) based on Pearson correlations and with standardized major axis (SMA) regressions (\protect\hyperlink{ref-Warton2006}{Warton et al., 2006}) across all the samples and different leaf area and thickness groups.
-Species and individual groups were divided into four categories based on the medians of leaf area and leaf thickness across all species and all individuals, respectively:
-thin and small-leaved, thin and large-leaved, thick and small-leaved, thick and large-leaved species (individuals).
+Bivariate trait relationships between disc-based and whole-leaf log-transformed LMA were further summarized with variance explained (\emph{R\textsuperscript{2}}) based on Pearson correlations and with standardized major axis (SMA) regressions (\protect\hyperlink{ref-Warton2006}{Warton et al., 2006}) across all the samples and different leaf area and thickness groups.
+
+Species groups were divided into four categories based on the medians of leaf area and leaf thickness across all species:
+thin and small-leaved, thin and large-leaved, thick and small-leaved, thick and large-leaved species.
 Median values are as following:
 small-leaved species (LA \textless{} cm\textsuperscript{2}),
-thin-leaved species (LT \textless{} mm),
-small-leaved individuals (LA \textless{} cm\textsuperscript{2}),
-and thin-leaved individuals (LT \textless{} mm).
+and thin-leaved species (LT \textless{} mm).
 
 The amount of intraspecific variation (ITV) was calculated using Bao's CV estimator (\protect\hyperlink{ref-Yang2020}{Yang et al., 2020});
 
@@ -540,18 +541,16 @@ All statistical analyses were conducted in R version 4.1.3 (\protect\hyperlink{r
 \hypertarget{results}{%
 \section{RESULTS}\label{results}}
 
-Disc-based estimates of species mean LMA matched well whole-leaf estimates (Table 1; \emph{R\textsuperscript{2}} = for all species).
-Species with thicker and smaller leaves had stronger correlations between disc-based and whole-leaf estimates of LMA (Table 1, Fig. 1).
-There was a negative correlation between species mean leaf area and leaf thickness (\emph{r} = , \emph{P} , \emph{n} = ).
-When we pooled all the species, there were significant differences in intercepts for species mean LMA (Table 1), suggesting that the whole-leaf estimates of LMA were 9.4\% greater than disc-based estimates in the arithmetic scale.
-Large-leaved species also had significant positive intercepts, suggesting that whole-leaf estimates of LMA were 22.1\% greater than disc-based estimates in the arithmetic scale (Table 1).
-Intercepts did not differ for small-leaved species (Table 1).
+There were a significant shift in elevation between whole-leaf and leaf disc LMA (Fig.1, SMA slope: 0.975 {[}95\%CI: 0.938, 1.013{]}, SMA intercept: 0.0881 {[}95\%CI: 0.016, 0.16{]}), suggesting that the whole-leaf estimates of LMA were 9.69\% {[}95\%CI: 8.07, 11.4{]} greater than disc-based estimates in the arithmetic scale.
 
-Disc-based estimates of individual mean LMA also showed positive correlations with whole-leaf estimates but their \emph{R\textsuperscript{2}} values were smaller than those for the species means (Fig. 2).
-Similar to the species-level pattern, individuals with thicker and smaller leaves had stronger correlations (Fig. 2).
-The relationships of the whole-leaf LMA : disc leaf LMA ratio with total dry mass for the leaf disc (we weighted 2-3 discs together), with leaf thickness, and with leaf area were heteroscedastic (unequal variance, \emph{P} \textless{} 0.001; Appendix S3).
-Samples with small total dry mass, thin leaves, and larger leaves tended to show greater variance (Fig. 2; Appendix S3).
-The total dry mass of leaf disc was positively correlated with both leaf thickness and leaf punch size (Appendix S4).
+Leaf tissue density, leaf area, leaf thickness and leaf punch size influenced the relationship between the whole-leaf LMA and leaf disc LMA (Fig. 2).
+When a large leaf punch was used, species with lower leaf tissue density had grater variance in the estimate of whole-leaf to leaf disc LMA ratio (Fig. 2a).
+Species with lower leaf tissue density had greater estimate whole-leaf to leaf disc LMA ratio when a small leaf punch was used (Fig. 2a).
+Species with larger leaves had greater estimate of the estimate of whole-leaf to leaf disc LMA ratio (Fig. 2b), which was only significant for leaves obtained by a large punch.
+Species with thinner leaves had grater variance in the estimate of whole-leaf to leaf disc LMA ratio (Fig. 2c), which was only significant for leaves obtained by a small punch.
+Posteriors of coefficients are summarized in (Fig. SX).
+Leaf disc and whole-leaf LMA estimate diverged for species with greater investment in petiole dry mass (Fig. 3a). Large-leaved species tended to have greater investment for petiole dry mass than small-leaved species (Fig. 3b).
+
 Amounts of intraspecific variation (CV; coefficient of variation) only weakly matched between whole-leaf and disc-based estimates (Fig. 3; \emph{R\textsuperscript{2}} = 0.33).
 
 \hypertarget{discussion}{%
@@ -588,7 +587,7 @@ The present study was designed to examine the extent to which whole leaf and lea
 Our study shows that mean values of leaf disc LMA is generally a good proxy for mean values of whole-leaf LMA.
 However, larger and thinner leaves tended to show the large discrepancies between the leaf disc and whole-leaf estimates, and thus when one needs to mix leaf disc LMA and whole-leaf LMA in a single analysis (e.g., meta-analysis), appropriate calibrations are necessary.
 Although our study was not designed to evaluate the effects of diameter sizes of leaf punches, the sizes of leaf punches are also the important sources of variance between whole-leaf and leaf disc LMA.
-This is probably because small dry mass inflates measurement errors and small leaf disc size inflates trait variation within leaves.
+This is probably because small dry mass inflates measurement errors and small leaf disc size inflates trait variation within leave.
 Additionally, although the mean values of leaf disc and whole-leaf LMA matched well, quantifying trait variation using leaf discs should be considered with caution, because variation among leaf discs within the same leaves (including measurement errors) seems to be large.
 Leaf discs, which can target leaf lamina avoiding leaf veins, are useful and essential for biochemical determinations such as measurements of Rubisco activity (\protect\hyperlink{ref-Parry2002}{Parry et al., 2002}), because the photosynthetic activity occurs most in lamina rather than in veins for C\textsubscript{3} plants (\protect\hyperlink{ref-Hibberd2002}{Hibberd and Quick, 2002}; \protect\hyperlink{ref-Gao2018}{Gao et al., 2018}).
 Leaf disc LMA is also the preferred method for quantifying leaf lamina density, which avoid effects of veins.
@@ -777,55 +776,37 @@ Yang, J., J. Lu, Y. Chen, E. Yan, J. Hu, X. Wang, and G. Shen. 2020. Large {Unde
 
 \newpage
 
-\begin{longtable}[]{@{}lllr@{}}
-\toprule()
-Data & Slope & Intercept & \emph{R\textsuperscript{2}} \\
-\midrule()
-\endhead
-All & 0.97 {[}0.94, 1.01{]} & \textbf{0.09 {[}0.02, 0.16{]}} & 0.87 \\
-Thick-large & 0.93 {[}0.85, 1.03{]} & \textbf{0.19 {[}0.01, 0.37{]}} & 0.86 \\
-Thick-small & 1.02 {[}0.97, 1.07{]} & 0 {[}-0.11, 0.11{]} & 0.93 \\
-Thin-large & 0.91 {[}0.82, 1.02{]} & \textbf{0.2 {[}0.02, 0.37{]}} & 0.71 \\
-Thin-small & 0.93 {[}0.83, 1.03{]} & 0.16 {[}-0.02, 0.35{]} & 0.84 \\
-\bottomrule()
-\end{longtable}
-
-\textbf{Table. 1.}
-Relationships between species mean leaf leaf mass per area (LMA) values determined by using whole leaves and leaf discs across all species and within species groups.
-Data are divided into four categories based on the quartiles:
-thin and small-leaved,
-thin and large-leaved,
-thick and small-leaved,
-and thick and large-leaved species.
-SMA slope (95\% CI), intercepts (95\% CI), and \emph{R\textsuperscript{2}} values are reported.
-Statistically significant differences (\emph{P} \textless{} 0.05) in slopes and intercepts are highlighted in bold.
-
-\newpage
-
 \textbf{Fig. 1.}
-Relationships between species mean leaf mass per area (LMA) determined by using whole leaves and leaf discs.
-Species groups are divided into four categories on the basis of the medians of the leaf size and leaf thickness across all the species.
+Relationships between species mean leaf mass per area (LMA) determined by using whole-leaves and leaf discs.
 Dashed lines indicate 1:1 lines.
-Blue solid lines indicate standardized major axis regressions.
-The 95\% confidence intervals are presented as the shaded area.
-All the correlations are significant (\emph{P} \textless{} 0.001).
+Blue solid lines indicate standardized major axis (SMA) regressions.
+The 95\% confidence intervals are resented as the shaded area.
+The correlation is significant (\emph{P} \textless{} 0.001).
 
-\includegraphics{../figs/lalt_pool_grid.png}
+\includegraphics{../figs/sma.png}
 
 \newpage
 
 \textbf{Fig. 2.}
-Relationships between individual leaf mass per area (LMA) determined by using whole leaves and leaf discs.
-Individual groups are divided into four categories based on the basis of the medians of the leaf size and leaf thickness across all the individuals.
-All the correlations are significant (\emph{P} \textless{} 0.001).
-Details as in Fig. 1.
+Model predictions of the whole-leaf to leaf disc LMA ratio as a function of leaf punch sizes and (a) leaf tissue density, (b) leaf area, and (c) leaf thickness.
+Dashed line indicates 1:1 ratio of leaf disc and whole-leaf estimates.
+Solid lines indicate the posterior means (\(\tilde{\mu}\) in Eq. 1-2), and the shade regions shows \(\pm\) the posterior means of standard deviations (\(\tilde{\sigma}\) in Eq. 3-4).
 
-\includegraphics{../figs/lalt_tree_grid.png}
+\includegraphics{../figs/pred_mcmc.png}
 
 \newpage
 
 \textbf{Fig. 3.}
-Relationships between coefficient of variation (CV) in leaf trait values determined by using whole leaves and leaf discs: (a) leaf mass per area (LMA).
+Relationships between petiole to leaf dry mass ratio and (a) leaf area and (b) whole-leaf to leaf disc LMA ratio.
+Blue solid lines indicate ordinary least squares (OLS) regressions.
+The 95\% confidence intervals are presented as the shaded area.
+All the correlations are significant (P \textless{} 0.001).
+All the samples were obtained with a diameter 1.0-cm leaf punch.
+
+\includegraphics{../figs/petiole.png}
+
+\textbf{Fig. 4.}
+Relationships between coefficient of variation (Bao's CV estimator) in leaf trait values determined by using whole leaves and leaf discs: (a) leaf mass per area (LMA).
 The correlation is significant (\emph{P} \textless{} 0.001).
 Details as in Fig. 1.
 Note that the axes are square root scales.

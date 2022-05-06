@@ -104,6 +104,9 @@ The pattern didn't change qualitatively.
 
 > L182 I believe leaf punch size was something that varied between datasets, and was never measured on the same leaves. I'm therefore confused as to how the authors are interpreting the effect of "leaf punch size" in their models: could this not simply be a reflection of the different species represented in the different datasets?
 
+- caveate
+
+
 > L183-184 Which metric had higher ITV? That is a more relevant result than simply the R2 value.
 
 > L193 you mention "appropriate calibration": it would be extremely useful if the authors were to report an equation (or several) for converting LMA measured by one metric to the other, ideally that incorporate leaf area and thickness (see major comment).
