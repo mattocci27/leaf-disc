@@ -131,19 +131,19 @@ write_yml <- function(path, sp_mean, full_data_cv_csv, tree, lma_yaku_re, sma_sp
     out,
     sep = "\n")
   writeLines(
-    paste0("sma_all_per_mean: ",
+    paste0("sma_per_all_mean: ",
            lma_mean_per |> round(2)
            ),
     out,
     sep = "\n")
   writeLines(
-    paste0("sma_all_per_lwr: ",
+    paste0("sma_per_all_lwr: ",
            lma_lwr_per |> round(2)
            ),
     out,
     sep = "\n")
   writeLines(
-    paste0("sma_all_per_upr: ",
+    paste0("sma_per_all_upr: ",
            lma_upr_per |> round(1)
            ),
     out,
