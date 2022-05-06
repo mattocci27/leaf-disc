@@ -677,27 +677,34 @@ coef_pointrange4 <- function(data) {
 #' @title pred
 pred_mcmc <- function(draws, sp_mean, n = 80) {
 # LT for small
+  tar_load(fit_sp_punch_draws_model)
+  draws <- (fit_sp_punch_draws_model)
   x_lt <- seq(-2, 2, length = n)
   my_col <- RColorBrewer::brewer.pal(4, "RdBu")
   sig_mat <- exp(rep(1, n) %*% t(draws$`gamma[1]` + draws$`gamma[5]`) + x_lt %*% t(draws$`gamma[4]` + draws$`gamma[8]`))
+  #apply(mu_mat, 1, mean) |> mean()
   mean_sig <- apply(sig_mat, 1, mean)
   lwr_sig <- apply(sig_mat, 1, \(x) quantile(x, 0.025))
   upr_sig <- apply(sig_mat, 1, \(x) quantile(x, 0.975))
-  pred_up <- 1 + mean_sig
-  pred_lo <- 1 - mean_sig
+  mu_mat <- exp(rep(1, n) %*% t(draws$`beta[1]`))
+  mean_mu <- apply(mu_mat, 2, mean) |> mean()
+  pred_up <- mean_mu + mean_sig
+  pred_lo <- mean_mu - mean_sig
   x_bar <- log(sp_mean$lt) |> mean()
   x_s <- log(sp_mean$lt) |> sd()
-  fig_d1 <- tibble(pred = 1, pred_up, pred_lo, x = exp(x_bar + x_s * x_lt), punch = "0.6-cm")
+  fig_d1 <- tibble(pred = mean_mu, pred_up, pred_lo, x = exp(x_bar + x_s * x_lt), punch = "0.6-cm")
 
   # LT for large
   sig_mat <- exp(rep(1, n) %*% t(draws$`gamma[1]`))
   upr_sig <- apply(sig_mat, 1, \(x)quantile(x, 0.975))
   mean_sig <- apply(sig_mat, 1, mean)
-  pred_up <- 1 + mean_sig
-  pred_lo <- 1 - mean_sig
+  mu_mat <- exp(rep(1, n) %*% t(draws$`beta[1]`))
+  mean_mu <- apply(mu_mat, 2, mean) |> mean()
+  pred_up <- mean_mu + mean_sig
+  pred_lo <- mean_mu - mean_sig
   x_bar <- log(sp_mean$lt) |> mean()
   x_s <- log(sp_mean$lt) |> sd()
-  fig_d1_2 <- tibble(pred = 1, pred_up, pred_lo,
+  fig_d1_2 <- tibble(pred = mean_mu, pred_up, pred_lo,
     x = exp(x_bar + x_s * x_lt), punch = "1.0-cm")
   #fig_d1 <- bind_rows(fig_d1, fig_d1_2)
 
@@ -740,11 +747,13 @@ pred_mcmc <- function(draws, sp_mean, n = 80) {
   # LA for small
   sig_mat <- exp(rep(1, n) %*% t(draws$`gamma[1]` + draws$`gamma[5]`))
   upr_sig <- apply(sig_mat, 1, \(x)quantile(x, 0.975))
-  pred_up <- 1 + mean_sig
-  pred_lo <- 1 - mean_sig
+  mu_mat <- exp(rep(1, n) %*% t(draws$`beta[1]`))
+  mean_mu <- apply(mu_mat, 2, mean) |> mean()
+  pred_up <- mean_mu + mean_sig
+  pred_lo <- mean_mu - mean_sig
   x_bar <- log(sp_mean$la) |> mean()
   x_s <- log(sp_mean$la) |> sd()
-  fig_d2_2 <- tibble(pred = 1, pred_up, pred_lo,
+  fig_d2_2 <- tibble(pred = mean_mu, pred_up, pred_lo,
     x = exp(x_bar + x_s * x_lt), punch = "0.6-cm")
   #fig_d2 <- bind_rows(fig_d2, fig_d2_2)
 
@@ -772,11 +781,13 @@ pred_mcmc <- function(draws, sp_mean, n = 80) {
   mean_sig <- apply(sig_mat, 1, mean)
   lwr_sig <- apply(sig_mat, 1, \(x)quantile(x, 0.025))
   upr_sig <- apply(sig_mat, 1, \(x)quantile(x, 0.975))
-  pred_up <- 1 + mean_sig
-  pred_lo <- 1 - mean_sig
+  mu_mat <- exp(rep(1, n) %*% t(draws$`beta[1]`))
+  mean_mu <- apply(mu_mat, 2, mean) |> mean()
+  pred_up <- mean_mu + mean_sig
+  pred_lo <- mean_mu - mean_sig
   x_bar <- log(sp_mean$ld_leaf) |> mean()
   x_s <- log(sp_mean$ld_leaf) |> sd()
-  fig_d3_1 <- tibble(pred = 1, pred_up, pred_lo,
+  fig_d3_1 <- tibble(pred = mean_mu, pred_up, pred_lo,
     x = exp(x_bar + x_s * x_lt), punch = "1.0-cm")
 
   # LD for small
