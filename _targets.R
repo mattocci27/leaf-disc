@@ -13,7 +13,7 @@ source("R/yml.R")
 source("R/stan.R")
 source("R/predictdf.R")
 
-options(clustermq.scheduler = "multiprocess")
+options(clustermq.scheduler = "multicore")
 
 tar_option_set(packages = c(
   "tidyverse",

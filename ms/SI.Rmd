@@ -78,7 +78,7 @@ opts_chunk$set(dev='pdf')
 options(kableExtra.auto_format = FALSE)
 library(kableExtra)
 
-val <- yaml::yaml.load_file("../values.yml")
+val <- yaml::yaml.load_file("values.yml")
 ```
 
 # Appendix S1:
