@@ -178,11 +178,12 @@ Finally, we predicted that amounts of intraspecifc variations for each species d
 
 # MATERIALS AND METHODS
 
-*Data sources*
+*Study sites and plant materials*
 
-We used newly compiled individual-level plant datasets form a wide ranges of biomes in China and Japan (Table S1) to examine the relationship between whole-leaf and leaf disc-based estimates of leaf traits.
-First, the Yunnan dataset is from three forest plots in Yunnan province, Southwest China, which includes a tropical rain forest (TRF), a hot-dry savanna ecosystem (HDS), and a subtropical evergreen wet forest (STF), with a total of `r val$sp1` species and `r val$tree1` individuals.
+We conducted this study in four sites which cover a wide ranges of biomes to examine the relationship between whole-leaf and leaf disc-based estimates of leaf traits (see site details in Table S1).
+First, the Yunnan dataset is from three forest plots in Yunnan province, Southwest China, which includes a tropical rain forest (TRF), a tropical hot-dry savanna ecosystem (HDS), and a subtropical evergreen wet forest (STF), with a total of `r val$sp1` species and `r val$tree1` individuals.
 Second, the Yakushima data is from a warm-temperate forest in Yakushima island, Japan, with a total of `r val$yaku_sp` species and `r val$tree3` individuals.
+We excluded species that had tiny leaves or leaflets (length <1 cm) because it was not practical to measure leaf disc LMA.
 In total, we used `r val$all_sp` woody species and `r val$all_tree` individuals.
 The methodologies for trait sampling and measurement are slightly different between the Yunnan and the Yakushima dataset, which we describe bellow.
 

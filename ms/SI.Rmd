@@ -74,11 +74,11 @@ opts_chunk$set(tidy = FALSE,
 # PDF-based figures
 opts_chunk$set(dev='pdf')
 
-# https://github.com/haozhu233/kableExtra/issues/477
+# https://github.com/haozhu233/kableExtra/issues/47
 options(kableExtra.auto_format = FALSE)
 library(kableExtra)
 
-val <- yaml::yaml.load_file("values.yml")
+val <- yaml::yaml.load_file("../values.yml")
 ```
 
 # Appendix S1:
@@ -89,12 +89,23 @@ MAP: mean annual precipitation,
 SPEI: Standardized Precipitation Evapotranspiration Index.
 
 
+
 | Site name  | Vegetation                             | Elevation (m) | Locations          | MAT (℃) | MAP (mm) | Dry period (month) | Canopy height (m) | Species number  |
 |------------|----------------------------------------|---------------|--------------------|---------|----------|--------------------|-------------------|-----------------|
 | Bubeng     | Tropical forest (TRF)                  | 780           | 21°37'N, 101°35' E | 21      | 1532     | 6                  | 35-45             | `r val$TRF`     |
 | Ailao-shan | Subtropical evergreen wet forest (STF) | 2500          | 24°32'N,101°01'E   | 11.7    | 1931     | -                  | 25                | `r val$STF`     |
 | Yuanjiang  | Hot-dry savanna  (HDS)                 | 480           | 23°28'N, 102°10'E  | 24.7    | 732.8    | 6                  | 4-6               | `r val$HDS`     |
 | Yakushima  | Warm-temperate forest        | 14 - 1748     | 30°38'N, 130°62'E  | 19.4    | 4477     | -                  |       -            | `r val$yaku_sp` |
+
+
+
+| Data name | Site name  | Vegetation                             | Elevation (m) | Locations          | MAT (℃) | MAP (mm) | Dry period (month) | Canopy height (m) | Leaf disc thickness | Leaf punch diameter (cm) | Number of species | Number of individuals |
+|-----------|------------|----------------------------------------|---------------|--------------------|---------|----------|--------------------|-------------------|---------------------|--------------------------|-------------------|-----------------------|
+| Yunnan    | Bubeng     | Tropical forest (TRF)                  | 780           | 21°37'N, 101°35' E | 21      | 1532     | 6                  | 35-45             | Measured            | 0.6                      | `r val$TRF`       | test                  |
+| Yunnan    | Ailao-shan | Subtropical evergreen wet forest (STF) | 2500          | 24°32'N,101°01'E   | 11.7    | 1931     | -                  | 25                | Measured            | 0.6                      | `r val$STF`       | test                  |
+| Yunnan    | Yuanjiang  | Hot-dry savanna  (HDS)                 | 480           | 23°28'N, 102°10'E  | 24.7    | 732.8    | 6                  | 4-6               | Measured            | 0.6                      | `r val$HDS`       | test                  |
+| Yakushima | Yakushima  | Warm-temperate forest                  | 14 - 1748     | 30°38'N, 130°62'E  | 19.4    | 4477     | -                  | -                 | Not-measured        | 1.0                      | `r val$TRF`       | test                  |
+
 
 The site information and climate data referred to @Fei2018 and @Song2017.
 The 6-month-SPEI data were extracted from the Global SPEI database (http://spei.csic.es/map/maps.html#months=1#month=7#year=2019).
@@ -169,7 +180,7 @@ Samples with small total dry mass, thin leaves, and larger leaves tended to show
 Summary of multiple regression for log-transformed total dry mass of leaf discs.
 The leaf punch size is described as an effect of '1.0 cm diameter' compared with '0.6 cm diameter'.
 
-```{r, eval=TRUE, echo=FALSE}
+```{r, eval=FALSE, echo=FALSE}
 tar_load(dm_lm_tab)
 dm_lm_tab |>
   kable(format = "html") |>
