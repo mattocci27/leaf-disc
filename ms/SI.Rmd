@@ -78,7 +78,7 @@ opts_chunk$set(dev='pdf')
 options(kableExtra.auto_format = FALSE)
 library(kableExtra)
 
-val <- yaml::yaml.load_file("values.yml")
+val <- yaml::yaml.load_file("../values.yml")
 ```
 
 # Appendix S1:
@@ -89,6 +89,14 @@ MAP: mean annual precipitation,
 SPEI: Standardized Precipitation Evapotranspiration Index.
 
 
+```{r}
+library(jsonlite)
+site <- fromJSON("../data/site_info.json")
+site |>
+  kable(format = "html") |>
+  kable_styling()
+```
+
 
 | Site name  | Vegetation                             | Elevation (m) | Locations          | MAT (℃) | MAP (mm) | Dry period (month) | Canopy height (m) | Species number  |
 |------------|----------------------------------------|---------------|--------------------|---------|----------|--------------------|-------------------|-----------------|
@@ -96,15 +104,6 @@ SPEI: Standardized Precipitation Evapotranspiration Index.
 | Ailao-shan | Subtropical evergreen wet forest (STF) | 2500          | 24°32'N,101°01'E   | 11.7    | 1931     | -                  | 25                | `r val$STF`     |
 | Yuanjiang  | Hot-dry savanna  (HDS)                 | 480           | 23°28'N, 102°10'E  | 24.7    | 732.8    | 6                  | 4-6               | `r val$HDS`     |
 | Yakushima  | Warm-temperate forest        | 14 - 1748     | 30°38'N, 130°62'E  | 19.4    | 4477     | -                  |       -            | `r val$yaku_sp` |
-
-
-
-| Data name | Site name  | Vegetation                             | Elevation (m) | Locations          | MAT (℃) | MAP (mm) | Dry period (month) | Canopy height (m) | Leaf disc thickness | Leaf punch diameter (cm) | Number of species | Number of individuals |
-|-----------|------------|----------------------------------------|---------------|--------------------|---------|----------|--------------------|-------------------|---------------------|--------------------------|-------------------|-----------------------|
-| Yunnan    | Bubeng     | Tropical forest (TRF)                  | 780           | 21°37'N, 101°35' E | 21      | 1532     | 6                  | 35-45             | Measured            | 0.6                      | `r val$TRF`       | test                  |
-| Yunnan    | Ailao-shan | Subtropical evergreen wet forest (STF) | 2500          | 24°32'N,101°01'E   | 11.7    | 1931     | -                  | 25                | Measured            | 0.6                      | `r val$STF`       | test                  |
-| Yunnan    | Yuanjiang  | Hot-dry savanna  (HDS)                 | 480           | 23°28'N, 102°10'E  | 24.7    | 732.8    | 6                  | 4-6               | Measured            | 0.6                      | `r val$HDS`       | test                  |
-| Yakushima | Yakushima  | Warm-temperate forest                  | 14 - 1748     | 30°38'N, 130°62'E  | 19.4    | 4477     | -                  | -                 | Not-measured        | 1.0                      | `r val$TRF`       | test                  |
 
 
 The site information and climate data referred to @Fei2018 and @Song2017.
