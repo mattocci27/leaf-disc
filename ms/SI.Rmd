@@ -92,7 +92,7 @@ MAT: mean annual temperature,
 MAP: mean annual precipitation,
 SPEI: Standardized Precipitation Evapotranspiration Index.
 
-```{r, echo=TRUE}
+```{r, echo=FALSE}
 library(jsonlite)
 # for dependency
 targets::tar_load(site_info)
@@ -102,14 +102,6 @@ site |>
   kable(format = "html") |>
   kable_styling()
 ```
-
-
-| Site name  | Vegetation                             | Elevation (m) | Locations          | MAT (℃) | MAP (mm) | Dry period (month) | Canopy height (m) | Species number  |
-|------------|----------------------------------------|---------------|--------------------|---------|----------|--------------------|-------------------|-----------------|
-| Bubeng     | Tropical forest (TRF)                  | 780           | 21°37'N, 101°35' E | 21      | 1532     | 6                  | 35-45             | `r val$TRF`     |
-| Ailao-shan | Subtropical evergreen wet forest (STF) | 2500          | 24°32'N,101°01'E   | 11.7    | 1931     | -                  | 25                | `r val$STF`     |
-| Yuanjiang  | Hot-dry savanna  (HDS)                 | 480           | 23°28'N, 102°10'E  | 24.7    | 732.8    | 6                  | 4-6               | `r val$HDS`     |
-| Yakushima  | Warm-temperate forest        | 14 - 1748     | 30°38'N, 130°62'E  | 19.4    | 4477     | -                  |       -            | `r val$yaku_sp` |
 
 
 The site information and climate data referred to @Fei2018 and @Song2017.
