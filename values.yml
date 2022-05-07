@@ -1,3 +1,11 @@
+TRF_sp: 60
+STF_sp: 47
+HDS_sp: 34
+Yaku_sp: 193
+TRF_ind: 366
+STF_ind: 282
+HDS_ind: 198
+Yaku_ind: 519
 mean_lma_disc: 88.2
 sma_slope_all_mean: 0.975
 sma_slope_all_lwr: 0.938
@@ -5,8 +13,8 @@ sma_slope_all_upr: 1.013
 sma_int_all_mean: 0.0881
 sma_int_all_lwr: 0.0160
 sma_int_all_upr: 0.160
-sma_per_all_mean: 9.69
-sma_per_all_lwr: 8.07
+sma_per_all_mean: 9.68
+sma_per_all_lwr: 8.05
 sma_per_all_upr: 11.4
 ols_int_raw: 1.62
 ols_int: 1.64

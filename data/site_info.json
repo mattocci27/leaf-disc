@@ -11,8 +11,8 @@
     "Canopy height (m)": "35-45",
     "Leaf disc thickness": "Measured",
     "Leaf punch diameter (cm)": 0.6,
-    "No. species": "`r val$TRF`",
-    "No. individuals": "test"
+    "Number of species": 60,
+    "Number of individuals": 366
   },
   {
     "Data name": "Yunnan",
@@ -26,8 +26,8 @@
     "Canopy height (m)": "25",
     "Leaf disc thickness": "Measured",
     "Leaf punch diameter (cm)": 0.6,
-    "No. species": "`r val$STF`",
-    "No. individuals": "test"
+    "Number of species": 47,
+    "Number of individuals": 282
   },
   {
     "Data name": "Yunnan",
@@ -41,8 +41,8 @@
     "Canopy height (m)": "6-Apr",
     "Leaf disc thickness": "Measured",
     "Leaf punch diameter (cm)": 0.6,
-    "No. species": "`r val$HDS`",
-    "No. individuals": "test"
+    "Number of species": 34,
+    "Number of individuals": 198
   },
   {
     "Data name": "Yakushima",
@@ -56,7 +56,7 @@
     "Canopy height (m)": "-",
     "Leaf disc thickness": "Not-measured",
     "Leaf punch diameter (cm)": 1,
-    "No. species": "`r val$yaku_sp`",
-    "No. individuals": "test"
+    "Number of species": 193,
+    "Number of individuals": 519
   }
 ]

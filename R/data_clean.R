@@ -166,6 +166,7 @@ data_clean <- function(d, d2, d3) {
 
    new_dat3 |>
       write_csv("data/full_data.csv")
+   paste("data/full_data.csv")
 }
 
 data_clean_cv <- function(d, d3) {
@@ -241,6 +242,7 @@ data_clean_cv <- function(d, d3) {
 
   new_dat3 |>
     write_csv("data/full_data_cv.csv")
+  paste("data/full_data_cv.csv")
 }
 
 data_clean_tree <- function(d, d3) {
@@ -291,6 +293,7 @@ data_clean_tree <- function(d, d3) {
   )
 
   tree_data |> write_csv("data/tree_data.csv")
+  paste("data/tree_data.csv")
 }
 
 

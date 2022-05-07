@@ -11,6 +11,7 @@ source("R/ind_analysis.R")
 source("R/fig_write.R")
 source("R/yml.R")
 source("R/stan.R")
+source("R/site_info.R")
 source("R/predictdf.R")
 
 options(clustermq.scheduler = "multicore")
@@ -26,7 +27,8 @@ tar_option_set(packages = c(
   "extrafont",
   "loo",
   "modelr",
-  "performance"
+  "performance",
+  "jsonlite"
 ))
 
 # check if it's inside a container
@@ -55,6 +57,11 @@ list(
     format = "file"
   ),
   tar_target(
+    site_info_raw,
+    "data-raw/site_info_raw.json",
+    format = "file"
+  ),
+  tar_target(
     lma_raw_re,
     clean_lma_raw(lma_raw)
   ),
@@ -68,36 +75,63 @@ list(
   ),
   tar_target(
     full_data_csv,
-    data_clean(lma_raw_re, lma_la_re, lma_yaku_re)
+    data_clean(lma_raw_re, lma_la_re, lma_yaku_re),
+    format = "file"
+  ),
+  tar_target(
+    full_data,
+    read_csv(full_data_csv)
   ),
   tar_target(
     full_data_cv_csv,
-    data_clean_cv(lma_raw_re, lma_yaku_re)
+    data_clean_cv(lma_raw_re, lma_yaku_re),
+    format = "file"
+  ),
+  tar_target(
+    full_data_cv,
+    read_csv(full_data_cv_csv)
   ),
   tar_target(
     tree_data_csv,
-    data_clean_tree(lma_raw_re, lma_yaku_re)
+    data_clean_tree(lma_raw_re, lma_yaku_re),
+    format = "file"
+  ),
+  tar_target(
+    tree_data,
+    read_csv(tree_data_csv)
   ),
   tar_target(
     sp_mean,
-    sp_dat_mean(full_data_csv)
+    sp_dat_mean(full_data)
   ),
   tar_target(
     sp_cv,
-    sp_dat_cv(full_data_cv_csv)
+    sp_dat_cv(full_data_cv)
   ),
   tar_target(
     tree,
-    tree_dat_clean(tree_data_csv)
+    tree_dat_clean(tree_data)
   ),
   tar_target(
     yaku_sp,
     create_yaku_sp(lma_yaku_re)
   ),
+
+  tar_target(
+    boot_fit_dat,
+    boot_fit(sp_mean)
+  ),
+
   tar_target(
     yml,
     write_yml("values.yml",
-      sp_mean, full_data_cv_csv, tree, lma_yaku_re)
+      sp_mean, full_data_cv, tree, lma_yaku_re, boot_fit_dat),
+    format = "file"
+  ),
+  tar_target(
+    site_info,
+    update_site_info(site_info_raw, yml),
+    format = "file"
   ),
 
   # analyses and figs ---------------------------------------------
@@ -105,10 +139,6 @@ list(
     stan_sim_dat,
     create_dummy_data(100)
   ),
-  # tar_target(
-  #   stan_sp_dat_noint,
-  #   clean_stan_data(sp_mean, interaction = FALSE)
-  # ),
 
   tar_stan_mcmc(
     fit_sim,
@@ -450,6 +480,7 @@ list(
   #   max_treedepth = 15,
   #   seed = 123
   #  ),
+
   tar_target(
     coef_sp_tab_punch3,
     create_stan_tab(fit_sp_punch3_draws_model2)
@@ -462,39 +493,24 @@ list(
     coef_sp_tab_punch4,
     create_stan_tab(fit_sp_punch4_draws_model)
   ),
-  # tar_target(
-  #   coef_sp_plot_punch1,
-  #   coef_pointrange3(coef_sp_tab_punch1)
-  # ),
-  # tar_target(
-  #   coef_sp_png_punch1,
-  #   ggsave(
-  #     "figs/coef_sp_punch1.png",
-  #     coef_sp_plot_punch1,
-  #     dpi = 300,
-  #     width = 5,
-  #     height = 6
-  #   ),
-  #   format = "file"
-  # ),
 
   tar_target(
     coef_sp_tab_punch1_add,
     create_stan_tab_add(fit_sp_punch_draws_model)
   ),
+
   tar_target(
-    pred_mcmc_plot,
-    pred_mcmc(fit_sp_punch_draws_model, sp_mean)
-  ),
-  tar_target(
-    pred_mcmc_plot_png,
-    ggsave(
-      "figs/pred_mcmc.png",
-      pred_mcmc_plot,
-      dpi = 300,
-      width = 9,
-      height = 3
-    ),
+    pred_mcmc_plot,  {
+      p <- pred_mcmc(fit_sp_punch_draws_model, sp_mean)
+      ggsave(
+        "figs/pred_mcmc.png",
+        p,
+        dpi = 300,
+        width = 9,
+        height = 3
+      )
+      paste0("figs/pred_mcmc", c(".png"))
+    },
     format = "file"
   ),
 
@@ -504,277 +520,45 @@ list(
   ),
 
   tar_target(
-    coef_sp_plot_punch1,
-    coef_pointrange3(coef_sp_tab_punch1)
-  ),
-  tar_target(
-    coef_sp_png_punch1,
-    ggsave(
-      "figs/coef_sp_punch1.png",
-      coef_sp_plot_punch1,
-      dpi = 300,
-      width = 5,
-      height = 6
-    ),
-    format = "file"
-  ),
-  tar_target(
-    coef_sp_pdf_punch1,
-    ggsave(
-      "figs/coef_sp_punch1.pdf",
-      coef_sp_plot_punch1,
-      device = cairo_pdf,
-      width = 6,
-      height = 6
-    ),
-    format = "file"
-  ),
-  tar_target(
-    coef_sp_plot_punch1_add,
-    coef_pointrange4(coef_sp_tab_punch1_add)
-  ),
-  tar_target(
-    coef_sp_png_punch1_add,
-    ggsave(
-      "figs/coef_sp_punch1_add.png",
-      coef_sp_plot_punch1_add,
-      dpi = 300,
-      width = 5,
-      height = 6
-    ),
-    format = "file"
-  ),
-  tar_target(
-    coef_sp_pdf_punch1_add,
-    ggsave(
-      "figs/coef_sp_punch1_add.pdf",
-      coef_sp_plot_punch1_add,
-      device = cairo_pdf,
-      width = 5,
-      height = 6
-    ),
+    coef_sp_punch1_plot, {
+      p <- coef_pointrange3(coef_sp_tab_punch1)
+      ggsave(
+        "figs/coef_sp_punch1.png",
+        p,
+        dpi = 300,
+        width = 5,
+        height = 6)
+      ggsave(
+        "figs/coef_sp_punch1.pdf",
+        p,
+        device = cairo_pdf,
+        width = 5,
+        height = 6)
+      paste0("figs/coef_sp_punch1", c(".png", ".pdf"))
+    },
     format = "file"
   ),
 
-  # coef for OLS stan
   tar_target(
-    coef_sp_tab,
-    create_stan_tab(fit_sp_lma0_draws_simple)
-  ),
-  tar_target(
-    coef_sp_plot,
-    coef_pointrange2(coef_sp_tab, ld = FALSE)
-  ),
-  tar_target(
-    coef_sp_png,
-    ggsave(
-      "figs/coef_sp.png",
-      coef_sp_plot,
-      dpi = 300,
-      width = 6,
-      height = 6
-    ),
-    format = "file"
-  ),
-  tar_target(
-    coef_sp_pdf,
-    ggsave(
-      "figs/coef_sp.pdf",
-      coef_sp_plot,
-      device = cairo_pdf,
-      width = 6,
-      height = 6
-    ),
+    coef_sp_punch1_add_plot, {
+      p <- coef_pointrange4(coef_sp_tab_punch1_add)
+      ggsave(
+        "figs/coef_sp_punch1_add.png",
+        p,
+        dpi = 300,
+        width = 5,
+        height = 6)
+      ggsave(
+        "figs/coef_sp_punch1_add.pdf",
+        p,
+        device = cairo_pdf,
+        width = 5,
+        height = 6)
+      paste0("figs/coef_sp_punch1_add", c(".png", ".pdf"))
+    },
     format = "file"
   ),
 
-       # coef for OLS stan 2
-  tar_target(
-    coef_sp_tab1,
-    create_stan_tab(fit_sp_no_lma_draws_model)
-  ),
-  tar_target(
-    coef_sp_plot1,
-    coef_pointrange2(coef_sp_tab1, lalt = TRUE)
-  ),
-  tar_target(
-    coef_sp_png1,
-    ggsave(
-      "figs/coef_sp1.png",
-      coef_sp_plot1,
-      dpi = 300,
-      width = 6,
-      height = 6
-    ),
-    format = "file"
-  ),
-
-
-  # coef for OLS stan 2
-  tar_target(
-    coef_sp_tab2,
-    create_stan_tab(fit_sp_lma_draws_model)
-  ),
-  tar_target(
-    coef_sp_plot2,
-    coef_pointrange2(coef_sp_tab2, ld = FALSE)
-  ),
-  tar_target(
-    coef_sp_png2,
-    ggsave(
-      "figs/coef_sp2.png",
-      coef_sp_plot2,
-      dpi = 300,
-      width = 6,
-      height = 6
-    ),
-    format = "file"
-  ),
-
-  # coef for OLS stan 2
-  tar_target(
-    coef_sp_ld_tab,
-    create_stan_tab(fit_sp_ld_draws_model)
-  ),
-  tar_target(
-    coef_sp_ld_plot,
-    coef_pointrange2(coef_sp_ld_tab, ld = TRUE)
-  ),
-  tar_target(
-    coef_sp_ld_png,
-    ggsave(
-      "figs/coef_sp_ld.png",
-      coef_sp_ld_plot,
-      dpi = 300,
-      width = 5,
-      height = 6
-    ),
-    format = "file"
-  ),
-
-  # coef for OLS stan 2
-  tar_target(
-    coef_sp_tab31,
-    create_stan_tab(fit_sp_ld3_draws_model)
-  ),
-  tar_target(
-    coef_sp_plot31,
-    coef_pointrange2(coef_sp_tab31, ld = TRUE)
-  ),
-  tar_target(
-    coef_sp_png31,
-    ggsave(
-      "figs/coef_sp31.png",
-      coef_sp_plot31,
-      dpi = 300,
-      width = 6,
-      height = 6
-    ),
-    format = "file"
-  ),
-
-
-  # coef for OLS stan 2
-  tar_target(
-    coef_sp_tab333,
-    create_stan_tab(fit_sp_lm_draws_model)
-  ),
-  tar_target(
-    coef_sp_plot333,
-    coef_pointrange2(coef_sp_tab333, lm = TRUE)
-  ),
-  tar_target(
-    coef_sp_png333,
-    ggsave(
-      "figs/coef_sp333.png",
-      coef_sp_plot333,
-      dpi = 300,
-      width = 6,
-      height = 6
-    ),
-    format = "file"
-  ),
-
-  # # coef for SMA stan
-  # tar_target(
-  #   coef_tree_sma_tab,
-  #   create_stan_tab(fit_tree_2_draws_ma)
-  # ),
-  # tar_target(
-  #   coef_tree_sma_plot,
-  #   coef_pointrange(coef_tree_sma_tab)
-  # ),
-  # tar_target(
-  #   coef_tree_sma_png,
-  #   ggsave(
-  #     "figs/coef_tree_sma.png",
-  #     coef_tree_sma_plot,
-  #     dpi = 300,
-  #     width = 6,
-  #     height = 6
-  #   ),
-  #   format = "file"
-  # ),
-  # tar_target(
-  #   coef_tree_sma_pdf,
-  #   ggsave(
-  #     "figs/coef_tree_sma.pdf",
-  #     coef_tree_sma_plot,
-  #     device = cairo_pdf,
-  #     width = 6,
-  #     height = 6
-  #   ),
-  #   format = "file"
-  # ),
-  # tar_target(
-  #   coef_tree_ld_sma_tab,
-  #   create_stan_tab(fit_tree_3_draws_sma)
-  # ),
-  # tar_target(
-  #   coef_tree_ld_sma_plot,
-  #   coef_pointrange(coef_tree_ld_sma_tab, ld = TRUE)
-  # ),
-  # tar_target(
-  #   coef_tree_ld_sma_png,
-  #   ggsave(
-  #     "figs/coef_tree_ld_sma.png",
-  #     coef_tree_ld_sma_plot,
-  #     dpi = 300,
-  #     width = 6,
-  #     height = 6
-  #   ),
-  #   format = "file"
-  # ),
-  # # tar_target(
-  # #   coef_tree_sma_pdf,
-  # #   ggsave(
-  # #     "figs/coef_tree_sma.pdf",
-  # #     coef_tree_sma_plot,
-  # #     device = cairo_pdf,
-  # #     width = 6,
-  # #     height = 6
-  # #   ),
-  # #   format = "file"
-  # # ),
-  # tar_target(
-  #   coef_tree_ld_ori_sma_tab,
-  #   create_stan_tab(fit_tree_4_draws_sma)
-  # ),
-  # tar_target(
-  #   coef_tree_ld_ori_sma_plot,
-  #   coef_pointrange(coef_tree_ld_ori_sma_tab, ld = TRUE)
-  # ),
-  # tar_target(
-  #   coef_tree_ld_ori_sma_png,
-  #   ggsave(
-  #     "figs/coef_tree_ld_ori_sma.png",
-  #     coef_tree_ld_ori_sma_plot,
-  #     dpi = 300,
-  #     width = 6,
-  #     height = 6
-  #   ),
-  #   format = "file"
-  # ),
 
   tar_target(
     cv_tree,
@@ -785,71 +569,6 @@ list(
     create_cv_fit(sp_mean, k = 10, seed = 123)
   ),
 
-  # coef for SMA stan for sp
-  # tar_target(
-  #   coef_sp_sma_tab,
-  #   create_stan_tab(fit_sp_2_draws_sma)
-  # ),
-  # tar_target(
-  #   coef_sp_sma_plot,
-  #   coef_pointrange2(coef_sp_sma_tab)
-  # ),
-
-  # tar_target(
-  #   coef_sp_sma_png,
-  #   ggsave(
-  #     "figs/coef_sp_sma.png",
-  #     coef_sp_sma_plot,
-  #     dpi = 300,
-  #     width = 4,
-  #     height = 5
-  #   ),
-  #   format = "file"
-  # ),
-
-  # tar_target(
-  #   coef_sp_ld_sma_tab,
-  #   create_stan_tab(fit_sp_3_draws_sma)
-  # ),
-  # tar_target(
-  #   coef_sp_ld_sma_plot,
-  #   coef_pointrange2(coef_sp_ld_sma_tab, ld = TRUE)
-  # ),
-  # tar_target(
-  #   coef_sp_ld_sma_png,
-  #   ggsave(
-  #     "figs/coef_sp_ld_sma.png",
-  #     coef_sp_ld_sma_plot,
-  #     dpi = 300,
-  #     width = 4,
-  #     height = 5
-  #   ),
-  #   format = "file"
-  # ),
-
-  # tar_stan_mcmc(
-  # tar_stan_mcmc(
-  #   fit_sp_1,
-  #   "stan/model.stan",
-  #   data = stan_sp_dat_noint,
-  #   refresh = 0,
-  #   chains = 4,
-  #   parallel_chains = getOption("mc.cores", 4),
-  #   iter_warmup = 2000,
-  #   iter_sampling = 2000,
-  #   seed = 123
-  #  ),
-  # tar_stan_mcmc(
-  #   fit_sp_2,
-  #   "stan/model.stan",
-  #   data = stan_sp_dat,
-  #   refresh = 0,
-  #   chains = 4,
-  #   parallel_chains = getOption("mc.cores", 4),
-  #   iter_warmup = 2000,
-  #   iter_sampling = 2000,
-  #   seed = 123
-  #  ),
 
   tar_target(
     loo_model,
@@ -873,319 +592,201 @@ list(
     )
   ),
 
-  # tar_target(
-  #   loo_sma,
-  #   mclapply(
-  #     list(
-  #       fit_sp_4 = fit_sp_4_mcmc_sma,
-  #       fit_sp_5 = fit_sp_5_mcmc_sma,
-  #       fit_sp_6 = fit_sp_6_mcmc_sma
-  #       ),
-  #   \(x)x$loo(cores = parallel::detectCores())
-  #   )
-  # ),
   tar_target(
-    sma_plot,
-    sma_point(sp_mean)
-  ),
-  tar_target(
-    sma_png,
-    ggsave(
-      "figs/sma.png",
-      sma_plot,
-      dpi = 300,
-      width = 4,
-      height = 4
-    ),
-    format = "file"
-  ),
-
-  tar_target(
-    sma_grid_col3_plot,
-    sma_grid_col3(sp_mean)
-  ),
-  tar_target(
-    sma_grid_col3_png,
-    ggsave(
-      "figs/sma_grid_col3.png",
-      sma_grid_col3_plot,
-      dpi = 300,
-      width = 6,
-      height = 9.5
-    ),
-    format = "file"
-  ),
-
-  tar_target(
-    lalt_pool_grid_plot,
-    lalt_pool_grid_point(sp_mean)
-  ),
-  tar_target(
-    lalt_pool_grid_png,
-    ggsave(
-      "figs/lalt_pool_grid.png",
-      lalt_pool_grid_plot,
-      dpi = 300,
-      width = 6,
-      height = 6
-    ),
-    format = "file"
-  ),
-  tar_target(
-    lalt_pool_grid_pdf,
-    ggsave(
-      "figs/lalt_pool_grid.pdf",
-      lalt_pool_grid_plot,
-      device = cairo_pdf,
-      width = 6,
-      height = 6
-    ),
-    format = "file"
-  ),
-
-  tar_target(
-    lalt_sep_grid_plot,
-    lalt_sep_grid_point(sp_mean)
-  ),
-  tar_target(
-    lalt_sep_grid_png,
-    ggsave(
-      "figs/lalt_sep_grid.png",
-      lalt_sep_grid_plot,
-      dpi = 300,
-      width = 6,
-      height = 6
-    ),
-    format = "file"
-  ),
-  tar_target(
-    lalt_sep_grid_pdf,
-    ggsave(
-      "figs/lalt_sep_grid.pdf",
-      lalt_sep_grid_plot,
-      device = cairo_pdf,
-      width = 6,
-      height = 6
-    ),
+    sma_plot, {
+      p <- sma_point(sp_mean)
+      ggsave(
+        "figs/sma.png",
+        p,
+        dpi = 300,
+        width = 4,
+        height = 4
+      )
+      paste0("figs/sma", c(".png"))
+    },
     format = "file"
   ),
 
 
   tar_target(
-    sma_sp_tab,
-    generate_sma_tab(sp_mean)
-  ),
-  tar_target(
-    sma_sp_ld_tab,
-    generate_sma_ld_tab(sp_mean)
-  ),
-  tar_target(
-    sma_sp_2_tab,
-    generate_sma_2_tab(sp_mean)
-  ),
-
-
-  tar_target(
-    sma_tree_tab,
-    generate_sma_tab(tree)
-  ),
-
-  tar_target(
-    sma_tree_ld_tab,
-    generate_sma_ld_tab(tree)
-  ),
-
-  tar_target(
-    lalt_tree_grid_plot,
-    lalt_tree_grid(tree)
-  ),
-  tar_target(
-    lalt_tree_grid_png,
-    ggsave(
-      "figs/lalt_tree_grid.png",
-      lalt_tree_grid_plot,
-      dpi = 300,
-      width = 6,
-      height = 6
-    ),
-    format = "file"
-  ),
-  tar_target(
-    lalt_tree_grid_pdf,
-    ggsave(
-      "figs/lalt_tree_grid.pdf",
-      lalt_tree_grid_plot,
-      device = cairo_pdf,
-      width = 6,
-      height = 6
-    ),
+    sma_grid_col3_plot, {
+      p <- sma_grid_col3(sp_mean)
+      ggsave(
+        "figs/sma_grid_col3.png",
+        p,
+        dpi = 300,
+        width = 6,
+        height = 9.5
+      )
+      paste0("figs/sma_grid_col3", c(".png"))
+    },
     format = "file"
   ),
 
   tar_target(
-    lalt_tree_grid_plot_dense,
-    lalt_tree_grid_dense(tree)
+    lalt_pool_grid_plot, {
+      p <- lalt_pool_grid_point(sp_mean)
+      ggsave(
+        "figs/lalt_pool_grid.png",
+        p,
+        dpi = 300,
+        width = 6,
+        height = 6)
+      paste0("figs/lalt_pool_grid", c(".png"))
+    },
+    format = "file"
   ),
   tar_target(
-    lalt_tree_grid_dense_png,
-    ggsave(
-      "figs/lalt_tree_grid_dense.png",
-      lalt_tree_grid_plot_dense,
-      dpi = 300,
-      width = 12,
-      height = 6
-    ),
+    lalt_sep_grid_plot, {
+      p <- lalt_sep_grid_point(sp_mean)
+      ggsave(
+        "figs/lalt_sep_grid.png",
+        p,
+        dpi = 300,
+        width = 6,
+        height = 6)
+      paste0("figs/lalt_sep_grid", c(".png"))
+    },
+    format = "file"
+  ),
+
+
+  tar_target(
+    lalt_tree_grid_plot, {
+      p <- lalt_tree_grid(tree)
+      ggsave(
+        "figs/lalt_tree_grid.png",
+        p,
+        dpi = 300,
+        width = 6,
+        height = 6
+      )
+      paste0("figs/lalt_tree_grid", c(".png"))
+    },
     format = "file"
   ),
 
   tar_target(
-    lalt_sp_grid_plot_dense,
-    lalt_sp_grid_dense(sp_mean)
-  ),
-  tar_target(
-    lalt_sp_grid_dense_png,
-    ggsave(
-      "figs/lalt_sp_grid_dense.png",
-      lalt_sp_grid_plot_dense,
-      dpi = 300,
-      width = 12,
-      height = 6
-    ),
+    lalt_tree_grid_plot_dense, {
+      p <- lalt_tree_grid_dense(tree)
+      ggsave(
+        "figs/lalt_tree_grid_dense.png",
+        p,
+        dpi = 300,
+        width = 12,
+        height = 6)
+      paste0("figs/lalt_tree_grid_dense", c(".png"))
+    },
     format = "file"
   ),
 
   tar_target(
-    ratio_plot,
-    ratio_combine(tree)
-  ),
-  tar_target(
-    ratio_png,
-    ggsave(
-      "figs/ratio.png",
-      ratio_plot,
-      dpi = 300,
-      width = 9,
-      height = 3
-    ),
-    format = "file"
-  ),
-  tar_target(
-    ratio_pdf,
-    ggsave(
-      "figs/ratio.pdf",
-      ratio_plot,
-      device = cairo_pdf,
-      width = 9,
-      height = 3
-    ),
+    lalt_sp_grid_plot_dense, {
+      p <- lalt_sp_grid_dense(sp_mean)
+      ggsave(
+        "figs/lalt_sp_grid_dense.png",
+        p,
+        dpi = 300,
+        width = 12,
+        height = 6
+      )
+      paste0("figs/lalt_sp_grid_dense", c(".png"))
+    },
     format = "file"
   ),
 
   tar_target(
-    lma_ld_plot,
-    lma_ld_wrap_point(sp_mean)
-  ),
-  tar_target(
-    lma_ld_png,
-    ggsave(
-      "figs/lma_ld.png",
-      lma_ld_plot,
-      dpi = 300,
-      width = 6,
-      height = 3
-    ),
-    format = "file"
-  ),
-  tar_target(
-    lma_ld_pdf,
-    ggsave(
-      "figs/lma_ld.pdf",
-      lma_ld_plot,
-      device = cairo_pdf,
-      width = 6,
-      height = 3
-    ),
+    ratio_plot, {
+      p <- ratio_combine(tree)
+      ggsave(
+        "figs/ratio.png",
+        p,
+        dpi = 300,
+        width = 9,
+        height = 3
+      )
+      paste0("figs/ratio", c(".png"))
+    },
     format = "file"
   ),
 
   tar_target(
-    cv_pool_plot,
-    cv_pool_point(sp_cv)
-  ),
-  tar_target(
-    cv_pool_png,
-    ggsave(
-      "figs/cv_pool.png",
-      cv_pool_plot,
-      dpi = 300,
-      width = 3,
-      height = 3
-    ),
-    format = "file"
-  ),
-  tar_target(
-    cv_pool_pdf,
-    ggsave(
-      "figs/cv_pool.pdf",
-      cv_pool_plot,
-      device = cairo_pdf,
-      width = 3,
-      height = 3
-    ),
+    lma_ld_plot, {
+      p <- lma_ld_wrap_point(sp_mean)
+      ggsave(
+        "figs/lma_ld.png",
+        p,
+        dpi = 300,
+        width = 9,
+        height = 3
+      )
+      paste0("figs/lma_ld", c(".png"))
+    },
     format = "file"
   ),
 
   tar_target(
-    cv_sep_plot,
-    cv_sep_point(sp_cv)
-  ),
-  tar_target(
-    cv_sep_png,
-    ggsave(
-      "figs/cv_sep.png",
-      cv_sep_plot,
-      dpi = 300,
-      width = 6,
-      height = 3
-    ),
-    format = "file"
-  ),
-  tar_target(
-    cv_sep_pdf,
-    ggsave(
-      "figs/cv_sep.pdf",
-      cv_sep_plot,
-      device = cairo_pdf,
-      width = 6,
-      height = 3
-    ),
+    cv_pool_plot, {
+      p <- cv_pool_point(sp_cv)
+      ggsave(
+        "figs/cv_pool.png",
+        p,
+        dpi = 300,
+        width = 3,
+        height = 3
+      )
+      ggsave(
+        "figs/cv_pool.pdf",
+        p,
+        device = cairo_pdf,
+        width = 3,
+        height = 3
+      )
+      paste0("figs/cv_pool", c(".png", ".pdf"))
+    },
     format = "file"
   ),
 
   tar_target(
-    petiole_plot,
-    petiole_point(yaku_sp)
-  ),
-  tar_target(
-    petiole_png,
-    ggsave(
-      "figs/petiole.png",
-      petiole_plot,
-      dpi = 300,
-      width = 8,
-      height = 4
-    ),
+    cv_sep_plot, {
+      p <- cv_sep_point(sp_cv)
+      ggsave(
+        "figs/cv_sep.png",
+        p,
+        dpi = 300,
+        width = 6,
+        height = 3
+      )
+      ggsave(
+        "figs/cv_sep.pdf",
+        p,
+        device = cairo_pdf,
+        width = 6,
+        height = 3
+      )
+      paste0("figs/cv_sep", c(".png", ".pdf"))
+    },
     format = "file"
   ),
+
   tar_target(
-    petiole_pdf,
-    ggsave(
-      "figs/petiole.pdf",
-      petiole_plot,
-      device = cairo_pdf,
-      width = 8,
-      height = 4
-    ),
+    petiole_plot, {
+      p <- petiole_point(yaku_sp)
+      ggsave(
+        "figs/petiole.png",
+        p,
+        dpi = 300,
+        width = 8,
+        height = 4
+      )
+      ggsave(
+        "figs/petiole.pdf",
+        p,
+        device = cairo_pdf,
+        width = 8,
+        height = 4)
+        paste0("figs/cv_pool", c(".png", ".pdf"))
+    },
     format = "file"
   ),
 

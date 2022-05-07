@@ -78,7 +78,9 @@ opts_chunk$set(dev='pdf')
 options(kableExtra.auto_format = FALSE)
 library(kableExtra)
 
-val <- yaml::yaml.load_file("../values.yml")
+#  for non-targets
+# val <- yaml::yaml.load_file("../values.yml")
+val <- yaml::yaml.load_file("values.yml")
 ```
 
 # Appendix S1:
@@ -88,10 +90,12 @@ MAT: mean annual temperature,
 MAP: mean annual precipitation,
 SPEI: Standardized Precipitation Evapotranspiration Index.
 
+`r val$TRF_sp`
 
-```{r}
+```{r, echo=TRUE}
 library(jsonlite)
-site <- fromJSON("../data/site_info.json")
+#site <- fromJSON("../data/site_info.json")
+site <- fromJSON("data/site_info.json")
 site |>
   kable(format = "html") |>
   kable_styling()

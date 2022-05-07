@@ -1,4 +1,4 @@
-write_yml <- function(path, sp_mean, full_data_cv_csv, tree, lma_yaku_re, sma_sp_ld_tab) {
+write_yml <- function(path, sp_mean, full_data_cv_csv, tree, lma_yaku_re, boot_fit_dat) {
   r2_lma <- cor.test(log(sp_mean$lma_leaf), log(sp_mean$lma_disc))$estimate^2 |> round(2)
   r2_ld <- cor.test(log(sp_mean$ld_leaf), log(sp_mean$ld_disc))$estimate^2 |> round(2)
 
@@ -81,13 +81,62 @@ write_yml <- function(path, sp_mean, full_data_cv_csv, tree, lma_yaku_re, sma_sp
     round(mean_, 1)
   }
 
-  boot_fit_dat <- boot_fit(sp_mean)
+  #boot_fit_dat <- boot_fit(sp_mean)
   lma_mean_per <- ((boot_fit_dat$conf_mean / boot_fit_dat$xseq) - 1) * 100
   lma_lwr_per <- ((boot_fit_dat$conf_low / boot_fit_dat$xseq) - 1) * 100
   lma_upr_per <- ((boot_fit_dat$conf_high / boot_fit_dat$xseq) - 1) * 100
 
+  # library(tidyverse)
+  # library(targets)
+  # tar_load(sp_mean)
+  # tar_load(tree)
+  n_sp <- table(sp_mean$location)
+  n_ind <- table(tree$location)
+
   output <- path
   out <- file(paste(output), "w") # write
+  writeLines(
+    paste0("TRF_sp: ",
+           n_sp["Mengla_Bubeng"]),
+    out,
+    sep = "\n")
+  writeLines(
+    paste0("STF_sp: ",
+           n_sp["Ailao_understory"]),
+    out,
+    sep = "\n")
+  writeLines(
+    paste0("HDS_sp: ",
+           n_sp["Yuanjiang_Savanna"]),
+    out,
+    sep = "\n")
+  writeLines(
+    paste0("Yaku_sp: ",
+           n_sp["Yakushima"]),
+    out,
+    sep = "\n")
+  writeLines(
+    paste0("TRF_ind: ",
+           n_ind["Mengla_Bubeng"]),
+    out,
+    sep = "\n")
+  writeLines(
+    paste0("STF_ind: ",
+           n_ind["Ailao_understory"]),
+    out,
+    sep = "\n")
+  writeLines(
+    paste0("HDS_ind: ",
+           n_ind["Yuanjiang_Savanna"]),
+    out,
+    sep = "\n")
+  writeLines(
+    paste0("Yaku_ind: ",
+           n_ind["Yakushima"]),
+    out,
+    sep = "\n")
+
+
   writeLines(
     paste0("mean_lma_disc: ",
            mean(sp_mean$lma_disc) |> round(1) |> format(nsmall = 1)),
@@ -305,4 +354,6 @@ write_yml <- function(path, sp_mean, full_data_cv_csv, tree, lma_yaku_re, sma_sp
     out,
     sep = "\n")
   close(out)
+  # The return value must be a vector of paths to the files we write:
+  paste("values.yml")
 }

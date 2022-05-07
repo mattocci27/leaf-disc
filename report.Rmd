@@ -40,7 +40,8 @@ sp_mean |>
   group_by(ldlalt_gr) |>
   summarise(
     lma_leaf = mean(lma_leaf) |> round(1),
-    lma_disc = mean(lma_disc) |> round(1)) |>
+    lma_disc = mean(lma_disc) |> round(1)
+  ) |>
   write_csv("data/ldlalt.csv")
 ```
 
@@ -72,7 +73,7 @@ targets::tar_load(fit_sp_no_lma_int_summary_model)
 targets::tar_load(fit_sp_lma_summary_model)
 targets::tar_load(fit_sp_lma2_summary_model2)
 targets::tar_load(fit_sp_ld_summary_model)
-targets::tar_load(fit_sp_ld2_summary_model)
+targets::tar_load(fit_sp_ld2_summary_model2)
 targets::tar_load(fit_sp_ld3_summary_model)
 targets::tar_load(fit_sp_lm_summary_model)
 targets::tar_load(fit_sp_lma0_summary_simple)
@@ -82,21 +83,20 @@ targets::tar_load(fit_sp_no_lma_int_diagnostics_model)
 targets::tar_load(fit_sp_lma_diagnostics_model)
 targets::tar_load(fit_sp_lma2_diagnostics_model2)
 targets::tar_load(fit_sp_ld_diagnostics_model)
-targets::tar_load(fit_sp_ld2_diagnostics_model)
+targets::tar_load(fit_sp_ld2_diagnostics_model2)
 targets::tar_load(fit_sp_ld3_diagnostics_model)
 targets::tar_load(fit_sp_lm_diagnostics_model)
 targets::tar_load(fit_sp_lma0_diagnostics_simple)
-
 ```
 
 
 ```{r,eval=TRUE}
-fit_sp_no_lma_summary_model  |> filter(rhat > 1.1)
+fit_sp_no_lma_summary_model |> filter(rhat > 1.1)
 fit_sp_no_lma_int_summary_model |> filter(rhat > 1.1)
 fit_sp_lma_summary_model |> filter(rhat > 1.1)
 fit_sp_lma2_summary_model2 |> filter(rhat > 1.1)
 fit_sp_ld_summary_model |> filter(rhat > 1.1)
-fit_sp_ld2_summary_model |> filter(rhat > 1.1)
+fit_sp_ld2_summary_model2 |> filter(rhat > 1.1)
 fit_sp_ld3_summary_model |> filter(rhat > 1.1)
 fit_sp_lm_summary_model |> filter(rhat > 1.1)
 fit_sp_lma0_summary_simple |> filter(rhat > 1.1)
@@ -110,7 +110,7 @@ div_check(fit_sp_no_lma_int_diagnostics_model)
 div_check(fit_sp_lma_diagnostics_model)
 div_check(fit_sp_lma2_diagnostics_model2)
 div_check(fit_sp_ld_diagnostics_model)
-div_check(fit_sp_ld2_diagnostics_model)
+div_check(fit_sp_ld2_diagnostics_model2)
 div_check(fit_sp_ld3_diagnostics_model)
 div_check(fit_sp_lm_diagnostics_model)
 div_check(fit_sp_lma0_diagnostics_simple)
@@ -124,7 +124,7 @@ loo::loo_compare(
   loo_model[[7]], loo_model[[8]], loo_model[[9]],
   loo_model[[10]], loo_model[[11]],
   loo_model[[12]], loo_model[[13]]
-  )
+)
 ```
 
 ```{r}
@@ -133,43 +133,8 @@ tar_read(cv_sp)
 
 ## coef
 
-```{r, eval=TRUE}
-tar_load(coef_sp_png)
-```
 
-![](figs/coef_sp.png)
-
-```{r, eval=TRUE}
-tar_load(coef_sp_png2)
-```
-
-![](figs/coef_sp2.png)
-
-```{r, eval=TRUE}
-tar_load(coef_sp_png1)
-```
-
-![](figs/coef_sp1.png)
-
-
-```{r, eval=TRUE}
-tar_load(coef_sp_png3)
-```
-
-![](figs/coef_sp3.png)
-
-```{r, eval=TRUE}
-tar_load(coef_sp_png31)
-```
-
-![](figs/coef_sp31.png)
-
-
-```{r, eval=TRUE}
-tar_load(coef_sp_png333)
-```
-
-![](figs/coef_sp333.png)
+![](figs/coef_sp_punch1_add.png)
 
 # SMA table
 
