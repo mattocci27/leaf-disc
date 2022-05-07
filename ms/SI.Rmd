@@ -78,6 +78,8 @@ opts_chunk$set(dev='pdf')
 options(kableExtra.auto_format = FALSE)
 library(kableExtra)
 
+# for dependency
+targets::tar_load(yml)
 #  for non-targets
 # val <- yaml::yaml.load_file("../values.yml")
 val <- yaml::yaml.load_file("values.yml")
@@ -90,10 +92,10 @@ MAT: mean annual temperature,
 MAP: mean annual precipitation,
 SPEI: Standardized Precipitation Evapotranspiration Index.
 
-`r val$TRF_sp`
-
 ```{r, echo=TRUE}
 library(jsonlite)
+# for dependency
+targets::tar_load(site_info)
 #site <- fromJSON("../data/site_info.json")
 site <- fromJSON("data/site_info.json")
 site |>
@@ -128,6 +130,10 @@ Thick and thin lines indicate 90% and 95% credible intervals, respectively.
 Circles show posterior means of coefficients.
 Circles filled with blue indicate significant effects and white indicate non-significance effects.
 
+```{r, incude=FALSE}
+targets::tar_load(coef_sp_punch1_add_plot)
+```
+
 ![](../figs/coef_sp_punch1_add.png)
 
 \newpage
@@ -156,6 +162,10 @@ As we expected LD, showed the slightly smaller *R^2^* value than LMA (Figure bel
 We have independent measurement for thickness for leaf discs and whole-leaves in the Yunnan dataset.
 If we use the same leaf thickness values for leaf discs and whole-leaves (i.e., LTw~i~/LTd~i~ =1), the scatter plots will be identical for LMA and LD.
 Consequently, we do not perform further analyses for LD, because differences between whole-leaf LD and leaf disc LD only depends on the ratio between whole-leaf LMA and leaf disc LMA and measurement errors of leaf thickness.
+
+```{r, include=FALSE}
+targets::tar_load(lma_ld_png)
+```
 
 ![](../figs/lma_ld.png){ width="600" style="display: block; margin: 0 auto" }
 

@@ -9,6 +9,7 @@
     "MAP (mm)": 1532,
     "Dry period (month)": "6",
     "Canopy height (m)": "35-45",
+    "Leaf thickness": "Measured",
     "Leaf disc thickness": "Measured",
     "Leaf punch diameter (cm)": 0.6
   },
@@ -22,6 +23,7 @@
     "MAP (mm)": 1931,
     "Dry period (month)": "-",
     "Canopy height (m)": "25",
+    "Leaf thickness": "Measured",
     "Leaf disc thickness": "Measured",
     "Leaf punch diameter (cm)": 0.6
   },
@@ -35,6 +37,7 @@
     "MAP (mm)": 732.8,
     "Dry period (month)": "6",
     "Canopy height (m)": "6-Apr",
+    "Leaf thickness": "Measured",
     "Leaf disc thickness": "Measured",
     "Leaf punch diameter (cm)": 0.6
   },
@@ -48,6 +51,7 @@
     "MAP (mm)": 4477,
     "Dry period (month)": "-",
     "Canopy height (m)": "-",
+    "Leaf thickness": "Measured",
     "Leaf disc thickness": "Not-measured",
     "Leaf punch diameter (cm)": 1
   }
