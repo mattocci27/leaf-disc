@@ -87,6 +87,10 @@ The pattern didn't change qualitatively.
 
 > L107- 113 The description of the sites/data is a little confusing: it seems that there are two datasets: one which includes 3 different sites, and another that includes a fourth site, for which a subset of the samples had additional measurement taken. I recommend clarifying this section to explain the different levels of organization, as well as including some of the methodological data in Table S1 (e.g. number of total samples, whether leaf thickness was measured, leaf punch size).
 
+Thank you.
+We have added columns to explain the number of species, the number of individuals,  whether leaf thickness was measured, and leaf punch size in Table S1.
+
+
 > L148-151 why were the species divided at all? Why not analyze the data as a single group, using leaf area and leaf thickness as (continuous) covariates? Dividing the species into groups this way turns a continuous variable into a categorical one, which is poor statistical practice.
 
 - making stan
