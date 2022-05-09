@@ -98,7 +98,7 @@ library(jsonlite)
 targets::tar_load(site_info)
 #site <- fromJSON("../data/site_info.json")
 site <- fromJSON("data/site_info.json")
-site |>
+site >
   kable(format = "html") |>
   kable_styling()
 ```

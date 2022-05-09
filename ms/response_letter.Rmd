@@ -62,8 +62,6 @@ This is an important thing to clarify.
 Leaf thickness and leaf area effect not only the mean LMA but also the variance of LMA, and that is why R2 values changed among the four groups (thin vs. think and small vs. large leaves).
 
 
-
-
 > 3. I am confused and unconvinced by the inclusion and discussion of intraspecific trait variation on several levels. First, the authors do not clearly explain ITV, its importance, or its relevance to LMA. Secondly, the methods used to quantify ITV are not recommended (see Yang et al 2020. Large underestimation of intraspecific trait variation and its improvements. Frontiers in Plant Science); ideally the authors should use Bao's CV estimator. Finally, there is little interpretation of the results of their analysis. I think this metric needs to either be excluded entirely or significantly expanded upon.
 
 Thank you.
@@ -88,12 +86,13 @@ The pattern didn't change qualitatively.
 > L107- 113 The description of the sites/data is a little confusing: it seems that there are two datasets: one which includes 3 different sites, and another that includes a fourth site, for which a subset of the samples had additional measurement taken. I recommend clarifying this section to explain the different levels of organization, as well as including some of the methodological data in Table S1 (e.g. number of total samples, whether leaf thickness was measured, leaf punch size).
 
 Thank you.
-We have added columns to explain the number of species, the number of individuals,  whether leaf thickness was measured, and leaf punch size in Table S1.
-
+(different levels of organization?)
+We have added columns to explain the number of species, the number of individuals, whether leaf thickness was measured, and leaf punch size in Table S1.
 
 > L148-151 why were the species divided at all? Why not analyze the data as a single group, using leaf area and leaf thickness as (continuous) covariates? Dividing the species into groups this way turns a continuous variable into a categorical one, which is poor statistical practice.
 
-- making stan
+Thank you.
+We now only report the linear model that used leaf area and leaf thickness as covariates as noted above.
 
 > L154-160 see major comment 3
 
@@ -107,7 +106,6 @@ We have added columns to explain the number of species, the number of individual
 > L182 I believe leaf punch size was something that varied between datasets, and was never measured on the same leaves. I'm therefore confused as to how the authors are interpreting the effect of "leaf punch size" in their models: could this not simply be a reflection of the different species represented in the different datasets?
 
 - caveate
-
 
 > L183-184 Which metric had higher ITV? That is a more relevant result than simply the R2 value.
 
@@ -147,15 +145,32 @@ We have added columns to explain the number of species, the number of individual
 
 > Lines 105 and 106: Why did you only collect the data in China and Japan. Here, I think, you had better add one to three sentences to explain the feasibility of showing general results for other floras.
 
+Thank you.
+We have added MAT and MAP in the main text to support that our dataset covers the wide climate ranges in the distribution of broad-leaved tree species.
+
 > Lines 124 and 125: Why did you maintain leaf petiole in calculating LMA? It is strange for me, because it might inflate LMA given that its definition is dry mass per unit leaf area. What is the meaning for "avoiding thick veins"? Do you mean in the experiment you punch the positions without having the secondary order veins?
+
+The main function of leaves is to deliver a profitable return on the investment that has been made in constructing the leaf (Westoby, Reich and Wright 2013), and thus it is also natural to include leaf petiole in LMA.
+According to the trait hand book (Perez-Harguindeguy 2013), either including or excluding petiole will fine.
+As long as we checked the TRY data that we have now, the numbers of LMA records for those two measurements are very similar:
+the number of records of LMA (or 1/SLA) including petiole is 57,033, and
+the number of records of LMA (or 1/SLA) excluding petiole is 59,103.
+(add conclusion).
+
+Thank you.
+We now more clearly explain that thick veins are secondary order veins.
+We have also added detailed LMA measurement protocol in Fig. SX.
 
 > Lines 129-131: Can you class the leaf shapes of 334 woody species you have used? It will affect your sampling positions you are describing here.
 
-> Lines 151-153: I think, a frequency of LA is needed as a supplementary figure to show the feasibility of such divisions.
+We have added detailed LMA measurement protocol in Fig. SX as note above.
+
+> Lines 151-153: I think, a frequency of LA is needed as a supplementary figure to show the feasibility of such division.
 
 > Line 157: Are you that the unit of CV is not a percentage? In general, an unitless variable, we usually use its percentage.
 
 > Line 163: It is incorrect to use 1000 bootstrap replates to calculate a confidence interval! In general, >= 30 replates are enough for calculating a standard deviation, and >= 2000 replates to calculate a confidence interval.
+
 
 > Lines 168 and 169: It is a strange result for me. Leaf area has been demonstrated to be negatively correlated to mean leaf thickness at the species level (see Figure 4 in Lin et al., 2018). It seems that you obtained a negative correlation based on the pooled data of biomes. If possible, I suggest adding several sentences to discuss the reasons for the pooled data in the Discussion section.
 
