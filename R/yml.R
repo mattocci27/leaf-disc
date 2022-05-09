@@ -14,7 +14,8 @@ write_yml <- function(path, sp_mean, full_data_cv_csv, tree, lma_yaku_re, boot_f
   la_lt_p <- ifelse(la_lt_p < 0.05, "< 0.05", la_lt_p)
 
   pet <- lma_yaku_re |>
-    filter(!is.na(petiole_dw))
+    filter(!is.na(petiole_dw)) |>
+    filter(!is.na(lma_disc))
 
   d_cv <- full_data_cv_csv |>
     filter(!is.na(lma_disc)) |>
