@@ -294,6 +294,12 @@ write_yml <- function(path, sp_mean, full_data_cv_csv, tree, lma_yaku_re, boot_f
     out,
     sep = "\n")
   writeLines(
+    paste0("all_tree: ",
+           tree |>
+             nrow()),
+    out,
+    sep = "\n")
+  writeLines(
     paste0("yaku_sp: ",
            sp_mean |>
              filter(location == "Yakushima") |>
