@@ -70,15 +70,19 @@ Thank you.
 We now use Bao's CV estimator (CV4) instead of  coefficient of variation of log-normally distributed data ($CV = \sqrt{exp(s_{\mathrm{ln}}^2) - 1}$).
 The pattern didn't change qualitatively.
 
-
-- Added Bao
+- remove?
 
 > Line comments:
 
 > L49 I think the introduction would benefit from an initial sentence to give more context for the definition of LMA (perhaps by restructuring this paragraph to introduce traits and the LES first, and then defining LMA in that context).
 
+Thank you.
+We now introduce the LES in the first sentence so that the readers can understand the role of LMA in LES more clearly.
 
 > L69-73 This sentence is crucial for your hypotheses but is buried in the middle of this paragraph. I suggest breaking this paragraph (beginning on line 63) up into 2: the first describing different methods of measurement and how commonly each are used, and any previous attempts to compare them. The second paragraph can get into which leaf types are likely to give similar or different estimates based on the two metrics and why.
+
+Thank you.
+We now break up the paragraph into two sections: the first describing the different methods and their record numbers in TRY, and previous works that compared them, and the second describing the expected effects of leaf morphology on the relationship between whole-leaf and leaf disc LMA.
 
 > L82-84 I find this introduction of ITV to be confusing. ITV has a robust literature which is not cited here (for a recent review, see Westerband, Funk, and Barton, 2021. Intraspecific trait variation in plants: a renewed focus on its role in ecological processes. Annals of botany). The authors should briefly introduce this concept and it's ecological relevance before applying it to their question of which method generates greater estimates of ITV and why.
 
@@ -172,6 +176,8 @@ We have also added detailed LMA measurement protocol in Fig. SX.
 We have added detailed LMA measurement protocol in Fig. SX as note above.
 
 > Lines 151-153: I think, a frequency of LA is needed as a supplementary figure to show the feasibility of such division.
+
+We have removed XXX.
 
 > Line 157: Are you that the unit of CV is not a percentage? In general, an unitless variable, we usually use its percentage.
 
