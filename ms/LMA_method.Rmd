@@ -117,7 +117,7 @@ Manuscript received _______; revision accepted _______.
 # ABSTRACT
 
 **PREMISE:**
-Leaf mass per area (LMA), which is the key trait in leaf economic spectrum and plant growth analysis, is measured from leaf discs or whole leaves.
+Leaf mass per area (LMA), which is an important functional trait in leaf economic spectrum and plant growth analysis, is measured from leaf discs or whole leaves.
 These differences in the measurement methods may lead to large differences in the estimates of LMA values.
 
 **METHODS:**
@@ -148,17 +148,20 @@ within-leaf variation
 
 # INTRODUCTION
 
-Leaf mass per area (LMA), determined by lamina thickness and leaf tissue density (LD), describes how much biomass is invested into given photosynthetic leaf area thus reflecting a cost for light interception, which is the key trait of the leaf economic spectrum (LES) [@Wright2004a; @Poorter2009; @Onoda2017].
+The primary function of leaves is to return photosynthetic revenue on the investment that has been made in constructing the leaf [@Westoby2013], which is inherently economic in nature [i.e., leaf economic spectrum, @Wright2004a].
+Leaf mass per area (LMA), determined by lamina thickness and leaf tissue density (LD), describes how much biomass is invested into given photosynthetic leaf area, which is the key trait of the leaf economic spectrum [@Wright2004a; @Poorter2009; @Onoda2017].
 Generally, resource-acquisitive species (fast-growing species) tend to have low LMA values, showing high photosynthesis, high nutrients, and often have fast leaf turnover [@Wright2004a].
 In contrast, resource-conservative species (slow-growing species) often have higher LMA values with the opposite patterns [@Garnier1994; @Wright2004a; @Reich2014; @Diaz2016].
 The LMA is also frequently used in plant growth analysis [@Evans1972; @Poorter2014; @Falster2018] because relative growth rates (RGR) can be decomposed into the product of net assimilation rate (NAR), leaf mass ratio (LMR) and LMA (i.e., RGR = NAR $\times$  LMR $\times$ LMA^-1^).
 Another appealing feature of LMA is that it is relatively easy to measure large numbers of species [i.e., 'soft' trait, @Diaz2004].
 Therefore, LMA has been of interests to ecologists and widely used since the first report more than a century ago [@Hanson1917].
+Actually, LMA was the most often requested leaf trait in the TRY plant data database (2,977 out of 7,330 requests), followed by leaf nitrogen contents per leaf dry mass [1,938 requests, @Kattge2020 [status October 1 2019]].
 
 LMA values can be determined by either
-1) a whole leaf including or excluding petioles, and
-2) a leaf disc excluding all major veins or petioles [@Perez-Harguindeguy2013; @Kattge2020].
-Although some studies do not make clear what protocol was followed, these differences in the measurement methods may lead to large discrepancies in the estimates of LMA values because the major vein allocation (major vein, which includes first to second or third-order veins, volume per area) has been reported to be one of the main determinants for the variation in LMA [@John2017].
+1) a whole leaf including (88,490 observations and 7,068 species) or excluding petioles (64,838 observations and 7,558 species), and
+2) a leaf disc excluding all major veins or petioles (645 observations and 403 species) [@Perez-Harguindeguy2013; @Kattge2020 [TRY version 5]].
+Although many studies do not make clear what protocol was followed (146,315 observations and 13,101 species), these differences in the measurement methods may lead to large discrepancies in the estimates of LMA values because the major vein allocation (major vein, which includes first to second or third-order veins, volume per area) has been reported to be one of the main determinants for the variation in LMA [@John2017].
+
 Since larger leaves tend to invest more of their mass into dense midribs and petiole for support [@Niinemets2006; @Niinemets2007], and thinner leaves have clearly visible and large-diameter veins with less uniform leaf structure (i.e., kite-type leaves; [@Grubb1986]), discrepancies in the estimates of whole-leaf LMA and leaf disc LMA might be greater for larger and thinner leaves.
 If leaf disc LMA largely and consistently underestimates whole-leaf LMA, some calibrations may be required to combine or compare those different estimates [@Kraft2008; @Onoda2011].
 If divergencies between the estimates based on the different methods are large and inconsistent (i.e., low *R^2^* values), this is difficult to calibrate and should inflate errors in the subsequent analyses.
