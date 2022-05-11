@@ -811,7 +811,6 @@ pred_mcmc <- function(draws, sp_mean, n = 80) {
   upr_sig <- apply(sig_mat, 1, \(x)quantile(x, 0.975))
   mu_mat <- exp(rep(1, n) %*% t(draws$`beta[1]`) + x_lt %*% t(draws$`beta[2]`))
   mean_mu <- apply(mu_mat, 1, mean)
-  mean_mu <- apply(mu_mat, 2, mean) |> mean()
   pred_up <- mean_mu + mean_sig
   pred_lo <- mean_mu - mean_sig
   x_bar <- log(sp_mean$ld_leaf) |> mean()
