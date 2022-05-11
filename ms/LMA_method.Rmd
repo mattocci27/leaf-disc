@@ -155,13 +155,14 @@ In contrast, resource-conservative species (slow-growing species) often have hig
 The LMA is also frequently used in plant growth analysis [@Evans1972; @Poorter2014; @Falster2018] because relative growth rates (RGR) can be decomposed into the product of net assimilation rate (NAR), leaf mass ratio (LMR) and LMA (i.e., RGR = NAR $\times$  LMR $\times$ LMA^-1^).
 Another appealing feature of LMA is that it is relatively easy to measure large numbers of species [i.e., 'soft' trait, @Diaz2004].
 Therefore, LMA has been of interests to ecologists and widely used since the first report more than a century ago [@Hanson1917].
-Actually, LMA was the most often requested leaf trait in the TRY plant data database (2,977 out of 7,330 requests), followed by leaf nitrogen contents per leaf dry mass [1,938 requests, @Kattge2020 [status October 1 2019]].
+Actually, LMA has one of the best species coverage in leaf traits of the TRY plant data database (16,460 species) and was also the most often requested leaf trait (2,977 out of 7,330 requests), followed by leaf by leaf nitrogen (N) contents per leaf dry mass [12,238 species, 1,938 requests, @Kattge2020 [TRY version 5, status October 1 2019]]
 
-LMA values can be determined by either
+LMA values can be determined by either measuring whole-leaf (including or excluding petioles) or leaf disc samples [@Perez-Harguindeguy2013].
+According to the TRY database version 5, recorded numbers of observations and species are as follows:
 1) a whole leaf including (88,490 observations and 7,068 species) or excluding petioles (64,838 observations and 7,558 species; note that this could include leaf disc samples), and
-2) a leaf disc excluding all major veins or petioles (645 observations and 403 species) [@Perez-Harguindeguy2013; @Kattge2020 [TRY version 5]].
+2) a leaf disc excluding all major veins or petioles (645 observations and 403 species) [@Kattge2020 [TRY version 5]].
 Although many studies do not make clear what protocol was followed (146,315 observations and 13,101 species), these differences in the measurement methods may lead to large discrepancies in the estimates of LMA values because the major vein allocation (major vein, which includes first to second or third-order veins, volume per area) has been reported to be one of the main determinants for the variation in LMA [@John2017].
-Previous works that compared estimates of whole-leaf LMA and leaf disc LMA using tropical tree species showed good correlations between the two [*R^2^* = 0.92 for whole-leaves  in @Kraft2008, *R^2^* = 0.92 for leaf laminas in @Onoda2011], but the comparisons between the two estimates in other biomes have rarely been examined.
+Previous works that compared estimates of whole-leaf LMA and leaf disc LMA using tropical tree species showed good correlations between the two [*R^2^* = 0.92 for whole-leaves in @Kraft2008; *R^2^* = 0.92 for leaf laminas in @Onoda2011], but the comparisons between the two estimates in other biomes have rarely been examined.
 
 Since larger leaves tend to invest more of their mass into dense midribs and petiole for support [@Niinemets2006; @Niinemets2007], and thinner leaves have clearly visible and large-diameter veins with less uniform leaf structure (i.e., kite-type leaves; [@Grubb1986]), discrepancies in the estimates of whole-leaf LMA and leaf disc LMA might be greater for larger and thinner leaves.
 (**add leaf density**)
@@ -169,11 +170,24 @@ If leaf disc LMA largely and consistently underestimates whole-leaf LMA (i.e., d
 If divergencies between the estimates based on the different methods are large and inconsistent (i.e., differences in variances and low *R^2^* values), this is difficult to calibrate and should inflate errors in the subsequent analyses.
 To date, however, only a database from a single region, Panama Plant Traits Database [@Wright2010], is available in the TRY [@Kattge2020] that have both estimates of LMA from small leaf discs and whole leaves including petioles, limiting of our understanding of under what conditions estimates of LMA from leaf discs are reliable estimates of whole-leaf LMA.
 
-In this study, we aimed to investigate what extent whole-leaf (including petiole) and leaf disc LMA match, whether the relationships between whole-leaf LMA and leaf disc LMA varied in leaf tissue density, leaf area and leaf thickness, and whether amounts of intraspecifc variations for each match between whole-leaf and leaf disc based estimates.
+Intraspecific trait variation (ITV), which reflects both heritable genetic variation and phenotypic plasticity, influences plant responses to abiotic and biotic interactions (REF).
+The extent of ITV within and among communities for LMA can be similar to or greater than interspecific trait variation [e.g., @Messier2010; @Kichenin2013; @Fajarado2018].
+The coefficient of variation (CV) is often used for quantifying the extent of ITV for each species [@Yang2020; @Westerband2021].
+Sources of ITV for whole-leaf samples are variation among individuals within the same species and variation among leaves within the same individuals [@Messier2010; @Messier2017].
+An additional source of trait variation for leaf disc samples is variation among leaf discs within the same leaves.
+Given that leaf disc samples have more sources of ITV than whole-leaf samples, the effects of discrepancies between whole-leaf LMA and leaf disc LMA might be large when ITV is quantified based on CV.
+Despite the importance of ITV in community ecology [@Siefert2015; @Westerband2021], the effect of different measurement methods on the extent of ITV has been largely ignored.
+
+In this study, we aimed to investigate the relationship between whole-leaf (including petiole) LMA and leaf disc LMA,
+whether the relationship varied with leaf tissue density, leaf area and leaf thickness, and
+whether the extent of ITV for each species match between whole-leaf and leaf disc based estimates.
 We collected a total of `r val$all_sp` woody species from four biomes (tropics, subtropics, savanna, and warm-temperate) to cover the wide range of geography.
-We predicted that the overall relationship between whole-leaf LMA and disc LMA would be weaker than previous reported LMA data (*R^2^* = 0.92 for whole-leaves in @Kraft2008, *R^2^* = 0.92 for leaf laminas in @Onoda2011) because we collected data with various leaf sizes from a wide range of climates.
-We also predicted that species with larger and/or thinner leaves would show weaker correlations.
-Finally, we predicted that amounts of intraspecifc variations for each species do not match well between whole-leaf and leaf disc based estimates.
+We predicted that whole-leaf LMA would be greater than leaf disc LMA because whole-leaf LMA includes petioles and midribs that have greater dry mass per unit area than laminas [@Niinemets2007].
+
+We also predicted that species with larger and/or thinner leaves would show weaker correlations and larger differences in LMA estimates.
+(**add leaf density**)
+
+Finally, we predicted that the extent of ITV do not match well between whole-leaf and leaf disc based estimates because leaf disc samples have more sources of variation than whole-leaf samples.
 
 
 # MATERIALS AND METHODS
@@ -183,24 +197,23 @@ Finally, we predicted that amounts of intraspecifc variations for each species d
 We used newly compiled individual-level plant datasets form a wide ranges of biomes in China and Japan (Table S1) to examine the relationship between whole-leaf and leaf disc-based estimates of leaf traits.
 First, the Yunnan dataset is from three forest plots in Yunnan province, Southwest China, which includes a tropical rain forest (TRF), a tropical hot-dry savanna ecosystem (HDS), and a subtropical evergreen wet forest (STF), with a total of `r val$sp1` species and `r val$tree1` individuals.
 Second, the Yakushima data is from a warm-temperate forest in Yakushima island, Japan, with a total of `r val$yaku_sp` species and `r val$tree3` individuals.
-In total, our data set comprised `r val$all_sp` woody species and `r val$all_tree` individual that ranged from xxx to 24.7 °C in mean annual temperature (MAT) and 732.8 to 4477 mm in mean annual precipitation (MAP) [Table S1; @Eguchi2006; @Song2017; @Fei2018], which covers the wide climate ranges in the distribution of broad-leaved tree species.
+In total, our data set comprised `r val$all_sp` woody species and `r val$all_tree` individual that ranged from 8.1 to 24.7 °C in mean annual temperature (MAT) and 732.8 to 4477 mm in mean annual precipitation (MAP) [Table S1; @Eguchi2006; @Song2017; @Fei2018], which covers the wide climate ranges in the distribution of broad-leaved tree species.
 The methodologies for trait sampling and measurement are slightly different between the Yunnan and the Yakushima dataset, which we describe bellow.
 
 *Measurements of leaf disc and whole-leaf LMA*
-
-We excluded species that had tiny leaves or leaflets (length <1 cm) because it was not practical to measure leaf disc LMA.
 
 At the TRF site, we collected leaf samples from trees within reach of a canopy crane (88 m tall with a 60 m long boom).
 In the HDS, and STF sites, we used a 12-m long pruner to collect samples for most of the target species.
 In case of tall individuals that out of the reach of pruner, we used a rope climbing to reach the canopy, then sampled branches with the long pruner.
 In Yakushima, we used 15-m poles for our leaf sampling.
 At least six sun-exposed healthy leaves were sampled from each of 3 to 6 individuals for each species.
-Trait values were averaged at the species- and individual-level for the analyses.
+Trait values were averaged at the species-level for the analyses.
 For compound-leaved species, we referred a leaflet (the minimum photosynthetic unit) as a single leaf in our study.
+We excluded species that had tiny leaves or leaflets (length <1 cm) because it was not practical to measure leaf disc LMA.
 
 To determine what extent LMA values were affected by the different methods, LMA were determined (i) LMA based on a whole leaf including petioles and (ii) LMA based on leaf disc avoiding thick veins.
 Three 0.6-cm diameter discs were taken from the base, middle and tip of each leaf using a hole punch in the Yunnan dataset.
-Two 1.0-cm diameter discs were taken from each leaf were in the Yakushima dataset.
+Two 1.0-cm diameter discs were taken from each leaf were in the Yakushima dataset (see Fig. S1 for more details).
 Fresh leaf area (LA; cm^-2^) of leaf materials (whole leaves including petioles and midribs) was measured using a scanner and ImageJ software by the R package *LeafArea* [@Katabuchi2015].
 Fresh leaf thickness (LT; mm) was measured using a micrometer in three points at the base, middle and tip of the leaf using a micrometer (Mitutoyo 293-240, Mitutoyo Corporation, Kawasaki, Japan) with a precision at 0.001 mm.
 Thickness of each leaf disc was also measured for the Yunnan dataset but not for the Yakushima dataset, which enables us to estimate whole-leaf and leaf disc leaf tissue density (LD; g cm^-3^) separately in the Yunnan dataset.
@@ -250,6 +263,22 @@ The Stan code use to fit models is available from Github at: [https://github.com
 Convergence of the posterior distribution was assessed with the Gelman-Rubin statistic with a convergence threshold of 1.1 for all parameters [@Gelman2013].
 
 We also perfomred ordinary least-squares (OLS) regressions to see the relationship between whole-leaf to leaf disc LMA ratio and petiole to leaf dry mass ratio and between leaf area petiole to leaf dry mass ratio, using a subset of the dataset in which we measured leaf lamina and petiole dry mass separately.
+
+*Relationship between disc-based and whole-leaf estiamtes of intraspecific variation*
+
+The extent of intraspecific variation (ITV) was calculated using Bao's CV estimator [@Yang2020];
+
+\begin{align}
+CV = CV_1 - \frac{CV_1^3}{N} + \frac{CV_1}{4N} + \frac{CV_1^2 \gamma_1}{2N} + \frac{CV_1 \gamma_2}{8N} (\#eq:CV)
+\end{align}
+
+where $CV_1 = s/\bar{x}$, $s$ is the sample standard deviation and $\bar{x}$ is the sample mean, *N* is the sample size, and $\gamma_1$ and $\gamma_2$ are the skewness and kurtosis of the trait distribution.
+Bao's CV estimator is a robust method to quantify ITV based on coefficient of variation (CV) when sample size is small [@Yang2020].
+We calulcated CV for species that have at least 5 indivdiuals as recommended in @Westerband2021.
+Ideally, 20 individuals for each species are required for robust estimation of CV [i.e., <5% differences from the true ITV; @Yang2020].
+
+SMA analyses were run as described above.
+We also perfmoed the paired t-test to compare the extent of ITV between whole-leaf LMA and leaf disc LMA.
 All statistical analyses were conducted in R version 4.1.3 [@RCoreTeam2021].
 
 # RESULTS
@@ -262,6 +291,9 @@ Species with larger leaves had greater estimate of the estimate of whole-leaf to
 Species with thinner leaves had grater variance in the estimate of whole-leaf to leaf disc LMA ratio (Fig. 2c), which was only significant for leaves obtained by a small punch.
 Posteriors of coefficients are summarized in (Fig. SX).
 Leaf disc and whole-leaf LMA estimate diverged for species with greater investment in petiole dry mass (Fig. 3a). Large-leaved species tended to have greater investment for petiole dry mass than small-leaved species (Fig. 3b).
+
+The extent of intraspecific trait variation (CV; coefficient of variation) only weakly matched between whole-leaf and disc-based estimates (Fig.4)
+Altough there were no stiatical differences in the SMA slope or elevation(SMA slope: `r val$sma_slope_cv_mean` [95%CI: `r val$sma_slope_cv_lwr`, `r val$sma_slope_cv_upr`], SMA intercept: `r val$sma_int_cv_mean` [95%CI: `r val$sma_int_cv_lwr`, `r val$sma_int_cv_upr`]), leaf disc LMA had greater CV than whole-leaf LMA (*t* = `r val$t_test_t`, *d.f.* = `r val$t_test_df`, *P* < 0.001).
 
 # DISCUSSION
 
@@ -415,7 +447,6 @@ All the samples were obtained with a diameter 1.0-cm leaf punch.
 Relationships between coefficient of variation (Bao's CV estimator, Eq. 5) in leaf trait values determined by using whole leaves and leaf discs: (a) leaf mass per area (LMA).
 The correlation is significant (*P* < 0.001).
 Details as in Fig. 1.
-Note that the axes are square root scales.
 
 ![](../figs/cv_pool.png)
 

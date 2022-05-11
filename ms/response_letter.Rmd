@@ -86,9 +86,15 @@ We now break up the paragraph into two sections: the first describing the differ
 
 > L82-84 I find this introduction of ITV to be confusing. ITV has a robust literature which is not cited here (for a recent review, see Westerband, Funk, and Barton, 2021. Intraspecific trait variation in plants: a renewed focus on its role in ecological processes. Annals of botany). The authors should briefly introduce this concept and it's ecological relevance before applying it to their question of which method generates greater estimates of ITV and why.
 
+- removed
+
 > L99-100 It may bear repeating here why you expect the estimates to match up better for smaller and/or thicker leaves
 
+- working
+
 > L101-102 again, might be worth stating why (even if it is discussed above)
+
+- working
 
 > L107- 113 The description of the sites/data is a little confusing: it seems that there are two datasets: one which includes 3 different sites, and another that includes a fourth site, for which a subset of the samples had additional measurement taken. I recommend clarifying this section to explain the different levels of organization, as well as including some of the methodological data in Table S1 (e.g. number of total samples, whether leaf thickness was measured, leaf punch size).
 
