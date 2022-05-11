@@ -116,6 +116,28 @@ clean_stan_data <- function(sp_mean, model = c("no", "LMA", "LD", "LD2"),
     )
 }
 
+clean_stan_data_cv <- function(sp_mean, sp_cv) {
+  sp_mean <- left_join(sp_cv, sp_mean)
+  x <- cbind(
+    intercept = rep(1, nrow(sp_mean)),
+    lma_disc_cv = sp_mean$lma_disc_cv,
+    lma_disc = sp_mean$ld_leaf,
+    la = sp_mean$la,
+    lt = sp_mean$lt
+  )
+
+  x[, -1] <- apply(x[, -1], 2, \(x)scale(log(x)))
+
+  list(
+    N = nrow(sp_cv),
+    K = ncol(x),
+    log_y = sp_mean$lma_leaf_cv,
+#    log_lma_disc = sp_mean$lma_disc_cv,
+    x = x
+  )
+}
+
+
 clean_stan_data_sep <- function(sp_mean, yaku = TRUE) {
   if (yaku) {
     sp_mean <- sp_mean |> filter(location == "Yakushima")
@@ -126,7 +148,7 @@ clean_stan_data_sep <- function(sp_mean, yaku = TRUE) {
   x <- cbind(
     intercept = rep(1, nrow(sp_mean)),
     #lma_disc = sp_mean$lma_disc / sp_mean$lt,
-    lma_disc = sp_mean$ld_disc,
+    lma_disc = sp_mean$lma_leaf,
     la = sp_mean$la,
     lt = sp_mean$lt
   )

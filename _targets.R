@@ -438,6 +438,20 @@ list(
     seed = 123
    ),
 
+   tar_stan_mcmc(
+    fit_sp_cv,
+    "stan/simple.stan",
+    data = clean_stan_data_cv(sp_mean, sp_cv),
+    refresh = 0,
+    chains = 4,
+    parallel_chains = getOption("mc.cores", 4),
+    iter_warmup = 2000,
+    iter_sampling = 2000,
+    # adapt_delta = 0.95,
+    # max_treedepth = 15,
+    seed = 123
+   ),
+
   # sma works but error models do not work
   #  tar_stan_mcmc(
   #   fit_sp_4,
@@ -485,6 +499,11 @@ list(
     coef_sp_tab_punch3,
     create_stan_tab(fit_sp_punch3_draws_model2)
   ),
+  tar_target(
+    coef_sp_tab_cv,
+    create_stan_tab(fit_sp_cv_draws_simple)
+  ),
+
   tar_target(
     coef_sp_tab_punch1,
     create_stan_tab(fit_sp_punch_draws_model)
