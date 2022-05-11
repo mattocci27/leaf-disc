@@ -149,7 +149,7 @@ within-leaf variation
 # INTRODUCTION
 
 The primary function of leaves is to return photosynthetic revenue on the investment that has been made in constructing the leaf [i.e., leaf economic spectrum, @Wright2004a; @Westoby2013].
-Leaf mass per area (LMA), determined by lamina thickness and leaf tissue density (LD), describes how much biomass is invested into given photosynthetic leaf area, which is the key trait of the leaf economic spectrum [@Wright2004a; @Poorter2009; @Onoda2017].
+Leaf mass per area (LMA), determined by lamina thickness and leaf tissue density (LD), describes how much biomass is invested into given photosynthetic leaf area, which is a key trait in the leaf economic spectrum [@Wright2004a; @Poorter2009; @Onoda2017].
 Generally, resource-acquisitive species (fast-growing species) tend to have low LMA values, showing high photosynthesis, high nutrients, and often have fast leaf turnover [@Wright2004a].
 In contrast, resource-conservative species (slow-growing species) often have higher LMA values with the opposite patterns [@Garnier1994; @Wright2004a; @Reich2014; @Diaz2016].
 The LMA is also frequently used in plant growth analysis [@Evans1972; @Poorter2014; @Falster2018] because relative growth rates (RGR) can be decomposed into the product of net assimilation rate (NAR), leaf mass ratio (LMR) and LMA (i.e., RGR = NAR $\times$  LMR $\times$ LMA^-1^).
@@ -164,7 +164,7 @@ According to the TRY database version 5, recorded numbers of observations and sp
 Although many studies do not make clear what protocol was followed (146,315 observations and 13,101 species), these differences in the measurement methods may lead to large discrepancies in the estimates of LMA values because the major vein allocation (major vein, which includes first to second or third-order veins, volume per area) has been reported to be one of the main determinants for the variation in LMA [@John2017].
 Previous works that compared estimates of whole-leaf LMA and leaf disc LMA using tropical tree species showed good correlations between the two [*R^2^* = 0.92 for whole-leaves in @Kraft2008; *R^2^* = 0.92 for leaf laminas in @Onoda2011], but the comparisons between the two estimates in other biomes have rarely been examined.
 
-Since larger leaves tend to invest more of their mass into dense midribs and petiole for support [@Niinemets2006; @Niinemets2007], and thinner leaves have clearly visible and large-diameter veins with less uniform leaf structure (i.e., kite-type leaves; [@Grubb1986]), discrepancies in the estimates of whole-leaf LMA and leaf disc LMA might be greater for larger and thinner leaves.
+Since larger leaves tend to invest more of their mass into dense midribs and petiole for support [@Niinemets2006; @Niinemets2007; @Li2022; @Li2022a], and thinner leaves have clearly visible and large-diameter veins with less uniform leaf structure (i.e., kite-type leaves; [@Grubb1986]), discrepancies in the estimates of whole-leaf LMA and leaf disc LMA might be greater for larger and thinner leaves.
 (**add leaf density**)
 If leaf disc LMA largely and consistently underestimates whole-leaf LMA (i.e., differences in means), some calibrations may be required to combine or compare those different estimates [@Kraft2008; @Onoda2011].
 If divergencies between the estimates based on the different methods are large and inconsistent (i.e., differences in variances and low *R^2^* values), this is difficult to calibrate and should inflate errors in the subsequent analyses.
@@ -225,9 +225,9 @@ We do not present results of LD in the main text, because differences between wh
 
 *Relationship between whole-leaf and leaf disc LMA*
 
-A bivariate trait relationships between disc-based and whole-leaf log-transformed LMA were summarized with variance explained (*R^2^*) based on Pearson correlations and with standardized major axis (SMA) regressions [@Warton2006] across all the species.
+A bivariate trait relationship between disc-based and whole-leaf log-transformed LMA was summarized with variance explained (*R^2^*) based on Pearson correlations and with a standardized major axis (SMA) regression [@Warton2006] across all the species.
 
-SMA analyses were run using the R package *smatr* [@Warton2012a]; this included tests for slope heterogeneity and elevation differences between disc-based and whole-leaf estimates of LMA values.
+A SMA analysis was run using the R package *smatr* [@Warton2012a]; this included tests for slope heterogeneity and elevation differences between disc-based and whole-leaf estimates of LMA values.
 Confidence intervals of SMA estimates were based on 2000 bootstraps.
 
 *Effects of leaf morphology on the relationship between whole-leaf and leaf disc LMA*
@@ -255,10 +255,10 @@ The standard deviation of whole-leaf LMA ($\sigma_i$) was assumed to follow a no
 where $\tilde{\sigma_i}$ is a hyperparameter for $\sigma_i$ ,
 $\omega^2$ is a scaling hyperparameter, and $\gamma$ are coefficients.
 To allow comparisons among parameter estimates, $\mathrm{ln}(LD)$, $\mathrm{ln}(LA)$, and $\mathrm{ln}(LT)$ were scaled to a mean of 0 and standard deviation of 1.
-Note that this model does not include measurement errors of leaf disc LMA implemented in the following analysis, because there are too many scaling parameters
+Note that this model does not include measurement errors of leaf disc LMA implemented in the previous SMA analysis, because there are too many scaling parameters
 
 Posterior distributions of all parameters were estimated using the Hamiltonian Monte Carlo algorithm (HMC) implemented in Stan [@Carpenter2017] using the weakly-informative priors [@Gelman2008].
-See supplement XXXX for more detail.
+See Appendix SX for more detail.
 The Stan code use to fit models is available from Github at: [https://github.com/mattocci27/leaf-disc](https://github.com/mattocci27/leaf-disc).
 Convergence of the posterior distribution was assessed with the Gelman-Rubin statistic with a convergence threshold of 1.1 for all parameters [@Gelman2013].
 
@@ -273,7 +273,7 @@ CV = CV_1 - \frac{CV_1^3}{N} + \frac{CV_1}{4N} + \frac{CV_1^2 \gamma_1}{2N} + \f
 \end{align}
 
 where $CV_1 = s/\bar{x}$, $s$ is the sample standard deviation and $\bar{x}$ is the sample mean, *N* is the sample size, and $\gamma_1$ and $\gamma_2$ are the skewness and kurtosis of the trait distribution.
-Bao's CV estimator is a robust method to quantify ITV based on coefficient of variation (CV) when sample size is small [@Yang2020].
+Bao's CV estimator is a robust method to quantify ITV based on a coefficient of variation (CV) when sample size is small [@Yang2020].
 We calulcated CV for species that have at least 5 indivdiuals as recommended in @Westerband2021.
 Ideally, 20 individuals for each species are required for robust estimation of CV [i.e., <5% differences from the true ITV; @Yang2020].
 
@@ -444,8 +444,10 @@ All the samples were obtained with a diameter 1.0-cm leaf punch.
 
 ![](../figs/petiole.png)
 
+\newpage
+
 **Fig. 4.**
-Relationships between coefficient of variation (Bao's CV estimator, Eq. 5) in leaf trait values determined by using whole leaves and leaf discs: (a) leaf mass per area (LMA).
+Relationships between coefficient of variation (Bao's CV estimator, Eq. 5) in LMA values determined by using whole leaves and leaf discs.
 The correlation is significant (*P* < 0.001).
 Details as in Fig. 1.
 
