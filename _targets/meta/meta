@@ -59,10 +59,10 @@ create_stan_tb|function|5f0efe9e4cbdafde|||||||||||||||
 create_yaku_sp|function|67304ec8d30c83e3|||||||||||||||
 cv|function|2cc1ad4ed1298658|||||||||||||||
 cv_pool_pdf|stem|6579c8f8bc274ac7|0182151788f7d4b3|a33ec791c6e7c9b2|-1613974060|figs/cv_pool.pdf|t19119.3763748421s|c2a714d6c8b34e19|31906|file|local|vector|||7.526||
-cv_pool_plot|stem|e505487e8861675b|b96d811157187cca|29c4b61c0afa21ba|602139885|figs/cv_pool.png*figs/cv_pool.pdf|t19123.2337782898s|90fbc2c1ef5c40b1|157054|file|local|vector|||6.312||
-cv_pool_plot_rm|stem|26fdba4723e95629|456d62f5d8c85ac7|29c4b61c0afa21ba|1376006609|figs/cv_pool_rm.png*figs/cv_pool_rm.pdf|t19123.2337787991s|5e08400d322c8cd1|155287|file|local|vector|||6.358||
+cv_pool_plot|stem|c4e2789c59138212|b96d811157187cca|a6b1bed0b56f67cf|602139885|figs/cv_pool.png*figs/cv_pool.pdf|t19123.637549472s|1dadbe178ca24e2a|161906|file|local|vector|||6.448||
+cv_pool_plot_rm|stem|046a0ff29ab24c7d|456d62f5d8c85ac7|a6b1bed0b56f67cf|1376006609|figs/cv_pool_rm.png*figs/cv_pool_rm.pdf|t19123.6375491016s|12665cc5cc7568e4|28518|file|local|vector|||6.411||
 cv_pool_png|stem|ee3d31f605ef4a71|59983ccd80c54ca2|32315d10fe796c99|-2120680583|figs/cv_pool.png|t19119.3764572046s|1446a59f23b0690b|163761|file|local|vector|||9.875||
-cv_pool_point|function|8046030b778b2fd2|||||||||||||||
+cv_pool_point|function|b2debba8ef8364bd|||||||||||||||
 cv_sep_pdf|stem|d43c7fce7e2167c8|dfc3d81381f40794|3d0f4b628946b9f5|-1066609951|figs/cv_sep.pdf|t19119.3764299356s|f171788731b028e2|36221|file|local|vector|||11.709||
 cv_sep_plot|stem|8386c9ae1134c9ef|46e6f3f31e1e89dd|d994dfc0c15befcf|-1499911496|figs/cv_sep.png*figs/cv_sep.pdf|t19119.417887457s||266961|file|local|vector|||2.853||Aesthetics must be either length 1 or the same as the data 1 x and y
 cv_sep_png|stem|3742d1dbc142c441|d16dea827d827052|fd60053f079dc805|-1868371106|figs/cv_sep.png|t19119.3765281779s|b63975d9c4f8b7d8|230342|file|local|vector|||12.143||
@@ -237,7 +237,7 @@ lma_yaku_re|stem|c5d539b29bf26afd|2d5c3300b2042821|652fce6d54f9afb8|16344712||t1
 loo_model|stem|0e885dc6c436d80f|1dd9695cad8885bc|88ddebb61240febf|-1911029848||t19123.2683832203s|d6eab0bc0bf98099|184747|rds|local|vector|||11.283||
 my_ggsave|function|2dafd3b2de716c9e|||||||||||||||
 petiole_pdf|stem|e872b119b4a956c2|c3b1eaf48d80037c|b52311aa0b3525f6|1647562864|figs/petiole.pdf|t19119.4100464342s|2d8c143a836452c8|35991|file|local|vector|||1.171||
-petiole_plot|stem|e505487e8861675b|9a27cda2038411e1|b2cb28949b596c24|-1986186134|figs/cv_pool.png*figs/cv_pool.pdf|t19123.2337782898s|90fbc2c1ef5c40b1|157054|file|local|vector|||1.716||
+petiole_plot|stem|5567168579952710|9a27cda2038411e1|b2cb28949b596c24|-1986186134|figs/cv_pool.png*figs/cv_pool.pdf|t19123.6374793779s|7b06cb25081d70eb|10337|file|local|vector|||1.458||
 petiole_png|stem|e5edc47c6a83b240|6913fa251858265e|49c842cbc6581ef0|-1645330511|figs/petiole.png|t19119.4100473601s|ff67cb63ff3a29f4|169672|file|local|vector|||1.26||
 petiole_point|function|4111b1d40232f2af|||||||||||||||
 pred_mcmc|function|c86635fd3f404d08|||||||||||||||

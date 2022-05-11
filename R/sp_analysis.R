@@ -508,15 +508,15 @@ cv_pool_point <- function(sp_cv, remove_outliers = FALSE) {
     filter(lma_leaf_cv < 0.09)
   }
   p <- sp_cv |>
-    ggplot(aes(x = lma_disc_cv, y = lma_leaf_cv)) +
+    ggplot(aes(x = lma_disc_cv * 100, y = lma_leaf_cv * 100)) +
     geom_abline(intercept = 0, slope = 1, lty = 2) +
     geom_point(alpha = 0.6) +
-    scale_x_log10(breaks = c(0.001, 0.01, 0.05, 0.1, 0.15)) +
-    scale_y_log10(breaks = c(0.001, 0.01, 0.05, 0.1, 0.15)) +
+    scale_x_log10(breaks = c(0.001, 0.01, 0.05, 0.1, 0.15) * 100) +
+    scale_y_log10(breaks = c(0.001, 0.01, 0.05, 0.1, 0.15) * 100) +
     geom_sma(se = TRUE, nboot = 2000) +
-    ylab("CV of whole-leaf LMA") +
-    xlab("CV of leaf disc LMA") +
-    coord_fixed(xlim = c(0.005, 0.15), ylim = c(0.005, 0.15)) +
+    ylab("CV of whole-leaf LMA (%)") +
+    xlab("CV of leaf disc LMA (%)") +
+    coord_fixed(xlim = c(0.005, 0.15) * 100, ylim = c(0.005, 0.15) * 100) +
     stat_cor(
        label.x.npc = 0.3,
        label.y.npc = 0.15,
