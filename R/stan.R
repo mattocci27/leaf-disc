@@ -774,9 +774,9 @@ pred_mcmc <- function(draws, sp_mean, n = 80) {
 
   # LA for small
   sig_mat <- exp(rep(1, n) %*% t(draws$`gamma[1]` + draws$`gamma[5]`))
-  upr_sig <- apply(sig_mat, 1, \(x)quantile(x, 0.975))
   mu_mat <- exp(rep(1, n) %*% t(draws$`beta[1]` + draws$`beta[5]`))
   mean_mu <- apply(mu_mat, 2, mean) |> mean()
+  mean_sig <- apply(sig_mat, 1, mean) |> mean()
   pred_up <- mean_mu + mean_sig
   pred_lo <- mean_mu - mean_sig
   x_bar <- log(sp_mean$la) |> mean()
