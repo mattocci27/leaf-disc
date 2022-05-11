@@ -171,7 +171,7 @@ If divergencies between the estimates based on the different methods are large a
 To date, however, only a database from a single region, Panama Plant Traits Database [@Wright2010], is available in the TRY [@Kattge2020] that have both estimates of LMA from small leaf discs and whole leaves including petioles, limiting of our understanding of under what conditions estimates of LMA from leaf discs are reliable estimates of whole-leaf LMA.
 
 Intraspecific trait variation (ITV), which reflects both heritable genetic variation and phenotypic plasticity, influences plant responses to abiotic and biotic interactions (REF).
-The extent of ITV within and among communities for LMA can be similar to or greater than interspecific trait variation [e.g., @Messier2010; @Kichenin2013; @Fajarado2018].
+The extent of ITV within and among communities for LMA can be similar to or greater than interspecific trait variation [e.g., @Messier2010; @Kichenin2013; @Fajardo2018].
 The coefficient of variation (CV) is often used for quantifying the extent of ITV for each species [@Yang2020; @Westerband2021].
 Sources of ITV for whole-leaf samples are variation among individuals within the same species and variation among leaves within the same individuals [@Messier2010; @Messier2017].
 An additional source of trait variation for leaf disc samples is variation among leaf discs within the same leaves.
@@ -279,21 +279,22 @@ Ideally, 20 individuals for each species are required for robust estimation of C
 
 SMA analyses were run as described above.
 We also perfmoed the paired t-test to compare the extent of ITV between whole-leaf LMA and leaf disc LMA.
-All statistical analyses were conducted in R version 4.1.3 [@RCoreTeam2021].
+All statistical analyses were conducted in R version 4.1.3 [@RCoreTeam2022].
 
 # RESULTS
 
 There were a significant shift in elevation between whole-leaf and leaf disc LMA (Fig.1, SMA slope: `r val$sma_slope_all_mean` [95%CI: `r val$sma_slope_all_lwr`, `r val$sma_slope_all_upr`], SMA intercept: `r val$sma_int_all_mean` [95%CI: `r val$sma_int_all_lwr`, `r val$sma_int_all_upr`]), suggesting that the whole-leaf estimates of LMA were `r val$sma_per_all_mean`% [95%CI: `r val$sma_per_all_lwr`, `r val$sma_per_all_upr`] greater than disc-based estimates in the arithmetic scale.
-Leaf tissue density, leaf area, leaf thickness and leaf punch size influenced the relationship between the whole-leaf LMA and leaf disc LMA (Fig. 2).
-When a large leaf punch was used, species with lower leaf tissue density had grater variance in the estimate of whole-leaf to leaf disc LMA ratio (Fig. 2a).
-Species with lower leaf tissue density had greater estimate whole-leaf to leaf disc LMA ratio when a small leaf punch was used (Fig. 2a).
+
+Leaf tissue density, leaf area, leaf thickness and leaf punch size influenced the relationship between the whole-leaf LMA and leaf disc LMA (Fig. 2 and Appendix SX).
+Species with lower leaf tissue density had greater variance in the estiamte of whole-leaf to leaf disc LMA ratio (Fig. 2a).
+When a small leaf punch was used, this pattern was more pronounced and leaf disc and whole-leaf LMA estimate diverged for species with higher leaf tissue density (Fig. 2a).
 Species with larger leaves had greater estimate of the estimate of whole-leaf to leaf disc LMA ratio (Fig. 2b), which was only significant for leaves obtained by a large punch.
 Species with thinner leaves had grater variance in the estimate of whole-leaf to leaf disc LMA ratio (Fig. 2c), which was only significant for leaves obtained by a small punch.
-Posteriors of coefficients are summarized in (Fig. SX).
+A small punch also inflated variance in the estimate of whole-leaf to leaf disc LMA ratio (Fig. 2a-c and Appendix SX).
 Leaf disc and whole-leaf LMA estimate diverged for species with greater investment in petiole dry mass (Fig. 3a). Large-leaved species tended to have greater investment for petiole dry mass than small-leaved species (Fig. 3b).
 
-The extent of intraspecific trait variation (CV; coefficient of variation) only weakly matched between whole-leaf and disc-based estimates (Fig.4)
-Altough there were no stiatical differences in the SMA slope or elevation(SMA slope: `r val$sma_slope_cv_mean` [95%CI: `r val$sma_slope_cv_lwr`, `r val$sma_slope_cv_upr`], SMA intercept: `r val$sma_int_cv_mean` [95%CI: `r val$sma_int_cv_lwr`, `r val$sma_int_cv_upr`]), leaf disc LMA had greater CV than whole-leaf LMA (*t* = `r val$t_test_t`, *d.f.* = `r val$t_test_df`, *P* < 0.001).
+The extent of intraspecific trait variation (CV; coefficient of variation) only weakly matched between whole-leaf and disc-based estimates (Fig.4).
+Altough there were no stiatical differences in the SMA slope or elevation (SMA slope: `r val$sma_slope_cv_mean` [95%CI: `r val$sma_slope_cv_lwr`, `r val$sma_slope_cv_upr`], SMA intercept: `r val$sma_int_cv_mean` [95%CI: `r val$sma_int_cv_lwr`, `r val$sma_int_cv_upr`]), leaf disc LMA had greater CVs than whole-leaf LMA (*t* = `r val$t_test_t`, *d.f.* = `r val$t_test_df`, *P* < 0.001).
 
 # DISCUSSION
 
