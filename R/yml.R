@@ -96,12 +96,23 @@ write_yml <- function(path, sp_mean, full_data_cv_csv, tree, lma_yaku_re, sp_cv,
 
   sp_cv2 <- sp_cv |>
     dplyr::filter(lma_leaf_cv < 0.09)
-  t_test <- t.test(log10(sp_cv$lma_leaf_cv), log10(sp_cv$lma_disc_cv))
-  sma_cv <- sma(log(lma_leaf_cv) ~ log(lma_disc_cv), sp_cv)
-  sma_cv2 <- sma(log(lma_leaf_cv) ~ log(lma_disc_cv), sp_cv2)
+  t_test <- t.test(log10(sp_cv$lma_leaf_cv), log10(sp_cv$lma_disc_cv), paired = TRUE)
+  sma_cv <- sma(log10(lma_leaf_cv) ~ log10(lma_disc_cv), sp_cv)
+  # without outliers
+  sma_cv2 <- sma(log10(lma_leaf_cv) ~ log10(lma_disc_cv), sp_cv2)
 
   output <- path
   out <- file(paste(output), "w") # write
+  writeLines(
+    paste0("t_test_t: ",
+      t_test$statistic |> round(2)),
+    out,
+    sep = "\n")
+  writeLines(
+    paste0("t_test_df: ",
+      t_test$parameter),
+    out,
+    sep = "\n")
   writeLines(
     paste0("TRF_sp: ",
            n_sp["Mengla_Bubeng"]),

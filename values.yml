@@ -1,3 +1,5 @@
+t_test_t: -3.19
+t_test_df: 144
 TRF_sp: 60
 STF_sp: 47
 HDS_sp: 34
@@ -9,9 +11,9 @@ Yaku_ind: 519
 sma_slope_cv_mean: 1.116
 sma_slope_cv_lwr: 0.954
 sma_slope_cv_upr: 1.304
-sma_int_cv_mean: 0.234
-sma_int_cv_lwr: -0.400
-sma_int_cv_upr: 0.868
+sma_int_cv_mean: 0.102
+sma_int_cv_lwr: -0.174
+sma_int_cv_upr: 0.377
 mean_lma_disc: 88.2
 sma_slope_all_mean: 0.975
 sma_slope_all_lwr: 0.938
