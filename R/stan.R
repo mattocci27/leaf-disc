@@ -20,13 +20,21 @@ clean_stan_data <- function(sp_mean, model = c("no", "LMA", "LD", "LD2"),
       la = sp_mean$la,
       lt = sp_mean$lt
    )
-  } else if (model == "LD3" | model == "punch" |
-      model == "punch2" | model == "punch3" | model == "punch4") {
+  } else if (model == "LD3" | model == "punch" | model == "punch3" | model == "punch4") {
     x <- cbind(
       intercept = rep(1, nrow(sp_mean)),
       # lma_disc = sp_mean$lma_disc / sp_mean$lt,
       # lma_disc = sp_mean$lma_disc,
-      lma_disc = sp_mean$ld_disc,
+      lma_disc = sp_mean$ld_leaf,
+      la = sp_mean$la,
+      lt = sp_mean$lt
+    )
+  } else if (model == "punch2") {
+    x <- cbind(
+      intercept = rep(1, nrow(sp_mean)),
+      # lma_disc = sp_mean$lma_disc / sp_mean$lt,
+      lma_disc = sp_mean$lma_disc,
+      #lma_disc = sp_mean$ld_leaf,
       la = sp_mean$la,
       lt = sp_mean$lt
     )
@@ -60,7 +68,7 @@ clean_stan_data <- function(sp_mean, model = c("no", "LMA", "LD", "LD2"),
     x[, -1] <- apply(x[, -1], 2, \(x)scale(log(x)))
   }
 
-  if (model == "punch") {
+  if (model == "punch" | model == "punch2") {
     yaku <- ifelse(sp_mean$location == "Yakushima", 0, 1)
     #yaku <- ifelse(sp_mean$location == "Yakushima", 0.5^2 * pi, 0.3^2*pi)
     #yaku <- scale(yaku) |> as.numeric()
@@ -70,7 +78,7 @@ clean_stan_data <- function(sp_mean, model = c("no", "LMA", "LD", "LD2"),
     int2 = x[,3] * yaku,
     int3 = x[,4] * yaku
     )
-  } else if (model == "punch2" | model == "punch3") {
+  } else if (model == "punch3") {
     yaku <- ifelse(sp_mean$location == "Yakushima", 0, 1)
     # yaku <- ifelse(sp_mean$location == "Yakushima", 0.5^2 * pi, 0.3^2*pi)
     # yaku <- scale(yaku) |> as.numeric()
@@ -699,8 +707,6 @@ coef_pointrange4 <- function(data) {
 #' @title pred
 pred_mcmc <- function(draws, sp_mean, n = 80) {
 # LT for small
-  tar_load(fit_sp_punch_draws_model)
-  draws <- (fit_sp_punch_draws_model)
   x_lt <- seq(-2, 2, length = n)
   my_col <- RColorBrewer::brewer.pal(4, "RdBu")
   sig_mat <- exp(rep(1, n) %*% t(draws$`gamma[1]` + draws$`gamma[5]`) + x_lt %*% t(draws$`gamma[4]` + draws$`gamma[8]`))
@@ -708,7 +714,7 @@ pred_mcmc <- function(draws, sp_mean, n = 80) {
   mean_sig <- apply(sig_mat, 1, mean)
   lwr_sig <- apply(sig_mat, 1, \(x) quantile(x, 0.025))
   upr_sig <- apply(sig_mat, 1, \(x) quantile(x, 0.975))
-  mu_mat <- exp(rep(1, n) %*% t(draws$`beta[1]`))
+  mu_mat <- exp(rep(1, n) %*% t(draws$`beta[1]` + draws$`beta[5]`))
   mean_mu <- apply(mu_mat, 2, mean) |> mean()
   pred_up <- mean_mu + mean_sig
   pred_lo <- mean_mu - mean_sig
@@ -728,7 +734,7 @@ pred_mcmc <- function(draws, sp_mean, n = 80) {
   x_s <- log(sp_mean$lt) |> sd()
   fig_d1_2 <- tibble(pred = mean_mu, pred_up, pred_lo,
     x = exp(x_bar + x_s * x_lt), punch = "1.0-cm")
-  #fig_d1 <- bind_rows(fig_d1, fig_d1_2)
+  fig_d1 <- bind_rows(fig_d1, fig_d1_2)
 
   p1 <- ggplot(fig_d1, aes(x = x, fill = punch)) +
     geom_hline(yintercept = 1, lty = 2) +
@@ -738,11 +744,11 @@ pred_mcmc <- function(draws, sp_mean, n = 80) {
     ylab("Whole-leaf / leaf disc LMA ratio") +
     scale_x_log10() +
     scale_color_manual(
-      values = my_col[c(2)],
+      values = my_col[c(2, 4)],
       name = "Leaf punch diameter"
     ) +
     scale_fill_manual(
-      values = my_col[c(2)],
+      values = my_col[c(2, 4)],
       name = "Leaf punch diameter"
     ) +
     coord_cartesian(ylim = c(0.5, 1.5)) +
@@ -769,7 +775,7 @@ pred_mcmc <- function(draws, sp_mean, n = 80) {
   # LA for small
   sig_mat <- exp(rep(1, n) %*% t(draws$`gamma[1]` + draws$`gamma[5]`))
   upr_sig <- apply(sig_mat, 1, \(x)quantile(x, 0.975))
-  mu_mat <- exp(rep(1, n) %*% t(draws$`beta[1]`))
+  mu_mat <- exp(rep(1, n) %*% t(draws$`beta[1]` + draws$`beta[5]`))
   mean_mu <- apply(mu_mat, 2, mean) |> mean()
   pred_up <- mean_mu + mean_sig
   pred_lo <- mean_mu - mean_sig
@@ -777,7 +783,7 @@ pred_mcmc <- function(draws, sp_mean, n = 80) {
   x_s <- log(sp_mean$la) |> sd()
   fig_d2_2 <- tibble(pred = mean_mu, pred_up, pred_lo,
     x = exp(x_bar + x_s * x_lt), punch = "0.6-cm")
-  #fig_d2 <- bind_rows(fig_d2, fig_d2_2)
+  fig_d2 <- bind_rows(fig_d2, fig_d2_2)
 
   p2 <- ggplot(fig_d2, aes(x = x, fill = punch)) +
     geom_hline(yintercept = 1, lty = 2) +
@@ -787,11 +793,11 @@ pred_mcmc <- function(draws, sp_mean, n = 80) {
     xlab(expression(paste("Leaf area (", cm^2,")"))) +
     ylab("Whole-leaf / leaf disc LMA ratio") +
     scale_color_manual(
-      values = my_col[c(4)],
+      values = my_col[c(2, 4)],
       name = "Leaf punch diameter"
     ) +
     scale_fill_manual(
-      values = my_col[c(4)],
+      values = my_col[c(2, 4)],
       name = "Leaf punch diameter"
     ) +
    coord_cartesian(ylim = c(0.5, 1.5)) +
@@ -803,7 +809,8 @@ pred_mcmc <- function(draws, sp_mean, n = 80) {
   mean_sig <- apply(sig_mat, 1, mean)
   lwr_sig <- apply(sig_mat, 1, \(x)quantile(x, 0.025))
   upr_sig <- apply(sig_mat, 1, \(x)quantile(x, 0.975))
-  mu_mat <- exp(rep(1, n) %*% t(draws$`beta[1]`))
+  mu_mat <- exp(rep(1, n) %*% t(draws$`beta[1]`) + x_lt %*% t(draws$`beta[2]`))
+  mean_mu <- apply(mu_mat, 1, mean)
   mean_mu <- apply(mu_mat, 2, mean) |> mean()
   pred_up <- mean_mu + mean_sig
   pred_lo <- mean_mu - mean_sig
@@ -813,8 +820,8 @@ pred_mcmc <- function(draws, sp_mean, n = 80) {
     x = exp(x_bar + x_s * x_lt), punch = "1.0-cm")
 
   # LD for small
-  mu_mat <- exp(rep(1, n) %*% t(draws$`beta[1]`) + x_lt %*% t(draws$`beta[2]` + draws$`beta[6]`))
-  sig_mat <- exp(rep(1, n) %*% t(draws$`gamma[1]` + draws$`gamma[5]`))
+  mu_mat <- exp(rep(1, n) %*% t(draws$`beta[1]` + draws$`beta[5]`) + x_lt %*% t(draws$`beta[2]` + draws$`beta[6]`))
+  sig_mat <- exp(rep(1, n) %*% t(draws$`gamma[1]` + draws$`gamma[5]`) + x_lt %*% t(draws$`gamma[2]` + draws$`gamma[6]`))
   mean_mu <- apply(mu_mat, 1, mean)
   mean_sig <- apply(sig_mat, 1, mean)
   lwr_sig <- apply(sig_mat, 1, \(x)quantile(x, 0.025))
@@ -848,7 +855,7 @@ pred_mcmc <- function(draws, sp_mean, n = 80) {
     theme_bw() +
     theme(
       text = element_text(family = "Arial"),
-      legend.position = c(0.35, 0.2),
+      legend.position = c(0.7, 0.2),
       legend.key.size = unit(0.5, "cm"),
       legend.spacing.y = unit(0.1, "cm"),
       legend.text.align = 0,

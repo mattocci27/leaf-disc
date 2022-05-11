@@ -316,6 +316,7 @@ list(
     # max_treedepth = 15,
     seed = 123
    ),
+   # LD_leaf, LA, and LT (how whole-leaf traits affects?)
    tar_stan_mcmc(
     fit_sp_punch_ori,
     "stan/model.stan",
@@ -329,6 +330,7 @@ list(
     # max_treedepth = 15,
     seed = 123
    ),
+   # LMA_disc, LA, and LT (just for predictions)
    tar_stan_mcmc(
     fit_sp_punch2,
     "stan/model.stan",
@@ -509,6 +511,11 @@ list(
     create_stan_tab(fit_sp_punch_draws_model)
   ),
   tar_target(
+    coef_sp_tab_punch2,
+    create_stan_tab(fit_sp_punch2_draws_model)
+  ),
+
+  tar_target(
     coef_sp_tab_punch4,
     create_stan_tab(fit_sp_punch4_draws_model)
   ),
@@ -517,6 +524,15 @@ list(
     coef_sp_tab_punch1_add,
     create_stan_tab_add(fit_sp_punch_draws_model)
   ),
+  tar_target(
+    coef_sp_tab_punch2_add,
+    create_stan_tab_add(fit_sp_punch2_draws_model)
+  ),
+
+  # tar_target(
+  #   coef_sp_tab_punch2_add,
+  #   create_stan_tab_add_simple(fit_sp_punch2_draws_simple)
+  # ),
 
   tar_target(
     pred_mcmc_plot,  {
@@ -533,10 +549,6 @@ list(
     format = "file"
   ),
 
-  tar_target(
-    coef_sp_tab_punch2,
-    create_stan_tab(fit_sp_punch2_draws_model)
-  ),
 
   tar_target(
     coef_sp_punch1_plot, {
@@ -574,6 +586,46 @@ list(
         width = 5,
         height = 6)
       paste0("figs/coef_sp_punch1_add", c(".png", ".pdf"))
+    },
+    format = "file"
+  ),
+
+  tar_target(
+    coef_sp_punch2_plot, {
+      p <- coef_pointrange3(coef_sp_tab_punch2)
+      ggsave(
+        "figs/coef_sp_punch2.png",
+        p,
+        dpi = 300,
+        width = 5,
+        height = 6)
+      ggsave(
+        "figs/coef_sp_punch2.pdf",
+        p,
+        device = cairo_pdf,
+        width = 5,
+        height = 6)
+      paste0("figs/coef_sp_punch2", c(".png", ".pdf"))
+    },
+    format = "file"
+  ),
+
+  tar_target(
+    coef_sp_punch2_add_plot, {
+      p <- coef_pointrange4(coef_sp_tab_punch2_add)
+      ggsave(
+        "figs/coef_sp_punch2_add.png",
+        p,
+        dpi = 300,
+        width = 5,
+        height = 6)
+      ggsave(
+        "figs/coef_sp_punch2_add.pdf",
+        p,
+        device = cairo_pdf,
+        width = 5,
+        height = 6)
+      paste0("figs/coef_sp_punch2_add", c(".png", ".pdf"))
     },
     format = "file"
   ),
