@@ -2,6 +2,7 @@ all: ms/LMA_method.pdf ms/response_letter.pdf
 docker: ms/LMA_method.pdf
 #docker: ms/LMA_method.pdf ms/diff.pdf
 local: ms/leaf_disc.bib
+dif: ms/diff.pdf
 
 ms/LMA_method.pdf: ms/LMA_method.Rmd values.yml figs/*
 	R -e 'system.time(rmarkdown::render("$<", "all"))'
@@ -38,7 +39,8 @@ ms/response_letter.docx: ms/response_letter.Rmd
 clean:
 	rm -f ms/*.tuc \
 	ms/*.log \
-	ms/*.aux \
+	ms/*.aux\
 	ms/*.fdb_* \
-	ms/*.gz
+	ms/*.gz \
+	ms/*.fls
 	rm -rf docs/components

@@ -69,7 +69,7 @@ library(kableExtra)
 val <- yaml::yaml.load_file("../values.yml")
 ```
 
-Sources and consequences of mismatch between leaf disc and whole-leaf leaf mass per are (LMA)
+Sources and consequences of mismatch between leaf disc and whole-leaf leaf mass per area (LMA)
 
 $$ $$
 
@@ -194,10 +194,10 @@ Finally, we predicted that the extent of ITV do not match well between whole-lea
 
 *Data sources*
 
-We used newly compiled individual-level plant datasets form a wide ranges of biomes in China and Japan (Table S1) to examine the relationship between whole-leaf and leaf disc-based estimates of leaf traits.
+We used newly compiled individual-level plant datasets form a wide ranges of biomes in China and Japan (Appendix S1) to examine the relationship between whole-leaf and leaf disc-based estimates of leaf traits.
 First, the Yunnan dataset is from three forest plots in Yunnan province, Southwest China, which includes a tropical rain forest (TRF), a tropical hot-dry savanna ecosystem (HDS), and a subtropical evergreen wet forest (STF), with a total of `r val$sp1` species and `r val$tree1` individuals.
 Second, the Yakushima data is from a warm-temperate forest in Yakushima island, Japan, with a total of `r val$yaku_sp` species and `r val$tree3` individuals.
-In total, our data set comprised `r val$all_sp` woody species and `r val$all_tree` individual that ranged from 8.1 to 24.7 °C in mean annual temperature (MAT) and 732.8 to 4477 mm in mean annual precipitation (MAP) [Table S1; @Eguchi2006; @Song2017; @Fei2018], which covers the wide climate ranges in the distribution of broad-leaved tree species.
+In total, our data set comprised `r val$all_sp` woody species and `r val$all_tree` individual that ranged from 8.1 to 24.7 °C in mean annual temperature (MAT) and 732.8 to 4477 mm in mean annual precipitation (MAP) [Appendix S1; @Eguchi2006; @Song2017; @Fei2018], which covers the wide climate ranges in the distribution of broad-leaved tree species.
 The methodologies for trait sampling and measurement are slightly different between the Yunnan and the Yakushima dataset, which we describe bellow.
 
 *Measurements of leaf disc and whole-leaf LMA*
