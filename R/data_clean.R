@@ -196,7 +196,7 @@ data_clean_cv <- function(d, d3) {
   yaku_sp_n <- d3 |>
     group_by(species, location) |>
     summarize(n = n()) |>
-    filter(n >= 3)
+    filter(n >= 5)
 
   yaku_sp <- d3 |>
     group_by(species) |>

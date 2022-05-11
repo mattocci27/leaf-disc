@@ -1,4 +1,4 @@
-write_yml <- function(path, sp_mean, full_data_cv_csv, tree, lma_yaku_re, boot_fit_dat) {
+write_yml <- function(path, sp_mean, full_data_cv_csv, tree, lma_yaku_re, sp_cv, boot_fit_dat) {
   r2_lma <- cor.test(log(sp_mean$lma_leaf), log(sp_mean$lma_disc))$estimate^2 |> round(2)
   r2_ld <- cor.test(log(sp_mean$ld_leaf), log(sp_mean$ld_disc))$estimate^2 |> round(2)
 
@@ -94,6 +94,12 @@ write_yml <- function(path, sp_mean, full_data_cv_csv, tree, lma_yaku_re, boot_f
   n_sp <- table(sp_mean$location)
   n_ind <- table(tree$location)
 
+  sp_cv2 <- sp_cv |>
+    dplyr::filter(lma_leaf_cv < 0.09)
+  t_test <- t.test(log10(sp_cv$lma_leaf_cv), log10(sp_cv$lma_disc_cv))
+  sma_cv <- sma(log(lma_leaf_cv) ~ log(lma_disc_cv), sp_cv)
+  sma_cv2 <- sma(log(lma_leaf_cv) ~ log(lma_disc_cv), sp_cv2)
+
   output <- path
   out <- file(paste(output), "w") # write
   writeLines(
@@ -137,6 +143,43 @@ write_yml <- function(path, sp_mean, full_data_cv_csv, tree, lma_yaku_re, boot_f
     out,
     sep = "\n")
 
+  writeLines(
+    paste0("sma_slope_cv_mean: ",
+           sma_cv$groupsummary$Slope |> round(3)
+           ),
+    out,
+    sep = "\n")
+  writeLines(
+    paste0("sma_slope_cv_lwr: ",
+           sma_cv$groupsummary$Slope_lowCI |> round(3)
+           ),
+    out,
+    sep = "\n")
+  writeLines(
+    paste0("sma_slope_cv_upr: ",
+           sma_cv$groupsummary$Slope_highCI |> round(3)
+           ),
+    out,
+    sep = "\n")
+
+  writeLines(
+    paste0("sma_int_cv_mean: ",
+           sma_cv$groupsummary$Int |> round(3)|> format(nsmall = 3)
+           ),
+    out,
+    sep = "\n")
+  writeLines(
+    paste0("sma_int_cv_lwr: ",
+           sma_cv$groupsummary$Int_lowCI |> round(3)|> format(nsmall = 3)
+           ),
+    out,
+    sep = "\n")
+  writeLines(
+    paste0("sma_int_cv_upr: ",
+           sma_cv$groupsummary$Int_highCI |> round(3) |> format(nsmall = 3)
+           ),
+    out,
+    sep = "\n")
 
   writeLines(
     paste0("mean_lma_disc: ",

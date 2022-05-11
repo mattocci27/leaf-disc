@@ -502,26 +502,35 @@ lma_ld_wrap_point <- function(sp_mean) {
 
 
 #' @title CV
-cv_pool_point <- function(sp_cv) {
-  sp_cv |>
+cv_pool_point <- function(sp_cv, remove_outliers = FALSE) {
+  if (remove_outliers) {
+  sp_cv <- sp_cv |>
+    filter(lma_leaf_cv < 0.09)
+  }
+  p <- sp_cv |>
     ggplot(aes(x = lma_disc_cv, y = lma_leaf_cv)) +
     geom_abline(intercept = 0, slope = 1, lty = 2) +
     geom_point(alpha = 0.6) +
-    scale_x_continuous(trans = "sqrt", breaks = c(0.001, 0.01, 0.05, 0.1)) +
-    scale_y_continuous(trans = "sqrt", breaks = c(0.001, 0.01, 0.05, 0.1)) +
+    scale_x_continuous(trans = "sqrt", breaks = c(0.001, 0.01, 0.05, 0.1, 0.15)) +
+    scale_y_continuous(trans = "sqrt", breaks = c(0.001, 0.01, 0.05, 0.1, 0.15)) +
     geom_sma(se = TRUE, nboot = 2000) +
     ylab("CV of whole-leaf LMA") +
     xlab("CV of leaf disc LMA") +
-    coord_fixed() +
+    coord_fixed(xlim = c(0.005, 0.15), ylim = c(0.005, 0.15)) +
     stat_cor(
-      label.x.npc = 0.3,
-      label.y.npc = 0,
+      label.x.npc = 0,
+      label.y.npc = 0.99,
       vjust = 1.5,
       aes(label = paste(..rr.label.., ..n.label.., sep = "~`,`~"), family = "Arial")
     ) +
     theme_bw() +
     theme(
       text = element_text(family = "Arial"))
+  if (remove_outliers) {
+    p <- p +
+      coord_fixed(xlim = c(0.005, 0.1), ylim = c(0.005, 0.1))
+  }
+  p
 }
 
 cv_sep_point <- function(sp_cv) {

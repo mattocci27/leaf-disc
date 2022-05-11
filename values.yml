@@ -6,6 +6,12 @@ TRF_ind: 366
 STF_ind: 282
 HDS_ind: 198
 Yaku_ind: 519
+sma_slope_cv_mean: 1.116
+sma_slope_cv_lwr: 0.954
+sma_slope_cv_upr: 1.304
+sma_int_cv_mean: 0.234
+sma_int_cv_lwr: -0.400
+sma_int_cv_upr: 0.868
 mean_lma_disc: 88.2
 sma_slope_all_mean: 0.975
 sma_slope_all_lwr: 0.938
@@ -44,4 +50,4 @@ lt_mid2: 0.26
 la_lt_r: -0.29
 la_lt_p: < 0.05
 la_lt_n: 334
-cv_r2: 0.33
+cv_r2: 0.09

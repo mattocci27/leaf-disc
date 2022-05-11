@@ -125,7 +125,7 @@ list(
   tar_target(
     yml,
     write_yml("values.yml",
-      sp_mean, full_data_cv, tree, lma_yaku_re, boot_fit_dat),
+      sp_mean, full_data_cv, tree, lma_yaku_re, sp_cv, boot_fit_dat),
     format = "file"
   ),
   tar_target(
@@ -746,28 +746,49 @@ list(
     },
     format = "file"
   ),
-
   tar_target(
-    cv_sep_plot, {
-      p <- cv_sep_point(sp_cv)
+    cv_pool_plot_rm, {
+      p <- cv_pool_point(sp_cv, remove_outliers = TRUE)
       ggsave(
-        "figs/cv_sep.png",
+        "figs/cv_pool_rm.png",
         p,
         dpi = 300,
-        width = 6,
+        width = 3,
         height = 3
       )
       ggsave(
-        "figs/cv_sep.pdf",
+        "figs/cv_pool_rm.pdf",
         p,
         device = cairo_pdf,
-        width = 6,
+        width = 3,
         height = 3
       )
-      paste0("figs/cv_sep", c(".png", ".pdf"))
+      paste0("figs/cv_pool_rm", c(".png", ".pdf"))
     },
     format = "file"
   ),
+
+  # tar_target(
+  #   cv_sep_plot, {
+  #     p <- cv_sep_point(sp_cv)
+  #     ggsave(
+  #       "figs/cv_sep.png",
+  #       p,
+  #       dpi = 300,
+  #       width = 6,
+  #       height = 3
+  #     )
+  #     ggsave(
+  #       "figs/cv_sep.pdf",
+  #       p,
+  #       device = cairo_pdf,
+  #       width = 6,
+  #       height = 3
+  #     )
+  #     paste0("figs/cv_sep", c(".png", ".pdf"))
+  #   },
+  #   format = "file"
+  # ),
 
   tar_target(
     petiole_plot, {

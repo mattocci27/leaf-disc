@@ -98,7 +98,7 @@ library(jsonlite)
 targets::tar_load(site_info)
 #site <- fromJSON("../data/site_info.json")
 site <- fromJSON("data/site_info.json")
-site >
+site |>
   kable(format = "html") |>
   kable_styling()
 ```
@@ -223,7 +223,6 @@ The 95% confidence intervals are presented as the shaded area.
 All the correlations are significant (*P* < 0.01).
 Note that the axes are square root scales.
 
-![](../figs/cv_sep.png){ width="600" style="display: block; margin: 0 auto" }
 
 \newpage
 # LITERATURE CITED
