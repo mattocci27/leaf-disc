@@ -28,6 +28,12 @@ ols_int_raw: 1.62
 ols_int: 1.64
 ols_int_log10: 0.211
 ols_slope: 0.911
+yaku2_int_log10: -0.027
+yaku2_slope_disc: 0.997
+yaku2_slope_area: 0.0589
+yaku2_int_inv_log10: 0.15
+yaku2_slope_inv_leaf: 0.945
+yaku2_slope_inv_area: -0.0653
 ols_var2: 1.01
 ols_int_inv_raw: 1
 ols_int_inv: 1.01
