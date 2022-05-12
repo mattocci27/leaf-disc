@@ -346,9 +346,9 @@ sp_dat_mean <- function(full_data_csv){
                            "Large-leaved~species")) |>
     mutate(lt_gr2 = ifelse(lt < lt_mid, "Thin-leaved~species",
                            "Thick-leaved~species")) |>
-    mutate(ld_gr = ifelse(ld_leaf < ld_mid, "Dense",
+    mutate(ld_gr = ifelse(ld_leaf > ld_mid, "Dense",
                            "Nondense")) |>
-    mutate(ld_gr2 = ifelse(ld_leaf < ld_mid, "Dense-leaved~species",
+    mutate(ld_gr2 = ifelse(ld_leaf > ld_mid, "Dense-leaved~species",
                            "Nondense-leaved~species")) |>
     mutate(la_gr2 = factor(la_gr2, levels = c("Small-leaved~species",
                            "Large-leaved~species"))) |>

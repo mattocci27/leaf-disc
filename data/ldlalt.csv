@@ -1,9 +1,9 @@
 ldlalt_gr,lma_leaf,lma_disc
-Dense~Thick~Large,90.7,78.9
-Dense~Thick~Small,94.3,87.5
-Dense~Thin~Large,59.1,56.4
-Dense~Thin~Small,62.4,60.6
-Nondense~Thick~Large,137.7,121.3
-Nondense~Thick~Small,153.6,141.2
-Nondense~Thin~Large,88.3,79
-Nondense~Thin~Small,89.3,83.7
+Dense~Thick~Large,137.7,121.3
+Dense~Thick~Small,153.6,141.2
+Dense~Thin~Large,88.3,79
+Dense~Thin~Small,89.3,83.7
+Nondense~Thick~Large,90.7,78.9
+Nondense~Thick~Small,94.3,87.5
+Nondense~Thin~Large,59.1,56.4
+Nondense~Thin~Small,62.4,60.6

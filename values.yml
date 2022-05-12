@@ -36,9 +36,9 @@ ols_slope_inv: 0.958
 ols_sig_inv: 0.142
 ols_var2_inv: 1.01
 sma_all: 9.7
-dens_thin_large: 5.7
-nondens_thin_large: 12.3
-nondens_thick_large: 14
+dens_thin_large: 12.3
+nondens_thin_large: 5.7
+nondens_thick_large: 15.2
 tree_no: 519
 r2_lma: 0.87
 r2_ld: 0.79
