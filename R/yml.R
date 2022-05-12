@@ -28,6 +28,10 @@ write_yml <- function(path, sp_mean, full_data_cv_csv, tree, lma_yaku_re, sp_cv,
       lma_disc = mean(lma_disc))
 
   fit_ols <- lm(log(lma_leaf) ~ log(lma_disc), sp_mean)
+  #fit_ols2 <- lm(log10(lma_leaf) ~ log10(lma_disc), sp_mean)
+
+
+
   var_fun <- function(fit) {
     sig_ols <- sqrt(deviance(fit_ols) / df.residual(fit_ols))
     exp(sig_ols^2 / 2)
@@ -39,13 +43,19 @@ write_yml <- function(path, sp_mean, full_data_cv_csv, tree, lma_yaku_re, sp_cv,
   # exp(coef(fit_ols)[1]) |> round(3)
 #  1.62 * 1.01
 
-  fit_ols_yaku <- lm(log(lma_leaf) ~ log(lma_disc), sp_mean|> filter(location == "Yakushima"))
+  yaku <- sp_mean |>
+    filter(location == "Yakushima")
+
+  fit_ols_yaku <- lm(log(lma_leaf) ~ log(lma_disc), yaku)
+  fit_ols_yaku2 <- lm(log(lma_leaf) ~ log(lma_disc) + log(la), yaku)
+
   sig_ols_yaku <- sqrt(deviance(fit_ols_yaku) / df.residual(fit_ols_yaku))
 
   fit_ols_inv <- lm(log(lma_disc) ~ log(lma_leaf), sp_mean)
   sig_ols_inv <- sqrt(deviance(fit_ols_inv) / df.residual(fit_ols_inv))
 
-  fit_ols_yaku_inv <- lm(log(lma_disc) ~ log(lma_leaf), sp_mean|> filter(location == "Yakushima"))
+  fit_ols_yaku_inv <- lm(log(lma_disc) ~ log(lma_leaf), yaku)
+  fit_ols_yaku_inv2 <- lm(log(lma_disc) ~ log(lma_leaf) + log(la), yaku)
   sig_ols_yaku_inv <- sqrt(deviance(fit_ols_yaku_inv) / df.residual(fit_ols_yaku_inv))
 
   fit_sma <- sma(log(lma_leaf) ~ log(lma_disc), sp_mean)
@@ -252,9 +262,6 @@ write_yml <- function(path, sp_mean, full_data_cv_csv, tree, lma_yaku_re, sp_cv,
            ),
     out,
     sep = "\n")
-
-
-
   writeLines(
     paste0("ols_int_raw: ",
            coef(fit_ols)[1] |> exp()|> round(2)),
@@ -263,6 +270,11 @@ write_yml <- function(path, sp_mean, full_data_cv_csv, tree, lma_yaku_re, sp_cv,
   writeLines(
     paste0("ols_int: ",
            exp(coef(fit_ols)[1] + log(var_fun(fit_ols))) |> round(2)),
+    out,
+    sep = "\n")
+  writeLines(
+    paste0("ols_int_log10: ",
+           log10(exp(coef(fit_ols)[1]))  |> round(3)),
     out,
     sep = "\n")
   writeLines(
@@ -287,6 +299,11 @@ write_yml <- function(path, sp_mean, full_data_cv_csv, tree, lma_yaku_re, sp_cv,
     out,
     sep = "\n")
   writeLines(
+    paste0("ols_int_inv_log10: ",
+           0),
+    out,
+    sep = "\n")
+  writeLines(
     paste0("ols_slope_inv: ",
            coef(fit_ols_inv)[2] |> round(3)),
     out,
@@ -302,7 +319,6 @@ write_yml <- function(path, sp_mean, full_data_cv_csv, tree, lma_yaku_re, sp_cv,
     #0.5 * sig_ols^2 |> round(3)),
     out,
     sep = "\n")
-
   writeLines(
     paste0("sma_all: ",
            my_fun(sma_all)),
