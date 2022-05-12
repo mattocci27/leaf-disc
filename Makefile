@@ -21,7 +21,7 @@ ms/cover.docx: ms/cover.md
   --reference-doc ms/templates/cover_style.docx \
 	-o $@
 
-ms/leaf_disc.bib: ~/trait_method.bib
+ms/leaf_disc.bib: ~/trait-method.bib
 	cp $< $@
 
 ms/response_letter.pdf: ms/response_letter.Rmd
