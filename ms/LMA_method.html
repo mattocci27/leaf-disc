@@ -509,8 +509,9 @@ LMA using tropical tree species showed good correlations between the two
 <span class="citation">(<em>R<sup>2</sup></em> = 0.92 for whole-leaves
 in <a href="#ref-Kraft2008" role="doc-biblioref">Kraft et al., 2008</a>;
 <em>R<sup>2</sup></em> = 0.92 for leaf laminas in <a href="#ref-Onoda2011" role="doc-biblioref">Onoda et al.,
-2011</a>)</span>, but the comparisons between the two estimates in other
-biomes have rarely been examined.</p>
+2011</a>)</span>. However, the comparisons between the two estimates in
+other biomes have rarely been examined, even though LMA responses to
+climate <span class="citation">(<a href="#ref-Poorter2009a" role="doc-biblioref">Poorter, 2009</a>)</span> .</p>
 <p>Since larger leaves tend to invest more of their mass into dense
 midribs and petiole for support <span class="citation">(<a href="#ref-Niinemets2006" role="doc-biblioref">Niinemets et al.,
 2006</a>, <a href="#ref-Niinemets2007" role="doc-biblioref">2007</a>; <a href="#ref-Li2022" role="doc-biblioref">Li, Shi, et al., 2022</a>; <a href="#ref-Li2022a" role="doc-biblioref">Li, Zheng, et al.,
@@ -567,14 +568,14 @@ following hypotheses: (1) whole-leaf LMA would be greater than leaf disc
 LMA because whole-leaf LMA includes petioles and midribs that have
 greater dry mass per unit area than laminas <span class="citation">(<a href="#ref-Niinemets2007" role="doc-biblioref">Niinemets et al.,
 2007</a>)</span>, (2) species with higher leaf tissue density, larger
-and/or thinner leaves would show weaker correlations and larger
-differences in LMA estimates because whole-leaf LMA should be driven
-more in those species by veins and petioles that are likely to be
-ignored in leaf disc samples, and (3) the extent of ITV does not match
-well between whole-leaf and leaf disc based estimates because leaf disc
-samples have more sources of variation than whole-leaf samples. In
-addition to leaf morphology, we also investigate the effects of leaf
-punch size on the relationship between whole-leaf and leaf disc LMA.</p>
+and/or thinner leaves would show larger variance and differences in LMA
+estimates because whole-leaf LMA should be driven more in those species
+by veins and petioles that are likely to be ignored in leaf disc
+samples, and (3) the extent of ITV does not match well between
+whole-leaf and leaf disc based estimates because leaf disc samples have
+more sources of variation than whole-leaf samples. In addition to leaf
+morphology, we also investigate the effects of leaf punch size on the
+relationship between whole-leaf and leaf disc LMA.</p>
 </div>
 <div id="materials-and-methods" class="section level1">
 <h1>MATERIALS AND METHODS</h1>
@@ -672,7 +673,9 @@ with a small leaf punch (0.6-cm diameter) and 0 for samples obtained
 with a large leaf punch (1.0-cm diameter). <span class="math inline">\(\tilde{\mu_i}\)</span> is the effect of leaf
 tissue density, leaf area, leaf thickness and leaf punch size on the
 mean estimates for the whole-leaf LMA of species <em>i</em>, <span class="math inline">\(\sigma_i^2\)</span> is the variance of whole-leaf
-LMA for species <em>i</em>, and <span class="math inline">\(\beta\)</span> are coefficients. The standard
+LMA for species <em>i</em>, and <span class="math inline">\(\beta\)</span> are coefficients. Since leaf disc
+LMA is used as an offset, this model can be used to see the realtionship
+between whole-leaf to leaf disc LMA ratio and predictors. The standard
 deviation of whole-leaf LMA (<span class="math inline">\(\sigma_i\)</span>) was assumed to follow a normal
 distribution;</p>
 <p><span class="math display">\[\begin{align}
@@ -761,54 +764,82 @@ than whole-leaf LMA (<em>t</em> = -3.19, <em>d.f.</em> = 144, <em>P</em>
 </div>
 <div id="discussion" class="section level1">
 <h1>DISCUSSION</h1>
-<p>Disc-based traits explained interspecific variations in whole-leaf
-LMA (<em>R<sup>2</sup></em> = , <em>n</em> = ) quite well, and the
+<p>Leaf disc LMA explained interspecific variations in whole-leaf LMA
+(<em>R<sup>2</sup></em> = 0.87, <em>n</em> = 334) quite well, and the
 strength of their relationship was approximately same or slightly weaker
 than previously reported (<em>R<sup>2</sup></em> = 0.92, <em>n</em> =
 409, for whole-leaves in <span class="citation">Kraft et al. (<a href="#ref-Kraft2008" role="doc-biblioref">2008</a>)</span>,
 <em>R<sup>2</sup></em> = 0.92, <em>n</em> = 364 for leaf laminas in
 <span class="citation">Onoda et al. (<a href="#ref-Onoda2011" role="doc-biblioref">2011</a>)</span>). Standardized major axis (SMA)
 regression analysis showed significantly greater intercepts when all the
-species were pooled (9.4% differences) or large-leaved species were used
-(22.1% differences). Together, these findings suggest that disc-based
-estimates can be generally used as good proxies for their whole-leaf
-estimates with appropriate calibration. However, the strength of
-correlations highly depended on leaf area, thickness (Fig. 1) and sizes
-of leaf punches (Appendix S3 and S5).</p>
-<p>Larger leaves generally invest disproportionally more mass into dense
-midribs and major veins for support <span class="citation">(<a href="#ref-Niinemets2006" role="doc-biblioref">Niinemets et al.,
-2006</a>, <a href="#ref-Niinemets2007" role="doc-biblioref">2007</a>; <a href="#ref-Sack2012" role="doc-biblioref">Sack et al., 2012</a>)</span>,
+species were pooled (9.4% differences). Together, these findings suggest
+that disc-based estimates can be generally used as good proxies for
+their whole-leaf estimates with appropriate calibration ( OLS
+regressions: log<sub>10</sub>LMA<sub>w</sub> = 0.211 + 0.911 <span class="math inline">\(\times\)</span> log<sub>10</sub>LMA<sub>d</sub> or
+log<sub>10</sub>LMA<sub>d</sub> = 0.958 <span class="math inline">\(\times\)</span> log<sub>10</sub>LMA<sub>w</sub>,
+where LMA<sub>w</sub> and LMA<sub>d</sub> are the whole-leaf and leaf
+disc LMA, respectively ). However, leaf tissue density, leaf area, leaf
+thickness and leaf punch size also influenced the relationship between
+the whole-leaf LMA and leaf disc LMA (Fig. 2 and Appendix SX). Higher
+leaf tissue density is associated with higher vein density <span class="citation">(<a href="#ref-John2017" role="doc-biblioref">John et
+al., 2017</a>; <a href="#ref-Sancho-Knapik2020" role="doc-biblioref">Sancho-Knapik et al., 2020</a>)</span>, but this
+effect might be ignored in leaf disc LMA. Larger leaves generally invest
+disproportionally more mass into dense midribs and major veins for
+support <span class="citation">(<a href="#ref-Niinemets2006" role="doc-biblioref">Niinemets et al., 2006</a>, <a href="#ref-Niinemets2007" role="doc-biblioref">2007</a>; <a href="#ref-Sack2012" role="doc-biblioref">Sack et al., 2012</a>)</span>,
 and thinner leaves have distinct veins and have kite-type appearances
-<span class="citation">(<a href="#ref-Grubb1986" role="doc-biblioref">Grubb, 1986</a>)</span>. As we predicted, thicker
-and/or smaller leaves tended to show greater <em>R<sup>2</sup></em>
-values between whole-leaf and leaf disc estimates (Figs 1. and 2).
-Large-leaved species had greater whole-leaf LMA than leaf disc LMA
-(Table 1), which is consistent with the pattern of large leaves
-disproportionately investing in more leaf veins and/or petioles. This is
-also supported by the subset of our dataset in which we measured leaf
-lamina and petiole dry mass separately. We confirmed that leaf disc and
-whole-leaf LMA estimate diverged for species with greater investment in
-petiole dry mass, and large-leaved species tended to have greater
-investment for petiole dry mass than small-leaved species (Appendix
-S6).</p>
-<p>Meanwhile, our results are seemingly inconsistent with a previous
-study that used thin and soft leaves and found high
-<em>R<sup>2</sup></em> values (<em>R<sup>2</sup></em> = 0.92; <span class="citation">Kraft et al. (<a href="#ref-Kraft2008" role="doc-biblioref">2008</a>)</span>). <span class="citation">Kraft et
-al. (<a href="#ref-Kraft2008" role="doc-biblioref">2008</a>)</span> used
-sapling leaves under closed canopy that are thinner than adult leaves
+<span class="citation">(<a href="#ref-Grubb1986" role="doc-biblioref">Grubb, 1986</a>)</span>. The effects of leaf
+morphology on the relationship between the whole-leaf LMA and leaf disc
+LMA were generally matched with our hyptheses, but the actual patterns
+were more complicated.</p>
+<p>The effect of leaf punch size was the most important source of the
+variation (Fig. 2, Appendix SX), and samples obtained with a small leaf
+punch showed greater variance in whole-leaf to leaf disc LMA ratio.
+Small leaf disc size inflates trait variation within leaves because dry
+mass will be inflated when major veins are unintentionally included in
+the samples. Species with lower leaf tissue density and thin leaves
+showed greater variance in whole-leaf to leaf disc LMA ratio especially
+when a small punch was used (Fig.2ac: small leaf punch, Fig. 2a: large
+leaf punch), suggesting that simple conversion between whole-leaf and
+leaf disc LMA is difficult for those species. <span class="citation">Kraft et al. (<a href="#ref-Kraft2008" role="doc-biblioref">2008</a>)</span> found high <em>R<sup>2</sup></em>
+values (<em>R<sup>2</sup></em> = 0.92) between whole-leaf and leaf disc
+LMA based on leaf discs of approximately 1.0-cm diameter for sapling
+leaves under closed canopy that are softer and thinner than adult leaves
 <span class="citation">(<a href="#ref-Kitajima2010" role="doc-biblioref">Kitajima and Poorter, 2010</a>; <a href="#ref-Oktavia2020" role="doc-biblioref">Oktavia and Jin,
-2020</a>)</span>. Shade leaves tend to have thinner leaves than sun
-leaves because of fewer layers of palisade mesophyll cells <span class="citation">(<a href="#ref-Terashima2001" role="doc-biblioref">Terashima et al., 2001</a>; <a href="#ref-Onoda2008" role="doc-biblioref">Onoda et al.,
-2008</a>)</span>. The relatively low <em>R<sup>2</sup></em> values for
-thin-leaved species and individuals in our study compared to the
-previous study may suggest not only the effect of distinct veins on
+2020</a>)</span>. Altough a leaf punch of 1.0-cm diameter was used only
+in the Yakushima dataset in our study, the correlations were also strong
+for the Yakushima dataset, regardress of leaf tissue density or leaf
+thickness (Appendix SX). The relatively low <em>R<sup>2</sup></em>
+values for species with lower leaf tissue density and thin leaves in the
+Yunnan dataset (Appendix SX) compared to the previous study and the
+Yakushima dataset, may suggest not only the effect of distinct veins on
 variance in LMA <span class="citation">(<a href="#ref-John2017" role="doc-biblioref">John et al., 2017</a>)</span> but also technical
 difficulty in measuring tiny weight of discs in lower LMA leaves. We
 found that estimates of whole-leaf and leaf disc LMA diverged when total
-dry mass of leaf discs was small (Fig. 2; Appendices S3), and thus
-thin-leaved species, which have smaller dry mass (Appendix S4), tended
-to showed the low <em>R<sup>2</sup></em> values especially when we used
-a smaller leaf punch (diameter: 0.6 cm; Appendix S5).</p>
+dry mass of leaf discs was small (Fig. 2; Appendices SX), and thus
+species with lower leaf tissue density and thin leaves, which have
+smaller dry mass (Appendix SX), tended to show grater variation in whole
+leaf to leaf disc LMA ratio especially when we used a smaller leaf
+punch.</p>
+<p>Species with higher leaf tissue density and large leaves showed
+greater whole-leaf LMA than leaf disc LMA (Fig. 2ab: large leaf punch),
+suggesting that conversion between leaf disc and whole-leaf LMA should
+be possible using leaf area as a covariate (measuring leaf tissue
+density requires whole-leaf LMA itself). We also observed that leaf disc
+and whole-leaf LMA estimate diverged for species with greater investment
+in petiole dry mass (Fig. 3a), and large-leaved species tended to have
+greater investment for petiole dry mass than small-leaved species (Fig.
+3b). This is consistent with the pattern of large leaves
+disproportionately investing in more leaf veins and/or petioles <span class="citation">(<a href="#ref-Niinemets2007" role="doc-biblioref">Niinemets et al., 2007</a>)</span> and the pattern
+of higher leaf tissue density associated with higher vein density <span class="citation">(<a href="#ref-John2017" role="doc-biblioref">John et
+al., 2017</a>; <a href="#ref-Sancho-Knapik2020" role="doc-biblioref">Sancho-Knapik et al., 2020</a>)</span> because
+those driving factors of LMA are likely to be ignored in leaf disc
+samples. The estimated effects of leaf tissue density and leaf area was
+also positive for species obtained with a small leaf punch (Appdendix
+SX), but those effects were not significant. This is probably because
+the variation in whole-leaf to leaf disc LMA ratio was too large to show
+clear effects of leaf tissue density and leaf area on the mean etimates
+(<span class="math inline">\(\beta\)</span>) when use a small leaf
+punch.</p>
 <p>Even though we used the same species, the same individuals and the
 same trait (LMA) to estimate the extents of intraspecific trait
 variation (ITV), the explained variance of the relationship between
@@ -1082,12 +1113,6 @@ morphological and chemical traits in response to life stages, plant
 functional types, and habitat types in an old-growth temperate
 forest</a>. <em>Basic and Applied Ecology</em> 49: 22–33.
 </div>
-<div id="ref-Onoda2008" class="csl-entry">
-Onoda, Y., F. Schieving, and N. P. R. Anten. 2008. <a href="https://doi.org/10.1093/aob/mcn013">Effects of light and nutrient
-availability on leaf mechanical properties of <span>Plantago</span>
-major: <span>A</span> conceptual approach</a>. <em>Annals of Botany</em>
-101: 727–736.
-</div>
 <div id="ref-Onoda2011" class="csl-entry">
 Onoda, Y., M. Westoby, P. B. Adler, A. M. F. Choong, F. J. Clissold, J.
 H. C. Cornelissen, S. Díaz, et al. 2011. <a href="https://doi.org/10.1111/j.1461-0248.2010.01582.x">Global patterns
@@ -1178,13 +1203,6 @@ Z.-Y. Lu, et al. 2017. <a href="https://doi.org/10.3832/ifor2223-010">Canopy tem
 variability in a tropical rainforest, subtropical evergreen forest, and
 savanna forest in <span>Southwest China</span></a>. <em>iForest -
 Biogeosciences and Forestry</em> 10: 611.
-</div>
-<div id="ref-Terashima2001" class="csl-entry">
-Terashima, I., S.-I. Miyazawa, and Y. T. Hanba. 2001. <a href="https://doi.org/10.1007/PL00013972">Why are <span>Sun Leaves
-Thicker</span> than <span>Shade Leaves</span>?
-<span>Consideration</span> based on <span>Analyses</span> of <span>CO2
-Diffusion</span> in the <span>Leaf</span></a>. <em>Journal of Plant
-Research</em> 114: 93–105.
 </div>
 <div id="ref-Warton2012a" class="csl-entry">
 Warton, D. I., R. A. Duursma, D. S. Falster, and S. Taskinen. 2012. <a href="https://doi.org/10.1111/j.2041-210X.2011.00153.x">Smatr 3 an
