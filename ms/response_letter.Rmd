@@ -163,7 +163,8 @@ We have included this in the results section.
 
 > In the Introduction section, the authors had better add some introduction to the leaf disc sampling method, since this method was focused to make a comparison with the whole-leaf sampling method for calculating LMA.
 
-???
+Thank you.
+We have mentioned several ecological studies that used leaf disc LMA in the introduction.
 
 > The authors had better explain why they used the LMA values with leaf petioles mass.
 

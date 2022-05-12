@@ -149,7 +149,7 @@ within-leaf variation
 # INTRODUCTION
 
 The primary function of leaves is to return photosynthetic revenue on the investment that has been made in constructing the leaf [i.e., leaf economic spectrum, @Wright2004a; @Westoby2013].
-Leaf mass per area (LMA), determined by lamina thickness and leaf tissue density (LD), describes how much biomass is invested into given photosynthetic leaf area, which is a key trait in the leaf economic spectrum [@Wright2004a; @Poorter2009; @Onoda2017].
+Leaf mass per area (LMA or 1/SLA [specific leaf area]), determined by lamina thickness and leaf tissue density (LD), describes how much biomass is invested into given photosynthetic leaf area, which is a key trait in the leaf economic spectrum [@Wright2004a; @Poorter2009; @Onoda2017].
 Generally, resource-acquisitive species (fast-growing species) tend to have low LMA values, showing high photosynthesis, high nutrients, and often have fast leaf turnover [@Wright2004a].
 In contrast, resource-conservative species (slow-growing species) often have higher LMA values with the opposite patterns [@Garnier1994; @Wright2004a; @Reich2014; @Diaz2016].
 The LMA is also frequently used in plant growth analysis [@Evans1972; @Poorter2014; @Falster2018] because relative growth rates (RGR) can be decomposed into the product of net assimilation rate (NAR), leaf mass ratio (LMR) and LMA (i.e., RGR = NAR $\times$  LMR $\times$ LMA^-1^).
@@ -161,6 +161,8 @@ LMA values can be determined by either measuring whole-leaf (including or exclud
 According to the TRY database version 5, recorded numbers of observations and species are as follows:
 1) a whole leaf including (88,490 observations and 7,068 species) or excluding petioles (64,838 observations and 7,558 species; note that this could include leaf disc samples), and
 2) a leaf disc excluding all major veins or petioles (645 observations and 403 species) [@Kattge2020 [TRY version 5]].
+There are not many records that explicitly indicate leaf disc LMA in the TRY database, but leaf disc LMA has been used for ecological studies as well as physiological studies [e.g., @Kraft2008; @Poorter2009a; @Onoda2011; @Serbin2019; @Campany2021].
+@Poorter2009a found that leaf disc LMA showed stronger correlations with shade tolerance than whole-leaf LMA, suggesting that lamina traits are more important whole-leaf traits in certain ecological contexts
 Although many studies do not make clear what protocol was followed (146,315 observations and 13,101 species), these differences in the measurement methods may lead to large discrepancies in the estimates of LMA values because the major vein allocation (major vein, which includes first to second or third-order veins, volume per area) has been reported to be one of the main determinants for the variation in LMA [@John2017].
 Previous works that compared estimates of whole-leaf LMA and leaf disc LMA using tropical tree species showed good correlations between the two [*R^2^* = 0.92 for whole-leaves in @Kraft2008; *R^2^* = 0.92 for leaf laminas in @Onoda2011], but the comparisons between the two estimates in other biomes have rarely been examined.
 
@@ -207,13 +209,13 @@ In the HDS, and STF sites, we used a 12-m long pruner to collect samples for mos
 In case of tall individuals that out of the reach of pruner, we used a rope climbing to reach the canopy, then sampled branches with the long pruner.
 In Yakushima, we used 15-m poles for our leaf sampling.
 At least six sun-exposed healthy leaves were sampled from each of 3 to 6 individuals for each species.
-Trait values were averaged at the species-level for the analyses.
+Trait values were averaged at the species- and individual-level for the analyses.
 For compound-leaved species, we referred a leaflet (the minimum photosynthetic unit) as a single leaf in our study.
 We excluded species that had tiny leaves or leaflets (length <1 cm) because it was not practical to measure leaf disc LMA.
 
-To determine what extent LMA values were affected by the different methods, LMA were determined (i) LMA based on a whole leaf including petioles and (ii) LMA based on leaf disc avoiding thick veins.
+To determine what extent LMA values were affected by the different methods, LMA were determined (i) LMA based on a whole leaf including petioles and (ii) LMA based on leaf disc avoiding thick veins (first to second veins).
 Three 0.6-cm diameter discs were taken from the base, middle and tip of each leaf using a hole punch in the Yunnan dataset.
-Two 1.0-cm diameter discs were taken from each leaf were in the Yakushima dataset (see Fig. S1 for more details).
+Two 1.0-cm diameter discs were taken from each leaf were in the Yakushima dataset (see Appendix S2 for more details).
 Fresh leaf area (LA; cm^-2^) of leaf materials (whole leaves including petioles and midribs) was measured using a scanner and ImageJ software by the R package *LeafArea* [@Katabuchi2015].
 Fresh leaf thickness (LT; mm) was measured using a micrometer in three points at the base, middle and tip of the leaf using a micrometer (Mitutoyo 293-240, Mitutoyo Corporation, Kawasaki, Japan) with a precision at 0.001 mm.
 Thickness of each leaf disc was also measured for the Yunnan dataset but not for the Yakushima dataset, which enables us to estimate whole-leaf and leaf disc leaf tissue density (LD; g cm^-3^) separately in the Yunnan dataset.
@@ -221,7 +223,6 @@ Leaf dry mass (whole leaves including petioles and midribs, and leaf discs) was 
 In the subset of Yakushima dataset, leaf lamina and petiole dry mass were also determined separately (`r val$pet_sp` out of `r val$yaku_sp` species) to quantify leaf support costs.
 Dry mass for leaf discs were recorded 2-3 discs together for each leaf.
 Based on those measurements of whole-leaf and leaf disc samples, LMA (g m^-2^) was calculated as the ratio of leaf dry mass to fresh leaf area, and LD was calculated as the ratio of LMA to LT.
-We do not present results of LD in the main text, because differences between whole-leaf LD and leaf disc LD only depends on the ratio between whole-leaf LMA and leaf disc LMA and measurement errors of leaf thickness (Appendix S2).
 
 *Relationship between whole-leaf and leaf disc LMA*
 
