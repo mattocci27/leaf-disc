@@ -161,18 +161,19 @@ LMA values can be determined by either measuring whole-leaf (including or exclud
 According to the TRY database version 5, recorded numbers of observations and species are as follows:
 1) a whole leaf including (88,490 observations and 7,068 species) or excluding petioles (64,838 observations and 7,558 species; note that this could include leaf disc samples), and
 2) a leaf disc excluding all major veins or petioles (645 observations and 403 species) [@Kattge2020 [TRY version 5]].
-There are not many records that explicitly indicate leaf disc LMA in the TRY database, but leaf disc LMA has been used for ecological studies as well as physiological studies [e.g., @Kraft2008; @Poorter2009a; @Onoda2011; @Serbin2019; @Campany2021].
-@Poorter2009a found that leaf disc LMA showed stronger correlations with shade tolerance than whole-leaf LMA, suggesting that lamina traits are more important whole-leaf traits in certain ecological contexts
-Although many studies do not make clear what protocol was followed (146,315 observations and 13,101 species), these differences in the measurement methods may lead to large discrepancies in the estimates of LMA values because the major vein allocation (major vein, which includes first to second or third-order veins, volume per area) has been reported to be one of the main determinants for the variation in LMA [@John2017].
-Previous works that compared estimates of whole-leaf LMA and leaf disc LMA using tropical tree species showed good correlations between the two [*R^2^* = 0.92 for whole-leaves in @Kraft2008; *R^2^* = 0.92 for leaf laminas in @Onoda2011], but the comparisons between the two estimates in other biomes have rarely been examined.
+There are not many records that explicitly indicate leaf disc LMA in the TRY database, but leaf disc LMA has been commonly used for ecological studies as well as biochemical studies [e.g., @Kraft2008; @Poorter2009a; @Onoda2011; @Osada2014; @Sastry2017; @Serbin2019; @Campany2021].
+Although using whole-leaf traits seems to be more straightforward in the logic of investment costs and returns on investment [@Westoby2013], @Poorter2009a found that leaf disc LMA showed stronger correlations with shade tolerance than whole-leaf LMA, suggesting that lamina traits are more important than whole-leaf traits in certain ecological contexts.
+Many studies do not make clear what protocol was followed (146,315 observations and 13,101 species), but these differences in the measurement methods may lead to large discrepancies in the estimates of LMA values because the major vein allocation (major vein, which includes first to second or third-order veins, volume per area) has been reported to be one of the main determinants for the variation in LMA [@John2017].
+Previous works that compared estimates of whole-leaf LMA and leaf disc LMA using tropical tree species showed good correlations between the two [*R^2^* = 0.92 for whole-leaves in @Kraft2008; *R^2^* = 0.92 for leaf laminas in @Onoda2011].
+However, the comparisons between the two estimates in other biomes have rarely been examined, even though LMA responses to climate [@Poorter2009a] .
 
 Since larger leaves tend to invest more of their mass into dense midribs and petiole for support [@Niinemets2006; @Niinemets2007; @Li2022; @Li2022a], and thinner leaves have clearly visible and large-diameter veins with less uniform leaf structure (i.e., kite-type leaves; [@Grubb1986]), discrepancies in the estimates of whole-leaf LMA and leaf disc LMA might be greater for larger and thinner leaves.
-(**add leaf density**)
+Higher leaf density (and LMA) is associated with higher vein density [@John2017; @Sancho-Knapik2020], and thus leaf disc LMA avoiding major veins might also underestimate whole-leaf LMA for species with higher leaf tissue density.
 If leaf disc LMA largely and consistently underestimates whole-leaf LMA (i.e., differences in means), some calibrations may be required to combine or compare those different estimates [@Kraft2008; @Onoda2011].
 If divergencies between the estimates based on the different methods are large and inconsistent (i.e., differences in variances and low *R^2^* values), this is difficult to calibrate and should inflate errors in the subsequent analyses.
 To date, however, only a database from a single region, Panama Plant Traits Database [@Wright2010], is available in the TRY [@Kattge2020] that have both estimates of LMA from small leaf discs and whole leaves including petioles, limiting of our understanding of under what conditions estimates of LMA from leaf discs are reliable estimates of whole-leaf LMA.
 
-Intraspecific trait variation (ITV), which reflects both heritable genetic variation and phenotypic plasticity, influences plant responses to abiotic and biotic interactions (REF).
+Intraspecific trait variation (ITV), which reflects both heritable genetic variation and phenotypic plasticity, influences plant responses to abiotic and biotic interactions [@Westerband2021].
 The extent of ITV within and among communities for LMA can be similar to or greater than interspecific trait variation [e.g., @Messier2010; @Kichenin2013; @Fajardo2018].
 The coefficient of variation (CV) is often used for quantifying the extent of ITV for each species [@Yang2020; @Westerband2021].
 Sources of ITV for whole-leaf samples are variation among individuals within the same species and variation among leaves within the same individuals [@Messier2010; @Messier2017].
@@ -184,13 +185,11 @@ In this study, we aimed to investigate the relationship between whole-leaf (incl
 whether the relationship varied with leaf tissue density, leaf area and leaf thickness, and
 whether the extent of ITV for each species match between whole-leaf and leaf disc based estimates.
 We collected a total of `r val$all_sp` woody species from four biomes (tropics, subtropics, savanna, and warm-temperate) to cover the wide range of geography.
-We predicted that whole-leaf LMA would be greater than leaf disc LMA because whole-leaf LMA includes petioles and midribs that have greater dry mass per unit area than laminas [@Niinemets2007].
-
-We also predicted that species with larger and/or thinner leaves would show weaker correlations and larger differences in LMA estimates.
-(**add leaf density**)
-
-Finally, we predicted that the extent of ITV do not match well between whole-leaf and leaf disc based estimates because leaf disc samples have more sources of variation than whole-leaf samples.
-
+We evaluate the following hypotheses:
+(1) whole-leaf LMA would be greater than leaf disc LMA because whole-leaf LMA includes petioles and midribs that have greater dry mass per unit area than laminas [@Niinemets2007],
+(2) species with higher leaf tissue density, larger and/or thinner leaves would show larger variance and differences in LMA estimates because whole-leaf LMA should be driven more in those species by veins and petioles that are likely to be ignored in leaf disc samples, and
+(3) the extent of ITV does not match well between whole-leaf and leaf disc based estimates because leaf disc samples have more sources of variation than whole-leaf samples.
+In addition to leaf morphology, we also investigate the effects of leaf punch size on the relationship between whole-leaf and leaf disc LMA.
 
 # MATERIALS AND METHODS
 
