@@ -50,8 +50,13 @@ write_yml <- function(path, sp_mean, full_data_cv_csv, tree, lma_yaku_re, sp_cv,
   fit_ols_yaku2 <- lm(log(lma_leaf) ~ log(lma_disc) + log(la), yaku)
   fit_ols_yaku3 <- lm(log(lma_leaf/lma_disc) ~ log(lma_disc) + log(la), yaku)
 
-  summary(fit_ols_yaku2)$r.squared
-  summary(fit_ols_yaku)$r.squared
+  # lm(log10(lma_leaf) ~ log10(lma_disc), yaku) |> summary()
+  # lm(log10(lma_disc) ~ log10(lma_leaf), yaku) |> summary()
+
+  # summary(fit_ols_yaku2)$r.squared
+  # summary(fit_ols_yaku)$r.squared
+  # summary(fit_ols_yaku)
+  # summary(fit_ols_yaku_inv)
 
   #  lm(log10(lma_leaf) ~ log10(lma_disc) + log10(la), yaku) |>
   #    summary()
@@ -292,6 +297,26 @@ write_yml <- function(path, sp_mean, full_data_cv_csv, tree, lma_yaku_re, sp_cv,
     out,
     sep = "\n")
 
+  writeLines(
+    paste0("yaku_int_log10: ",
+           log10(exp(coef(fit_ols_yaku)[1]))  |> round(3)),
+    out,
+    sep = "\n")
+  writeLines(
+    paste0("yaku_slope_disc: ",
+           coef(fit_ols_yaku)[2]  |> round(3)),
+    out,
+    sep = "\n")
+  writeLines(
+    paste0("yaku_int_inv_log10: ",
+           log10(exp(coef(fit_ols_yaku_inv)[1]))  |> round(3)),
+    out,
+    sep = "\n")
+  writeLines(
+    paste0("yaku_slope_inv_leaf: ",
+           coef(fit_ols_yaku_inv)[2]  |> round(3)),
+    out,
+    sep = "\n")
 
   writeLines(
     paste0("yaku2_int_log10: ",
