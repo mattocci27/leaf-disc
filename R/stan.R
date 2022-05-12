@@ -756,7 +756,7 @@ pred_mcmc <- function(draws, sp_mean, n = 80) {
     theme(legend.position = "none")
 
 #  LA for large
-  mu_mat <- exp(rep(1, n) %*% t(draws$`beta[1]`) + x_lt %*% t(draws$`beta[4]`))
+  mu_mat <- exp(rep(1, n) %*% t(draws$`beta[1]`) + x_lt %*% t(draws$`beta[3]`))
   sig_mat <- exp(rep(1, n) %*% t(draws$`gamma[1]`))
   #mu_sig_mat <- mu_mat + sig_mat
   mean_mu <- apply(mu_mat, 1, mean)
@@ -819,7 +819,7 @@ pred_mcmc <- function(draws, sp_mean, n = 80) {
     x = exp(x_bar + x_s * x_lt), punch = "1.0-cm")
 
   # LD for small
-  mu_mat <- exp(rep(1, n) %*% t(draws$`beta[1]` + draws$`beta[5]`) + x_lt %*% t(draws$`beta[2]` + draws$`beta[6]`))
+  mu_mat <- exp(rep(1, n) %*% t(draws$`beta[1]` + draws$`beta[5]`)) #+ x_lt %*% t(draws$`beta[2]` + draws$`beta[6]`))
   sig_mat <- exp(rep(1, n) %*% t(draws$`gamma[1]` + draws$`gamma[5]`) + x_lt %*% t(draws$`gamma[2]` + draws$`gamma[6]`))
   mean_mu <- apply(mu_mat, 1, mean)
   mean_sig <- apply(sig_mat, 1, mean)
