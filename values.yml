@@ -34,6 +34,8 @@ yaku2_slope_area: 0.0589
 yaku2_int_inv_log10: 0.15
 yaku2_slope_inv_leaf: 0.945
 yaku2_slope_inv_area: -0.0653
+yaku_r2_simple: 0.93
+yaku_r2_area: 0.94
 ols_var2: 1.01
 ols_int_inv_raw: 1
 ols_int_inv: 1.01
