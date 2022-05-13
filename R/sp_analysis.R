@@ -20,6 +20,45 @@ sma_point <- function(data) {
     theme_bw() +
     theme(text = element_text(family = "Arial"))
 }
+#' @title Leaf disc vs whole-leaf LMA (simple)
+sma_point_sep <- function(data) {
+  my_col <- RColorBrewer::brewer.pal(4, "RdBu")
+  data <- data |>
+    mutate(size_gr = ifelse(location == "Yakushima", "1.0-cm", "0.6-cm")) |>
+    ggplot(aes(x = lma_disc, y = lma_leaf, col = size_gr)) +
+    geom_point(alpha = 0.8) +
+    scale_x_log10() +
+    scale_y_log10() +
+    geom_abline(slope = 1, intercept = 0, lty = 2) +
+    geom_sma(se = TRUE, nboot = 2000) +
+    scale_color_manual(
+      values = my_col[c(2, 4)],
+      name = "Leaf punch diameter"
+    ) +
+    scale_fill_manual(
+      values = my_col[c(2, 4)],
+      name = "Leaf punch diameter"
+    ) +
+    xlab(expression(Leaf ~ disc ~ LMA ~ (g ~ m^{
+      -2
+    }))) +
+    ylab(expression(Whole - leaf ~ LMA ~ (g ~ m^{
+      -2
+    }))) +
+    stat_cor(
+      aes(label = paste(..rr.label.., ..n.label.., sep = "~`,`~"), family = "Arial"),
+      show.legend = FALSE
+    ) +
+    theme_bw() +
+    theme(text = element_text(family = "Arial"),
+      legend.position = c(0.8, 0.2),
+      legend.key.size = unit(0.5, "cm"),
+      legend.spacing.y = unit(0.1, "cm"),
+      legend.text.align = 0,
+      legend.key.height = unit(0.2, "cm"),
+      legend.text = element_text(size = 9),
+      legend.title = element_text(size = 9))
+}
 
 #' @title Leaf disc vs whole-leaf LMA (pooled species-level)
 lalt_pool_grid_point <- function(data) {

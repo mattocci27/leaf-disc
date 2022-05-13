@@ -181,6 +181,18 @@ targets::tar_load(coef_sp_punch1_add_plot)
 
 # Appendix S5:
 
+Relationships between species mean leaf mass per area (LMA) determined by using whole-leaves and leaf discs for species obtained with leaf punches of different diameters.
+Dashed lines indicate 1:1 lines.
+Blue solid lines indicate standardized major axis (SMA) regressions.
+The 95% confidence intervals are resented as the shaded area.
+The correlation is significant (*P* < 0.001).
+
+![](../figs/sma_sep.png){ width="400" style="display: block; margin: 0 auto" }
+
+\newpage
+
+# Appendix S6:
+
 Relationships between whole-leaf LMA : disc leaf LMA and total dry mass for the leaf disc.
 The relationships was heteroscedastic (unequal variance, *p* < 0.001; all the samples were analyzed together).
 Samples with small total dry mass tended to show greater variance.
@@ -189,7 +201,7 @@ Samples with small total dry mass tended to show greater variance.
 
 \newpage
 
-# Appendix S6:
+# Appendix S7:
 
 Summary of a linear mixed model for log-transformed total dry mass of leaf discs for each tree individual.
 Species was used as a random intercept.
@@ -201,26 +213,6 @@ dm_glmm_tab |>
   kable(format = "html") |>
   kable_styling()
 ```
-
-\newpage
-
-# Appendix S7:
-
-hist
-
-![](../figs/hist.png)
-
-\newpage
-
-# Appendix S7:
-
-Relationships between species mean leaf mass per area (LMA) determined by using whole leaves and leaf discs.
-Species groups are divided into four categories on the basis of the medians of the leaf size and leaf thickness across all the species.
-Estimates obtained by different leaf punches are plotted separately in different colors.
-All the correlations are significant (*P* < 0.001).
-
-![](../figs/sma_grid_col3.png){ width="600" style="display: block; margin: 0 auto" }
-
 
 \newpage
 # LITERATURE CITED

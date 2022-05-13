@@ -63,7 +63,7 @@ ratio_dm <- function(tree) {
     geom_hline(yintercept = 1) +
     scale_color_manual(
       values = my_col[c(2, 4)],
-      name = "Diameter of the leaf punch"
+      name = "Leaf punch diameter"
     ) +
     xlab("Total dry mass of leaf disc (g)") +
     ylab("Whole-leaf LMA / leaf disc LMA") +

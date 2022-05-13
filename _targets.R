@@ -676,6 +676,20 @@ list(
     },
     format = "file"
   ),
+  tar_target(
+    sma_sep_plot, {
+      p <- sma_point_sep(sp_mean)
+      ggsave(
+        "figs/sma_sep.png",
+        p,
+        dpi = 300,
+        width = 4,
+        height = 4
+      )
+      paste0("figs/sma_sep", c(".png"))
+    },
+    format = "file"
+  ),
 
   tar_target(
     sma_tab_large,

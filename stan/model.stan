@@ -1,8 +1,8 @@
 data{
-  int<lower=0> N;
-  int<lower=0> K;
-  vector[N] log_y; // whole-leaf LMA / disc LMA
-  vector[N] log_lma_disc; // whole-leaf LMA / disc LMA
+  int<lower=0> N; // No. samples
+  int<lower=0> K; // No. predictors
+  vector[N] log_y; // whole-leaf LMA
+  vector[N] log_lma_disc; // Leaf disc LMA
   matrix[N, K] x; // predictors
 }
 
