@@ -90,7 +90,7 @@ val <- yaml::yaml.load_file("values.yml")
 Site information.
 MAT: mean annual temperature,
 MAP: mean annual precipitation,
-CV: coefficient variance
+CV: coefficient of variation
 
 ```{r, echo=FALSE}
 library(jsonlite)
