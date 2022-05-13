@@ -495,7 +495,6 @@ generate_sma_2_tab <- function(sp_mean) {
     elev.test = 0,
     slope.test = 1
   )
-
   sma_la <- sma(log10(lma_leaf) ~ log10(lma_disc) * la_gr3,
     data = sp_mean,
     elev.test = 0,

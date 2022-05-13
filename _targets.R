@@ -26,8 +26,6 @@ tar_option_set(packages = c(
   "janitor",
   "extrafont",
   "loo",
-  "modelr",
-  "performance",
   "jsonlite",
   "lmtest"
 ))
@@ -677,6 +675,19 @@ list(
       paste0("figs/sma", c(".png"))
     },
     format = "file"
+  ),
+
+  tar_target(
+    sma_tab_large,
+    generate_sma_2_tab(
+      sp_mean |> filter(location == "Yakushima")
+    )
+  ),
+  tar_target(
+    sma_tab_small,
+    generate_sma_2_tab(
+      sp_mean |> filter(location != "Yakushima")
+    )
   ),
 
 

@@ -138,6 +138,22 @@ tar_read(cv_sp)
 
 # SMA table
 
+## punch
+
+```{r, eval=TRUE}
+tar_load(sma_tab_large)
+sma_tab_large |>
+  kable() |>
+  kable_styling()
+```
+
+```{r, eval=TRUE}
+tar_load(sma_tab_small)
+sma_tab_small |>
+  kable() |>
+  kable_styling()
+```
+
 ## species
 
 ```{r, eval=TRUE}
@@ -146,6 +162,8 @@ sma_sp_tab |>
   kable() |>
   kable_styling()
 ```
+
+
 ```{r}
 sma_sp_tab |>
   write_csv("data/sma_sp_tab.csv")

@@ -185,7 +185,7 @@ Relationships between whole-leaf LMA : disc leaf LMA and total dry mass for the 
 The relationships was heteroscedastic (unequal variance, *p* < 0.001; all the samples were analyzed together).
 Samples with small total dry mass tended to show greater variance.
 
-![](../figs/ratio.png){style="display: block; margin: 0 auto" }
+![](../figs/ratio_dm.png){ width="400" style="display: block; margin: 0 auto" }
 
 \newpage
 
@@ -201,6 +201,14 @@ dm_glmm_tab |>
   kable(format = "html") |>
   kable_styling()
 ```
+
+\newpage
+
+# Appendix S7:
+
+hist
+
+![](../figs/hist.png)
 
 \newpage
 
