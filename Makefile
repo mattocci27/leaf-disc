@@ -1,4 +1,4 @@
-all: ms/LMA_method.pdf ms/response_letter.pdf
+all: ms/LMA_method.pdf ms/response_letter.pdf ms/diff.pdf
 docker: ms/LMA_method.pdf
 #docker: ms/LMA_method.pdf ms/diff.pdf
 local: ms/leaf_disc.bib
