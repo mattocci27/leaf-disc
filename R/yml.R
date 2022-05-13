@@ -50,6 +50,9 @@ write_yml <- function(path, sp_mean, full_data_cv_csv, tree, lma_yaku_re, sp_cv,
   fit_ols_yaku2 <- lm(log(lma_leaf) ~ log(lma_disc) + log(la), yaku)
   fit_ols_yaku3 <- lm(log(lma_leaf/lma_disc) ~ log(lma_disc) + log(la), yaku)
 
+#  AIC(fit_ols_yaku)
+#  AIC(fit_ols_yaku2)
+
   # lm(log10(lma_leaf) ~ log10(lma_disc), yaku) |> summary()
   # lm(log10(lma_disc) ~ log10(lma_leaf), yaku) |> summary()
 
@@ -359,6 +362,17 @@ write_yml <- function(path, sp_mean, full_data_cv_csv, tree, lma_yaku_re, sp_cv,
       summary(fit_ols_yaku2)$r.squared |> round(2)),
     out,
     sep = "\n")
+  writeLines(
+    paste0("yaku_aic_simple: ",
+      AIC(fit_ols_yaku) |> round(1)),
+    out,
+    sep = "\n")
+  writeLines(
+    paste0("yaku_aic_area: ",
+      AIC(fit_ols_yaku2) |> round(1)),
+    out,
+    sep = "\n")
+
   writeLines(
     paste0("ols_var2: ",
            var_fun(fit_ols) |> round(3)),
