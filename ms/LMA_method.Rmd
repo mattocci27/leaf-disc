@@ -173,7 +173,7 @@ However, the comparisons between the two estimates in other biomes have rarely b
 Since larger leaves tend to invest more of their mass into dense midribs and petiole for support [@Niinemets2006; @Niinemets2007; @Li2022; @Li2022a], and thinner leaves have clearly visible and large-diameter veins with less uniform leaf structure (i.e., kite-type leaves; [@Grubb1986]), discrepancies in the estimates of whole-leaf LMA and leaf disc LMA might be greater for larger and thinner leaves.
 Higher leaf density (and LMA) is associated with higher vein density [@John2017; @Sancho-Knapik2020], and thus leaf disc LMA avoiding major veins might also underestimate whole-leaf LMA for species with higher leaf tissue density.
 If leaf disc LMA largely and consistently underestimates whole-leaf LMA (i.e., differences in means), some calibrations may be required to combine or compare those different estimates [@Kraft2008; @Onoda2011].
-If divergencies between the estimates based on the different methods are large and inconsistent (i.e., differences in variances and low *R^2^* values), this is difficult to calibrate and should inflate errors in the subsequent analyses.
+If divergences between the estimates based on the different methods are large and inconsistent (i.e., differences in variances and low *R^2^* values), this is difficult to calibrate and should inflate errors in the subsequent analyses.
 To date, however, only a database from a single region, Panama Plant Traits Database [@Wright2010], is available in the TRY [@Kattge2020] that have both estimates of LMA from small leaf discs and whole leaves including petioles, limiting of our understanding of under what conditions estimates of LMA from leaf discs are reliable estimates of whole-leaf LMA.
 
 Intraspecific trait variation (ITV), which reflects both heritable genetic variation and phenotypic plasticity, influences plant responses to abiotic and biotic interactions [@Westerband2021].
@@ -199,26 +199,26 @@ In addition to leaf morphology, we also investigate the effects of leaf punch si
 
 *Data sources*
 
-We used newly compiled individual-level plant datasets form a wide ranges of biomes in China and Japan (Appendix S1) to examine the relationship between whole-leaf and leaf disc-based estimates of leaf traits.
-First, the Yunnan dataset is from three forest plots in Yunnan province, Southwest China, which includes a tropical rain forest (TRF), a tropical hot-dry savanna ecosystem (HDS), and a subtropical evergreen wet forest (STF), with a total of `r val$sp1` species and `r val$tree1` individuals.
+We used newly compiled individual-level plant datasets from a wide range of biomes in China and Japan (Appendix S1) to examine the relationship between whole-leaf and leaf disc-based estimates of leaf traits.
+First, the Yunnan dataset is from three forest plots in Yunnan province, Southwest China, which includes a tropical rainforest (TRF), a tropical hot-dry savanna ecosystem (HDS), and a subtropical evergreen wet forest (STF), with a total of `r val$sp1` species and `r val$tree1` individuals.
 Second, the Yakushima dataset is from a warm-temperate forest in Yakushima island, Japan, with a total of `r val$yaku_sp` species and `r val$tree3` individuals.
 In total, our dataset comprised `r val$all_sp` woody species and `r val$all_tree` individual that ranged from 8.1 to 24.7 °C in mean annual temperature (MAT) and 732.8 to 4477 mm in mean annual precipitation (MAP) [Appendix S1; @Eguchi2006; @Song2017; @Fei2018], which covers the wide climate ranges in the distribution of broad-leaved tree species.
-The methodologies for trait sampling and measurement are slightly different between the Yunnan and the Yakushima dataset, which we describe bellow.
+The methodologies for trait sampling and measurement are slightly different between the Yunnan and the Yakushima dataset, which we describe below.
 
 *Measurements of leaf disc and whole-leaf LMA*
 
 At the TRF site, we collected leaf samples from trees within reach of a canopy crane (88 m tall with a 60 m long boom).
 In the HDS, and STF sites, we used a 12-m long pruner to collect samples for most of the target species.
-In case of tall individuals that out of the reach of pruner, we used a rope climbing to reach the canopy, then sampled branches with the long pruner.
+In the case of tall individuals that were out of the reach of pruners, we used rope climbing to reach the canopy, then sampled branches with the long pruner.
 In Yakushima, we used 15-m poles for our leaf sampling.
 At least six sun-exposed healthy leaves were sampled from each of 3 to 6 individuals for each species.
 Trait values were averaged at the species- and individual-level for the analyses.
-For compound-leaved species, we referred a leaflet (the minimum photosynthetic unit) as a single leaf in our study.
+For compound-leaved species, we referred to a leaflet (the minimum photosynthetic unit) as a single leaf in our study.
 We excluded species that had tiny leaves or leaflets (length <1 cm) because it was not practical to measure leaf disc LMA.
 
 To determine what extent LMA values were affected by the different methods, LMA were determined (i) LMA based on a whole leaf including petioles and (ii) LMA based on leaf disc avoiding thick veins (first to second veins).
 Three 0.6-cm diameter discs were taken from the base, middle and tip of each leaf using a hole punch in the Yunnan dataset.
-Two 1.0-cm diameter discs were taken from each leaf were in the Yakushima dataset (see Appendix S2 for more details).
+Two 1.0-cm diameter discs were taken from each leaf in the Yakushima dataset (see Appendix S2 for more details).
 Fresh leaf area (LA; cm^-2^) of leaf materials (whole leaves including petioles and midribs) was measured using a scanner and ImageJ software by the R package *LeafArea* [@Katabuchi2015].
 Fresh leaf thickness (LT; mm) was measured using a micrometer in three points at the base, middle and tip of the leaf using a micrometer (Mitutoyo 293-240, Mitutoyo Corporation, Kawasaki, Japan) with a precision at 0.001 mm.
 Thickness of each leaf disc was also measured for the Yunnan dataset but not for the Yakushima dataset, which enables us to estimate whole-leaf and leaf disc leaf tissue density (LD; g cm^-3^) separately in the Yunnan dataset.
@@ -267,9 +267,9 @@ See Appendix SX for more detail.
 The Stan code use to fit models is available from Github at: [https://github.com/mattocci27/leaf-disc](https://github.com/mattocci27/leaf-disc).
 Convergence of the posterior distribution was assessed with the Gelman-Rubin statistic with a convergence threshold of 1.1 for all parameters [@Gelman2013].
 
-We also perfomred ordinary least-squares (OLS) regressions to see the relationship between whole-leaf to leaf disc LMA ratio and petiole to leaf dry mass ratio and between leaf area petiole to leaf dry mass ratio, using a subset of the dataset in which we measured leaf lamina and petiole dry mass separately.
+We also performed ordinary least-squares (OLS) regressions to see the relationship between whole-leaf to leaf disc LMA ratio and petiole to leaf dry mass ratio and between leaf area petiole to leaf dry mass ratio, using a subset of the dataset in which we measured leaf lamina and petiole dry mass separately.
 
-*Relationship between disc-based and whole-leaf estiamtes of intraspecific variation*
+*Relationship between disc-based and whole-leaf estimates of intraspecific variation*
 
 The extent of intraspecific variation (ITV) was calculated using Bao's CV estimator [@Yang2020];
 
@@ -279,11 +279,11 @@ CV = CV_1 - \frac{CV_1^3}{N} + \frac{CV_1}{4N} + \frac{CV_1^2 \gamma_1}{2N} + \f
 
 where $CV_1 = s/\bar{x}$, $s$ is the sample standard deviation and $\bar{x}$ is the sample mean, *N* is the sample size, and $\gamma_1$ and $\gamma_2$ are the skewness and kurtosis of the trait distribution.
 Bao's CV estimator is a robust method to quantify ITV based on a coefficient of variation (CV) when sample size is small [@Yang2020].
-We calulcated CV for species that have at least 5 indivdiuals as recommended in @Westerband2021.
+We calculated CV for species that have at least 5 individuals as recommended in @Westerband2021.
 Ideally, 20 individuals for each species are required for robust estimation of CV [i.e., <5% differences from the true ITV; @Yang2020].
 
 SMA analyses were run as described above.
-We also perfmoed the paired t-test to compare the extent of ITV between whole-leaf LMA and leaf disc LMA.
+We also performed the paired t-test to compare the extent of ITV between whole-leaf LMA and leaf disc LMA.
 All statistical analyses were conducted in R version 4.1.3 [@RCoreTeam2022].
 
 # RESULTS
@@ -291,15 +291,15 @@ All statistical analyses were conducted in R version 4.1.3 [@RCoreTeam2022].
 There were a significant shift in elevation between whole-leaf and leaf disc LMA (Fig.1, SMA slope: `r val$sma_slope_all_mean` [95%CI: `r val$sma_slope_all_lwr`, `r val$sma_slope_all_upr`], SMA intercept: `r val$sma_int_all_mean` [95%CI: `r val$sma_int_all_lwr`, `r val$sma_int_all_upr`]), suggesting that the whole-leaf estimates of LMA were `r val$sma_per_all_mean`% [95%CI: `r val$sma_per_all_lwr`, `r val$sma_per_all_upr`] greater than disc-based estimates in the arithmetic scale.
 
 Leaf tissue density, leaf area, leaf thickness and leaf punch size influenced the relationship between the whole-leaf LMA and leaf disc LMA (Fig. 2 and Appendix SX).
-Species with lower leaf tissue density had greater variance in the estiamte of whole-leaf to leaf disc LMA ratio (Fig. 2a).
+Species with lower leaf tissue density had greater variance in the estimate of whole-leaf to leaf disc LMA ratio (Fig. 2a).
 When a small leaf punch was used, this pattern was more pronounced and leaf disc and whole-leaf LMA estimate diverged for species with higher leaf tissue density (Fig. 2a).
-Species with larger leaves had greater estimate of the estimate of whole-leaf to leaf disc LMA ratio (Fig. 2b), which was only significant for leaves obtained by a large punch.
-Species with thinner leaves had grater variance in the estimate of whole-leaf to leaf disc LMA ratio (Fig. 2c), which was only significant for leaves obtained by a small punch.
+Species with larger leaves had greater estimate for the whole-leaf to leaf disc LMA ratio (Fig. 2b), which was only significant for leaves obtained by a large punch.
+Species with thinner leaves had greater variance in the estimate of whole-leaf to leaf disc LMA ratio (Fig. 2c), which was only significant for leaves obtained by a small punch.
 A small punch also inflated variance in the estimate of whole-leaf to leaf disc LMA ratio (Fig. 2a-c and Appendix SX).
 Leaf disc and whole-leaf LMA estimate diverged for species with greater investment in petiole dry mass (Fig. 3a). Large-leaved species tended to have greater investment for petiole dry mass than small-leaved species (Fig. 3b).
 
 The extent of intraspecific trait variation (CV; coefficient of variation) only weakly matched between whole-leaf and disc-based estimates (Fig.4).
-Altough there were no stiatical differences in the SMA slope or elevation (SMA slope: `r val$sma_slope_cv_mean` [95%CI: `r val$sma_slope_cv_lwr`, `r val$sma_slope_cv_upr`], SMA intercept: `r val$sma_int_cv_mean` [95%CI: `r val$sma_int_cv_lwr`, `r val$sma_int_cv_upr`]), leaf disc LMA had greater CVs than whole-leaf LMA (*t* = `r val$t_test_t`, *d.f.* = `r val$t_test_df`, *P* < 0.001).
+Although there were no statistical differences in the SMA slope or elevation (SMA slope: `r val$sma_slope_cv_mean` [95%CI: `r val$sma_slope_cv_lwr`, `r val$sma_slope_cv_upr`], SMA intercept: `r val$sma_int_cv_mean` [95%CI: `r val$sma_int_cv_lwr`, `r val$sma_int_cv_upr`]), leaf disc LMA had greater CVs than whole-leaf LMA (*t* = `r val$t_test_t`, *d.f.* = `r val$t_test_df`, *P* < 0.001).
 
 # DISCUSSION
 
@@ -314,34 +314,34 @@ The effect of leaf punch size was the most important source of the variation (Fi
 Small leaf disc size inflates trait varition within leaves because dry mass will be inflated when major veins are unintentionally included in the samples.
 Species with lower leaf tissue density and thin leaves showed greater variance in whole-leaf to leaf disc LMA ratio especially when a small punch was used (Fig.2ac: small leaf punch, Fig. 2a: large leaf punch).
 @Kraft2008 found high *R^2^* values (*R^2^* = 0.92) between whole-leaf and leaf disc LMA based on leaf discs of approximately 1.0-cm diameter for sapling leaves under closed canopy that are softer and thinner than adult leaves [@Kitajima2010; @Oktavia2020].
-Altough a leaf punch of 1.0-cm diameter was used only in the Yakushima dataset in our study, the correlations were also strong for the Yakushima dataset, regardress of leaf tissue density or leaf thickness (Appendix SX).
-On the other hand, a previous study found that leaf disc LMA obtained with a very small leaf punch (0.3-cm diameter) and whole-leaf LMA had different relationships between shade tolerance [@Poorter2009a], suggesting that leaf disc LMA and whole-leaf LMA can be inheretly different when small disc samples were used.
+Altough a leaf punch of 1.0-cm diameter was used only in the Yakushima dataset in our study, the correlations were also strong for the Yakushima dataset, regardless of leaf tissue density or leaf thickness (Appendix SX).
+On the other hand, a previous study found that leaf disc LMA obtained with a very small leaf punch (0.3-cm diameter) and whole-leaf LMA had different relationships between shade tolerance [@Poorter2009a], suggesting that leaf disc LMA and whole-leaf LMA can be inherently different when small disc samples were used.
 The relatively low *R^2^* values in the Yunnan dataset (Appendix SX) compared to the previous study and the Yakushima dataset may suggest not only the effect of distinct veins on variance in LMA [@John2017] or distinct veins with kite-type appearances [@Grubb1986] but also technical difficulty in measuring tiny weight of discs in lower LMA leaves.
 We found that estimates of whole-leaf and leaf disc LMA diverged when total dry mass of leaf discs was small (Appendix SX), and thus species with lower leaf tissue density and thin leaves, which have smaller dry mass (Appendix SX), tended to show grater variation in whole leaf to leaf disc LMA ratio especially when we used a smaller leaf punch.
 
 Species with higher leaf tissue density and large leaves showed greater whole-leaf LMA than leaf disc LMA (Fig. 2ab: large leaf punch).
 We also observed that leaf disc and whole-leaf LMA estimate diverged for species with greater investment in petiole dry mass (Fig. 3a), and large-leaved species tended to have greater investment for petiole dry mass than small-leaved species (Fig. 3b).
 This is consistent with the pattern of large leaves disproportionately investing in more leaf veins and/or petioles [@Niinemets2006; @Niinemets2007; @Sack2012] and the pattern of higher leaf tissue density associated with higher vein density [@John2017; @Sancho-Knapik2020] because those driving factors of LMA are likely to be ignored in leaf disc samples.
-The estimated effects of leaf tissue density and leaf area was also positive for species obtained with a small leaf punch (Appdendix SX), but those effects were not significant.
-This is probably because the variation in whole-leaf to leaf disc LMA ratio was too large to show clear effects of leaf tissue density and leaf area on the mean etimates ($\beta$ in Eq. 2) when a small leaf punch was used.
+The estimated effects of leaf tissue density and leaf area was also positive for species obtained with a small leaf punch (Appendix SX), but those effects were not significant.
+This is probably because the variation in whole-leaf to leaf disc LMA ratio was too large to show clear effects of leaf tissue density and leaf area on the mean estimates ($\beta$ in Eq. 2) when a small leaf punch was used.
 
 *Conversion between whole-leaf and leaf disc LMA*
 
 When the objective is to use leaf disc LMA as an alternative for whole-leaf LMA, using an appropriate size of leaf punch (e.g., 1.0-cm in diameter) is important for obtaining stable estimates of leaf disc LMA that matches well with whole-leaf LMA.
 Our results suggest that simple conversion between whole-leaf and leaf disc LMA is difficult for species obtained with a small leaf punch.
 The effects of leaf tissue density and leaf area are predictable when we used a large leaf punch (Fig. 2ab: large leaf punch), suggesting that conversion between leaf disc and whole-leaf LMA should be possible using leaf area as a covariate (measuring leaf tissue density requires whole-leaf LMA itself).
-OLS regressions with leaf area as a covariate as follwoing:
+OLS regressions with leaf area as a covariate as following:
 (1) log~10~LMA~w~ = `r val$yaku2_slope_disc` $\times$ log~10~LMA~d~ + `r val$yaku2_slope_area` $\times$ log~10~LA,
 (2) log~10~LMA~d~ = `r val$yaku2_int_inv_log10` + `r val$yaku2_slope_inv_leaf` $\times$ log~10~LMA~w~  - 0.063  $\times$ log~10~LA (*R^2^* = `r val$yaku_r2_area`, *AIC* = `r val$yaku_aic_area`, *n* = `r val$yaku_sp`),
 where LMA~w~, LMA~d~, and LA are the whole-leaf LMA, leaf disc LMA and leaf area, respectively.
-OLS regressions without leaf area as a covariate as follwoing:
+OLS regressions without leaf area as a covariate as following:
 (3) log~10~LMA~w~ = `r val$yaku_int_log10` + `r val$yaku_slope_disc` $\times$ log~10~LMA~d~ or
 (4) log~10~LMA~d~ = `r val$yaku_slope_inv_leaf` $\times$ log~10~LMA~w~
 (*R^2^* = `r val$yaku_r2_simple`, *AIC* = `r val$yaku_aic_simple`, *n* = `r val$yaku_sp`).
-Nonetheless, including leaf area only slighlty imporves the *R^2^* values for the Yakushima dataset where a large punch was used.
-This is because the large descripancy in the whole-leaf to leaf disc LMA for large leaves can be explained by scaling relationships between leaf mass and leaf area called "dimishing returns" [@Niklas2007] which refers to increases in leaf dry mass including petioles do not result in the proportional increase in leaf area including petioles [@Li2022], which is strong for mature leaves [@Jiao2022].
-The "dimishing returns" can be either descirbed as the scaling slope of leaf area in the model 1 or the scaling slope of leaf-disc LMA and the intercept in the model 3.
-When one needs to mix leaf disc LMA and whole-leaf LMA in a single analysis (e.g., meta-analysis) or quickly measure leaf disc LMA as a proxy for whole-leaf LMA, we recommend to covert LMA values using one of the models above.
+Nonetheless, including leaf area only slightly improves the *R^2^* values for the Yakushima dataset where a large punch was used.
+This is because the large discrepancy in the whole-leaf to leaf disc LMA for large leaves can be explained by scaling relationships between leaf mass and leaf area called "diminishing returns" [@Niklas2007] which refers to increases in leaf dry mass including petioles do not result in the proportional increase in leaf area including petioles [@Li2022], which is strong for mature leaves [@Jiao2022].
+The "diminishing returns" can be either described as the scaling slope of leaf area in the model 1 or the scaling slope of leaf-disc LMA and the intercept in the model 3.
+When one needs to mix leaf disc LMA and whole-leaf LMA in a single analysis (e.g., meta-analysis) or quickly measure leaf disc LMA as a proxy for whole-leaf LMA, we recommend to convert LMA values using one of the models above.
 
 *Intraspecific variation*
 
@@ -351,9 +351,9 @@ On average, ITV based on leaf disc LMA was greater than ITV based on whole-leaf 
 Although there are not many studies that quantified trait variation within a single leaf, a previous study that used a giant leaved species *Alocasia macrorrhiza*, suggests that LMA varied within leaves due to reduced water supply and demand from midrib to outer regions [@Li2013a].
 Because calculating the mean values generally diminishes the effect of within-sample variation, the relationship between disc-based estimates of individual mean LMA and its whole-leaf estimates will be stronger than the relationship between leaf disc CV and whole-leaf CV.
 Thus, leaf disc and whole-leaf estimates of species means will show the strongest relationship.
-The mismatch of ITV between whole-leaf and disc-based estimates could be ignored in the type of ITV studies that attempt to detemine sources of trait variation (e.g., site, across species, within species) which often use mixed linear modles and variance partitioning [e.g., @Messier2010; @Leps2011; @Siefert2015].
+The mismatch of ITV between whole-leaf and disc-based estimates could be ignored in the type of ITV studies that attempt to determine sources of trait variation (e.g., site, across species, within species) which often use mixed linear models and variance partitioning [e.g., @Messier2010; @Leps2011; @Siefert2015].
 However, it is likely to change patterns significantly in the type of ITV studies that attempt to quantify the extent of ITV which usually use CV [i.g., @Albert2010a; @Bastias2017a; @Yang2020].
-This caveat might apply to other leaf chemical traits such as leaf N contents because those traits have both disc and whole-leaf based estimates but those two estimates are usually not clarifeind in trait databases (e.g., TRY).
+This caveat might apply to other leaf chemical traits such as leaf N contents because those traits have both disc and whole-leaf based estimates but those two estimates are usually not clarified in trait databases (e.g., TRY).
 Since we used limited sample numbers (at least 5 samples per species) and most of them were obtained with a small punch, our study design may inflate errors in estimating ITV [@Yang2020].
 Future studies should include more samples to improve the comparisons of leaf disc and whole-leaf based ITV.
 
@@ -362,8 +362,8 @@ Future studies should include more samples to improve the comparisons of leaf di
 The present study was designed to examine the extent to which whole leaf and leaf disc LMA matched.
 Although our study was not designed to evaluate the effects of diameter sizes of leaf punches, the sizes of leaf punches as well as leaf morphology are the important sources of variance between whole-leaf and leaf disc LMA.
 Our study shows that mean values of leaf disc LMA is generally a good proxy for mean values of whole-leaf LMA when an appropriate size of leaf punch (e.g., 1.0-cm in diameter) was used.
-Thhose LMA values can be converted using OLS regressions.
-Additionally, although the mean values of leaf disc and whole-leaf LMA matched well, quantifying trait variation using leaf discs should be considered with caution, because variation among leaf discs within the same leaves (including measurement errors) seems to be considerably large but cannot be avoid for typical sampling numbers (2-3 discs per leaf).
+Those LMA values can be converted using OLS regressions.
+Additionally, although the mean values of leaf disc and whole-leaf LMA matched well, quantifying trait variation using leaf discs should be considered with caution, because variation among leaf discs within the same leaves (including measurement errors) seems to be considerably large but cannot be avoided with the typical sampling numbers (2-3 discs per leaf).
 Leaf discs, which can target leaf lamina avoiding leaf veins, are useful and essential for biochemical determinations such as measurements of Rubisco activity [@Parry2002], because the photosynthetic activity occurs most in lamina rather than in veins for C~3~ plants [@Hibberd2002; @Gao2018].
 Leaf disc LMA is also the preferred method for quantifying leaf lamina density, which avoid effects of veins.
 Accurately representing leaf traits will probably require careful selection between leaf disc and whole-leaf traits depending on the objectives.
