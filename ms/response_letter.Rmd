@@ -44,8 +44,46 @@ output:
     - "--mathml"
 ---
 
+Dear Editors,
+
+We hereby resubmit the manuscript (AJB-D-21-00391), “Sources and consequences of mismatch between leaf disc and whole-leaf leaf mass per area (LMA)” (Phisamai Maenpuen, Masatoshi Katabuchi, Yusuke Onoda, Cong Zhou, Jiao-Lin Zhang, Ya-Jun Chen).
+We thank the associate editor and the reviewers for their careful attention to detail in our manuscript and for providing comments that have greatly improved the study.
+
+Based on the comments, we have updated the manuscript to reflect the following:
+
+1. To quantify the effect of leaf morphology (leaf tissue density, leaf area, leaf thickness) and leaf punch size on the relationship between whole-leaf and leaf disc LMA, we have built a hierarchical Bayesian model.
+This allows to quantify when the whole-leaf LMA to leaf disc LMA ratio become large and in which direction the relationship is changing.
+
+2. We also removed the analysis that grouped species into four categories based on medians of leaf area and leaf thickness because it is somewhat arbitral as pointed by the reviewer.
+Instead, the above Bayesian model can was used to test our hypotheses.
+
+3. We have removed the individual-based analysis from the main text because variance among species are not independent in the individual-level data, and thus SMA or OLS regressions are not appropriate.
+Analyses of individual-level data requires mixed linear models with species-level errors, but this is not useful for the context of our paper.
+We therefore only report species-level results.
+
+The programming code and the data supporting the findings of this study will be deposited at Zenodo (https://zenodo.org) and Github (https://github.com/mattocci27/leaf-disc).
+At the moment, we have attached the stan code for our Bayesian model.
+
+Below we provide detailed responses.
+The editing history is recorded in a separate pdf file.
+
+We appreciate the opportunity to revise and improve our manuscript, and we thank the editors and reviewers for their time and consideration.
+
+
+Sincerely,
+
+Masatoshi Katabuchi
+
+Xishuangbanna Tropical Botanical Garden, Chinese Academy of Sciences
+
+(on behalf of coauthors: Phisamai Maenpuen,Yusuke Onoda, Cong Zhou, Jiao-Lin Zhang, and Ya-Jun Chen)
+
+\newpage
 
 > AE comments: Thanks for the submission. I agree with the reviewers that the paper has merit and will be of interest to many researchers because LMA is a widely used trait. Both reviewers have some feedback for you to consider. Reviewer 1's suggestions would require extensive revisions to address. Reviewer 2 has suggested a modification to the title. I think the existing title is fine if you prefer to keep that but would ask you to carefully consider all other comments carefully.
+
+We appreciate the positive comments, and thank you for the opportunity to revise the manuscript.
+We have carefully detailed our responses to each point below.
 
 > Reviewer #1: Summary of Manuscript:
 > This manuscript compares two methods of measuring LMA (leaf mass per area), an ecologically important functional trait in plants. It is a carefully executed and useful piece of work, in that LMA is a very widely measured plant trait and many readers will be interested in identifying the best methods to use when measuring LMA in their system, as well as how to compare their own measurements to other published estimates. However, I believe the paper needs modification; I include recommendations, including three major concerns, below:
@@ -55,8 +93,8 @@ We thank the reviewer for the encouraging comments and helpful critiques.
 > 1. Framing: I think the paper misses an opportunity to provide a bit more context for why the study is important. The authors could provide more concrete examples of why standardizing LMA techniques across studies matters: e.g. what is the ecological significance of an LMA measurement difference between the two methods?  This could also be set up in the introduction by providing more context for LMA as a functional trait. For example, by citing the TRY database, the authors could provide readers with the importance and ubiquity of LMA relative to other plant traits (e.g. of all the studies of plant traits in TRY, how many report LMA?)
 
 Thank you.
-We now note that a key difference between leaf disc and whole-leaf LMA is that leaf disc LMA focuses on lamina rather than whole-leaf and usages depend on ecological contexts.
-We also have mentioned the TRY database to explain LMA is the most often used leaf trait in TRY.
+We now note that a key difference between leaf disc and whole-leaf LMA is that leaf disc LMA focuses on lamina rather than whole-leaf and usages depend on ecological contexts (Line 75-77).
+We also have mentioned the TRY database to explain LMA is the most often used leaf trait in TRY (Line 59-63).
 
 > 2. A crucial thing for readers to know is how to "convert" one method's estimate of LMA to another: the authors could report an equation (or a few, accounting for some additional covariates such as leaf area and leaf thickness, which this paper identifies as important modifiers of the relationship) that scholars could use in the future if trying to compare LMA estimates collected using different methods. In other words, taking the eq from Appendix 2 and modifying it given the results of this study.
 
@@ -68,7 +106,7 @@ We also present a practical guideline for conversion of LMA.
 > 3. I am confused and unconvinced by the inclusion and discussion of intraspecific trait variation on several levels. First, the authors do not clearly explain ITV, its importance, or its relevance to LMA. Secondly, the methods used to quantify ITV are not recommended (see Yang et al 2020. Large underestimation of intraspecific trait variation and its improvements. Frontiers in Plant Science); ideally the authors should use Bao's CV estimator. Finally, there is little interpretation of the results of their analysis. I think this metric needs to either be excluded entirely or significantly expanded upon.
 
 Thank you.
-We have cited the recent review by Westerband et al. as well as other works to explain ITV, its importance and the extent of ITV for LMA.
+We have cited the recent review by Westerband et al. as well as other works to explain ITV, its importance and the extent of ITV for LMA (Line 104-111).
 We now use Bao's CV estimator (CV4) instead of the coefficient of variation of log-normally distributed data ($CV = \sqrt{exp(s_{\mathrm{ln}}^2) - 1}$).
 We also limited to the analysis for species that have at least 5 individuals.
 The relationship between the two estimates became much weaker (Fig. 4).
@@ -83,7 +121,7 @@ We now introduce the LES in the first sentence so that the readers can understan
 > L69-73 This sentence is crucial for your hypotheses but is buried in the middle of this paragraph. I suggest breaking this paragraph (beginning on line 63) up into 2: the first describing different methods of measurement and how commonly each are used, and any previous attempts to compare them. The second paragraph can get into which leaf types are likely to give similar or different estimates based on the two metrics and why.
 
 Thank you.
-We now break up the paragraph into two sections: the first describing the different methods and their record numbers in TRY, and previous works that compared them, and the second describing the expected effects of leaf morphology on the relationship between whole-leaf and leaf disc LMA.
+We now break up the paragraph into two sections: the first describing the different methods and their record numbers in TRY, and previous works that compared them (Line 64-86), and the second describing the expected effects of leaf morphology on the relationship between whole-leaf and leaf disc LMA (Lin 87-103).
 
 > L82-84 I find this introduction of ITV to be confusing. ITV has a robust literature which is not cited here (for a recent review, see Westerband, Funk, and Barton, 2021. Intraspecific trait variation in plants: a renewed focus on its role in ecological processes. Annals of botany). The authors should briefly introduce this concept and it's ecological relevance before applying it to their question of which method generates greater estimates of ITV and why.
 
@@ -93,12 +131,12 @@ As noted above, we have cited the recent review by Westerband et al. as well as 
 > L99-100 It may bear repeating here why you expect the estimates to match up better for smaller and/or thicker leaves
 
 Thank you.
-We have repeated our expectations here.
+We have repeated our expectations here (Line 125-132).
 
 > L101-102 again, might be worth stating why (even if it is discussed above)
 
 Thank you.
-We have repeated our expectations here.
+Please see our response above.
 
 > L107- 113 The description of the sites/data is a little confusing: it seems that there are two datasets: one which includes 3 different sites, and another that includes a fourth site, for which a subset of the samples had additional measurement taken. I recommend clarifying this section to explain the different levels of organization, as well as including some of the methodological data in Table S1 (e.g. number of total samples, whether leaf thickness was measured, leaf punch size).
 
@@ -119,7 +157,7 @@ We now use Bao's CV as noted above.
 > L169-172 This is the major result of the paper. I suggest making it the first line of the results section (however I would modify it to fit the individual, rather than species-mean, level data: see below).
 
 Thank you.
-We have started the result section with the shift in elevation between whole-leaf and leaf disc LMA (i.e., whole-leaf LMA is greater than leaf disc LMA) .
+We have started the result section with the shift in elevation between whole-leaf and leaf disc LMA (i.e., whole-leaf LMA is greater than leaf disc LMA).
 Please see our response for using species- vs. individual-level data below.
 
 > L175-176 Based on this, I am confused about the statistical approach. Did the authors separately run regressions for species-level means and individual level means? If so, it is almost a statistical inevitability that the individual level analysis would have a lower r2 than the species level analysis: therefore I would not report this as a result, per se. In addition, the species level means is more or less meaningless in the context of this paper: much more importantly is the comparison of individual based measurements. I would therefore remove the species level results form the manuscript, and instead only report on the individual level data.
@@ -136,32 +174,34 @@ We therefore only report species-level results.
 Thank you.
 We now include other continuous variables (leaf tissue density, leaf area, and leaf thickness) as covariates in our model, and thus we have some confidence in the effect of leaf punch.
 However, as the reviewer pointed out, we should have used the same leaf punch size or repeated measurements using different leaf punch sizes.
-We consider this as a limitation of our study and explain this in the discussion.
+We have discussed the effects of leaf punch size more carefully (Line 273-282).
 
 > L183-184 Which metric had higher ITV? That is a more relevant result than simply the R2 value.
 
 Leaf disc LMA had higher ITV.
-We have added the paired t-test for this in the results section.
+We have added the paired t-test for this in the results section (Line 251-255).
 
 > L193 you mention "appropriate calibration": it would be extremely useful if the authors were to report an equation (or several) for converting LMA measured by one metric to the other, ideally that incorporate leaf area and thickness (see major comment).
+
+Thank you.
+Now we have the subsection for conversion between the two LMA estimates in the discussion.
 
 > L201-204 This is a result, and an important one (again, I'm thinking of readers who are looking for advice on how to measure LMA): it should be reported in the results section.
 
 Thank you.
-We have included this in the results section.
+We have included this in the results section (Fig. 3).
 
 > L247 is this reported in the results somewhere? I thought the multiple discs/leaf were measured together?
 
 Thank you.
 That is not a result but an explanation.
 Since we only measured 3 discs for each leaf in the Yunnan dataset, which is a common protocol, we cannot avoid the effect of variance within leaves.
-We have updated the text.
+We have updated the text (Line 364-365).
 
 > Appendix S2 seems to be missing the x axis titles
 
 Thank you.
-The two panels share the x axis.
-Units are in the strip.
+The two panels share the same x axis, and the units are in the strip.
 
 > Reviewer #2: In this work, the authors compared two methods to measure LMA of plants: leaf disc sampling and whole-leaf sampling using 334 woody species from East Asia. The main finding are that (i) mean values of leaf disc LMA is a good proxy for mean values of whole-leaf LMA; (ii) larger and thinner leaves tended to show the large discrepancies between the leaf disc and whole-leaf estimates. Therefore, the present work implies that when one needs to mix leaf disc LMA and whole-leaf LMA in a single analysis (e.g., meta-analysis), appropriate calibrations are necessary. This manuscript was well written. At least, I can read the whole manuscript fast. The study is valuable for choosing a better approach when calculating LMA. I suggest minor to moderate revisions for this manuscript.
 
@@ -170,12 +210,12 @@ Units are in the strip.
 > In the Introduction section, the authors had better add some introduction to the leaf disc sampling method, since this method was focused to make a comparison with the whole-leaf sampling method for calculating LMA.
 
 Thank you.
-We have mentioned several ecological studies that used leaf disc LMA in the introduction.
+We have mentioned several ecological studies that used leaf disc LMA in the introduction (Line 70-77).
 
 > The authors had better explain why they used the LMA values with leaf petioles mass.
 
 Thank you.
-We have added the records of TRY database that shows LMA including petioles are very common.
+We have added the records of TRY database that shows LMA including petioles are very common (Line 64-70).
 
 > Line-specific Comments:
 
@@ -193,7 +233,7 @@ We have updated the first one but keep the second one as "a key trait" because w
 > Jiao, Y., Niklas, K.J., Wang, L., Yu, K., Li, Y., Shi, P. 2022. Influence of leaf age on the scaling relationships of lamina biomass vs. area. Frontiers in Plant Science In press.
 
 Thank you.
-We have cited it in the context of "diminishing returns" in the discussion.
+We have cited it in the context of "diminishing returns" in the discussion (Line 322-323).
 
 > Line 70: Please consider citing the following references:
 
@@ -212,7 +252,7 @@ We, therefore, kept the *R^2^* values in the introduction.
 > Lines 105 and 106: Why did you only collect the data in China and Japan. Here, I think, you had better add one to three sentences to explain the feasibility of showing general results for other floras.
 
 Thank you.
-We have added MAT and MAP in the main text to support that our dataset covers the wide climate ranges in the distribution of broad-leaved tree species.
+We have added MAT and MAP in the main text to support that our dataset covers the wide climate ranges in the distribution of broad-leaved tree species (Line 143-147).
 
 > Lines 124 and 125: Why did you maintain leaf petiole in calculating LMA? It is strange for me, because it might inflate LMA given that its definition is dry mass per unit leaf area. What is the meaning for "avoiding thick veins"? Do you mean in the experiment you punch the positions without having the secondary order veins?
 
@@ -220,7 +260,7 @@ Thank you.
 The main function of leaves is to deliver a profitable return on the investment that has been made in constructing the leaf (Westoby, Reich and Wright 2013), and thus it is also natural to include leaf petiole in LMA.
 As noted above, we have added the records of TRY database that shows LMA including petioles are actually very common.
 
-We now more clearly explain that thick veins are secondary order veins.
+We now more clearly explain that thick veins are first to secondary order veins (Line 163).
 
 > Lines 129-131: Can you class the leaf shapes of 334 woody species you have used? It will affect your sampling positions you are describing here.
 

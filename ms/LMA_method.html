@@ -476,9 +476,9 @@ numbers of species <span class="citation">(i.e., ‘soft’ trait, <a href="#ref
 Therefore, LMA has been of interests to ecologists and widely used since
 the first report more than a century ago <span class="citation">(<a href="#ref-Hanson1917" role="doc-biblioref">Hanson, 1917</a>)</span>.
 Actually, LMA has one of the best species coverage in leaf traits of the
-TRY plant data database (16,460 species) and was also the most often
-requested leaf trait (2,977 out of 7,330 requests), followed by leaf by
-leaf nitrogen (N) contents per leaf dry mass <span class="citation">(12,238 species, 1,938 requests, <a href="#ref-Kattge2020" role="doc-biblioref">Kattge et al., 2020</a> [TRY
+TRY plant data database (16,460 species) and has been also the most
+often requested leaf trait (2,977 out of 7,330 requests), followed by
+leaf by leaf nitrogen (N) contents per leaf dry mass <span class="citation">(12,238 species, 1,938 requests, <a href="#ref-Kattge2020" role="doc-biblioref">Kattge et al., 2020</a> [TRY
 version 5, status October 1 2019])</span></p>
 <p>LMA values can be determined by either measuring whole-leaf
 (including or excluding petioles) or leaf disc samples <span class="citation">(<a href="#ref-Perez-Harguindeguy2013" role="doc-biblioref">Pérez-Harguindeguy et al., 2013</a>)</span>.
@@ -571,12 +571,12 @@ greater dry mass per unit area than laminas <span class="citation">(<a href="#re
 2007</a>)</span>, (2) species with higher leaf tissue density, larger
 and/or thinner leaves would show larger variance and differences in LMA
 estimates because whole-leaf LMA should be driven more in those species
-by veins and petioles that are likely to be ignored in leaf disc
-samples, and (3) the extent of ITV does not match well between
-whole-leaf and leaf disc based estimates because leaf disc samples have
-more sources of variation than whole-leaf samples. In addition to leaf
-morphology, we also investigate the effects of leaf punch size on the
-relationship between whole-leaf and leaf disc LMA.</p>
+by veins and petioles , whereas those effects are likely to be ignored
+in leaf disc samples, and (3) the extent of ITV does not match well
+between whole-leaf and leaf disc based estimates because leaf disc
+samples have more sources of variation than whole-leaf samples. In
+addition to leaf morphology, we also investigate the effects of leaf
+punch size on the relationship between whole-leaf and leaf disc LMA.</p>
 </div>
 <div id="materials-and-methods" class="section level1">
 <h1>MATERIALS AND METHODS</h1>
@@ -737,7 +737,7 @@ leaf disc LMA. All statistical analyses were conducted in R version
 </div>
 <div id="results" class="section level1">
 <h1>RESULTS</h1>
-<p>There were a significant shift in elevation between whole-leaf and
+<p>There was a significant shift in elevation between whole-leaf and
 leaf disc LMA (Fig.1, SMA slope: 0.975 [95%CI: 0.938, 1.013], SMA
 intercept: 0.0881 [95%CI: 0.016, 0.16]), suggesting that the whole-leaf
 estimates of LMA were 9.68% [95%CI: 8.05, 11.4] greater than disc-based
@@ -776,7 +776,7 @@ than previously reported <span class="citation">(<em>R<sup>2</sup></em>
 = 0.92, <em>n</em> = 409, for whole-leaves in <a href="#ref-Kraft2008" role="doc-biblioref">Kraft et al., 2008</a>; <em>R<sup>2</sup></em> =
 0.92, <em>n</em> = 364 for leaf laminas in <a href="#ref-Onoda2011" role="doc-biblioref">Onoda et al., 2011</a>)</span>. Standardized major
 axis (SMA) regression analysis showed significantly greater intercepts
-when all the species were pooled (9.4% differences). Together, these
+when all the species were pooled (9.68% differences). Together, these
 findings suggest that disc-based estimates can be generally used as good
 proxies for their whole-leaf estimates with appropriate calibration (see
 discussion below). However, leaf tissue density, leaf area, leaf
@@ -798,25 +798,25 @@ diameter for sapling leaves under closed canopy that are softer and
 thinner than adult leaves <span class="citation">(<a href="#ref-Kitajima2010" role="doc-biblioref">Kitajima and Poorter,
 2010</a>; <a href="#ref-Oktavia2020" role="doc-biblioref">Oktavia and
 Jin, 2020</a>)</span>. Altough a leaf punch of 1.0-cm diameter was used
-only in the Yakushima dataset in our study, the correlations were also
-strong for the Yakushima dataset, regardless of leaf tissue density or
-leaf thickness (Fig. 2ac). On the other hand, a previous study found
-that leaf disc LMA obtained with a very small leaf punch (0.3-cm
-diameter) and whole-leaf LMA had different relationships between shade
-tolerance <span class="citation">(<a href="#ref-Poorter2009a" role="doc-biblioref">Poorter, 2009</a>)</span>, suggesting that leaf
-disc LMA and whole-leaf LMA can be inherently different when small disc
-samples were used. The relatively low <em>R<sup>2</sup></em> values in
-the Yunnan dataset (Appendix S5) compared to the previous study and the
-Yakushima dataset may suggest not only the effect of distinct veins on
-variance in LMA <span class="citation">(<a href="#ref-John2017" role="doc-biblioref">John et al., 2017</a>)</span> or distinct veins
-with kite-type appearances <span class="citation">(<a href="#ref-Grubb1986" role="doc-biblioref">Grubb, 1986</a>)</span> but
-also technical difficulty in measuring tiny weight of discs in lower LMA
-leaves. We found that estimates of whole-leaf and leaf disc LMA diverged
-when total dry mass of leaf discs was small (Appendix S6), and thus
-species with lower leaf tissue density and thin leaves, which have
-smaller dry mass (Appendix S7), tended to show grater variation in whole
-leaf to leaf disc LMA ratio especially when we used a smaller leaf
-punch.</p>
+only in the Yakushima dataset in our study, the variance in the
+whole-leaf to leaf disc LMA ratio were small for the Yakushima dataset,
+regardless of leaf tissue density or leaf thickness (Fig. 2ac). On the
+other hand, a previous study found that leaf disc LMA obtained with a
+very small leaf punch (0.3-cm diameter) and whole-leaf LMA had different
+relationships between shade tolerance <span class="citation">(<a href="#ref-Poorter2009a" role="doc-biblioref">Poorter, 2009</a>)</span>,
+suggesting that leaf disc LMA and whole-leaf LMA can be inherently
+different when small disc samples were used. The relatively low
+<em>R<sup>2</sup></em> values in the Yunnan dataset (Appendix S5)
+compared to the previous study and the Yakushima dataset may suggest not
+only the effect of distinct veins on variance in LMA <span class="citation">(<a href="#ref-John2017" role="doc-biblioref">John et
+al., 2017</a>)</span> or distinct veins with kite-type appearances <span class="citation">(<a href="#ref-Grubb1986" role="doc-biblioref">Grubb,
+1986</a>)</span> but also technical difficulty in measuring tiny weight
+of discs in lower LMA leaves. We found that estimates of whole-leaf and
+leaf disc LMA diverged when total dry mass of leaf discs was small
+(Appendix S6), and thus species with lower leaf tissue density and thin
+leaves, which have smaller dry mass (Appendix S7), tended to show grater
+variation in whole leaf to leaf disc LMA ratio especially when we used a
+smaller leaf punch.</p>
 <p>Species with higher leaf tissue density and large leaves showed
 greater whole-leaf LMA than leaf disc LMA (Fig. 2ab: large leaf punch).
 We also observed that leaf disc and whole-leaf LMA estimate diverged for
@@ -845,16 +845,16 @@ obtained with a small leaf punch. The effects of leaf tissue density and
 leaf area are predictable when we used a large leaf punch (Fig. 2ab:
 large leaf punch), suggesting that conversion between leaf disc and
 whole-leaf LMA should be possible using leaf area as a covariate
-(measuring leaf tissue density requires whole-leaf LMA itself). OLS
-regressions with leaf area as a covariate as following: (1)
-log<sub>10</sub>LMA<sub>w</sub> = 0.997 <span class="math inline">\(\times\)</span> log<sub>10</sub>LMA<sub>d</sub> +
+(measuring leaf tissue density requires whole-leaf LMA itself). The
+ordinary least-squares (OLS) regressions with leaf area as a covariate
+as following: (1) log<sub>10</sub>LMA<sub>w</sub> = 0.997 <span class="math inline">\(\times\)</span> log<sub>10</sub>LMA<sub>d</sub> +
 0.0589 <span class="math inline">\(\times\)</span> log<sub>10</sub>LA,
 (2) log<sub>10</sub>LMA<sub>d</sub> = 0.15 + 0.945 <span class="math inline">\(\times\)</span> log<sub>10</sub>LMA<sub>w</sub> -
 0.063 <span class="math inline">\(\times\)</span> log<sub>10</sub>LA
 (<em>R<sup>2</sup></em> = 0.94, <em>AIC</em> = -321.7, <em>n</em> =
 193), where LMA<sub>w</sub>, LMA<sub>d</sub>, and LA are the whole-leaf
-LMA, leaf disc LMA and leaf area, respectively. OLS regressions without
-leaf area as a covariate as following: (3)
+LMA, leaf disc LMA and leaf area, respectively. Thej OLS regressions
+without leaf area as a covariate as following: (3)
 log<sub>10</sub>LMA<sub>w</sub> = 0.124 + 0.958 <span class="math inline">\(\times\)</span> log<sub>10</sub>LMA<sub>d</sub> or
 (4) log<sub>10</sub>LMA<sub>d</sub> = 0.973 <span class="math inline">\(\times\)</span> log<sub>10</sub>LMA<sub>w</sub>
 (<em>R<sup>2</sup></em> = 0.93, <em>AIC</em> = -284.2, <em>n</em> =
@@ -866,14 +866,14 @@ relationships between leaf mass and leaf area called “diminishing
 returns” <span class="citation">(<a href="#ref-Niklas2007" role="doc-biblioref">Niklas et al., 2007</a>)</span> which refers to
 increases in leaf dry mass including petioles do not result in the
 proportional increase in leaf area including petioles <span class="citation">(<a href="#ref-Li2022" role="doc-biblioref">Li, Shi, et
-al., 2022</a>)</span>, which is strong for mature leaves <span class="citation">(<a href="#ref-Jiao2022" role="doc-biblioref">Jiao et
-al., 2022</a>)</span>. The “diminishing returns” can be either described
-as the scaling slope of leaf area in the model 1 or the scaling slope of
-leaf-disc LMA and the intercept in the model 3. When one needs to mix
-leaf disc LMA and whole-leaf LMA in a single analysis (e.g.,
-meta-analysis) or quickly measure leaf disc LMA as a proxy for
-whole-leaf LMA, we recommend to convert LMA values using one of the
-models above.</p>
+al., 2022</a>)</span>. This effect is generally strong for mature leaves
+<span class="citation">(<a href="#ref-Jiao2022" role="doc-biblioref">Jiao et al., 2022</a>)</span>. The “diminishing
+returns” can be either described as the scaling slope of leaf area in
+the model 1 or the scaling slope of leaf-disc LMA and the intercept in
+the model 3. When one needs to mix leaf disc LMA and whole-leaf LMA in a
+single analysis (e.g., meta-analysis) or quickly measure leaf disc LMA
+as a proxy for whole-leaf LMA, we recommend to convert LMA values using
+one of the models above.</p>
 <p><em>Intraspecific variation</em></p>
 <p>Even though we used the same species, the same individuals and the
 same trait (LMA) to estimate the extents of intraspecific trait
@@ -910,7 +910,9 @@ with a small punch, our study design may inflate errors in estimating
 ITV <span class="citation">(<a href="#ref-Yang2020" role="doc-biblioref">Yang et al., 2020</a>)</span>. Future studies
 should include more samples to improve the comparisons of leaf disc and
 whole-leaf based ITV.</p>
-<p><em>Conclusions</em></p>
+</div>
+<div id="conclusions" class="section level1">
+<h1>Conclusions</h1>
 <p>The present study was designed to examine the extent to which whole
 leaf and leaf disc LMA matched. Although our study was not designed to
 evaluate the effects of diameter sizes of leaf punches, the sizes of
