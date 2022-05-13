@@ -52,12 +52,12 @@ We thank the associate editor and the reviewers for their careful attention to d
 Based on the comments, we have updated the manuscript to reflect the following:
 
 1. To quantify the effect of leaf morphology (leaf tissue density, leaf area, leaf thickness) and leaf punch size on the relationship between whole-leaf and leaf disc LMA, we have built a hierarchical Bayesian model.
-This allows to quantify when the whole-leaf LMA to leaf disc LMA ratio become large and in which direction the relationship is changing.
+This allows us to quantify when the whole-leaf LMA to leaf disc LMA ratio become large and in which direction the relationship is changing.
 
-2. We also removed the analysis that grouped species into four categories based on medians of leaf area and leaf thickness because it is somewhat arbitral as pointed by the reviewer.
-Instead, the above Bayesian model can was used to test our hypotheses.
+2. We have removed the analysis that grouped species into four categories based on medians of leaf area and leaf thickness because it is somewhat arbitral as pointed by the reviewer.
+Instead, the above Bayesian model was used to test our hypotheses.
 
-3. We have removed the individual-based analysis from the main text because variance among species are not independent in the individual-level data, and thus SMA or OLS regressions are not appropriate.
+3. We have also removed the individual-based analysis from the main text because variance among species are not independent in the individual-level data, and thus SMA or OLS regressions are not appropriate.
 Analyses of individual-level data requires mixed linear models with species-level errors, but this is not useful for the context of our paper.
 We therefore only report species-level results.
 
@@ -80,6 +80,8 @@ Xishuangbanna Tropical Botanical Garden, Chinese Academy of Sciences
 
 \newpage
 
+# Responses
+
 > AE comments: Thanks for the submission. I agree with the reviewers that the paper has merit and will be of interest to many researchers because LMA is a widely used trait. Both reviewers have some feedback for you to consider. Reviewer 1's suggestions would require extensive revisions to address. Reviewer 2 has suggested a modification to the title. I think the existing title is fine if you prefer to keep that but would ask you to carefully consider all other comments carefully.
 
 We appreciate the positive comments, and thank you for the opportunity to revise the manuscript.
@@ -100,8 +102,8 @@ We also have mentioned the TRY database to explain LMA is the most often used le
 
 Thank you.
 This is a good point and an important thing to clarify.
-We now use a linear model that includes leaf area and leaf thickness as covariates but we suggest OLS models without covariates for the conversion of LMA because leaf thickness and leaf area affect not only the mean but also the variance in the relationship between the leaf disc and whole-leaf estimates, and that is why R2 values changed among the four groups (thin vs. think and small vs. large leaves) and it is not to practical to convert LMA using leaf area or leaf thickness.
-We also present a practical guideline for conversion of LMA.
+We now use a Bayesian model that includes leaf area and leaf thickness as covariates for both mean and variance.
+However, we report several OLS models with and without leaf area in a practical guideline for LMA conversion (Line 303 - 323).
 
 > 3. I am confused and unconvinced by the inclusion and discussion of intraspecific trait variation on several levels. First, the authors do not clearly explain ITV, its importance, or its relevance to LMA. Secondly, the methods used to quantify ITV are not recommended (see Yang et al 2020. Large underestimation of intraspecific trait variation and its improvements. Frontiers in Plant Science); ideally the authors should use Bao's CV estimator. Finally, there is little interpretation of the results of their analysis. I think this metric needs to either be excluded entirely or significantly expanded upon.
 
@@ -116,7 +118,7 @@ The relationship between the two estimates became much weaker (Fig. 4).
 > L49 I think the introduction would benefit from an initial sentence to give more context for the definition of LMA (perhaps by restructuring this paragraph to introduce traits and the LES first, and then defining LMA in that context).
 
 Thank you.
-We now introduce the LES in the first sentence so that the readers can understand the role of LMA in LES more clearly.
+We now introduce the LES in the first sentence so that the readers can understand the role of LMA in LES more clearly (Line 44-46).
 
 > L69-73 This sentence is crucial for your hypotheses but is buried in the middle of this paragraph. I suggest breaking this paragraph (beginning on line 63) up into 2: the first describing different methods of measurement and how commonly each are used, and any previous attempts to compare them. The second paragraph can get into which leaf types are likely to give similar or different estimates based on the two metrics and why.
 
@@ -157,7 +159,7 @@ We now use Bao's CV as noted above.
 > L169-172 This is the major result of the paper. I suggest making it the first line of the results section (however I would modify it to fit the individual, rather than species-mean, level data: see below).
 
 Thank you.
-We have started the result section with the shift in elevation between whole-leaf and leaf disc LMA (i.e., whole-leaf LMA is greater than leaf disc LMA).
+We have started the result section with the shift in elevation between whole-leaf and leaf disc LMA (i.e., whole-leaf LMA is greater than leaf disc LMA) (Line 234-).
 Please see our response for using species- vs. individual-level data below.
 
 > L175-176 Based on this, I am confused about the statistical approach. Did the authors separately run regressions for species-level means and individual level means? If so, it is almost a statistical inevitability that the individual level analysis would have a lower r2 than the species level analysis: therefore I would not report this as a result, per se. In addition, the species level means is more or less meaningless in the context of this paper: much more importantly is the comparison of individual based measurements. I would therefore remove the species level results form the manuscript, and instead only report on the individual level data.
@@ -294,4 +296,4 @@ As noted above, we removed the analysis of grouping species, and thus we also re
 > Line 171: "… were 9.4% greater than disc-based estimates …" Can you provide a standard deviation or a confidence interval for 9.4%? In general, we can use the bootstrap method to get it.
 
 Thank you.
-We have added confidence intervals using bootstraps in the result section.
+We have added confidence intervals using bootstraps in the result section (Line 252-255).
