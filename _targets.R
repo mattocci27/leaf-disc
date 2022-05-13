@@ -768,6 +768,21 @@ list(
   ),
 
   tar_target(
+    hist_plot, {
+      p <- hist_data(tree)
+      ggsave(
+        "figs/hist.png",
+        p,
+        dpi = 300,
+        width = 9,
+        height = 3
+      )
+      paste0("figs/hist", c(".png"))
+    },
+    format = "file"
+  ),
+
+  tar_target(
     ratio_plot, {
       p <- ratio_combine(tree)
       ggsave(
@@ -781,6 +796,8 @@ list(
     },
     format = "file"
   ),
+
+
   tar_target(
     ratio_dm_plot, {
       p <- ratio_dm(tree)

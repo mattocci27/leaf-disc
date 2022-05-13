@@ -65,6 +65,85 @@ lalt_sp_grid_dense <- function(data) {
       text = element_text(family = "Arial"))
 }
 
+hist_data <- function(data) {
+  data <- data |>
+    mutate(size_gr = ifelse(location == "Yakushima", "1.0-cm", "0.6-cm")) |>
+    mutate(la_gr3 = ifelse(str_detect(la_gr2, "Large"), "Large", "Small")) |>
+    mutate(lt_gr3 = ifelse(str_detect(lt_gr2, "Thick"), "Thick", "Thin")) |>
+    mutate(ld_gr3 = ifelse(str_detect(ld_gr2, "Dense"), "Dense", "Less dense"))
+  my_col <- RColorBrewer::brewer.pal(4, "RdBu")
+
+  p1 <- data |>
+    ggplot(aes(x = ld_leaf, fill = size_gr, coll = size_gr)) +
+    geom_histogram(position = "identity", alpha = 0.6) +
+    geom_vline(xintercept =  median(data$ld_leaf), lty = 2, col = "grey40") +
+    scale_x_log10() +
+    scale_color_manual(
+      values = my_col[c(2, 4)],
+      name = "Leaf punch diameter"
+    ) +
+    scale_fill_manual(
+      values = my_col[c(2, 4)],
+      name = "Leaf punch diameter"
+    ) +
+    ylab("Number of species") +
+    xlab(expression(Leaf ~ tissue ~ density ~ (g ~ m^{
+      -3}))) +
+    theme_bw() +
+    theme(
+      legend.position = c(0.35, 0.7),
+      legend.key.size = unit(0.5, "cm"),
+      legend.spacing.y = unit(0.1, "cm"),
+      legend.text.align = 0,
+      legend.key.height = unit(0.2, "cm"),
+      legend.text = element_text(size = 9),
+      legend.title = element_text(size = 9)
+    )
+
+  p2 <- data |>
+    ggplot(aes(x = la, fill = size_gr)) +
+    geom_histogram(position = "identity", alpha = 0.6) +
+    geom_vline(xintercept =  median(data$la), lty = 2, col = "grey40") +
+    scale_x_log10() +
+    scale_color_manual(
+      values = my_col[c(2, 4)]
+    ) +
+    scale_fill_manual(
+      values = my_col[c(2, 4)]
+    ) +
+    ylab("Number of species") +
+    xlab(expression(Leaf ~ area ~ (m^{
+      2}))) +
+    theme_bw() +
+    theme(
+      legend.position = "NULL"
+    )
+
+  p3 <- data |>
+    ggplot(aes(x = lt, fill = size_gr)) +
+    geom_histogram(position = "identity", alpha = 0.6) +
+    geom_vline(xintercept =  median(data$lt), lty = 2, col = "grey40") +
+    scale_x_log10() +
+    scale_color_manual(
+      values = my_col[c(2, 4)]
+    ) +
+    scale_fill_manual(
+      values = my_col[c(2, 4)]
+    ) +
+    ylab("Number of species") +
+    xlab("Leaf thickness (mm)")+
+    theme_bw() +
+    theme(
+      legend.position = "NULL"
+    )
+
+  p1 + p2 + p3 +
+     plot_annotation(tag_levels = "a") &
+     theme(
+       text = element_text(family = "Arial"))
+
+}
+
 sma_grid_col <- function(data, trait, legend_title) {
   data <- data |>
     mutate(size_gr = ifelse(location == "Yakushima", "Large punch (1.0-cm)", "Small punch (0.6-cm)")) |>
@@ -72,6 +151,7 @@ sma_grid_col <- function(data, trait, legend_title) {
     mutate(lt_gr3 = ifelse(str_detect(lt_gr2, "Thick"), "Thick", "Thin")) |>
     mutate(ld_gr3 = ifelse(str_detect(ld_gr2, "Dense"), "Dense", "Less dense"))
   my_col <- RColorBrewer::brewer.pal(4, "RdBu")
+
   p <- data |>
    # ggplot(aes(x = lma_disc, y = lma_leaf))+
     ggplot(aes(x = lma_disc, y = lma_leaf, col = {{trait}}, fill = {{trait}})) +
