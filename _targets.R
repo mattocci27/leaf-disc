@@ -125,7 +125,7 @@ list(
   tar_target(
     yml,
     write_yml("values.yml",
-      sp_mean, full_data_cv, tree, lma_yaku_re, sp_cv, boot_fit_dat),
+      sp_mean, full_data_cv, tree, lma_raw_re, lma_yaku_re, sp_cv, boot_fit_dat),
     format = "file"
   ),
   tar_target(

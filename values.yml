@@ -1,3 +1,8 @@
+TRF_sp_cv: 60
+STF_sp_cv: 47
+HDS_sp_cv: 33
+Yaku_sp_cv: 5
+Yaku_ind_cv: 26
 t_test_t: -3.19
 t_test_df: 144
 TRF_sp: 60

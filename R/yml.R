@@ -1,4 +1,4 @@
-write_yml <- function(path, sp_mean, full_data_cv_csv, tree, lma_yaku_re, sp_cv, boot_fit_dat) {
+write_yml <- function(path, sp_mean, full_data_cv_csv, tree, lma_raw_re, lma_yaku_re, sp_cv, boot_fit_dat) {
   r2_lma <- cor.test(log(sp_mean$lma_leaf), log(sp_mean$lma_disc))$estimate^2 |> round(2)
   r2_ld <- cor.test(log(sp_mean$ld_leaf), log(sp_mean$ld_disc))$estimate^2 |> round(2)
 
@@ -17,6 +17,7 @@ write_yml <- function(path, sp_mean, full_data_cv_csv, tree, lma_yaku_re, sp_cv,
     filter(!is.na(petiole_dw)) |>
     filter(!is.na(lma_disc))
 
+  #full_data_cv_csv <- read_csv(full_data_cv_csv)
   d_cv <- full_data_cv_csv |>
     filter(!is.na(lma_disc)) |>
     filter(!is.na(lma_leaf))
@@ -29,7 +30,6 @@ write_yml <- function(path, sp_mean, full_data_cv_csv, tree, lma_yaku_re, sp_cv,
 
   fit_ols <- lm(log(lma_leaf) ~ log(lma_disc), sp_mean)
   #fit_ols2 <- lm(log10(lma_leaf) ~ log10(lma_disc), sp_mean)
-
 
 
   var_fun <- function(fit) {
@@ -119,17 +119,62 @@ write_yml <- function(path, sp_mean, full_data_cv_csv, tree, lma_yaku_re, sp_cv,
   # tar_load(sp_mean)
   # tar_load(tree)
   n_sp <- table(sp_mean$location)
+  n_sp_cv <- table(sp_cv$location)
   n_ind <- table(tree$location)
+#  n_ind_cv <- table(full_data_cv_csv$location)
+
+  yaku_sp_n <- lma_yaku_re |>
+    group_by(species, location) |>
+    summarize(n = n()) |>
+    filter(n >= 5)
+
+  # hoge <- tree |>
+  #   group_by(species, location) |>
+  #   summarize(n = n())
+
+  # hoge |>
+  #   filter(location != "Yakushima") |>
+  #   filter(n <= 3)
 
   sp_cv2 <- sp_cv |>
     dplyr::filter(lma_leaf_cv < 0.09)
+
+  # log10(sp_cv$lma_leaf_cv) |> mean()
+  # log10(sp_cv$lma_disc_cv) |> mean()
+
   t_test <- t.test(log10(sp_cv$lma_leaf_cv), log10(sp_cv$lma_disc_cv), paired = TRUE)
+
   sma_cv <- sma(log10(lma_leaf_cv) ~ log10(lma_disc_cv), sp_cv)
   # without outliers
   sma_cv2 <- sma(log10(lma_leaf_cv) ~ log10(lma_disc_cv), sp_cv2)
 
   output <- path
   out <- file(paste(output), "w") # write
+  writeLines(
+    paste0("TRF_sp_cv: ",
+           n_sp_cv["Mengla_Bubeng"]),
+    out,
+    sep = "\n")
+  writeLines(
+    paste0("STF_sp_cv: ",
+           n_sp_cv["Ailao_understory"]),
+    out,
+    sep = "\n")
+  writeLines(
+    paste0("HDS_sp_cv: ",
+           n_sp_cv["Yuanjiang_Savanna"]),
+    out,
+    sep = "\n")
+  writeLines(
+    paste0("Yaku_sp_cv: ",
+           nrow(yaku_sp_n)),
+    out,
+    sep = "\n")
+  writeLines(
+    paste0("Yaku_ind_cv: ",
+      sum(yaku_sp_n$n)),
+    out,
+    sep = "\n")
   writeLines(
     paste0("t_test_t: ",
       t_test$statistic |> round(2)),

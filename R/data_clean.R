@@ -183,7 +183,8 @@ data_clean_cv <- function(d, d3) {
         leaf_area_leaf
       ),
       .funs = cv4
-    )
+    ) |>
+    filter(species != "Argyreia osyrensis")
 
   sp_list <- d |>
     dplyr::select(species:data_contributor) |>
