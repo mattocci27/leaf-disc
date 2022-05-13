@@ -104,8 +104,7 @@ site |>
 ```
 
 The site information and climate data in Yunnan, referred to @Fei2018, and @Song2017.
-MAT and MAP at the lower elevation (37 m) on Yakushima were obtained from the Yakushima meteorological stationj.
-MAT at the higher elevation (1800 m) on Yakushima was obtained from @Eguchi2006.
+MAT and MAP of Yakushima were obtained from the Yakushima meteorological station and @Eguchi2006.
 
 \newpage
 
