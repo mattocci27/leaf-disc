@@ -123,7 +123,7 @@ We now introduce the LES in the first sentence so that the readers can understan
 > L69-73 This sentence is crucial for your hypotheses but is buried in the middle of this paragraph. I suggest breaking this paragraph (beginning on line 63) up into 2: the first describing different methods of measurement and how commonly each are used, and any previous attempts to compare them. The second paragraph can get into which leaf types are likely to give similar or different estimates based on the two metrics and why.
 
 Thank you.
-We now break up the paragraph into two sections: the first describing the different methods and their record numbers in TRY, and previous works that compared them (Line 64-86), and the second describing the expected effects of leaf morphology on the relationship between whole-leaf and leaf disc LMA (Lin 87-103).
+We now break up the paragraph into two sections: the first describing the different methods and their record numbers in TRY, and previous works that compared them (Line 64-86), and the second describing the expected effects of leaf morphology on the relationship between whole-leaf and leaf disc LMA (Line 87-103).
 
 > L82-84 I find this introduction of ITV to be confusing. ITV has a robust literature which is not cited here (for a recent review, see Westerband, Funk, and Barton, 2021. Intraspecific trait variation in plants: a renewed focus on its role in ecological processes. Annals of botany). The authors should briefly introduce this concept and it's ecological relevance before applying it to their question of which method generates greater estimates of ITV and why.
 
