@@ -205,7 +205,7 @@ Samples with small total dry mass tended to show greater variance.
 
 Summary of a linear mixed model for log-transformed total dry mass of leaf discs for each tree individual.
 Species was used as a random intercept.
-The leaf punch size is described as an effect of '0.6 cm diameter' compared with '1.0 cm diameter.
+The leaf punch size is described as an effect of '0.6 cm diameter' compared with '1.0 cm diameter'.
 
 ```{r, eval=TRUE, echo=FALSE}
 tar_load(dm_glmm_tab)
