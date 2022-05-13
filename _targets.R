@@ -28,7 +28,8 @@ tar_option_set(packages = c(
   "loo",
   "modelr",
   "performance",
-  "jsonlite"
+  "jsonlite",
+  "lmtest"
 ))
 
 # check if it's inside a container
@@ -780,6 +781,20 @@ list(
     },
     format = "file"
   ),
+  tar_target(
+    ratio_dm_plot, {
+      p <- ratio_dm(tree)
+      ggsave(
+        "figs/ratio_dm.png",
+        p,
+        dpi = 300,
+        width = 3,
+        height = 3
+      )
+      paste0("figs/ratio_dm", c(".png"))
+    },
+    format = "file"
+  ),
 
   tar_target(
     lma_ld_plot, {
@@ -883,8 +898,8 @@ list(
   ),
 
   tar_target(
-    dm_lm_tab,
-    dm_lm(tree)
+    dm_glmm_tab,
+    dm_glmm(tree)
   ),
   tar_render(
     report,

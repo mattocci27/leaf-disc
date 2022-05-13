@@ -90,7 +90,7 @@ val <- yaml::yaml.load_file("values.yml")
 Site information.
 MAT: mean annual temperature,
 MAP: mean annual precipitation,
-SPEI: Standardized Precipitation Evapotranspiration Index.
+CV: coefficient variance
 
 ```{r, echo=FALSE}
 library(jsonlite)
@@ -103,34 +103,22 @@ site |>
   kable_styling()
 ```
 
-
-The site information and climate data referred to @Fei2018 and @Song2017.
-The 6-month-SPEI data were extracted from the Global SPEI database (http://spei.csic.es/map/maps.html#months=1#month=7#year=2019).
-
-\newpage
-
-**Fig. SX.**
-Standardized regression coefficients modelig the effects of leaf tissue density,
-leaf area,
-leaf thickness,
-punch size, and
-their interactios
-(a) on the mean estimates of whole-leaf LMA, and
-(b) on the estimated variance of whole-leaf LMA.
-The leaf disc LMA was used for the baseline mean of the whole-leaf LMA.
-Thick and thin lines indicate 90% and 95% credible intervals, respectively.
-Circles show posterior means of coefficients.
-Circles filled with blue indicate significant effects and white indicate non-significance effects.
-
-```{r, incude=FALSE}
-targets::tar_load(coef_sp_punch1_add_plot)
-```
-
-![](../figs/coef_sp_punch1_add.png)
+The site information and climate data in Yunnan, referred to @Fei2018, and @Song2017.
+MAT and MAP at the lower elevation (37 m) on Yakushima were obtained from the Yakushima meteorological stationj.
+MAT at the higher elevation (1800 m) on Yakushima was obtained from @Eguchi2006.
 
 \newpage
 
 # Appendix S2:
+
+Detailed sampling protocol for whole-leaf and leaf disc LMA.
+
+![](../figs/S2.jpeg)
+
+\newpage
+
+
+# Appendix S3:
 
 Generalization for a relationship between ratios of disc-based and whole-leaf estimates of leaf mass per area (LMA), leaf tissue density (LD), and leaf thickness (LT).
 For the *i* tree individual or species, the relationship between ratios of disc-based and whole-leaf estimates of LMA, LD, and LT is:
@@ -169,59 +157,61 @@ All the correlations are significant (*P* < 0.001).
 
 \newpage
 
-# Appendix S3:
+# Appendix S4:
 
-Relationships between whole-leaf LMA : disc leaf LMA and (a) total dry mass for the leaf disc, (b) leaf thickness, and (c) leaf area.
-(b) and (c) follow the same legend.
-All the relationships were heteroscedastic (unequal variance, *p* < 0.001; all the samples were analyzed together in (a)).
-Samples with small total dry mass, thin leaves, and larger leaves tended to show greater variance.
+Standardized regression coefficients modelig the effects of leaf tissue density,
+leaf area,
+leaf thickness,
+punch size, and
+their interactios
+(a) on the mean estimates of whole-leaf LMA, and
+(b) on the estimated variance of whole-leaf LMA.
+The leaf disc LMA was used for the baseline mean of the whole-leaf LMA.
+Thick and thin lines indicate 90% and 95% credible intervals, respectively.
+Circles show posterior means of coefficients.
+Circles filled with blue indicate significant effects and white indicate non-significance effects.
+
+```{r, incude=FALSE}
+targets::tar_load(coef_sp_punch1_add_plot)
+```
+
+![](../figs/coef_sp_punch1_add.png)
+
+\newpage
+
+# Appendix S5:
+
+Relationships between whole-leaf LMA : disc leaf LMA and total dry mass for the leaf disc.
+The relationships was heteroscedastic (unequal variance, *p* < 0.001; all the samples were analyzed together).
+Samples with small total dry mass tended to show greater variance.
 
 ![](../figs/ratio.png){style="display: block; margin: 0 auto" }
 
 \newpage
 
-# Appendix S4:
+# Appendix S6:
 
-Summary of multiple regression for log-transformed total dry mass of leaf discs.
-The leaf punch size is described as an effect of '1.0 cm diameter' compared with '0.6 cm diameter'.
+Summary of a linear mixed model for log-transformed total dry mass of leaf discs for each tree individual.
+Species was used as a random intercept.
+The leaf punch size is described as an effect of '0.6 cm diameter' compared with '1.0 cm diameter.
 
-```{r, eval=FALSE, echo=FALSE}
-tar_load(dm_lm_tab)
-dm_lm_tab |>
+```{r, eval=TRUE, echo=FALSE}
+tar_load(dm_glmm_tab)
+dm_glmm_tab |>
   kable(format = "html") |>
   kable_styling()
 ```
 
 \newpage
 
-# Appendix S5:
+# Appendix S7:
 
 Relationships between species mean leaf mass per area (LMA) determined by using whole leaves and leaf discs.
 Species groups are divided into four categories on the basis of the medians of the leaf size and leaf thickness across all the species.
 Estimates obtained by different leaf punches are plotted separately in different colors.
 All the correlations are significant (*P* < 0.001).
 
-![](../figs/lalt_sep_grid.png){ width="600" style="display: block; margin: 0 auto" }
-
-# Appendix S6:
-
-Relationships between petiole to leaf dry mass ratio and (a) leaf area and (b) whole-leaf to leaf disc LMA ratio.
-Blue solid lines indicate ordinary least squares (OLS) regressions.
-The 95% confidence intervals are presented as the shaded area.
-All the correlations are significant (*P* < 0.001).
-
-![](../figs/petiole.png){ width="600" style="display: block; margin: 0 auto" }
-
-\newpage
-
-# Appendix S7:
-
-Relationships between coefficient of variation (CV) in LMA determined by using whole leaves and leaf discs: (a) 0.6 cm diameter leaf punch, and (b) 1.0 cm diameter leaf punch.
-Dashed lines indicate 1:1 lines.
-Blue solid lines indicate standardized major axis regressions.
-The 95% confidence intervals are presented as the shaded area.
-All the correlations are significant (*P* < 0.01).
-Note that the axes are square root scales.
+![](../figs/sma_grid_col3.png){ width="600" style="display: block; margin: 0 auto" }
 
 
 \newpage

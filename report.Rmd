@@ -259,6 +259,14 @@ tar_load(petiole_png)
 
 ![](figs/petiole.png)
 
+# DM and HDK
+
+```{r}
+tar_load(tree)
+fit <- lm(log(lma_leaf / lma_disc) ~ log(dry_mass_disc), tree)
+lmtest::bptest(fit)
+```
+
 
 # Computing Environment
 

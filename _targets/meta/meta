@@ -1,6 +1,7 @@
 name|type|data|command|depend|seed|path|time|size|bytes|format|repository|iteration|parent|children|seconds|warnings|error
 boot_fit|function|e85c5cf223e6bd01|||||||||||||||
 boot_fit_dat|stem|92d14458844de929|548e9e245e2d585a|0c02db39f9ddfbec|1580567336||t19124.6444456532s|9208ff4405c91373|218|rds|local|vector|||3.435||
+check_hdk|function|24242dac37509c5c|||||||||||||||
 clean_lma_la|function|264963d2319eb466|||||||||||||||
 clean_lma_raw|function|6da1f00665d442c0|||||||||||||||
 clean_lma_yaku|function|e6368913aa97e0f2|||||||||||||||
@@ -74,6 +75,8 @@ data_clean|function|f3b816752e82d2c6|||||||||||||||
 data_clean_cv|function|641888b1ab9b7c01|||||||||||||||
 data_clean_tree|function|30b33fd9c4ded06c|||||||||||||||
 div_check|function|9913df743f96f3d8|||||||||||||||
+dm_glmm|function|af321c7042fcbd81|||||||||||||||
+dm_glmm_tab|stem|e1f4387986b8d46a|c53ccbb2648c011b|6529ec272feec354|1700728476||t19125.3539664611s|efcd02b2c80eadaa|298|rds|local|vector|||0.403||
 dm_lm|function|d72d17708d6db840|||||||||||||||
 dm_lm_tab|stem|a895dbed40dd1d32|3de31de839d165b8|65bd2ac9949602c6|-1861398493||t19119.3700747394s|f61d5eec182b6cd2|255|rds|local|vector|||0.009||
 extract_sma|function|42d4c0a9699b3bbc|||||||||||||||
@@ -244,15 +247,18 @@ pred_mcmc|function|ab31edbec7925626|||||||||||||||
 pred_mcmc_plot|stem|17da1bfcc4a06de4|c3ae64df8d55075a|74dfc9cb9e38c0e4|-458926008|figs/pred_mcmc.png|t19124.6444655146s|d1f2816b03893cce|92688|file|local|vector|||1.567||
 pred_mcmc_plot_png|stem|197001cc079ebd4f|038a5172b9c26df6|46b61132fb383dd1|1994164657|figs/pred_mcmc.png|t19119.3770551773s|c2d698e6869e2abc|94864|file|local|vector|||0.383||
 ratio_combine|function|39af899c381a5781|||||||||||||||
+ratio_dm|function|c327a15c037104f2|||||||||||||||
+ratio_dm_plot|stem|1bc017c3fe8ea8d0|31e4d879753eee68|40da17a0cd970ff6|719225831|figs/ratio_dm.png|t19125.3592518928s|b79849d40fd5df91|238156|file|local|vector|||0.557||
+ratio_mass_plot|stem||ac54f4f831ed86a7|647d30ea0bd5e2de|-1347346256||t19125.3581445646s||0|file|local|vector|||0.359||could not find function ratio_mass
 ratio_pdf|stem|b00b3c18bccb41c4|5c9e590c575821fd|864e1a9986ca78d6|-908551514|figs/ratio.pdf|t19119.376371092s|d4d860dc3fbf1237|190852|file|local|vector|||2.506||
 ratio_plot|stem|d2b7a6c9c2263744|b1f1b24aed94683f|b0aa7492543fde4a|923082000|figs/ratio.png|t19119.4100995371s|547eeb4f8a1b7184|648995|file|local|vector|||1.011||
 ratio_png|stem|d2b7a6c9c2263744|dd6023b40f942608|1548a1361a46da1e|151564805|figs/ratio.png|t19119.3763062299s|547eeb4f8a1b7184|648995|file|local|vector|||0.639||
-report|stem|a8302b48e086f5f9|ff62782f76c241d8|8db6ea46ad8e84b8|-237041703|report.html*report.Rmd|t19124.6445452844s|5eee1b314713f3b3|4575525|file|local|vector|||6.931||
+report|stem|8278700a7c11fcd0|fd5bde217ddea20c|b1322d2870dd0dbe|-237041703|report.html*report.Rmd|t19125.3710727322s|a00ba9f327067421|4982346|file|local|vector|||7.255||
 save_tiff|function|5bae6d4d57942267|||||||||||||||
-si|stem|68de965fc87edb17|ed0dc5527ef90c4e|10609411d70a6352|2093119568|ms/SI.html*ms/SI.Rmd|t19125.3210933668s|2a3ddc642c3feb2a|3145451|file|local|vector|||0.435||
+si|stem|7f158fcbb2a0ea47|ae8c648d61a1fae4|3db0f5bc7785f915|2093119568|ms/SI.html*ms/SI.Rmd|t19125.3710775934s|fd96b6974c620f79|6082665|file|local|vector|||0.517||
 site_info|stem|fc31dd996d2c5e7c|d765ddff39700187|d044efa390ba1459|1530165991|data/site_info.json|t19125.3210880889s|120d90f695a7bfd7|2336|file|local|vector|||0.016||
 site_info_file|stem|fbbde8981eccc855|68cfc08c8330bb46|ef46db3751d8e999|1628515792|data/site_info.json|t19119.3059193126s|a26c7eb00fbd604a|2|file|local|vector|||0.315||
-site_info_raw|stem|247a5cf354f6eeab|3e67250b7942301c|ef46db3751d8e999|-1723180885|data-raw/site_info_raw.json|t19125.3210441531s|9fb6a091b313babb|1611|file|local|vector|||0.32||
+site_info_raw|stem|247a5cf354f6eeab|3e67250b7942301c|ef46db3751d8e999|-1723180885|data-raw/site_info_raw.json|t19125.3212505912s|9fb6a091b313babb|1611|file|local|vector|||0.32||
 sma_fun|function|276e65d7f92ddb7a|||||||||||||||
 sma_grid_col|function|c0ff224d38bd3275|||||||||||||||
 sma_grid_col3|function|7c6018722e82454e|||||||||||||||
