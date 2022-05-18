@@ -34,46 +34,15 @@ library(targets)
 library(kableExtra)
 ```
 
-```{r}
-tar_load(sp_mean)
-sp_mean |>
-  group_by(ldlalt_gr) |>
-  summarise(
-    lma_leaf = mean(lma_leaf) |> round(1),
-    lma_disc = mean(lma_disc) |> round(1)
-  ) |>
-  write_csv("data/ldlalt.csv")
-```
 
-
-# Leaf disc vs whole-leaf LMA (species-level)
-
-## Pooled
-
-<!-- I put tar_load to use {{targets}} -->
-
-```{r, include=FALSE}
-tar_load(lalt_pool_grid_png)
-```
-
-![](figs/lalt_pool_grid.png)
-
-## Seprated
-
-```{r, include=FALSE}
-tar_load(lalt_sep_grid_png)
-```
-
-## MCMC check
+# MCMC check
 
 ```{r,eval=TRUE}
-
 targets::tar_load(fit_sp_no_lma_summary_model)
 targets::tar_load(fit_sp_no_lma_int_summary_model)
 targets::tar_load(fit_sp_lma_summary_model)
 targets::tar_load(fit_sp_lma2_summary_model2)
 targets::tar_load(fit_sp_ld_summary_model)
-targets::tar_load(fit_sp_ld2_summary_model2)
 targets::tar_load(fit_sp_ld3_summary_model)
 targets::tar_load(fit_sp_lm_summary_model)
 targets::tar_load(fit_sp_lma0_summary_simple)
@@ -83,7 +52,6 @@ targets::tar_load(fit_sp_no_lma_int_diagnostics_model)
 targets::tar_load(fit_sp_lma_diagnostics_model)
 targets::tar_load(fit_sp_lma2_diagnostics_model2)
 targets::tar_load(fit_sp_ld_diagnostics_model)
-targets::tar_load(fit_sp_ld2_diagnostics_model2)
 targets::tar_load(fit_sp_ld3_diagnostics_model)
 targets::tar_load(fit_sp_lm_diagnostics_model)
 targets::tar_load(fit_sp_lma0_diagnostics_simple)
@@ -96,7 +64,6 @@ fit_sp_no_lma_int_summary_model |> filter(rhat > 1.1)
 fit_sp_lma_summary_model |> filter(rhat > 1.1)
 fit_sp_lma2_summary_model2 |> filter(rhat > 1.1)
 fit_sp_ld_summary_model |> filter(rhat > 1.1)
-fit_sp_ld2_summary_model2 |> filter(rhat > 1.1)
 fit_sp_ld3_summary_model |> filter(rhat > 1.1)
 fit_sp_lm_summary_model |> filter(rhat > 1.1)
 fit_sp_lma0_summary_simple |> filter(rhat > 1.1)
@@ -110,7 +77,6 @@ div_check(fit_sp_no_lma_int_diagnostics_model)
 div_check(fit_sp_lma_diagnostics_model)
 div_check(fit_sp_lma2_diagnostics_model2)
 div_check(fit_sp_ld_diagnostics_model)
-div_check(fit_sp_ld2_diagnostics_model2)
 div_check(fit_sp_ld3_diagnostics_model)
 div_check(fit_sp_lm_diagnostics_model)
 div_check(fit_sp_lma0_diagnostics_simple)
@@ -122,9 +88,7 @@ loo::loo_compare(
   loo_model[[1]], loo_model[[2]], loo_model[[3]],
   loo_model[[4]], loo_model[[5]], loo_model[[6]],
   loo_model[[7]], loo_model[[8]], loo_model[[9]],
-  loo_model[[10]], loo_model[[11]],
-  loo_model[[12]], loo_model[[13]]
-)
+  loo_model[[10]], loo_model[[11]])
 ```
 
 ```{r}
@@ -136,86 +100,7 @@ tar_read(cv_sp)
 
 ![](figs/coef_sp_punch1_add.png)
 
-# SMA table
-
-## punch
-
-```{r, eval=TRUE}
-tar_load(sma_tab_large)
-sma_tab_large |>
-  kable() |>
-  kable_styling()
-```
-
-```{r, eval=TRUE}
-tar_load(sma_tab_small)
-sma_tab_small |>
-  kable() |>
-  kable_styling()
-```
-
-## species
-
-```{r, eval=TRUE}
-tar_load(sma_sp_tab)
-sma_sp_tab |>
-  kable() |>
-  kable_styling()
-```
-
-
-```{r}
-sma_sp_tab |>
-  write_csv("data/sma_sp_tab.csv")
-```
-
-
-## species LD
-
-```{r, eval=TRUE}
-tar_load(sma_sp_ld_tab)
-sma_sp_ld_tab |>
-  kable() |>
-  kable_styling()
-```
-
-```{r}
-sma_sp_ld_tab |>
-  write_csv("data/sma_sp_ld_tab.csv")
-```
-
-## species simple
-
-```{r, eval=TRUE}
-tar_load(sma_sp_2_tab)
-sma_sp_2_tab |>
-  kable() |>
-  kable_styling()
-```
-
-```{r}
-sma_sp_2_tab |>
-  write_csv("data/sma_sp_2_tab.csv")
-```
-
-
-## tree
-
-```{r, eval=TRUE}
-tar_load(sma_tree_tab)
-sma_tree_tab |>
-  kable() |>
-  kable_styling()
-```
-
-## tree LD
-
-```{r, eval=TRUE}
-tar_load(sma_tree_ld_tab)
-sma_tree_ld_tab |>
-  kable() |>
-  kable_styling()
-```
+``
 
 # Validation
 
@@ -224,33 +109,11 @@ tar_load(cv_sp)
 cv_sp
 ```
 
-```{r}
-tar_load(cv_tree)
-cv_tree
-```
-
-
-# Leaf disc vs whole-leaf LMA (individual-level)
-
-```{r, include=FALSE}
-tar_load(lalt_tree_grid_png)
-```
-
-![](figs/lalt_tree_grid.png)
-
-# Divergence (species-level)
-
-```{r, include=FALSE}
-tar_load(ratio_png)
-```
-
-![](figs/ratio.png)
-
 
 # LMA and LD (species-level)
 
 ```{r, include=FALSE}
-tar_load(lma_ld_png)
+tar_load(lma_ld_plot)
 ```
 
 ![](figs/lma_ld.png)
@@ -258,21 +121,15 @@ tar_load(lma_ld_png)
 # CV
 
 ```{r, include=FALSE}
-tar_load(cv_pool_png)
+tar_load(cv_pool_plot)
 ```
 
 ![](figs/cv_pool.png)
 
-```{r, include=FALSE}
-tar_load(cv_sep_png)
-```
-
-![](figs/cv_sep.png)
-
 # Leaf support cost (species-level)
 
 ```{r, include=FALSE}
-tar_load(petiole_png)
+tar_load(petiole_plot)
 ```
 
 ![](figs/petiole.png)
@@ -285,14 +142,14 @@ fit <- lm(log(lma_leaf / lma_disc) ~ log(dry_mass_disc), tree)
 lmtest::bptest(fit)
 ```
 
+# {targets} pipepline
+
+```{r}
+targets::tar_visnetwork()
+```
 
 # Computing Environment
 
 ```{r}
 devtools::session_info()
-```
-
-
-```{r}
-tar_visnetwork()
 ```

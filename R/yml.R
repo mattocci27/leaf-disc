@@ -1,4 +1,4 @@
-write_yml <- function(path, sp_mean, full_data_cv_csv, tree, lma_raw_re, lma_yaku_re, sp_cv, boot_fit_dat) {
+write_yml <- function(path, sp_mean, sp_cv, tree, lma_raw_re, lma_yaku_re, boot_fit_dat) {
   r2_lma <- cor.test(log(sp_mean$lma_leaf), log(sp_mean$lma_disc))$estimate^2 |> round(2)
   r2_ld <- cor.test(log(sp_mean$ld_leaf), log(sp_mean$ld_disc))$estimate^2 |> round(2)
 
@@ -17,16 +17,16 @@ write_yml <- function(path, sp_mean, full_data_cv_csv, tree, lma_raw_re, lma_yak
     filter(!is.na(petiole_dw)) |>
     filter(!is.na(lma_disc))
 
-  #full_data_cv_csv <- read_csv(full_data_cv_csv)
-  d_cv <- full_data_cv_csv |>
-    filter(!is.na(lma_disc)) |>
-    filter(!is.na(lma_leaf))
+  # #full_data_cv_csv <- read_csv(full_data_cv_csv)
+  # d_cv <- sp_cv |>
+  #   filter(!is.na(lma_disc)) |>
+  #   filter(!is.na(lma_leaf))
 
-  lma_mean <- sp_mean |>
-    group_by(ldlalt_gr) |>
-    summarise(
-      lma_leaf = mean(lma_leaf),
-      lma_disc = mean(lma_disc))
+  # lma_mean <- sp_mean |>
+  #   group_by(ldlalt_gr) |>
+  #   summarise(
+  #     lma_leaf = mean(lma_leaf),
+  #     lma_disc = mean(lma_disc))
 
   fit_ols <- lm(log(lma_leaf) ~ log(lma_disc), sp_mean)
   #fit_ols2 <- lm(log10(lma_leaf) ~ log10(lma_disc), sp_mean)
@@ -83,20 +83,20 @@ write_yml <- function(path, sp_mean, full_data_cv_csv, tree, lma_raw_re, lma_yak
     slope.test = 1
   )
 
-  sma_lma_gr <- sma(log10(lma_leaf) ~ log10(lma_disc) * ldlalt_gr,
-    data = sp_mean,
-    elev.test = 0,
-    slope.test = 1
-  )
+  # sma_lma_gr <- sma(log10(lma_leaf) ~ log10(lma_disc) * ldlalt_gr,
+  #   data = sp_mean,
+  #   elev.test = 0,
+  #   slope.test = 1
+  # )
 
-  lma_mean2 <- left_join(lma_mean, sma_lma_gr$groupsummary, by = c("ldlalt_gr" = "group"))
+  # lma_mean2 <- left_join(lma_mean, sma_lma_gr$groupsummary, by = c("ldlalt_gr" = "group"))
 
-  dens_thin_large <- lma_mean2 |>
-    filter(ldlalt_gr == "Dense~Thin~Large")
-  nondens_thin_large <- lma_mean2 |>
-    filter(ldlalt_gr == "Nondense~Thin~Large")
-  nondens_thick_large <- lma_mean2 |>
-    filter(ldlalt_gr == "Nondense~Thick~Large")
+  # dens_thin_large <- lma_mean2 |>
+  #   filter(ldlalt_gr == "Dense~Thin~Large")
+  # nondens_thin_large <- lma_mean2 |>
+  #   filter(ldlalt_gr == "Nondense~Thin~Large")
+  # nondens_thick_large <- lma_mean2 |>
+  #   filter(ldlalt_gr == "Nondense~Thick~Large")
 
   lma_disc_mean <- median(sp_mean$lma_disc, na.rm = TRUE) |> round(1)
   sma_all <- cbind(lma_disc = lma_disc_mean, sma_lma$groupsummary)
@@ -460,21 +460,21 @@ write_yml <- function(path, sp_mean, full_data_cv_csv, tree, lma_raw_re, lma_yak
            my_fun(sma_all)),
     out,
     sep = "\n")
-  writeLines(
-    paste0("dens_thin_large: ",
-           my_fun(dens_thin_large)),
-    out,
-    sep = "\n")
-  writeLines(
-    paste0("nondens_thin_large: ",
-           my_fun(nondens_thin_large)),
-    out,
-    sep = "\n")
-  writeLines(
-    paste0("nondens_thick_large: ",
-           my_fun(nondens_thick_large)),
-    out,
-    sep = "\n")
+  # writeLines(
+  #   paste0("dens_thin_large: ",
+  #          my_fun(dens_thin_large)),
+  #   out,
+  #   sep = "\n")
+  # writeLines(
+  #   paste0("nondens_thin_large: ",
+  #          my_fun(nondens_thin_large)),
+  #   out,
+  #   sep = "\n")
+  # writeLines(
+  #   paste0("nondens_thick_large: ",
+  #          my_fun(nondens_thick_large)),
+  #   out,
+  #   sep = "\n")
   writeLines(
     paste0("tree_no: ",
            tree |>
@@ -562,8 +562,8 @@ write_yml <- function(path, sp_mean, full_data_cv_csv, tree, lma_raw_re, lma_yak
     sep = "\n")
   writeLines(
     paste0("cv_r2: ",
-           cor(sqrt(d_cv$lma_leaf),
-               sqrt(d_cv$lma_disc))^2 |> round(2)),
+           cor(sqrt(sp_cv$lma_leaf_cv),
+               sqrt(sp_cv$lma_disc_cv))^2 |> round(2)),
     out,
     sep = "\n")
   close(out)

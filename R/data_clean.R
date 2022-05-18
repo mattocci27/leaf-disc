@@ -124,7 +124,18 @@ data_clean_tree <- function(lma_raw_re, lma_yaku_re) {
      location == "Yakushima" ~ lma_disc * 1.57 * 10^-4,
      # disc size for lma_disc in lma_raw_re is 0.899
      TRUE ~ lma_disc * 0.889 * 10^-4
-                  ))
+                  )) |>
+    mutate(growth_form = case_when(
+      growth_form == "T" ~ "tree",
+      growth_form == "S" ~ "shrub",
+      growth_form == "L" ~ "liana",
+      growth_form == "Trees" ~ "tree"
+    )) |>
+    mutate(leaf_habit = case_when(
+      leaf_habit == "E" ~ "evergreen",
+      leaf_habit == "D" ~ "deciduous",
+      leaf_habit == "ED" ~ "semi-deciduous"
+    ))
 
   tree_data |> write_csv("data/tree_data.csv")
   paste("data/tree_data.csv")
@@ -134,9 +145,9 @@ data_clean_tree <- function(lma_raw_re, lma_yaku_re) {
 data_clean_mean <- function(tree) {
   sp_dat <- tree |>
     # to calculate means, we use samples that have both LMAw and LMAd
-    filter(!is.na(lma_disc)) |>
-    filter(!is.na(lma_leaf)) |>
-    filter(!is.na(lt)) |>
+    # filter(!is.na(lma_disc)) |>
+    # filter(!is.na(lma_leaf)) |>
+    # filter(!is.na(lt)) |>
     group_by(species, family, growth_form, leaf_habit, leaf_type,
     location, biomes, data_contributor) |>
     summarise_at(
@@ -152,6 +163,11 @@ data_clean_mean <- function(tree) {
       .funs = \(x)mean(x, na.rm = TRUE)
     ) |>
     arrange(location) |>
+    # to calculate means, we use all the samples even if that sample doesn't
+    # have the corresponding LMAw or LMAd
+    filter(!is.na(lma_disc)) |>
+    filter(!is.na(lma_leaf)) |>
+    filter(!is.na(lt)) |>
     mutate(lma_ratio = lma_leaf / lma_disc) |>
     mutate(ld_ratio = ld_leaf / ld_disc)
 
@@ -164,6 +180,9 @@ data_clean_mean <- function(tree) {
 data_clean_cv <- function(tree) {
   # sample with n > 5
   tree_n <- tree |>
+    # to calculate cv, we use samples that have both LMAw and LMAd
+    filter(!is.na(lma_leaf)) |>
+    filter(!is.na(lt)) |>
     group_by(species, location) |>
     summarize(n = n()) |>
     filter(n >= 5) |>
@@ -171,10 +190,6 @@ data_clean_cv <- function(tree) {
   tree2 <- left_join(tree_n, tree, by = c("species", "location"))
 
   sp_dat <- tree2 |>
-    # to calculate cv, we use samples that have both LMAw and LMAd
-    filter(!is.na(lma_disc)) |>
-    filter(!is.na(lma_leaf)) |>
-    # filter(!is.na(lt)) |>
     group_by(species, family, growth_form, leaf_habit, leaf_type,
     location, biomes, data_contributor, n) |>
     rename(lma_leaf_cv = lma_leaf) |>

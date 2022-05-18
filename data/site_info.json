@@ -49,9 +49,9 @@
     "Leaf disc thickness": "Measured",
     "Leaf punch diameter (cm)": 0.6,
     "Number of species for species means": 34,
-    "Number of individuals for individuals means": 198,
+    "Number of individuals for individuals means": 204,
     "Number of species for CV": 33,
-    "Number of individuals for CV": 197
+    "Number of individuals for CV": 203
   },
   {
     "Data name": "Yakushima",
@@ -67,7 +67,7 @@
     "Leaf disc thickness": "Not-measured",
     "Leaf punch diameter (cm)": 1,
     "Number of species for species means": 193,
-    "Number of individuals for individuals means": 519,
+    "Number of individuals for individuals means": 607,
     "Number of species for CV": 5,
     "Number of individuals for CV": 26
   }

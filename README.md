@@ -11,22 +11,16 @@ cd leaf-disc
 
 ### Running code on local
 
-To make everything.
+To run analysis.
+
+```bash
+Rscript run.R
+```
+
+To generate manuscript.
 
 ```bash
 make
-```
-
-To make specific files.
-
-For example:
-
-```bash
-make analysis
-```
-
-```bash
-make docs/figs.html
 ```
 
 ### Running code in Docker
@@ -42,22 +36,26 @@ docker-compose up
 
 If you are not using docker, you will need the following dependencies.
 
-- R (4.1.3)
-	- DT
-	- [mattocci27/ggpubr](https://github.com/mattocci27/ggpubr)
-	- [mattocci27/ggsma](https://github.com/mattocci27/ggsma)
-	- kableExtra
-	- patchwork
-	- smatr
-	- tictoc
-	- tidyverse
-	- tinytex
-  - lmtest
-	- targets
-	- tarchetypes
-	- clustermq
-	- janitor
-	- extrafont
 - pandoc
 - pandoc-crossref
 - latexdiff
+- R (4.1.3)
+	- renv (this will install all the dependencies)
+	- (or folloiwng packages)
+	- DT
+	- [mattocci27/ggpubr](https://github.com/mattocci27/ggpubr)
+	- [mattocci27/ggsma](https://github.com/mattocci27/ggsma)
+	- clustermq
+	- extrafont
+	- janitor
+	- jsonlite
+	- kableExtra
+	- lmtest
+	- modelr
+	- patchwork
+	- smatr
+	- tarchetypes
+	- targets
+	- tictoc
+	- tidyverse
+	- tinytex

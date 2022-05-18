@@ -20,6 +20,7 @@ sma_point <- function(data) {
     theme_bw() +
     theme(text = element_text(family = "Arial"))
 }
+
 #' @title Leaf disc vs whole-leaf LMA (simple)
 sma_point_sep <- function(data) {
   my_col <- RColorBrewer::brewer.pal(4, "RdBu")
@@ -60,565 +61,6 @@ sma_point_sep <- function(data) {
       legend.title = element_text(size = 9))
 }
 
-#' @title Leaf disc vs whole-leaf LMA (pooled species-level)
-lalt_pool_grid_point <- function(data) {
-  # data <- data |>
-  #   mutate(size_gr = ifelse(location == "Yakushima", "1.0-cm", "0.6-cm"))
-  data |>
-    mutate(la_gr2 = factor(la_gr2, levels = c("Small-leaved~species",
-                           "Large-leaved~species") |> rev())) |>
-    ggplot(aes(x = lma_disc, y = lma_leaf)) +
-    geom_point(alpha = 0.8) +
-    scale_x_log10() +
-    scale_y_log10() +
-    geom_abline(slope = 1, intercept = 0, lty = 2) +
-    geom_sma(se = TRUE, nboot = 2000) +
-    facet_grid(la_gr2 ~ lt_gr2, scale = "fixed", labeller = label_parsed) +
-    xlab(expression(Leaf ~ disc ~ LMA ~ (g ~ m^{
-      -2
-    }))) +
-    ylab(expression(Whole - leaf ~ LMA ~ (g ~ m^{
-      -2
-    }))) +
-    stat_cor(
-      aes(label = paste(..rr.label.., ..n.label.., sep = "~`,`~"),
-          family = "Arial")
-    ) +
-    theme_bw() +
-    theme(text = element_text(family = "Arial"))
-}
-
-lalt_sp_grid_dense <- function(data) {
-  p1 <- data |>
-      filter(ld_gr2 == "Nondense-leaved~species") |>
-      lalt_pool_grid_point() +
-      ggtitle("Nondense-leaved species") +
-      theme(legend.position = c(0.88, 0.65))
-  p2 <- data |>
-      filter(ld_gr2 == "Dense-leaved~species") |>
-      lalt_pool_grid_point() +
-      ggtitle("Dense-leaved species")
-  p1 + p2 +
-    plot_annotation(tag_levels = "a") &
-    theme(
-      text = element_text(family = "Arial"))
-}
-
-hist_data <- function(data) {
-  data <- data |>
-    mutate(size_gr = ifelse(location == "Yakushima", "1.0-cm", "0.6-cm")) |>
-    mutate(la_gr3 = ifelse(str_detect(la_gr2, "Large"), "Large", "Small")) |>
-    mutate(lt_gr3 = ifelse(str_detect(lt_gr2, "Thick"), "Thick", "Thin")) |>
-    mutate(ld_gr3 = ifelse(str_detect(ld_gr2, "Dense"), "Dense", "Less dense"))
-  my_col <- RColorBrewer::brewer.pal(4, "RdBu")
-
-  p1 <- data |>
-    ggplot(aes(x = ld_leaf, fill = size_gr, coll = size_gr)) +
-    geom_histogram(position = "identity", alpha = 0.6) +
-    geom_vline(xintercept =  median(data$ld_leaf), lty = 2, col = "grey40") +
-    scale_x_log10() +
-    scale_color_manual(
-      values = my_col[c(2, 4)],
-      name = "Leaf punch diameter"
-    ) +
-    scale_fill_manual(
-      values = my_col[c(2, 4)],
-      name = "Leaf punch diameter"
-    ) +
-    ylab("Number of species") +
-    xlab(expression(Leaf ~ tissue ~ density ~ (g ~ m^{
-      -3}))) +
-    theme_bw() +
-    theme(
-      legend.position = c(0.35, 0.7),
-      legend.key.size = unit(0.5, "cm"),
-      legend.spacing.y = unit(0.1, "cm"),
-      legend.text.align = 0,
-      legend.key.height = unit(0.2, "cm"),
-      legend.text = element_text(size = 9),
-      legend.title = element_text(size = 9)
-    )
-
-  p2 <- data |>
-    ggplot(aes(x = la, fill = size_gr)) +
-    geom_histogram(position = "identity", alpha = 0.6) +
-    geom_vline(xintercept =  median(data$la), lty = 2, col = "grey40") +
-    scale_x_log10() +
-    scale_color_manual(
-      values = my_col[c(2, 4)]
-    ) +
-    scale_fill_manual(
-      values = my_col[c(2, 4)]
-    ) +
-    ylab("Number of species") +
-    xlab(expression(Leaf ~ area ~ (m^{
-      2}))) +
-    theme_bw() +
-    theme(
-      legend.position = "NULL"
-    )
-
-  p3 <- data |>
-    ggplot(aes(x = lt, fill = size_gr)) +
-    geom_histogram(position = "identity", alpha = 0.6) +
-    geom_vline(xintercept =  median(data$lt), lty = 2, col = "grey40") +
-    scale_x_log10() +
-    scale_color_manual(
-      values = my_col[c(2, 4)]
-    ) +
-    scale_fill_manual(
-      values = my_col[c(2, 4)]
-    ) +
-    ylab("Number of species") +
-    xlab("Leaf thickness (mm)")+
-    theme_bw() +
-    theme(
-      legend.position = "NULL"
-    )
-
-  p1 + p2 + p3 +
-     plot_annotation(tag_levels = "a") &
-     theme(
-       text = element_text(family = "Arial"))
-
-}
-
-sma_grid_col <- function(data, trait, legend_title) {
-  data <- data |>
-    mutate(size_gr = ifelse(location == "Yakushima", "Large punch (1.0-cm)", "Small punch (0.6-cm)")) |>
-    mutate(la_gr3 = ifelse(str_detect(la_gr2, "Large"), "Large", "Small")) |>
-    mutate(lt_gr3 = ifelse(str_detect(lt_gr2, "Thick"), "Thick", "Thin")) |>
-    mutate(ld_gr3 = ifelse(str_detect(ld_gr2, "Dense"), "Dense", "Less dense"))
-  my_col <- RColorBrewer::brewer.pal(4, "RdBu")
-
-  p <- data |>
-   # ggplot(aes(x = lma_disc, y = lma_leaf))+
-    ggplot(aes(x = lma_disc, y = lma_leaf, col = {{trait}}, fill = {{trait}})) +
-    geom_point(alpha = 0.6) +
-    facet_grid(~ size_gr, scale = "fixed") +
-    #facet_grid(~ld_gr3, scale = "fixed", labeller = label_parsed) +
-    scale_x_log10() +
-    scale_y_log10() +
-    #ggtitle(legend_title) +
-    geom_abline(slope = 1, intercept = 0, lty = 2) +
-    geom_sma(se = TRUE, nboot = 2000) +
-    scale_color_manual(
-      values = my_col[c(2, 4)],
-      name = legend_title
-    ) +
-    scale_fill_manual(
-      values = my_col[c(2, 4)],
-      name = legend_title
-    ) +
-    xlab(expression(Leaf ~ disc ~ LMA ~ (g ~ m^{
-      -2
-    }))) +
-    ylab(expression(Whole - leaf ~ LMA ~ (g ~ m^{
-      -2
-    }))) +
-    stat_cor(
-      aes(label = paste(..rr.label.., ..n.label.., sep = "~`,`~"), family = "Arial"),
-      show.legend = FALSE
-    ) +
-    theme_bw() +
-    theme(
-      text = element_text(family = "Arial"),
-      legend.position = c(0.35, 0.2),
-      legend.key.size = unit(0.5, "cm"),
-      legend.spacing.y = unit(0.1, "cm"),
-      legend.text.align = 0,
-      legend.key.height = unit(0.2, "cm"),
-      legend.text = element_text(size = 9),
-      legend.title = element_text(size = 9)
-    )
-   p
-}
-
-sma_grid_col3 <- function(sp_mean) {
-  p1 <- sma_grid_col(sp_mean, ld_gr3, "Leaf tissue density")
-  p2 <- sma_grid_col(sp_mean, la_gr3, "Leaf area")
-  p3 <- sma_grid_col(sp_mean, lt_gr3, "Leaf thickness")
-
-  p1 / p2 / p3 +
-     plot_annotation(tag_levels = "a") &
-     theme(
-       text = element_text(family = "Arial"))
-}
-
-
-ldlalt_sp_col <- function(data) {
-  # tar_load(sp_mean)
-  # data <- sp_mean
-  data <- data |>
-    mutate(size_gr = ifelse(location == "Yakushima", "Large punch (1.0-cm)", "Small punch (0.6-cm)")) |>
-    mutate(la_gr3 = ifelse(str_detect(la_gr2, "Large"), "Large", "Small")) |>
-    mutate(lt_gr3 = ifelse(str_detect(lt_gr2, "Thick"), "Thick", "Thin")) |>
-    mutate(ld_gr3 = ifelse(str_detect(ld_gr2, "Dense"), "Dense", "Less dense"))
-
-  my_col <- RColorBrewer::brewer.pal(4, "RdBu")
-
-  p1 <- data |>
-   # ggplot(aes(x = lma_disc, y = lma_leaf))+
-    ggplot(aes(x = lma_disc, y = lma_leaf, col = la_gr3, fill = la_gr3)) +
-    geom_point(alpha = 0.6) +
-    facet_grid(~ size_gr, scale = "fixed") +
-    #facet_grid(~ld_gr3, scale = "fixed", labeller = label_parsed) +
-    scale_x_log10() +
-    scale_y_log10() +
-    geom_abline(slope = 1, intercept = 0, lty = 2) +
-    geom_sma(se = TRUE, nboot = 10) +
-    scale_color_manual(
-      values = my_col[c(2, 4)],
-      name = "Leaf area"
-    ) +
-    scale_fill_manual(
-      values = my_col[c(2, 4)],
-      name = "Leaf area"
-    ) +
-    xlab(expression(Leaf ~ disc ~ LMA ~ (g ~ m^{
-      -2
-    }))) +
-    ylab(expression(Whole - leaf ~ LMA ~ (g ~ m^{
-      -2
-    }))) +
-    stat_cor(
-      aes(label = paste(..rr.label.., ..n.label.., sep = "~`,`~"), family = "Arial"),
-      show.legend = FALSE
-    ) +
-    theme_bw() +
-    theme(
-      text = element_text(family = "Arial"),
-      legend.position = c(0.3, 0.1),
-      legend.key.size = unit(0.5, "cm"),
-      legend.spacing.y = unit(0.1, "cm"),
-      legend.text.align = 0,
-      legend.key.height = unit(0.2, "cm"),
-      legend.text = element_text(size = 9),
-      legend.title = element_text(size = 9)
-    )
-
-  p2 <- data |>
-   # ggplot(aes(x = lma_disc, y = lma_leaf))+
-    ggplot(aes(x = lma_disc, y = lma_leaf, col = ld_gr3))+
-    geom_point(alpha = 0.6) +
-    facet_grid(~size_gr, scale = "fixed") +
-    #facet_grid(~ld_gr3, scale = "fixed", labeller = label_parsed) +
-    scale_x_log10() +
-    scale_y_log10() +
-    geom_abline(slope = 1, intercept = 0, lty = 2) +
-    geom_sma(se = FALSE, nboot = 10) +
-    scale_color_manual(
-      values = my_col[c(2, 4)],
-      name = "Leaf tissue density"
-    ) +
-    xlab(expression(Leaf ~ disc ~ LMA ~ (g ~ m^{
-      -2
-    }))) +
-    ylab(expression(Whole - leaf ~ LMA ~ (g ~ m^{
-      -2
-    }))) +
-    stat_cor(
-      aes(label = paste(..rr.label.., ..n.label.., sep = "~`,`~"), family = "Arial"),
-      show.legend = FALSE
-    ) +
-    theme_bw() +
-    theme(
-      text = element_text(family = "Arial"),
-      legend.position = c(0.3, 0.1),
-      legend.key.size = unit(0.5, "cm"),
-      legend.spacing.y = unit(0.1, "cm"),
-      legend.text.align = 0,
-      legend.key.height = unit(0.2, "cm"),
-      legend.text = element_text(size = 9),
-      legend.title = element_text(size = 9)
-    )
-
-  p3 <- data |>
-    ggplot(aes(x = lma_disc, y = lma_leaf, col = lt_gr3)) +
-    geom_point(alpha = 0.6) +
-    facet_grid(~size_gr, scale = "fixed") +
-    scale_x_log10() +
-    scale_y_log10() +
-    geom_abline(slope = 1, intercept = 0, lty = 2) +
-    geom_sma(se = FALSE, nboot = 10) +
-    scale_color_manual(
-      values = my_col[c(2, 4)],
-      name = "Leaf thickness"
-    ) +
-    xlab(expression(Leaf ~ disc ~ LMA ~ (g ~ m^{
-      -2
-    }))) +
-    ylab(expression(Whole - leaf ~ LMA ~ (g ~ m^{
-      -2
-    }))) +
-    stat_cor(
-      aes(label = paste(..rr.label.., ..n.label.., sep = "~`,`~"), family = "Arial"),
-      show.legend = FALSE
-    ) +
-    theme_bw() +
-    theme(
-      text = element_text(family = "Arial"),
-      legend.position = c(0.3, 0.1),
-      legend.key.size = unit(0.5, "cm"),
-      legend.spacing.y = unit(0.1, "cm"),
-      legend.text.align = 0,
-      legend.key.height = unit(0.2, "cm"),
-      legend.text = element_text(size = 9),
-      legend.title = element_text(size = 9)
-    )
-
-   p1 / p2 / p3
-     plot_annotation(tag_levels = "a") &
-     theme(
-       text = element_text(family = "Arial"))
-}
-
-#' @title Leaf disc vs whole-leaf LMA (separted species-level)
-lalt_sep_grid_point <- function(data) {
-  my_col <- RColorBrewer::brewer.pal(4, "RdBu")
-  data |>
-    mutate(punch_size = ifelse(location == "Yakushima", "1.0 cm", "0.6 cm")) |>
-    ggplot(aes(x = lma_disc, y = lma_leaf, col = punch_size)) +
-    geom_point(alpha = 0.6) +
-    scale_x_log10() +
-    scale_y_log10() +
-    geom_abline(slope = 1, intercept = 0, lty = 2) +
-    geom_sma(se = FALSE) +
-    scale_color_manual(
-      values = my_col[c(2, 4)],
-      name = "Diameter of the leaf punch"
-    ) +
-    facet_grid(la_gr2 ~ lt_gr2, scale = "free", labeller = label_parsed) +
-    xlab(expression(Leaf ~ disc ~ LMA ~ (g ~ m^{
-      -2
-    }))) +
-    ylab(expression(Whole - leaf ~ LMA ~ (g ~ m^{
-      -2
-    }))) +
-    stat_cor(
-      aes(label = paste(..rr.label.., ..n.label.., sep = "~`,`~"), family = "Arial"),
-      show.legend = FALSE
-    ) +
-    theme_bw() +
-    theme(
-      text = element_text(family = "Arial"),
-      legend.position = c(0.3, 0.1),
-      legend.key.size = unit(0.5, "cm"),
-      legend.spacing.y = unit(0.1, "cm"),
-      legend.text.align = 0,
-      legend.key.height = unit(0.2, "cm"),
-      legend.text = element_text(size = 9),
-      legend.title = element_text(size = 9)
-    )
-}
-
-
-#' @title extract sma coeffs from sma object
-extract_sma <- function(fit) {
-  tb1 <- fit$groupsummary |>
-    mutate(slope = paste0(
-      round(Slope, 2), " [", round(Slope_lowCI, 2), ", ",
-      round(Slope_highCI, 2), "]"
-    )) |>
-    mutate(intercept = paste0(
-      round(Int, 2), " [", round(Int_lowCI, 2), ", ",
-      round(Int_highCI, 2), "]"
-    )) |>
-    mutate(sig_slope = case_when(
-      Slope_highCI < 1 ~ "sig",
-      Slope_lowCI > 1 ~ "sig",
-      TRUE ~ "ns"
-    )) |>
-    mutate(sig_int = ifelse(Int_lowCI * Int_highCI > 0, "sig", "ns")) |>
-    mutate(r2 = round(r2, 2)) |>
-    dplyr::select(slope, intercept, r2, sig_slope, sig_int, group)
-
-  tb2 <- tb1 |>
-    mutate(slope = ifelse(sig_slope == "sig", paste0("**", slope, "**"), slope)) |>
-    mutate(intercept = ifelse(sig_int == "sig", paste0("**", intercept, "**"),
-      intercept
-    )) |>
-    dplyr::select(slope, intercept, `*R^2^*` = r2)
-  list(tb1, tb2, group = tb1$group)
-}
-
-#' @title SMA table (species-level)
-generate_sma_tab <- function(sp_mean) {
-  sma_lma <- sma(log10(lma_leaf) ~ log10(lma_disc),
-    data = sp_mean,
-    elev.test = 0,
-    slope.test = 1
-  )
-
-  sma_ld <- sma(log10(ld_leaf) ~ log10(ld_disc),
-    data = sp_mean,
-    elev.test = 0,
-    slope.test = 1
-  )
-
-  sma_lma_lalt_gr <- sma(log10(lma_leaf) ~ log10(lma_disc) * lalt_gr,
-    data = sp_mean,
-    elev.test = 0,
-    slope.test = 1
-  )
-
-  sma_ld_lalt_gr <- sma(log10(ld_leaf) ~ log10(ld_disc) * lalt_gr,
-    data = sp_mean,
-    elev.test = 0,
-    slope.test = 1
-  )
-
-  # we don't need leaf density
-  tb0 <- lapply(
-    list(
-      lma = sma_lma,
-      ld = sma_ld,
-      lma_gr = sma_lma_lalt_gr,
-      ld_gr = sma_ld_lalt_gr
-    ),
-    extract_sma
-  )
-
-  tb <- rbind(tb0$lma[[2]], tb0$lma_gr[[2]])
-  tb <- cbind(c("All", tb0$lma_gr$group), tb) |>
-    as_tibble() |>
-    rename(Slope = slope, Intercept = intercept)
-
-  colnames(tb)[1] <- "Data"
-
-  tb
-}
-
-#' @title SMA table (species-level)
-generate_sma_ld_tab <- function(sp_mean) {
-  sma_lma <- sma(log10(lma_leaf) ~ log10(lma_disc),
-    data = sp_mean,
-    elev.test = 0,
-    slope.test = 1
-  )
-
-  sma_lma_gr <- sma(log10(lma_leaf) ~ log10(lma_disc) * ldlalt_gr,
-    data = sp_mean,
-    elev.test = 0,
-    slope.test = 1
-  )
-
-  # we don't need leaf density
-  tb0 <- lapply(
-    list(
-      lma = sma_lma,
-      lma_gr = sma_lma_gr
-    ),
-    extract_sma
-  )
-
-  tb <- rbind(tb0$lma[[2]], tb0$lma_gr[[2]])
-  tb <- cbind(c("All", tb0$lma_gr$group), tb) |>
-    as_tibble() |>
-    rename(Slope = slope, Intercept = intercept)
-
-  colnames(tb)[1] <- "Data"
-
-  tb
-}
-
-#' @title SMA table (species-level)
-generate_sma_2_tab <- function(sp_mean) {
-  sp_mean <- sp_mean |>
-     mutate(la_gr3 = ifelse(str_detect(la_gr2, "Large"), "Large", "Small")) |>
-     mutate(lt_gr3 = ifelse(str_detect(lt_gr2, "Thick"), "Thick", "Thin")) |>
-     mutate(ld_gr3 = ifelse(str_detect(ld_gr2, "Dense"), "Dense", "Less dense"))
-
-  sma_lma <- sma(log10(lma_leaf) ~ log10(lma_disc),
-    data = sp_mean,
-    elev.test = 0,
-    slope.test = 1
-  )
-  sma_la <- sma(log10(lma_leaf) ~ log10(lma_disc) * la_gr3,
-    data = sp_mean,
-    elev.test = 0,
-    slope.test = 1
-  )
-  sma_ld <- sma(log10(lma_leaf) ~ log10(lma_disc) * ld_gr3,
-    data = sp_mean,
-    elev.test = 0,
-    slope.test = 1
-  )
-  sma_lt <- sma(log10(lma_leaf) ~ log10(lma_disc) * lt_gr3,
-    data = sp_mean,
-    elev.test = 0,
-    slope.test = 1
-  )
-
-  # we don't need leaf density
-  tb0 <- lapply(
-    list(
-      lma = sma_lma,
-      ld_gr = sma_ld,
-      la_gr = sma_la,
-      lt_gr = sma_lt
-    ),
-    extract_sma
-  )
-
-  tb <- rbind(tb0$lma[[2]], tb0$ld_gr[[2]], tb0$la_gr[[2]], tb0$lt_gr[[2]])
-  tb <- cbind(c("All", tb0$ld_gr$group, tb0$la_gr$group, tb0$lt_gr$group), tb) |>
-    as_tibble() |>
-    rename(Slope = slope, Intercept = intercept)
-
-  colnames(tb)[1] <- "Data"
-
-  tb
-}
-
-
-#' @title LMA and LD (species-level)
-lma_ld_wrap_point <- function(sp_mean) {
-  d_leaf <- sp_mean |>
-    dplyr::select(c(species:data_contributor,
-      lma = lma_leaf, ldmc = ldmc_leaf, ld = ld_leaf
-    )) |>
-    pivot_longer(lma:ld, names_to = "trait", values_to = "whole_leaf") |>
-    filter(location != "Yakushima" | trait != "ld") |>
-    filter(location != "Yakushima" | trait != "lma")
-  d_disc <- sp_mean |>
-    dplyr::select(species, location, lma = lma_disc, ldmc = ldmc_disc, ld = ld_disc) |>
-    pivot_longer(lma:ld, names_to = "trait", values_to = "leaf_disc") |>
-    filter(location != "Yakushima" | trait != "ld") |>
-    filter(location != "Yakushima" | trait != "lma")
-  d2 <- full_join(d_leaf, d_disc) |>
-    mutate(trait = factor(trait, c("lma", "ldmc", "ld"))) |>
-    mutate(trait_lab = factor(trait,
-      labels = c(
-        "LMA~(g~m^{-2})",
-        "LDMC~(g~g^{-1})",
-        "LD~(g~cm^{-3})"
-      )
-    ))
-  p_all <- d2 |>
-    filter(trait != "ldmc") |>
-    ggplot(aes(x = leaf_disc, y = whole_leaf)) +
-    geom_abline(intercept = 0, slope = 1, lty = 2) +
-    geom_point(alpha = 0.6) +
-    scale_x_log10() +
-    scale_y_log10() +
-    geom_sma(se = TRUE, nboot = 2000) +
-    facet_wrap(~trait_lab, scale = "free", labeller = label_parsed) +
-    stat_cor(
-      aes(
-        label = paste(..rr.label.., ..n.label.., sep = "~`,`~"),
-        family = "Arial"
-      )
-    ) +
-    xlab("Leaf disc") +
-    ylab("Whole-leaf") +
-    theme_bw() +
-    theme(
-      text = element_text(family = "Arial"))
-  p_all
-}
-
-
 #' @title CV
 cv_pool_point <- function(sp_cv, remove_outliers = FALSE) {
   if (remove_outliers) {
@@ -651,55 +93,55 @@ cv_pool_point <- function(sp_cv, remove_outliers = FALSE) {
   p
 }
 
-cv_sep_point <- function(sp_cv) {
-  p_cv1 <- sp_cv |>
-    filter(location != "Yakushima") |>
-    ggplot(aes(x = lma_disc_cv, y = lma_leaf_cv)) +
+#' @title LMA and LD (species-level)
+lma_ld_wrap_point <- function(sp_mean) {
+  d_leaf <- sp_mean |>
+    dplyr::select(c(species:data_contributor,
+      lma = lma_leaf,
+     # ldmc = ldmc_leaf,
+      ld = ld_leaf
+    )) |>
+    pivot_longer(lma:ld, names_to = "trait", values_to = "whole_leaf") |>
+    filter(location != "Yakushima" | trait != "ld") |>
+    filter(location != "Yakushima" | trait != "lma")
+  d_disc <- sp_mean |>
+    dplyr::select(species, location, lma = lma_disc, ld = ld_disc) |>
+    pivot_longer(lma:ld, names_to = "trait", values_to = "leaf_disc") |>
+    filter(location != "Yakushima" | trait != "ld") |>
+    filter(location != "Yakushima" | trait != "lma")
+  d2 <- full_join(d_leaf, d_disc) |>
+    mutate(trait = factor(trait, c("lma", "ld"))) |>
+    mutate(trait_lab = factor(trait,
+      labels = c(
+        "LMA~(g~m^{-2})",
+     #   "LDMC~(g~g^{-1})",
+        "LD~(g~cm^{-3})"
+      )
+    ))
+  p_all <- d2 |>
+    filter(trait != "ldmc") |>
+    ggplot(aes(x = leaf_disc, y = whole_leaf)) +
     geom_abline(intercept = 0, slope = 1, lty = 2) +
     geom_point(alpha = 0.6) +
-    scale_x_continuous(trans = "sqrt") +
-    scale_y_continuous(trans = "sqrt") +
+    scale_x_log10() +
+    scale_y_log10() +
     geom_sma(se = TRUE, nboot = 2000) +
-    ggtitle("Diameter: 0.6 cm") +
-    ylab("CV of whole-leaf LMA") +
-    xlab("CV of leaf disc LMA") +
-    # coord_fixed(xlim = c(0.01, 5.4), ylim = c(0.01, 5.4)) +
-    # coord_fixed() +
+    facet_wrap(~trait_lab, scale = "free", labeller = label_parsed) +
     stat_cor(
       aes(
         label = paste(..rr.label.., ..n.label.., sep = "~`,`~"),
         family = "Arial"
       )
-    )
-
-  p_cv2 <- sp_cv |>
-    filter(location == "Yakushima") |>
-    ggplot(aes(x = lma_disc_cv, y = lma_leaf_cv)) +
-    geom_abline(intercept = 0, slope = 1, lty = 2) +
-    geom_point(alpha = 0.6) +
-    scale_x_continuous(trans = "sqrt") +
-    scale_y_continuous(trans = "sqrt") +
-    geom_sma(se = TRUE) +
-    ggtitle("Diameter: 1.0 cm") +
-    ylab("CV of whole-leaf LMA") +
-    xlab("CV of leaf disc LMA") +
-    # coord_fixed(xlim = c(0.01, 5.4), ylim = c(0.01, 5.4)) +
-    # coord_fixed() +
-    stat_cor(
-      aes(
-        label = paste(..rr.label.., ..n.label.., sep = "~`,`~"),
-        family = "Arial"
-      )
-    )
-
-  (p_cv1 + p_cv2) +
-    plot_annotation(tag_levels = "a") &
-    theme_bw() &
+    ) +
+    xlab("Leaf disc") +
+    ylab("Whole-leaf") +
+    theme_bw() +
     theme(
       text = element_text(family = "Arial"))
+  p_all
 }
 
-
+#' @title Plot petiole data
 petiole_point <- function(yaku_sp) {
   pet1 <- ggplot(yaku_sp, aes(x = petiole_ratio, y = lma_leaf / lma_disc)) +
     geom_point() +
@@ -735,162 +177,59 @@ petiole_point <- function(yaku_sp) {
     theme(plot.tag = element_text(face = "bold"))
 }
 
-generate_sma_punch_tab <- function(data) {
-  data <- sp_mean
-  data <- data |>
-    mutate(size_gr = ifelse(location == "Yakushima", "Large punch (1.0-cm)", "Small punch (0.6-cm)")) |>
-    mutate(la_gr3 = ifelse(str_detect(la_gr2, "Large"), "Large", "Small")) |>
-    mutate(lt_gr3 = ifelse(str_detect(lt_gr2, "Thick"), "Thick", "Thin")) |>
-    mutate(ld_gr3 = ifelse(str_detect(ld_gr2, "Dense"), "Dense", "Less dense")) |>
-    mutate(punch_size = ifelse(location == "Yakushima", "1.0cm", "0.6cm")) |>
-    mutate(all_gr = paste(ld_gr3, la_gr3, lt_gr3, punch_size, sep = "-")) |>
-    mutate(all_gr2 = paste(ld_gr3, la_gr3, lt_gr3, sep = "-"))
+#' @title Cross-validation for OLS models
+#' @param tree tree or spcies mean data
+create_cv_fit <- function(tree, k = 10, seed = 123)  {
+  set.seed(seed)
+  cv <- crossv_kfold(tree, k = k)
+  y_bar <- mean(log(tree$lma_leaf))
 
-  small_punch <- data |> filter(location != "Yakushima")
-  large_punch <- data |> filter(location == "Yakushima")
-  la_mid_yaku <- median(large_punch$la)
-  large_punch <- large_punch |>
-    mutate(la_gr4 = ifelse(la >= la_mid_yaku, "Large", "Small"
-    ))
-  large_la <- sma(log10(lma_leaf) ~ log10(lma_disc) * la_gr3,
-    data = large_punch,
-    elev.test = 0,
-    slope.test = 1
-  )
-  extract_sma(large_la)
+  models1 <- map(cv$train,
+    ~lm(log(lma_leaf) ~ log(lma_disc), data = .))
+  models2 <- map(cv$train,
+    ~lm(log(lma_leaf) ~ log(la) + log(lt),
+        offset = log(lma_disc), data = .))
+  models3  <- map(cv$train,
+    ~lm(log(lma_leaf) ~ log(ld_leaf) + log(la) + log(lt),
+        offset = log(lma_disc),
+        data = .))
+  models4 <- map(cv$train,
+    ~lm(log(lma_leaf) ~ log(lma_disc) + log(la) + log(lt),
+        data = .))
 
-  tar_load(lma_yaku_re)
+  fit1 <- lm(log(lma_leaf) ~ log(lma_disc), data = tree)
+  fit2 <- lm(log(lma_leaf) ~ log(la) + log(lt),
+        offset = log(lma_disc), data = tree)
+  fit3 <- lm(log(lma_leaf) ~ log(ld_leaf) + log(la) + log(lt),
+          offset = log(lma_disc), data = tree)
+  fit4 <- lm(log(lma_leaf) ~ log(lma_disc) + log(la) + log(lt),
+          data = tree)
 
-  # lma_yaku_re |>
-  #   arrange(la) |>
-  #   filter(!is.na(petiole_dw)) |>
-  #   filter(!is.na(lma_disc)) |>
-  #   filter(petiole_ratio > 0) |>
-  #   dplyr::select(species, location, la, lma_leaf, lma_disc, lamina_dw, petiole_dw, petiole_ratio)
+  get_pred  <- function(model, test_data){
+    data  <- as.data.frame(test_data)
+    pred  <- add_predictions(data, model)
+    return(pred)
+  }
 
+  pred <- map(list(models1, models2, models3, models4),
+    \(x) map2_df(x, cv$test, get_pred, .id = "Run"))
 
-  sma_lma <- sma(log10(lma_leaf) ~ log10(lma_disc),
-    data = sp_mean,
-    elev.test = 0,
-    slope.test = 1
-  )
-  small_ld <- sma(log10(lma_leaf) ~ log10(lma_disc) * ld_gr3,
-    data = small_punch,
-    elev.test = 0,
-    slope.test = 1
-  )
-  small_la <- sma(log10(lma_leaf) ~ log10(lma_disc) * la_gr3,
-    data = small_punch,
-    elev.test = 0,
-    slope.test = 1
-  )
-  small_lt <- sma(log10(lma_leaf) ~ log10(lma_disc) * lt_gr3,
-    data = small_punch,
-    elev.test = 0,
-    slope.test = 1
-  )
-  large_ld <- sma(log10(lma_leaf) ~ log10(lma_disc) * ld_gr3,
-    data = large_punch,
-    elev.test = 0,
-    slope.test = 1
-  )
+  tmp_fun <- function(x) {
+    x |>
+    group_by(Run) |>
+    summarise(
+      MSE = mean((log(lma_leaf) - pred)^2),
+      R2 = 1 - sum((log(lma_leaf) - pred)^2) / sum((log(lma_leaf) - y_bar)^2) )
+  }
 
-  large_la <- sma(log10(lma_leaf) ~ log10(lma_disc) * la_gr3,
-    data = data,
-    elev.test = 0,
-    slope.test = 1
-  )
-  extract_sma(large_la)
-
-  large_lt <- sma(log10(lma_leaf) ~ log10(lma_disc) * lt_gr3,
-    data = large_punch,
-    elev.test = 0,
-    slope.test = 1
-  )
-
-  tb0 <- lapply(
-    list(
-      lma = sma_lma,
-      small_ld = small_ld,
-      small_la = small_la,
-      small_lt = small_lt,
-      large_ld = large_ld,
-      large_la = large_la,
-      large_lt = large_lt
-    ),
-    extract_sma
-  )
-
-  fit <- sma(log10(lma_leaf) ~ log10(lma_disc) * all_gr,
-    data = data |> filter(location != "Yakushima"),
-    elev.test = 0,
-    slope.test = 1
-  )
-  extract_sma(fit)
-
-  tb_s <- rbind(tb0$small_ld[[2]], tb0$small_la[[2]], tb0$small_lt[[2]])
-  tb_l <- rbind(tb0$large_ld[[2]], tb0$large_la[[2]], tb0$large_lt[[2]])
-
-  tb <- cbind(c("All", tb0$ld_gr$group, tb0$la_gr$group, tb0$lt_gr$group), tb) |>
-    as_tibble() |>
-    rename(Slope = slope, Intercept = intercept)
-
-  colnames(tb)[1] <- "Data"
-
-  tb
-
+  mse_dat <- map(pred, tmp_fun)
+  r2 <- map_dbl(mse_dat, \(x)mean(x$R2))
+  mse_ <- map_dbl(mse_dat, \(x)mean(x$MSE))
+  list(
+    table = tibble(model = paste("fit", 1:4), r2 = r2, mse = mse_),
+    fit1 = fit1,
+    fit2 = fit2,
+    fit3 = fit3,
+    fit4 = fit4
+    )
 }
-
-# sma_grid_col <- function(data, trait, legend_title) {
-#   data <- data |>
-#     mutate(size_gr = ifelse(location == "Yakushima", "Large punch (1.0-cm)", "Small punch (0.6-cm)")) |>
-#     mutate(la_gr3 = ifelse(str_detect(la_gr2, "Large"), "Large", "Small")) |>
-#     mutate(lt_gr3 = ifelse(str_detect(lt_gr2, "Thick"), "Thick", "Thin")) |>
-#     mutate(ld_gr3 = ifelse(str_detect(ld_gr2, "Dense"), "Dense", "Less dense"))
-#   my_col <- RColorBrewer::brewer.pal(4, "RdBu")
-#   p <- data |>
-#    # ggplot(aes(x = lma_disc, y = lma_leaf))+
-#     ggplot(aes(x = lma_disc, y = lma_leaf, col = {{trait}}, fill = {{trait}})) +
-#     geom_point(alpha = 0.6) +
-#     facet_grid(~ size_gr, scale = "fixed") +
-#     #facet_grid(~ld_gr3, scale = "fixed", labeller = label_parsed) +
-#     scale_x_log10() +
-#     scale_y_log10() +
-#     #ggtitle(legend_title) +
-#     geom_abline(slope = 1, intercept = 0, lty = 2) +
-#     geom_sma(se = TRUE, nboot = 1000) +
-#     # scale_color_manual(
-#     #   values = my_col[c(2, 4)],
-#     #   name = legend_title
-#     # ) +
-#     # scale_fill_manual(
-#     #   values = my_col[c(2, 4)],
-#     #   name = legend_title
-#     # ) +
-#     xlab(expression(Leaf ~ disc ~ LMA ~ (g ~ m^{
-#       -2
-#     }))) +
-#     ylab(expression(Whole - leaf ~ LMA ~ (g ~ m^{
-#       -2
-#     }))) +
-#     stat_cor(
-#       aes(label = paste(..rr.label.., ..n.label.., sep = "~`,`~"), family = "Arial"),
-#       show.legend = FALSE
-#     ) +
-#     theme_bw() +
-#     theme(
-#       text = element_text(family = "Arial"),
-#       legend.position = c(0.35, 0.2),
-#       legend.key.size = unit(0.5, "cm"),
-#       legend.spacing.y = unit(0.1, "cm"),
-#       legend.text.align = 0,
-#       legend.key.height = unit(0.2, "cm"),
-#       legend.text = element_text(size = 9),
-#       legend.title = element_text(size = 9)
-#     )
-#    p
-# }
-
-# tic()
-# sma_grid_col(sp_mean, lt_gr, "leaf thickness")
-# toc()
