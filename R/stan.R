@@ -704,43 +704,152 @@ coef_pointrange4 <- function(data) {
       text = element_text(family = "Arial"))
 }
 
-#' @title pred
+
+#' @title Prepare dataframe for pred_mcmc
+pred_each <- function(draws,
+                      beta_int, beta_slope = NULL,
+                      gamma_int, gamma_slope = NULL,
+                      trait,
+                      punch = c("0.6-cm", "1.0-cm"),
+                      n = 80) {
+  x_lt <- seq(-2, 2, length = n)
+  draws2 <- janitor::clean_names(draws)
+
+  update_para <- function(x) {
+    tmp1 <- str_split_fixed(x, "_", 2)[, 1]
+    tmp2 <- str_split_fixed(x, "_", 2)[, 2] |> as.numeric()
+    paste(tmp1, tmp2 + 1, sep = "_")
+  }
+
+  beta_int2 <- update_para(beta_int)
+  beta_slope2 <- update_para(beta_slope)
+  gamma_int2 <- update_para(gamma_int)
+  gamma_slope2 <- update_para(gamma_slope)
+
+  mu_mat <- exp(rep(1, n) %*% t(apply(draws2[, beta_int2], 1, sum)))
+  if (!is.null(beta_slope)) {
+  mu_mat <- exp(rep(1, n) %*% t(apply(draws2[, beta_int2], 1, sum)) +
+     x_lt %*% t(apply(draws2[, beta_slope2], 1, sum)))
+  }
+
+  sig_mat <- exp(rep(1, n) %*% t(apply(draws2[, gamma_int2], 1, sum)))
+  if (!is.null(gamma_slope)) {
+  sig_mat <- exp(rep(1, n) %*% t(apply(draws2[, gamma_int2], 1, sum)) +
+     x_lt %*% t(apply(draws2[, gamma_slope2], 1, sum)))
+  }
+
+  mean_sig <- apply(sig_mat, 1, mean)
+  mean_mu <- apply(mu_mat, 1, mean)
+
+  pred_up <- mean_mu + mean_sig
+  pred_lo <- mean_mu - mean_sig
+  x_bar <- log(trait) |> mean()
+  x_s <- log(trait) |> sd()
+  tibble(pred = mean_mu, pred_up, pred_lo,
+         x = exp(x_bar + x_s * x_lt), punch = punch)
+}
+
+#' @title Prepare dataframe for pred_mcmc (use 95% CI)
+pred_each2 <- function(draws,
+                      beta_int, beta_slope = NULL,
+                      gamma_int, gamma_slope = NULL,
+                      trait,
+                      punch = c("0.6-cm", "1.0-cm"),
+                      n = 80) {
+  x_lt <- seq(-2, 2, length = n)
+  draws2 <- janitor::clean_names(draws)
+
+  update_para <- function(x) {
+    tmp1 <- str_split_fixed(x, "_", 2)[, 1]
+    tmp2 <- str_split_fixed(x, "_", 2)[, 2] |> as.numeric()
+    paste(tmp1, tmp2 + 1, sep = "_")
+  }
+
+  beta_int2 <- update_para(beta_int)
+  beta_slope2 <- update_para(beta_slope)
+  gamma_int2 <- update_para(gamma_int)
+  gamma_slope2 <- update_para(gamma_slope)
+
+  mu_mat <- exp(rep(1, n) %*% t(apply(draws2[, beta_int2], 1, sum)))
+  if (!is.null(beta_slope)) {
+  mu_mat <- exp(rep(1, n) %*% t(apply(draws2[, beta_int2], 1, sum)) +
+     x_lt %*% t(apply(draws2[, beta_slope2], 1, sum)))
+  }
+
+  sig_mat <- exp(rep(1, n) %*% t(apply(draws2[, gamma_int2], 1, sum)))
+  if (!is.null(gamma_slope)) {
+  sig_mat <- exp(rep(1, n) %*% t(apply(draws2[, gamma_int2], 1, sum)) +
+     x_lt %*% t(apply(draws2[, gamma_slope2], 1, sum)))
+  }
+
+  pred_up0 <- mu_mat + sig_mat
+  pred_up <- apply(pred_up0, 1, \(x)quantile(x, 0.975))
+
+  pred_lo0 <- mu_mat - sig_mat
+  pred_lo <- apply(pred_lo0, 1, \(x)quantile(x, 0.025))
+
+  mean_mu <- apply(mu_mat, 1, mean)
+
+  x_bar <- log(trait) |> mean()
+  x_s <- log(trait) |> sd()
+  tibble(pred = mean_mu, pred_up, pred_lo,
+         x = exp(x_bar + x_s * x_lt), punch = punch)
+}
+
+
+#' @title Figure for predictions
 pred_mcmc <- function(draws, sp_mean, n = 80) {
-# LT for small
+  large_ld <- pred_each(draws,
+            beta_int = "beta_0",
+            # beta_slope = "beta_1",
+            gamma_int = "gamma_0",
+            trait = sp_mean$ld_leaf,
+            punch = "1.0-cm")
+  large_la <- pred_each(draws,
+            beta_int = "beta_0",
+            beta_slope = "beta_2",
+            gamma_int = "gamma_0",
+            trait = sp_mean$la,
+            punch = "1.0-cm")
+  large_lt <- pred_each(draws,
+            beta_int = "beta_0",
+            # beta_slope = "beta_3",
+            gamma_int = "gamma_0",
+            trait = sp_mean$lt,
+            punch = "1.0-cm")
+
+  small_ld <- pred_each(draws,
+            beta_int = c("beta_0", "beta_4"),
+            gamma_int = c("gamma_0", "gamma_4"),
+            gamma_slope = c("gamma_1", "gamma_5"),
+            trait = sp_mean$ld_leaf,
+            punch = "0.6-cm")
+  small_la <- pred_each(draws,
+            beta_int = c("beta_0", "beta_4"),
+            gamma_int = c("gamma_0", "gamma_4"),
+            trait = sp_mean$la,
+            punch = "0.6-cm")
+  small_lt <- pred_each(draws,
+            beta_int = c("beta_0", "beta_4"),
+            gamma_int = c("gamma_0", "gamma_4"),
+            gamma_slope = c("gamma_3", "gamma_7"),
+            trait = sp_mean$lt,
+            punch = "0.6-cm")
+
+  d_lt <- bind_rows(large_lt, small_lt)
+  d_la <- bind_rows(large_la, small_la)
+  d_ld <- bind_rows(large_ld, small_ld)
+
   x_lt <- seq(-2, 2, length = n)
   my_col <- RColorBrewer::brewer.pal(4, "RdBu")
-  sig_mat <- exp(rep(1, n) %*% t(draws$`gamma[1]` + draws$`gamma[5]`) + x_lt %*% t(draws$`gamma[4]` + draws$`gamma[8]`))
-  #apply(mu_mat, 1, mean) |> mean()
-  mean_sig <- apply(sig_mat, 1, mean)
-  lwr_sig <- apply(sig_mat, 1, \(x) quantile(x, 0.025))
-  upr_sig <- apply(sig_mat, 1, \(x) quantile(x, 0.975))
-  mu_mat <- exp(rep(1, n) %*% t(draws$`beta[1]` + draws$`beta[5]`))
-  mean_mu <- apply(mu_mat, 2, mean) |> mean()
-  pred_up <- mean_mu + mean_sig
-  pred_lo <- mean_mu - mean_sig
-  x_bar <- log(sp_mean$lt) |> mean()
-  x_s <- log(sp_mean$lt) |> sd()
-  fig_d1 <- tibble(pred = mean_mu, pred_up, pred_lo, x = exp(x_bar + x_s * x_lt), punch = "0.6-cm")
 
-  # LT for large
-  sig_mat <- exp(rep(1, n) %*% t(draws$`gamma[1]`))
-  upr_sig <- apply(sig_mat, 1, \(x)quantile(x, 0.975))
-  mean_sig <- apply(sig_mat, 1, mean)
-  mu_mat <- exp(rep(1, n) %*% t(draws$`beta[1]`))
-  mean_mu <- apply(mu_mat, 2, mean) |> mean()
-  pred_up <- mean_mu + mean_sig
-  pred_lo <- mean_mu - mean_sig
-  x_bar <- log(sp_mean$lt) |> mean()
-  x_s <- log(sp_mean$lt) |> sd()
-  fig_d1_2 <- tibble(pred = mean_mu, pred_up, pred_lo,
-    x = exp(x_bar + x_s * x_lt), punch = "1.0-cm")
-  fig_d1 <- bind_rows(fig_d1, fig_d1_2)
-
-  p1 <- ggplot(fig_d1, aes(x = x, fill = punch)) +
+  plot_fun <- function(data, xlab) {
+    ggplot(data, aes(x = x, fill = punch)) +
     geom_hline(yintercept = 1, lty = 2) +
     geom_ribbon(aes(ymax = pred_up, ymin = pred_lo), alpha = 0.5) +
     geom_line(aes(y = pred, col = punch)) +
-    xlab("Leaf thickness (mm)") +
+    #xlab("Leaf thickness (mm)") +
+    xlab(xlab) +
     ylab("Whole-leaf / leaf disc LMA ratio") +
     scale_x_log10() +
     scale_color_manual(
@@ -754,105 +863,12 @@ pred_mcmc <- function(draws, sp_mean, n = 80) {
     coord_cartesian(ylim = c(0.5, 1.5)) +
     theme_bw() +
     theme(legend.position = "none")
+  }
 
-#  LA for large
-  mu_mat <- exp(rep(1, n) %*% t(draws$`beta[1]`) + x_lt %*% t(draws$`beta[3]`))
-  sig_mat <- exp(rep(1, n) %*% t(draws$`gamma[1]`))
-  #mu_sig_mat <- mu_mat + sig_mat
-  mean_mu <- apply(mu_mat, 1, mean)
-  mean_sig <- apply(sig_mat, 1, mean)
-  lwr_sig <- apply(sig_mat, 1, \(x) quantile(x, 0.025))
-  upr_sig <- apply(sig_mat, 1, \(x) quantile(x, 0.975))
-  # pred_up <- apply(mu_sig_mat, 1, \(x) quantile(x, 0.025))
-  # pred_lo <- apply(mu_sig_mat, 1, \(x) quantile(x, 0.975))
-  pred_up <- mean_mu + mean_sig
-  pred_lo <- mean_mu - mean_sig
-  x_bar <- log(sp_mean$la) |> mean()
-  x_s <- log(sp_mean$la) |> sd()
-  fig_d2 <- tibble(pred = mean_mu, pred_up, pred_lo,
-  x = exp(x_bar + x_s * x_lt), punch = "1.0-cm")
-
-  # LA for small
-  sig_mat <- exp(rep(1, n) %*% t(draws$`gamma[1]` + draws$`gamma[5]`))
-  mu_mat <- exp(rep(1, n) %*% t(draws$`beta[1]` + draws$`beta[5]`))
-  mean_mu <- apply(mu_mat, 2, mean) |> mean()
-  mean_sig <- apply(sig_mat, 1, mean) |> mean()
-  pred_up <- mean_mu + mean_sig
-  pred_lo <- mean_mu - mean_sig
-  x_bar <- log(sp_mean$la) |> mean()
-  x_s <- log(sp_mean$la) |> sd()
-  fig_d2_2 <- tibble(pred = mean_mu, pred_up, pred_lo,
-    x = exp(x_bar + x_s * x_lt), punch = "0.6-cm")
-  fig_d2 <- bind_rows(fig_d2, fig_d2_2)
-
-  p2 <- ggplot(fig_d2, aes(x = x, fill = punch)) +
-    geom_hline(yintercept = 1, lty = 2) +
-    geom_ribbon(aes(ymax = pred_up, ymin = pred_lo), alpha = 0.5) +
-    geom_line(aes(y = pred, col = punch)) +
-    scale_x_log10() +
-    xlab(expression(paste("Leaf area (", cm^2,")"))) +
-    ylab("Whole-leaf / leaf disc LMA ratio") +
-    scale_color_manual(
-      values = my_col[c(2, 4)],
-      name = "Leaf punch diameter"
-    ) +
-    scale_fill_manual(
-      values = my_col[c(2, 4)],
-      name = "Leaf punch diameter"
-    ) +
-   coord_cartesian(ylim = c(0.5, 1.5)) +
-   theme_bw() +
-   theme(legend.position = "none")
-
-  # LD for large
-  sig_mat <- exp(rep(1, n) %*% t(draws$`gamma[1]`) + x_lt %*% t(draws$`gamma[2]`))
-  mean_sig <- apply(sig_mat, 1, mean)
-  lwr_sig <- apply(sig_mat, 1, \(x)quantile(x, 0.025))
-  upr_sig <- apply(sig_mat, 1, \(x)quantile(x, 0.975))
-  mu_mat <- exp(rep(1, n) %*% t(draws$`beta[1]`) + x_lt %*% t(draws$`beta[2]`))
-  mean_mu <- apply(mu_mat, 1, mean)
-  pred_up <- mean_mu + mean_sig
-  pred_lo <- mean_mu - mean_sig
-  x_bar <- log(sp_mean$ld_leaf) |> mean()
-  x_s <- log(sp_mean$ld_leaf) |> sd()
-  fig_d3_1 <- tibble(pred = mean_mu, pred_up, pred_lo,
-    x = exp(x_bar + x_s * x_lt), punch = "1.0-cm")
-
-  # LD for small
-  mu_mat <- exp(rep(1, n) %*% t(draws$`beta[1]` + draws$`beta[5]`)) #+ x_lt %*% t(draws$`beta[2]` + draws$`beta[6]`))
-  sig_mat <- exp(rep(1, n) %*% t(draws$`gamma[1]` + draws$`gamma[5]`) + x_lt %*% t(draws$`gamma[2]` + draws$`gamma[6]`))
-  mean_mu <- apply(mu_mat, 1, mean)
-  mean_sig <- apply(sig_mat, 1, mean)
-  lwr_sig <- apply(sig_mat, 1, \(x)quantile(x, 0.025))
-  upr_sig <- apply(sig_mat, 1, \(x)quantile(x, 0.975))
-  pred_up <- mean_mu + mean_sig
-  pred_lo <- mean_mu - mean_sig
-  x_bar <- log(sp_mean$ld_leaf) |> mean()
-  x_s <- log(sp_mean$ld_leaf) |> sd()
-  fig_d3_2 <- tibble(pred = mean_mu, pred_up, pred_lo,
-    x = exp(x_bar + x_s * x_lt), punch = "0.6-cm")
-
-  fig_d3 <- bind_rows(fig_d3_1, fig_d3_2)
-
-  p3 <- ggplot(fig_d3, aes(x = x, fill = punch)) +
-    geom_hline(yintercept = 1, lty = 2) +
-    geom_ribbon(aes(ymax = pred_up, ymin = pred_lo), alpha = 0.5) +
-    geom_line(aes(y = pred, col = punch)) +
-    xlab("Leaf tissue density") +
-    xlab(expression(paste("Leaf tissue density (g ", cm^-3,")"))) +
-    ylab("Whole-leaf / leaf disc LMA ratio") +
-    scale_x_log10() +
-    scale_color_manual(
-      values = my_col[c(2, 4)],
-      name = "Leaf punch diameter"
-    ) +
-    scale_fill_manual(
-      values = my_col[c(2, 4)],
-      name = "Leaf punch diameter"
-    ) +
-    coord_cartesian(ylim = c(0.5, 1.5)) +
-    theme_bw() +
-    theme(
+  p_lt <- plot_fun(d_lt, xlab = "Leaf thickness (mm)")
+  p_la <- plot_fun(d_la, xlab = expression(paste("Leaf area (", cm^2,")")))
+  p_ld <- plot_fun(d_ld, xlab = expression(paste("Leaf tissue density (g ", cm^-3,")"))) +
+      theme(
       text = element_text(family = "Arial"),
       legend.position = c(0.7, 0.2),
       legend.key.size = unit(0.5, "cm"),
@@ -863,14 +879,14 @@ pred_mcmc <- function(draws, sp_mean, n = 80) {
       legend.title = element_text(size = 9)
     )
 
-  p3 + p2 + p1 +
+  p_ld + p_la + p_lt +
       plot_annotation(tag_levels = "a") &
       theme(
         text = element_text(family = "Arial"),
       )
-
 }
 
+#' @title Check divergence
 div_check <- function(diags) {
   n1 <- diags |>
     filter(divergent__ == 1) |>
