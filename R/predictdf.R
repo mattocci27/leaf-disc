@@ -10,7 +10,8 @@ sma_fun <- function(data) {
   tibble(intercept, slope)
 }
 
-boot_fit <- function(data, nboot = 2000) {
+boot_fit <- function(data, nboot = 2000, seed = 12345) {
+  set.seed(seed)
   data <- tibble(x = log(data$lma_disc), y = log(data$lma_leaf))
   xseq <- mean(data$x)
   level <- 0.95
