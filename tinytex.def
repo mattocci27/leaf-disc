@@ -1,5 +1,5 @@
 BootStrap: docker
-From: mattocci/radian:4.1.3
+From: mattocci/tinytex:4.1.3
 
 %apprun R
   exec R "${@}"
@@ -14,14 +14,6 @@ From: mattocci/radian:4.1.3
 %post
   DEBIAN_FRONTEND=noninteractive
   export RENV_VERSION=0.15.4
-  export R_VERSION=4.1.3
-
-  # Install dependencies if you need
-  apt-get update -q -y \
-    && apt-get install --no-install-recommends --fix-missing -y \
-      libtbb2 \
-    && apt-get autoremove -y \
-    && apt-get clean all
 
   # Add renv settings for global cache as well as linux distro specific
 	# directory hierarchy in cache (optional but useful)

@@ -6,13 +6,13 @@ services:
       context: .
       dockerfile: ./docker/Dockerfile
     #command: ls
-    #command: Rscript -e "library(tidyverse)"
+    command: Rscript -e "library(tidyverse)"
     image: mattocci/leaf-disc
-    command: >
-      sh -c "
-        Rscript run.R &&
-        make docker
-      "
+    # command: >
+    #   sh -c "
+    #     Rscript run.R &&
+    #     make docker
+    #   "
     container_name: leaf-disc
     environment:
       - LOCAL_UID=${LOCAL_UID}
