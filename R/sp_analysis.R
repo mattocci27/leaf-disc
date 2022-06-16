@@ -3,16 +3,12 @@ sma_point <- function(data) {
   data |>
     ggplot(aes(x = lma_disc, y = lma_leaf)) +
     geom_point(alpha = 0.8) +
-    scale_x_log10() +
-    scale_y_log10() +
+    scale_x_log10(breaks = c(30, 50, 100, 200, 300)) +
+    scale_y_log10(breaks = c(30, 50, 100, 200, 300)) +
     geom_abline(slope = 1, intercept = 0, lty = 2) +
     geom_sma(se = TRUE, nboot = 2000) +
-    xlab(expression(Leaf ~ disc ~ LMA ~ (g ~ m^{
-      -2
-    }))) +
-    ylab(expression(Whole - leaf ~ LMA ~ (g ~ m^{
-      -2
-    }))) +
+    xlab(expression("Leaf disc LMA "(g~m^{-2}))) +
+    ylab(expression("Whole-leaf LMA "(g~m^{-2}))) +
     stat_cor(
       aes(label = paste(..rr.label.., ..n.label.., sep = "~`,`~"),
           family = "Arial")
@@ -78,12 +74,12 @@ cv_pool_point <- function(sp_cv, remove_outliers = FALSE) {
     xlab("CV of leaf disc LMA (%)") +
     coord_fixed(xlim = c(0.005, 0.15) * 100, ylim = c(0.005, 0.15) * 100) +
     stat_cor(
-       label.x.npc = 0.3,
-       label.y.npc = 0.15,
+       label.x.npc = 0.45,
+       label.y.npc = 0.1,
        vjust = 1.5,
        aes(label = paste(..rr.label.., ..n.label.., sep = "~`,`~"), family = "Arial")
      )  +
-    theme_bw()+
+    theme_bw() +
     theme(
       text = element_text(family = "Arial"))
   if (remove_outliers) {
@@ -145,7 +141,7 @@ lma_ld_wrap_point <- function(sp_mean) {
 petiole_point <- function(yaku_sp) {
   pet1 <- ggplot(yaku_sp, aes(x = petiole_ratio, y = lma_leaf / lma_disc)) +
     geom_point() +
-    scale_x_log10() +
+    scale_x_log10(breaks = c(0.02, 0.05, 0.1, 0.2)) +
     # xlab(expression(Petiole/leaf~dry~mass~ratio(g~g^-1))) +
     xlab("Petiole / leaf dry mass ratio") +
     ylab("Whole-leaf / leaf disc LMA ratio") +
@@ -159,7 +155,7 @@ petiole_point <- function(yaku_sp) {
 
   pet2 <- ggplot(yaku_sp, aes(x = petiole_ratio, y = la)) +
     geom_point() +
-    scale_x_log10() +
+    scale_x_log10(breaks = c(0.02, 0.05, 0.1, 0.2)) +
     scale_y_log10() +
     xlab("Petiole / leaf dry mass ratio") +
     ylab(expression(Leaf ~ area ~ (g ~ cm^2))) +
@@ -174,7 +170,9 @@ petiole_point <- function(yaku_sp) {
   pet1 + pet2 +
     plot_annotation(tag_levels = "a") &
     theme_bw() &
-    theme(plot.tag = element_text(face = "bold"))
+    theme(
+      text = element_text(family = "Arial", size = 10),
+      plot.tag = element_text(face = "bold"))
 }
 
 #' @title Cross-validation for OLS models

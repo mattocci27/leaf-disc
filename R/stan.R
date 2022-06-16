@@ -446,7 +446,7 @@ pred_mcmc <- function(draws, sp_mean, n = 80) {
   plot_fun <- function(data, xlab) {
     ggplot(data, aes(x = x, fill = punch)) +
     geom_hline(yintercept = 1, lty = 2) +
-    geom_ribbon(aes(ymax = pred_up, ymin = pred_lo), alpha = 0.5) +
+    geom_ribbon(aes(ymax = pred_up, ymin = pred_lo), alpha = 0.6) +
     geom_line(aes(y = pred, col = punch)) +
     #xlab("Leaf thickness (mm)") +
     xlab(xlab) +
@@ -470,19 +470,20 @@ pred_mcmc <- function(draws, sp_mean, n = 80) {
   p_ld <- plot_fun(d_ld, xlab = expression(paste("Leaf tissue density (g ", cm^-3,")"))) +
       theme(
       text = element_text(family = "Arial"),
-      legend.position = c(0.7, 0.2),
+      legend.position = c(0.6, 0.21),
       legend.key.size = unit(0.5, "cm"),
       legend.spacing.y = unit(0.1, "cm"),
       legend.text.align = 0,
       legend.key.height = unit(0.2, "cm"),
-      legend.text = element_text(size = 9),
-      legend.title = element_text(size = 9)
+      legend.text = element_text(size = 8),
+      legend.title = element_text(size = 8)
     )
 
   p_ld + p_la + p_lt +
       plot_annotation(tag_levels = "a") &
       theme(
-        text = element_text(family = "Arial"),
+        text = element_text(family = "Arial", size = 8.5),
+        plot.tag = element_text(face = "bold")
       )
 }
 

@@ -409,10 +409,17 @@ list(
         "figs/pred_mcmc.png",
         p,
         dpi = 300,
-        width = 9,
-        height = 3
+        width = 7.25,
+        height = 2.5
       )
-      paste0("figs/pred_mcmc", c(".png"))
+      ggsave(
+        "figs/pred_mcmc.pdf",
+        p,
+        device = cairo_pdf,
+        width = 7.25,
+        height = 2.5
+      )
+      paste0("figs/pred_mcmc", c(".png", ".pdf"))
     },
     format = "file"
   ),
@@ -497,7 +504,14 @@ list(
         width = 4,
         height = 4
       )
-      paste0("figs/sma", c(".png"))
+      ggsave(
+        "figs/sma.pdf",
+        p,
+        device = cairo_pdf,
+        width = 3.5,
+        height = 3.5
+      )
+      paste0("figs/sma", c(".png", ".pdf"))
     },
     format = "file"
   ),
@@ -553,15 +567,15 @@ list(
         "figs/cv_pool.png",
         p,
         dpi = 300,
-        width = 3,
-        height = 3
+        width = 3.5,
+        height = 3.5
       )
       ggsave(
         "figs/cv_pool.pdf",
         p,
         device = cairo_pdf,
-        width = 3,
-        height = 3
+        width = 3.5,
+        height = 3.5
       )
       paste0("figs/cv_pool", c(".png", ".pdf"))
     },
@@ -596,15 +610,15 @@ list(
         "figs/petiole.png",
         p,
         dpi = 300,
-        width = 8,
-        height = 4
+        width = 6,
+        height = 3
       )
       ggsave(
         "figs/petiole.pdf",
         p,
         device = cairo_pdf,
-        width = 8,
-        height = 4)
+        width = 6,
+        height = 3)
         paste0("figs/petiole", c(".png", ".pdf"))
     },
     format = "file"
