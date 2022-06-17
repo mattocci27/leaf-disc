@@ -1,4 +1,7 @@
 %%
+%DIF LATEXDIFF DIFFERENCE FILE
+%DIF DEL /tmp/pDDx6pLG2p/latexdiff-vc-36a960d/ms/LMA_method.tex   Sat May 14 00:26:01 2022
+%DIF ADD ms/LMA_method.tex                                        Fri Jun 17 16:55:19 2022
 % Copyright (c) 2017 - 2020, Pascal Wagler;
 % Copyright (c) 2014 - 2020, John MacFarlane
 %
@@ -328,6 +331,87 @@
 %%
 %% end added
 %%
+%DIF PREAMBLE EXTENSION ADDED BY LATEXDIFF
+%DIF UNDERLINE PREAMBLE %DIF PREAMBLE
+\RequirePackage[normalem]{ulem} %DIF PREAMBLE
+\RequirePackage{color}\definecolor{RED}{rgb}{1,0,0}\definecolor{BLUE}{rgb}{0,0,1} %DIF PREAMBLE
+\providecommand{\DIFaddtex}[1]{{\protect\color{blue}\uwave{#1}}} %DIF PREAMBLE
+\providecommand{\DIFdeltex}[1]{{\protect\color{red}\sout{#1}}}                      %DIF PREAMBLE
+%DIF SAFE PREAMBLE %DIF PREAMBLE
+\providecommand{\DIFaddbegin}{} %DIF PREAMBLE
+\providecommand{\DIFaddend}{} %DIF PREAMBLE
+\providecommand{\DIFdelbegin}{} %DIF PREAMBLE
+\providecommand{\DIFdelend}{} %DIF PREAMBLE
+\providecommand{\DIFmodbegin}{} %DIF PREAMBLE
+\providecommand{\DIFmodend}{} %DIF PREAMBLE
+%DIF FLOATSAFE PREAMBLE %DIF PREAMBLE
+\providecommand{\DIFaddFL}[1]{\DIFadd{#1}} %DIF PREAMBLE
+\providecommand{\DIFdelFL}[1]{\DIFdel{#1}} %DIF PREAMBLE
+\providecommand{\DIFaddbeginFL}{} %DIF PREAMBLE
+\providecommand{\DIFaddendFL}{} %DIF PREAMBLE
+\providecommand{\DIFdelbeginFL}{} %DIF PREAMBLE
+\providecommand{\DIFdelendFL}{} %DIF PREAMBLE
+%DIF HYPERREF PREAMBLE %DIF PREAMBLE
+\providecommand{\DIFadd}[1]{\texorpdfstring{\DIFaddtex{#1}}{#1}} %DIF PREAMBLE
+\providecommand{\DIFdel}[1]{\texorpdfstring{\DIFdeltex{#1}}{}} %DIF PREAMBLE
+\newcommand{\DIFscaledelfig}{0.5}
+%DIF HIGHLIGHTGRAPHICS PREAMBLE %DIF PREAMBLE
+\RequirePackage{settobox} %DIF PREAMBLE
+\RequirePackage{letltxmacro} %DIF PREAMBLE
+\newsavebox{\DIFdelgraphicsbox} %DIF PREAMBLE
+\newlength{\DIFdelgraphicswidth} %DIF PREAMBLE
+\newlength{\DIFdelgraphicsheight} %DIF PREAMBLE
+% store original definition of \includegraphics %DIF PREAMBLE
+\LetLtxMacro{\DIFOincludegraphics}{\includegraphics} %DIF PREAMBLE
+\newcommand{\DIFaddincludegraphics}[2][]{{\color{blue}\fbox{\DIFOincludegraphics[#1]{#2}}}} %DIF PREAMBLE
+\newcommand{\DIFdelincludegraphics}[2][]{% %DIF PREAMBLE
+\sbox{\DIFdelgraphicsbox}{\DIFOincludegraphics[#1]{#2}}% %DIF PREAMBLE
+\settoboxwidth{\DIFdelgraphicswidth}{\DIFdelgraphicsbox} %DIF PREAMBLE
+\settoboxtotalheight{\DIFdelgraphicsheight}{\DIFdelgraphicsbox} %DIF PREAMBLE
+\scalebox{\DIFscaledelfig}{% %DIF PREAMBLE
+\parbox[b]{\DIFdelgraphicswidth}{\usebox{\DIFdelgraphicsbox}\\[-\baselineskip] \rule{\DIFdelgraphicswidth}{0em}}\llap{\resizebox{\DIFdelgraphicswidth}{\DIFdelgraphicsheight}{% %DIF PREAMBLE
+\setlength{\unitlength}{\DIFdelgraphicswidth}% %DIF PREAMBLE
+\begin{picture}(1,1)% %DIF PREAMBLE
+\thicklines\linethickness{2pt} %DIF PREAMBLE
+{\color[rgb]{1,0,0}\put(0,0){\framebox(1,1){}}}% %DIF PREAMBLE
+{\color[rgb]{1,0,0}\put(0,0){\line( 1,1){1}}}% %DIF PREAMBLE
+{\color[rgb]{1,0,0}\put(0,1){\line(1,-1){1}}}% %DIF PREAMBLE
+\end{picture}% %DIF PREAMBLE
+}\hspace*{3pt}}} %DIF PREAMBLE
+} %DIF PREAMBLE
+\LetLtxMacro{\DIFOaddbegin}{\DIFaddbegin} %DIF PREAMBLE
+\LetLtxMacro{\DIFOaddend}{\DIFaddend} %DIF PREAMBLE
+\LetLtxMacro{\DIFOdelbegin}{\DIFdelbegin} %DIF PREAMBLE
+\LetLtxMacro{\DIFOdelend}{\DIFdelend} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFaddbegin}{\DIFOaddbegin \let\includegraphics\DIFaddincludegraphics} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFaddend}{\DIFOaddend \let\includegraphics\DIFOincludegraphics} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFdelbegin}{\DIFOdelbegin \let\includegraphics\DIFdelincludegraphics} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFdelend}{\DIFOaddend \let\includegraphics\DIFOincludegraphics} %DIF PREAMBLE
+\LetLtxMacro{\DIFOaddbeginFL}{\DIFaddbeginFL} %DIF PREAMBLE
+\LetLtxMacro{\DIFOaddendFL}{\DIFaddendFL} %DIF PREAMBLE
+\LetLtxMacro{\DIFOdelbeginFL}{\DIFdelbeginFL} %DIF PREAMBLE
+\LetLtxMacro{\DIFOdelendFL}{\DIFdelendFL} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFaddbeginFL}{\DIFOaddbeginFL \let\includegraphics\DIFaddincludegraphics} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFaddendFL}{\DIFOaddendFL \let\includegraphics\DIFOincludegraphics} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFdelbeginFL}{\DIFOdelbeginFL \let\includegraphics\DIFdelincludegraphics} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFdelendFL}{\DIFOaddendFL \let\includegraphics\DIFOincludegraphics} %DIF PREAMBLE
+%DIF LISTINGS PREAMBLE %DIF PREAMBLE
+\RequirePackage{listings} %DIF PREAMBLE
+\RequirePackage{color} %DIF PREAMBLE
+\lstdefinelanguage{DIFcode}{ %DIF PREAMBLE
+%DIF DIFCODE_UNDERLINE %DIF PREAMBLE
+  moredelim=[il][\color{red}\sout]{\%DIF\ <\ }, %DIF PREAMBLE
+  moredelim=[il][\color{blue}\uwave]{\%DIF\ >\ } %DIF PREAMBLE
+} %DIF PREAMBLE
+\lstdefinestyle{DIFverbatimstyle}{ %DIF PREAMBLE
+	language=DIFcode, %DIF PREAMBLE
+	basicstyle=\ttfamily, %DIF PREAMBLE
+	columns=fullflexible, %DIF PREAMBLE
+	keepspaces=true %DIF PREAMBLE
+} %DIF PREAMBLE
+\lstnewenvironment{DIFverbatim}{\lstset{style=DIFverbatimstyle}}{} %DIF PREAMBLE
+\lstnewenvironment{DIFverbatim*}{\lstset{style=DIFverbatimstyle,showspaces=true}}{} %DIF PREAMBLE
+%DIF END PREAMBLE EXTENSION ADDED BY LATEXDIFF
 
 \begin{document}
 
@@ -399,10 +483,10 @@ whether the relationship varied by leaf morphology (tissue density, leaf area, l
 whether the extent of intraspecifc variation (ITV) for each species matches.
 
 \textbf{RESULTS:}
-Disc-based estimates of species mean LMA matched well whole-leaf estimates, and whole-leaf LMA tended to be 9.69\% higher than leaf disc LMA.
+Disc-based estimates of species mean LMA matched well whole-leaf estimates, and whole-leaf LMA tended to be \DIFdelbegin \DIFdel{9.68}\DIFdelend \DIFaddbegin \DIFadd{9.69}\DIFaddend \% higher than leaf disc LMA.
 The whole-leaf to leaf disc LMA ratio was higher for species with higher leaf tissue density and larger leaf, and their variance was greater for species with lower leaf tissue density and thinner leaves.
 Small leaf punch also inflated the ratio.
-The extent of ITV only weakly matched between whole-leaf and disc-based estimates (\emph{R\textsuperscript{2}} = 0.08).
+The extent of ITV only weakly matched between whole-leaf and disc-based estimates (\emph{R\textsuperscript{2}} = \DIFdelbegin \DIFdel{0.09}\DIFdelend \DIFaddbegin \DIFadd{0.08}\DIFaddend ).
 
 \textbf{CONCLUSIONS:}
 Our results suggest that simple conversion between whole-leaf and leaf disc LMA is difficult for species obtained with a small leaf punch, but it should be possible for species obtained with a large leaf punch.
@@ -461,7 +545,7 @@ Despite the importance of ITV in community ecology (\protect\hyperlink{ref-Siefe
 In this study, we aimed to investigate the relationship between whole-leaf (including petiole) LMA and leaf disc LMA,
 whether the relationship varied with leaf tissue density, leaf area and leaf thickness, and
 whether the extent of ITV for each species match between whole-leaf and leaf disc based estimates.
-We collected leaves from 1459 individuals of 334 woody species from four biomes (tropics, subtropics, savanna, and warm-temperate) to cover the wide range of geography.
+We collected \DIFdelbegin \DIFdel{a total }\DIFdelend \DIFaddbegin \DIFadd{leaves from 1459 individuals }\DIFaddend of 334 woody species from four biomes (tropics, subtropics, savanna, and warm-temperate) to cover the wide range of geography.
 We evaluate the following hypotheses:
 (1) whole-leaf LMA would be greater than leaf disc LMA because whole-leaf LMA includes petioles and midribs that have greater dry mass per unit area than laminas (\protect\hyperlink{ref-Niinemets2007}{Niinemets et al., 2007}),
 (2) species with higher leaf tissue density, larger and/or thinner leaves would show larger variance and differences in LMA estimates because whole-leaf LMA should be driven more in those species by veins and petioles , whereas those effects are likely to be ignored in leaf disc samples, and
@@ -474,9 +558,9 @@ In addition to leaf morphology, we also investigate the effects of leaf punch si
 \emph{Data sources}
 
 We used newly compiled individual-level plant datasets from a wide range of biomes in China and Japan (Appendix S1) to examine the relationship between whole-leaf and leaf disc-based estimates of leaf traits.
-First, the Yunnan dataset is from three forest plots in Yunnan province, Southwest China, which includes a tropical rainforest (TRF), a tropical hot-dry savanna ecosystem (HDS), and a subtropical evergreen wet forest (STF), with a total of 141 species and 852 individuals.
-Second, the Yakushima dataset is from a warm-temperate forest in Yakushima island, Japan, with a total of 193 species and 607 individuals.
-In total, our dataset comprised 334 woody species and 1459 individuals that ranged from 8.1 to 24.7 °C in mean annual temperature (MAT) and 732.8 to 4477 mm in mean annual precipitation (MAP) {[}Appendix S1; Eguchi (\protect\hyperlink{ref-Eguchi2006}{2006}); Song et al. (\protect\hyperlink{ref-Song2017}{2017}); Fei et al. (\protect\hyperlink{ref-Fei2018}{2018}){]}, which covers the wide climate ranges in the distribution of broad-leaved tree species.
+First, the Yunnan dataset is from three forest plots in Yunnan province, Southwest China, which includes a tropical rainforest (TRF), a tropical hot-dry savanna ecosystem (HDS), and a subtropical evergreen wet forest (STF), with a total of \DIFdelbegin \DIFdel{species and }\DIFdelend \DIFaddbegin \DIFadd{141 species and 852 }\DIFaddend individuals.
+Second, the Yakushima dataset is from a warm-temperate forest in Yakushima island, Japan, with a total of 193 species and \DIFaddbegin \DIFadd{607 }\DIFaddend individuals.
+In total, our dataset comprised 334 woody species and \DIFdelbegin \DIFdel{1365 individual }\DIFdelend \DIFaddbegin \DIFadd{1459 individuals }\DIFaddend that ranged from 8.1 to 24.7 °C in mean annual temperature (MAT) and 732.8 to 4477 mm in mean annual precipitation (MAP) {[}Appendix S1; Eguchi (\protect\hyperlink{ref-Eguchi2006}{2006}); Song et al. (\protect\hyperlink{ref-Song2017}{2017}); Fei et al. (\protect\hyperlink{ref-Fei2018}{2018}){]}, which covers the wide climate ranges in the distribution of broad-leaved tree species.
 The methodologies for trait sampling and measurement are slightly different between the Yunnan and the Yakushima dataset, which we describe below.
 
 \emph{Measurements of leaf disc and whole-leaf LMA}
@@ -494,7 +578,7 @@ To determine what extent LMA values were affected by the different methods, LMA 
 Three 0.6-cm diameter discs were taken from the base, middle and tip of each leaf using a hole punch in the Yunnan dataset.
 Two 1.0-cm diameter discs were taken from each leaf in the Yakushima dataset (see Appendix S2 for more details).
 Fresh leaf area (LA; cm\textsuperscript{-2}) of leaf materials (whole leaves including petioles and midribs) was measured using a scanner and ImageJ software by the R package \emph{LeafArea} (\protect\hyperlink{ref-Katabuchi2015}{Katabuchi, 2015}).
-Fresh leaf thickness (LT; mm) was measured using a micrometer in three points at the base, middle and tip of the leaf (Mitutoyo 293-240, Mitutoyo Corporation, Kawasaki, Japan) with a precision at 0.001 mm.
+Fresh leaf thickness (LT; mm) was measured using a micrometer in three points at the base, middle and tip of the leaf \DIFdelbegin \DIFdel{using a micrometer }\DIFdelend (Mitutoyo 293-240, Mitutoyo Corporation, Kawasaki, Japan) with a precision at 0.001 mm.
 Thickness of each leaf disc was also measured for the Yunnan dataset but not for the Yakushima dataset, which enables us to estimate whole-leaf and leaf disc leaf tissue density (LD; g cm\textsuperscript{-3}) separately in the Yunnan dataset.
 Leaf dry mass (whole leaves including petioles and midribs, and leaf discs) was recorded after drying 80°C for over 48 h to constant weight using an electronic scale (Mettler-Toledo MS204TS, Columbus, OH, U.S.A.) with a precision at 0.0001 g.
 In the subset of Yakushima dataset, leaf lamina and petiole dry mass were also determined separately (80 out of 193 species) to quantify leaf support costs.
@@ -563,7 +647,7 @@ All statistical analyses were conducted in R version 4.1.3 (\protect\hyperlink{r
 \hypertarget{results}{%
 \section{RESULTS}\label{results}}
 
-There was a significant shift in elevation between whole-leaf and leaf disc LMA (Fig.1, SMA slope: 0.975 {[}95\%CI: 0.938, 1.013{]}, SMA intercept: 0.0881 {[}95\%CI: 0.016, 0.16{]}), suggesting that the whole-leaf estimates of LMA were 9.69\% {[}95\%CI: 8.06, 11.3{]} greater than disc-based estimates in the arithmetic scale.
+There was a significant shift in elevation between whole-leaf and leaf disc LMA (Fig.1, SMA slope: 0.975 {[}95\%CI: 0.938, 1.013{]}, SMA intercept: 0.0881 {[}95\%CI: 0.016, 0.16{]}), suggesting that the whole-leaf estimates of LMA were \DIFdelbegin \DIFdel{9.68}\DIFdelend \DIFaddbegin \DIFadd{9.69}\DIFaddend \% {[}95\%CI: \DIFdelbegin \DIFdel{8.05, 11.4}\DIFdelend \DIFaddbegin \DIFadd{8.06, 11.3}\DIFaddend {]} greater than disc-based estimates in the arithmetic scale.
 
 Leaf tissue density, leaf area, leaf thickness and leaf punch size influenced the relationship between the whole-leaf LMA and leaf disc LMA (Fig. 2 and Appendix S4).
 Species with lower leaf tissue density had greater variance in the estimate of whole-leaf to leaf disc LMA ratio (Fig. 2a).
@@ -574,13 +658,13 @@ A small punch also inflated variance in the estimate of whole-leaf to leaf disc 
 Leaf disc and whole-leaf LMA estimate diverged for species with greater investment in petiole dry mass (Fig. 3a). Large-leaved species tended to have greater investment for petiole dry mass than small-leaved species (Fig. 3b).
 
 The extent of intraspecific trait variation (CV; coefficient of variation) only weakly matched between whole-leaf and disc-based estimates (Fig.4).
-Although there were no statistical differences in the SMA slope or elevation (SMA slope: 1.112 {[}95\%CI: 0.951, 1.302{]}, SMA intercept: 0.096 {[}95\%CI: -0.18, 0.372{]}), leaf disc LMA had greater CVs than whole-leaf LMA (\emph{t} = -3.2, \emph{d.f.} = 143, \emph{P} \textless{} 0.001).
+Although there were no statistical differences in the SMA slope or elevation (SMA slope: \DIFdelbegin \DIFdel{1.116 }\DIFdelend \DIFaddbegin \DIFadd{1.112 }\DIFaddend {[}95\%CI: \DIFdelbegin \DIFdel{0.954, 1.304}\DIFdelend \DIFaddbegin \DIFadd{0.951, 1.302}\DIFaddend {]}, SMA intercept: \DIFdelbegin \DIFdel{0.102 }\DIFdelend \DIFaddbegin \DIFadd{0.096 }\DIFaddend {[}95\%CI: \DIFdelbegin \DIFdel{-0.174, 0.377}\DIFdelend \DIFaddbegin \DIFadd{-0.18, 0.372}\DIFaddend {]}), leaf disc LMA had greater CVs than whole-leaf LMA (\emph{t} = \DIFdelbegin \DIFdel{-3.19}\DIFdelend \DIFaddbegin \DIFadd{-3.2}\DIFaddend , \emph{d.f.} = \DIFdelbegin \DIFdel{144}\DIFdelend \DIFaddbegin \DIFadd{143}\DIFaddend , \emph{P} \textless{} 0.001).
 
 \hypertarget{discussion}{%
 \section{DISCUSSION}\label{discussion}}
 
 Leaf disc LMA explained interspecific variations in whole-leaf LMA (\emph{R\textsuperscript{2}} = 0.87, \emph{n} = 334) quite well, and the strength of their relationship was approximately same or slightly weaker than previously reported (\emph{R\textsuperscript{2}} = 0.92, \emph{n} = 409, for whole-leaves in \protect\hyperlink{ref-Kraft2008}{Kraft et al., 2008}; \emph{R\textsuperscript{2}} = 0.92, \emph{n} = 364 for leaf laminas in \protect\hyperlink{ref-Onoda2011}{Onoda et al., 2011}).
-Standardized major axis (SMA) regression analysis showed significantly greater intercepts when all the species were pooled (9.69\% differences).
+Standardized major axis (SMA) regression analysis showed significantly greater intercepts when all the species were pooled (\DIFdelbegin \DIFdel{9.68}\DIFdelend \DIFaddbegin \DIFadd{9.69}\DIFaddend \% differences).
 Together, these findings suggest that disc-based estimates can be generally used as good proxies for their whole-leaf estimates with appropriate calibration (see discussion below).
 However, leaf tissue density, leaf area, leaf thickness and leaf punch size also influenced the relationship between the whole-leaf LMA and leaf disc LMA (Fig. 2 and Appendix S4).
 
@@ -610,12 +694,12 @@ The ordinary least-squares (OLS) regressions with leaf area as a covariate as fo
 (1) log\textsubscript{10}LMA\textsubscript{w} = 0.997 \(\times\) log\textsubscript{10}LMA\textsubscript{d} + 0.0589 \(\times\) log\textsubscript{10}LA,
 (2) log\textsubscript{10}LMA\textsubscript{d} = 0.15 + 0.945 \(\times\) log\textsubscript{10}LMA\textsubscript{w} - 0.063 \(\times\) log\textsubscript{10}LA (\emph{R\textsuperscript{2}} = 0.94, \emph{AIC} = -321.7, \emph{n} = 193),
 where LMA\textsubscript{w}, LMA\textsubscript{d}, and LA are the whole-leaf LMA, leaf disc LMA and leaf area, respectively.
-The OLS regressions without leaf area as a covariate as following:
+\DIFdelbegin \DIFdel{Thej }\DIFdelend \DIFaddbegin \DIFadd{The }\DIFaddend OLS regressions without leaf area as a covariate as following:
 (3) log\textsubscript{10}LMA\textsubscript{w} = 0.124 + 0.958 \(\times\) log\textsubscript{10}LMA\textsubscript{d} or
 (4) log\textsubscript{10}LMA\textsubscript{d} = 0.973 \(\times\) log\textsubscript{10}LMA\textsubscript{w}
 (\emph{R\textsuperscript{2}} = 0.93, \emph{AIC} = -284.2, \emph{n} = 193).
-{[}Note that OLS regressions minimize errors of either whole-leaf LMA or leaf disc LMA, and thus those four models are not identical, whereas SMA regressions are not appropriate for predictions (\protect\hyperlink{ref-Warton2006}{Warton et al., 2006}){]}
-Nonetheless, including leaf area only slightly improves the \emph{R\textsuperscript{2}} values for the Yakushima dataset where a large punch was used.
+\DIFaddbegin {[}\DIFadd{Note that OLS regressions minimize errors of either whole-leaf LMA or leaf disc LMA, and thus those four models are not identical, whereas SMA regressions are not appropriate for predictions (}\protect\hyperlink{ref-Warton2006}{Warton et al., 2006}\DIFadd{)}{]}
+\DIFaddend Nonetheless, including leaf area only slightly improves the \emph{R\textsuperscript{2}} values for the Yakushima dataset where a large punch was used.
 This is because the large discrepancy in the whole-leaf to leaf disc LMA for large leaves can be explained by scaling relationships between leaf mass and leaf area called ``diminishing returns'' (\protect\hyperlink{ref-Niklas2007}{Niklas et al., 2007}) which refers to increases in leaf dry mass including petioles do not result in the proportional increase in leaf area including petioles (\protect\hyperlink{ref-Li2022}{Li, Shi, et al., 2022}).
 This effect is generally strong for mature leaves (\protect\hyperlink{ref-Jiao2022}{Jiao et al., 2022}).
 The ``diminishing returns'' can be either described as the scaling slope of leaf area in the model 1 or the scaling slope of leaf-disc LMA and the intercept in the model 3.
@@ -623,7 +707,7 @@ When one needs to mix leaf disc LMA and whole-leaf LMA in a single analysis (e.g
 
 \emph{Intraspecific variation}
 
-Even though we used the same species, the same individuals and the same trait (LMA) to estimate the extents of intraspecific trait variation (ITV), the explained variance of the relationship between whole-leaf and disc-based estimate was surprisingly small (Fig. 3; \emph{R\textsuperscript{2}} = 0.08).
+Even though we used the same species, the same individuals and the same trait (LMA) to estimate the extents of intraspecific trait variation (ITV), the explained variance of the relationship between whole-leaf and disc-based estimate was surprisingly small (Fig. 3; \emph{R\textsuperscript{2}} = \DIFdelbegin \DIFdel{0.09}\DIFdelend \DIFaddbegin \DIFadd{0.08}\DIFaddend ).
 This is probably because leaf disc samples have more sources of ITV than whole-leaf samples (i.e., variation among leaf discs within the same leaves).
 On average, ITV based on leaf disc LMA was greater than ITV based on whole-leaf LMA as we expected.
 Although there are not many studies that quantified trait variation within a single leaf, a previous study that used a giant leaved species \emph{Alocasia macrorrhiza}, suggests that LMA varied within leaves due to reduced water supply and demand from midrib to outer regions (\protect\hyperlink{ref-Li2013a}{Li et al., 2013}).
