@@ -36,11 +36,11 @@ clean_lma_yaku <- function(lma_yaku) {
       growth_form = growthform,
       lma_leaf = whole_leaf_lma,
       lma_disc = ld_lma,
-      ldmc_leaf = ldmc,
+      # ldmc_leaf = ldmc,
       ld_disc = td) |>
     mutate(ld_leaf = lma_leaf / lt * 10^-3) %>%
     mutate(ld_disc = NA) |>
-    mutate(ldmc_disc = NA) |>
+    # mutate(ldmc_disc = NA) |>
     mutate(lt_disc = NA) |>
     mutate(petiole_ratio = petiole_dw / scanned_leaf_dw)
   yaku

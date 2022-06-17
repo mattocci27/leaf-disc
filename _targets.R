@@ -42,20 +42,25 @@ cmdstan_version()
 list(
   # data cleaning ----------------------------------
   tar_target(
+    lma_yaku,
+    "data-raw/yakushima_raw.csv",
+    format = "file"
+  ),
+  tar_target(
     lma_raw,
-    "data-raw/lma_raw.csv",
+    "data-raw/yunnan_lma.csv",
     format = "file"
   ),
   tar_target(
     lma_la,
-    "data-raw/lma_la.csv",
+    "data-raw/yunnan_la.csv",
     format = "file"
   ),
-  tar_target(
-    lma_yaku,
-    "data-raw/leaf_traits_for_katabuchi.csv",
-    format = "file"
-  ),
+  # tar_target(
+  #   lma_yaku,
+  #   "data-raw/leaf_traits_for_katabuchi.csv",
+  #   format = "file"
+  # ),
   tar_target(
     site_info_raw,
     "data-raw/site_info_raw.json",
