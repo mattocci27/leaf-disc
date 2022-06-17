@@ -41,7 +41,7 @@ Requirements:
 - R (4.1.3)
 	- renv (this will install all the R packages)
 
-## Running code in Singularity
+## Running code in Singularity (Linux)
 
 First, change `RENV_PATHS_CACHE` in `singularity.def` and `tinytex.def` to your path (i.e.,
 `
