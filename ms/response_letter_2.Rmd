@@ -1,0 +1,187 @@
+---
+geometry: margin=1in
+link-citations: yes
+#csl: templates/xxxx.csl
+#bibliography: xxxx.bib
+fontsize: 12pt
+header-includes:
+  - \usepackage{booktabs}
+  - \usepackage{longtable}
+  - \usepackage{array}
+  - \usepackage{multirow}
+  - \usepackage{wrapfig}
+  - \usepackage{float}
+  - \usepackage{colortbl}
+  - \usepackage{pdflscape}
+  - \usepackage{tabu}
+  - \usepackage{threeparttable}
+  - \usepackage{threeparttablex}
+  - \usepackage[normalem]{ulem}
+  - \usepackage{makecell}
+  - \usepackage{xcolor}
+  - \usepackage{lineno}
+ # - \linenumbers
+output:
+  pdf_document:
+    keep_md: false
+    fig_caption: yes
+    keep_tex: no
+    toc: no
+    number_sections: no
+    template: templates/eisvogel2.tex
+    #template: null
+    pandoc_args:
+      - "--filter"
+      - "pandoc-crossref"
+  word_document:
+    fig_width: 6
+    fig_caption: yes
+    toc: FALSE
+    reference_docx: templates/rmd_style.docx
+    pandoc_args:
+    - "--filter"
+    - "pandoc-crossref"
+    - "--mathml"
+---
+
+Dear Editors,
+
+We hereby resubmit the manuscript (AJB-D-21-00391R1), “Sources and consequences of mismatch between leaf disc and whole-leaf leaf mass per area (LMA)” (Phisamai Maenpuen, Masatoshi Katabuchi, Yusuke Onoda, Cong Zhou, Jiao-Lin Zhang, Ya-Jun Chen).
+We thank the associate editor and the reviewers for their careful attention to detail in our manuscript and for providing comments that have greatly improved the study.
+
+We found small errors in R codes and the total number of individuals used in our analysis was increased from 1365 to 1469.
+Accordingly, several statistical values have changed slightly (highlighted in blue).
+
+Below we provide detailed responses.
+The editing history is recorded in a separate pdf file.
+
+Sincerely,
+
+Masatoshi Katabuchi
+
+Xishuangbanna Tropical Botanical Garden, Chinese Academy of Sciences
+
+(on behalf of coauthors: Phisamai Maenpuen,Yusuke Onoda, Cong Zhou, Jiao-Lin Zhang, and Ya-Jun Chen)
+
+\newpage
+
+# Responses
+
+> Associate Editor Comments:
+> AE comments: I agree with the reviewers that the paper looks much improved. Reviewer 1 has several further minor suggestions.
+
+Thank you again for the positive evalutation.
+
+> Reviewer #1: Review of AJB-D-21-00391_R1
+
+> Overall summary: The authors did a really nice job updating this manuscript in response to the previous reviews. I especially appreciate the inclusion of the section "Conversion between whole-leaf and leaf disc LMA". I also appreciate the updated appendices, which very much help to clarify the experimental design. I just have a few lingering comments, the only major one being about the new section (see comment on lines 311-317):
+
+We are pleased that the reviewer was satisfied with the revsied manuscript.
+We also thank you for pointing out typos and style errors.
+
+> Line 123: it would be helpful to rephrase this line to clarify what unit is being reported here. For example: "We collected leaves from ___individuals of 334 species from 4 biomes"
+
+Thank you.
+We have added the number of individuals (Line 123).
+
+> Line 139-143 Please report the # of individuals and # of species for each of the two datasets here
+
+Thank you for pointing this error out.
+We have added the numbers of species and indivdiuals (Line 142-144)
+
+> Line 169 Remove second "using a micrometer".
+
+Thank you.
+We have corrected it (Line 170).
+
+> Lines 311-317 I love this inclusion in the revision. However, I'm not clear on the difference between eq. 1 and 2 and between eq. 3 and 4. Please clarify when authors should use each. Also please clarify how generalizable you believe these equations are.
+
+Thank you.
+We have added an explnation of the differences, and the text now reads:
+"Note that OLS regressions minimize errors of either whole-leaf LMA or leaf disc LMA, and thus those four models are not identical, whereas SMA regressions are not appropriate for predictions (Warton et al., 2006)" (Line 320-322)
+
+> Line 315 Typo
+
+Thank you again for pointing this error out.
+We have corrected it (Line 318).
+
+> Reviewer #2: The authors have well responded to my comments. I can recommend accepting it if the associate editor and another reviewer also feel satisfactory with this revised manuscript.
+
+We are very grateful for the positive feedback.
+
+> Editorial Office Comments:
+
+> For the final manuscript, please submit a clean copy without markup, but do retain line numbers and upload an editable file format (not PDF; preferably MS Word DOC).
+
+Confirmed.
+
+> Key words can greatly enhance the discovery of your article. Please review your key words and consider whether they will help the reader find your work, i.e., that will widen the search-window of topics in your manuscript but also emphasize what is most important in the article. If applicable, include the name of the plant family here (instead of in the title of the article).
+For more details see “c. Key Words” at https://bsapubs.onlinelibrary.wiley.com/hub/journal/15372197/homepage/forauthors#ps
+
+> In the Materials and Methods section please provide the city, spelled-out state (if in USA), and country for the locations and companies mentioned (such as L175).
+
+Confirmed:
+We have spelled-out state (Ohio) (Line 176).
+
+> Would you like to thank the reviewers in the acknowledgements? It is not required, but we recommend it, especially if you found their comments helpful. (They don’t, as a rule, see your final response letter.)
+
+Confirmed:
+We have added a new line for the acknowledgements (line 378).
+
+> Data Availability:
+> Please provide a doi for your data deposited in the Zenodo database at this time.
+
+> For more information, see “Data Availability” at https://bsapubs.onlinelibrary.wiley.com/hub/journal/15372197/homepage/forauthors#epec and “g. Data Availability Statement” at https://bsapubs.onlinelibrary.wiley.com/hub/journal/15372197/homepage/forauthors#ps
+
+
+**working**
+
+> For the online supplements:
+> a) For appendices with multiple parts, these parts should be labeled Appendix S1, Table (or Fig) S1; Appendix S1, Table S2, etc.
+
+Confirmed.
+
+> b) In the manuscript, after the first mention of the first online appendix, include the following: “Appendix S1 (see the Supplementary Data with this article)”. Please be sure that each appendix is referred to somewhere in the ms text.
+
+Confirmed.
+
+> c) Finalize and upload each appendix file separately, with the formatting and file type you would like to appear online with the article.
+
+Confirmed.
+
+> d) On each file, place a header at the top of the page, using this format: “Smith et al.—American Journal of Botany 2022—Appendix S1”.
+
+Confirmed.
+
+> e) On each file, also include a title/legend, prefaced by, e.g., “Appendix S1”.
+
+Confirmed.
+
+> For the figures:
+> a) Please upload each of your figures as a high-resolution file, cropped of white space, and sized as you would like to see them published (1 column = 3.5 inches; 1.5 column = 5-6 inches; 2 columns = 7.25 inches wide).
+
+Confirmed.
+
+> b) If a figure has multiple panels, keep them together in a single file for that figure.
+
+Confirmed.
+
+> c) For photographs we recommend that authors submit files in TIF, PNG, or EPS format, at 300 ppi.
+
+Confirmed.
+
+> d) For graphs/line art, please save figures as PDF or EPS files (not as JPG, TIF, or other pixel-based formats), at 600 ppi.
+
+Confirmed.
+
+> e) Do not include the figure legends with the figures but instead place them in the manuscript document (after the tables). Please also remove any figure images that remain in the manuscript document at this time.
+
+Confirmed.
+
+> f) For more details see “m. Figures/Illustrations” at https://bsapubs.onlinelibrary.wiley.com/hub/journal/15372197/homepage/forauthors#ps
+
+Confirmed.
+
+> g) Note that supplementary figures have different guidelines, and you do not need to make changes to your supplemental figures, except as described above under online supplements.
+
+Confirmed.

@@ -1,5 +1,5 @@
 GIT = 36a960d # second submission
-all: ms/LMA_method.pdf ms/LMA_method-diff$(GIT).pdf
+all: ms/LMA_method.pdf ms/LMA_method-diff$(GIT).pdf ms/response_letter_2.pdf
 docker: ms/LMA_method.pdf
 #docker: ms/LMA_method.pdf ms/diff.pdf
 local: ms/leaf_disc.bib
@@ -30,6 +30,9 @@ ms/response_letter.pdf: ms/response_letter.Rmd
 
 ms/response_letter.docx: ms/response_letter.Rmd
 	R -e 'system.time(rmarkdown::render("$<", "all"))'
+
+ms/response_letter_2.pdf: ms/response_letter_2.Rmd
+	R -e 'system.time(rmarkdown::render("$<", "pdf_document"))'
 
 .PHONY: clean
 clean:

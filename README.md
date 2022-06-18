@@ -70,5 +70,5 @@ apptainer exec tinytex.sif make
 
 Requirements:
 
-- Apptainer
+- Apptainer (or singularity)
 - cmdstan 2.29.2 (radian.sif does not contain Apptainer)
