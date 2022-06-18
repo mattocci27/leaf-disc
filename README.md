@@ -11,14 +11,14 @@ Cong Zhou,
 Jiao-Lin Zhang,
 Ya-Jun Chen*
 
-# Usage
+Code repostitory to run the analysis and generate the manuscript for Maenpuen et al. "Sources and consequnces of mismatch between leaf disc and whole-leaf leaf mass per area (LMA)".
+doi: xxx.
 
-```bash
-git clone https://github.com/mattocci27/leaf-disc
-cd leaf-disc
-```
+## Reproduce the results
 
-## Running code on local
+Codes (R and STAN) and workflow are managed with the R package `targets` (https://github.com/ropensci/targets).
+
+### Running code on local
 
 To run analysis:
 
@@ -39,11 +39,11 @@ Requirements:
 - pandoc-crossref
 - latexdiff
 - R (4.1.3)
-	- renv (this will install all the R packages)
+	- renv (`renv::restore()` will install all the R packages)
 
-## Running code in Apptainer (Linux)
+### Running code in Apptainer (Linux)
 
-First, change `RENV_PATHS_CACHE` in `apptainer.def` and `tinytex.def` to your path (i.e.,
+First, change `RENV_PATHS_CACHE` in `radian.def` and `tinytex.def` to your path (i.e.,
 `
 RENV_PATHS_CACHE=<your_path>"
 `
@@ -70,6 +70,5 @@ apptainer exec tinytex.sif make
 
 Requirements:
 
-- apptainer
-- cmdstan 2.29.2
-
+- Apptainer
+- cmdstan 2.29.2 (radian.sif does not contain Apptainer)

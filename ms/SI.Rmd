@@ -1,5 +1,5 @@
 ---
-title: "Maenpuen et al. Appendix S1-7: Sources and consequences of mismatch between leaf disc and whole-leaf leaf mass per area (LMA)"
+title: "Maenpuen *et al.* --American Journal of Botany-- Appendix S1"
 geometry: margin=1in
 link-citations: yes
 csl: templates/american-journal-of-botany.csl
@@ -21,8 +21,8 @@ header-includes:
   - \usepackage[normalem]{ulem}
   - \usepackage{makecell}
   - \usepackage{xcolor}
-  - \usepackage{lineno}
-  - \linenumbers
+#  - \usepackage{lineno}
+#  - \linenumbers
 output:
   html_document:
     fig_caption: yes
@@ -82,10 +82,14 @@ library(kableExtra)
 targets::tar_load(yml)
 #  for non-targets
 # val <- yaml::yaml.load_file("../values.yml")
-val <- yaml::yaml.load_file("values.yml")
+#val <- yaml::yaml.load_file("values.yml")
 ```
 
 # Appendix S1:
+
+Supporting Tables and Figures.
+
+# Table S1:
 
 Site information.
 MAT: mean annual temperature,
@@ -94,13 +98,13 @@ CV: coefficient of variation
 
 ```{r, echo=FALSE}
 library(jsonlite)
-# for dependency
-targets::tar_load(site_info)
 #site <- fromJSON("../data/site_info.json")
 site <- fromJSON("data/site_info.json")
 site |>
   kable(format = "html") |>
-  kable_styling()
+  # kable_styling() |>
+  kable_styling(latex_options = "scale_down")
+  #kableExtra::landscape()
 ```
 
 The site information and climate data in Yunnan, referred to @Fei2018, and @Song2017.
@@ -108,16 +112,32 @@ MAT and MAP of Yakushima were obtained from the Yakushima meteorological station
 
 \newpage
 
-# Appendix S2:
+# Table S2:
+
+Summary of a linear mixed model for log-transformed total dry mass of leaf discs for each tree individual.
+Species was used as a random intercept.
+The leaf punch size is described as an effect of '0.6 cm diameter' compared with '1.0 cm diameter'.
+
+```{r, eval=TRUE, echo=FALSE}
+targets::tar_load(dm_glmm_tab)
+dm_glmm_tab |>
+  kable(format = "html") |>
+  kable_styling()
+```
+
+\newpage
+
+# Figure S1:
 
 Detailed sampling protocol for whole-leaf and leaf disc LMA.
+
 
 ![](../figs/S2.jpeg)
 
 \newpage
 
 
-# Appendix S3:
+# Figure S2:
 
 Generalization for a relationship between ratios of disc-based and whole-leaf estimates of leaf mass per area (LMA), leaf tissue density (LD), and leaf thickness (LT).
 For the *i* tree individual or species, the relationship between ratios of disc-based and whole-leaf estimates of LMA, LD, and LT is:
@@ -143,7 +163,7 @@ If we use the same leaf thickness values for leaf discs and whole-leaves (i.e., 
 Consequently, we do not perform further analyses for LD, because differences between whole-leaf LD and leaf disc LD only depends on the ratio between whole-leaf LMA and leaf disc LMA and measurement errors of leaf thickness.
 
 ```{r, include=FALSE}
-targets::tar_load(lma_ld_png)
+targets::tar_load(lma_ld_plot)
 ```
 
 ![](../figs/lma_ld.png){ width="600" style="display: block; margin: 0 auto" }
@@ -156,7 +176,7 @@ All the correlations are significant (*P* < 0.001).
 
 \newpage
 
-# Appendix S4:
+# Figure S3:
 
 Standardized regression coefficients modelig the effects of leaf tissue density,
 leaf area,
@@ -170,7 +190,7 @@ Thick and thin lines indicate 90% and 95% credible intervals, respectively.
 Circles show posterior means of coefficients.
 Circles filled with blue indicate significant effects and white indicate non-significance effects.
 
-```{r, incude=FALSE}
+```{r, include=FALSE}
 targets::tar_load(coef_sp_punch1_add_plot)
 ```
 
@@ -178,7 +198,7 @@ targets::tar_load(coef_sp_punch1_add_plot)
 
 \newpage
 
-# Appendix S5:
+# Figure S4:
 
 Relationships between species mean leaf mass per area (LMA) determined by using whole-leaves and leaf discs for species obtained with leaf punches of different diameters.
 Dashed lines indicate 1:1 lines.
@@ -186,32 +206,26 @@ Blue solid lines indicate standardized major axis (SMA) regressions.
 The 95% confidence intervals are resented as the shaded area.
 The correlation is significant (*P* < 0.001).
 
+```{r, include=FALSE}
+targets::tar_load(sma_sep_plot)
+```
+
 ![](../figs/sma_sep.png){ width="400" style="display: block; margin: 0 auto" }
 
 \newpage
 
-# Appendix S6:
+# Figure S5:
 
 Relationships between whole-leaf LMA : disc leaf LMA and total dry mass for the leaf disc.
 The relationships was heteroscedastic (unequal variance, *p* < 0.001; all the samples were analyzed together).
 Samples with small total dry mass tended to show greater variance.
 
+```{r, include=FALSE}
+targets::tar_load(ratio_dm_plot)
+```
+
 ![](../figs/ratio_dm.png){ width="400" style="display: block; margin: 0 auto" }
 
 \newpage
 
-# Appendix S7:
-
-Summary of a linear mixed model for log-transformed total dry mass of leaf discs for each tree individual.
-Species was used as a random intercept.
-The leaf punch size is described as an effect of '0.6 cm diameter' compared with '1.0 cm diameter'.
-
-```{r, eval=TRUE, echo=FALSE}
-tar_load(dm_glmm_tab)
-dm_glmm_tab |>
-  kable(format = "html") |>
-  kable_styling()
-```
-
-\newpage
 # LITERATURE CITED

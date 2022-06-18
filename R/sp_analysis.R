@@ -36,19 +36,15 @@ sma_point_sep <- function(data) {
       values = my_col[c(2, 4)],
       name = "Leaf punch diameter"
     ) +
-    xlab(expression(Leaf ~ disc ~ LMA ~ (g ~ m^{
-      -2
-    }))) +
-    ylab(expression(Whole - leaf ~ LMA ~ (g ~ m^{
-      -2
-    }))) +
+    xlab(expression("Leaf disc LMA "(g~m^{-2}))) +
+    ylab(expression("Whole-leaf LMA "(g~m^{-2}))) +
     stat_cor(
       aes(label = paste(..rr.label.., ..n.label.., sep = "~`,`~"), family = "Arial"),
       show.legend = FALSE
     ) +
     theme_bw() +
     theme(text = element_text(family = "Arial"),
-      legend.position = c(0.8, 0.2),
+      legend.position = c(0.7, 0.15),
       legend.key.size = unit(0.5, "cm"),
       legend.spacing.y = unit(0.1, "cm"),
       legend.text.align = 0,

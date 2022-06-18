@@ -527,8 +527,8 @@ list(
         "figs/sma_sep.png",
         p,
         dpi = 300,
-        width = 4,
-        height = 4
+        width = 3.5,
+        height = 3.5
       )
       paste0("figs/sma_sep", c(".png"))
     },
@@ -557,7 +557,7 @@ list(
         "figs/lma_ld.png",
         p,
         dpi = 300,
-        width = 9,
+        width = 6,
         height = 3
       )
       paste0("figs/lma_ld", c(".png"))

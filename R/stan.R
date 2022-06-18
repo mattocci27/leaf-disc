@@ -300,6 +300,7 @@ coef_pointrange <- function(data, ld = TRUE, add = FALSE) {
   theme_bw() &
   theme(
     legend.position = "none",
+    plot.tag = element_text(face = "bold"),
     text = element_text(family = "Arial"))
 }
 

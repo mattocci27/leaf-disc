@@ -1,5 +1,5 @@
 GIT = 36a960d # second submission
-all: ms/LMA_method.pdf ms/LMA_method-diff$(GIT).pdf ms/SI.pdf
+all: ms/LMA_method.pdf ms/LMA_method-diff$(GIT).pdf
 docker: ms/LMA_method.pdf
 #docker: ms/LMA_method.pdf ms/diff.pdf
 local: ms/leaf_disc.bib
@@ -24,9 +24,6 @@ ms/cover.docx: ms/cover.md
 
 ms/leaf_disc.bib: ~/trait-method.bib
 	cp $< $@
-
-ms/SI.pdf: ms/SI.Rmd
-	R -e 'system.time(rmarkdown::render("$<", "all"))'
 
 ms/response_letter.pdf: ms/response_letter.Rmd
 	R -e 'system.time(rmarkdown::render("$<", "all"))'
