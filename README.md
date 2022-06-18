@@ -41,35 +41,35 @@ Requirements:
 - R (4.1.3)
 	- renv (this will install all the R packages)
 
-## Running code in Singularity (Linux)
+## Running code in Apptainer (Linux)
 
-First, change `RENV_PATHS_CACHE` in `singularity.def` and `tinytex.def` to your path (i.e.,
+First, change `RENV_PATHS_CACHE` in `apptainer.def` and `tinytex.def` to your path (i.e.,
 `
-RENV_PATHS_CACHE=<your_path>" >> /usr/local/lib/R/etc/Renviron.site
+RENV_PATHS_CACHE=<your_path>"
 `
 )
 
-To build singularity containers:
+To build Apptainer containers:
 
 ```bash
-sudo singularity build singularity.sif singularity.def
-sudo singularity build tinytex.sif tinytex.def
+sudo apptainer build radian.sif radian.def
+sudo apptainer build tinytex.sif tinytex.def
 ```
 
 To run analysis:
 
 ```bash
-singularity exec singularity.sif Rscript run.R
+apptainer exec radian.sif Rscript run.R
 ```
 
 To generate the manuscript:
 
 ```bash
-singularity exec tinytex.sif make
+apptainer exec tinytex.sif make
 ```
 
 Requirements:
 
-- singularity
+- apptainer
 - cmdstan 2.29.2
 
