@@ -135,7 +135,8 @@ We have added a new line for the acknowledgements (line 379-380).
 > For more information, see “Data Availability” at https://bsapubs.onlinelibrary.wiley.com/hub/journal/15372197/homepage/forauthors#epec and “g. Data Availability Statement” at https://bsapubs.onlinelibrary.wiley.com/hub/journal/15372197/homepage/forauthors#ps
 
 
-**working**
+Confirmed.
+We have added the DOI: https://doi.org/10.5281/zenodo.6665083 (Line 391-393)
 
 > For the online supplements:
 > a) For appendices with multiple parts, these parts should be labeled Appendix S1, Table (or Fig) S1; Appendix S1, Table S2, etc.

@@ -283,7 +283,7 @@ Ideally, 20 individuals for each species are required for robust estimation of C
 
 SMA analyses were run as described above.
 We also performed the paired t-test to compare the extent of ITV between whole-leaf LMA and leaf disc LMA.
-All statistical analyses were conducted in R version 4.1.3 [@RCoreTeam2022] using the package targets version 0.12.0 for workflow management [@Landau2021]
+All statistical analyses were conducted in R version 4.1.3 [@RCoreTeam2022] using the R package *targets* version 0.12.0 for workflow management [@Landau2021]
 
 # RESULTS
 
@@ -388,7 +388,7 @@ all authors contributed to revisions.
 
 # DATA AVAILABILITY STATEMENT
 
-Data and codes for this manuscript are archived on Zenodo (XXX) and also available at https://github.com/mattocci27/leaf-disc.
+Data and codes for this manuscript are archived on Zenodo at https://doi.org/10.5281/zenodo.6665083 and also available on Github at https://github.com/mattocci27/leaf-disc.
 
 # SUPPORTING INFORMATION
 
