@@ -51,6 +51,7 @@ We thank the associate editor and the reviewers for their careful attention to d
 
 We found small errors in R codes and the total number of individuals used in our analysis was increased from 1365 to 1469.
 Accordingly, several statistical values have changed slightly (highlighted in blue).
+Additionally, we have cited one more R package that made a significant contribution to workflow management (Line 233-234).
 
 Below we provide detailed responses.
 The editing history is recorded in a separate pdf file.
@@ -98,12 +99,12 @@ We have corrected it (Line 170).
 
 Thank you.
 We have added an explnation of the differences, and the text now reads:
-"Note that OLS regressions minimize errors of either whole-leaf LMA or leaf disc LMA, and thus those four models are not identical, whereas SMA regressions are not appropriate for predictions (Warton et al., 2006)" (Line 320-322)
+"Note that OLS regressions minimize errors of either whole-leaf LMA or leaf disc LMA, and thus those four models are not identical, whereas SMA regressions are not appropriate for predictions (Warton et al., 2006)" (Line 321-323)
 
 > Line 315 Typo
 
 Thank you again for pointing this error out.
-We have corrected it (Line 318).
+We have corrected it (Line 319).
 
 > Reviewer #2: The authors have well responded to my comments. I can recommend accepting it if the associate editor and another reviewer also feel satisfactory with this revised manuscript.
 
@@ -126,7 +127,7 @@ We have spelled-out state (Ohio) (Line 176).
 > Would you like to thank the reviewers in the acknowledgements? It is not required, but we recommend it, especially if you found their comments helpful. (They don’t, as a rule, see your final response letter.)
 
 Confirmed:
-We have added a new line for the acknowledgements (line 378).
+We have added a new line for the acknowledgements (line 379-380).
 
 > Data Availability:
 > Please provide a doi for your data deposited in the Zenodo database at this time.
