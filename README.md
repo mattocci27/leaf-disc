@@ -23,6 +23,8 @@ Codes (R and STAN) and workflow are managed with the R package `targets` (https:
 To run analysis:
 
 ```bash
+# To install R packages for the first run
+# Rscript -e "renv::restore()"
 Rscript run.R
 ```
 
@@ -47,7 +49,7 @@ First, change `RENV_PATHS_CACHE` in `radian.def` and `tinytex.def` to your path 
 `
 RENV_PATHS_CACHE=<your_path>"
 `
-)
+).
 
 To build Apptainer containers:
 
@@ -59,16 +61,20 @@ sudo apptainer build tinytex.sif tinytex.def
 To run analysis:
 
 ```bash
+# To install R packages for the first run
+# apptainer exec radian.sif Rscript -e "renv::restore()"
 apptainer exec radian.sif Rscript run.R
 ```
 
 To generate the manuscript:
 
 ```bash
+# To install R packages for the first run
+# Rscript -e "renv::restore()"
 apptainer exec tinytex.sif make
 ```
 
 Requirements:
 
 - Apptainer (or singularity)
-- cmdstan 2.29.2 (radian.sif does not contain Apptainer)
+- cmdstan 2.29.2 (radian.sif does not contain cmdstan)

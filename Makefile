@@ -1,12 +1,11 @@
 GIT = 36a960d # second submission
-all: ms/LMA_method.pdf ms/LMA_method-diff$(GIT).pdf ms/response_letter_2.pdf
-docker: ms/LMA_method.pdf
+all: ms/LMA_method.pdf  ms/LMA_method-diff$(GIT).pdf ms/response_letter_2.pdf
 #docker: ms/LMA_method.pdf ms/diff.pdf
 local: ms/leaf_disc.bib
-dif: ms/diff.pdf
+dif: ms/LMA_method-diff$(GIT).pdf
 
 ms/LMA_method.pdf: ms/LMA_method.Rmd values.yml figs/*
-	R -e 'system.time(rmarkdown::render("$<", "all"))'
+	R -e 'system.time(rmarkdown::render("$<", "bookdown::pdf_document2"))'
 
 ms/LMA_method-diff$(GIT).pdf: ms/LMA_method.tex
 	latexdiff-vc --git --flatten --force -r $(GIT) $^ ; \

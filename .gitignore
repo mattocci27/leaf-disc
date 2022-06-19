@@ -135,7 +135,6 @@ figs/LT_prop.png
 ms/LMA_figs.pdf
 ms/*.pdf
 #ms/*.html
-ms/diff.pdf
 
 data/try.csv
 data/try_long.csv
