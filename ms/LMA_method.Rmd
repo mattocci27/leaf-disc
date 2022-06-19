@@ -316,7 +316,7 @@ Species with lower leaf tissue density and thin leaves showed greater variance i
 Altough a leaf punch of 1.0-cm diameter was used only in the Yakushima dataset in our study, the variance in the whole-leaf to leaf disc LMA ratio were small for the Yakushima dataset, regardless of leaf tissue density or leaf thickness (Fig. 2ac).
 On the other hand, a previous study found that leaf disc LMA obtained with a very small leaf punch (0.3-cm diameter) and whole-leaf LMA had different relationships between shade tolerance [@Poorter2009a], suggesting that leaf disc LMA and whole-leaf LMA can be inherently different when small disc samples were used.
 The relatively low *R^2^* values in the Yunnan dataset (Appendix S1, Figure S4) compared to the previous study and the Yakushima dataset may suggest not only the effect of distinct veins on variance in LMA [@John2017] or distinct veins with kite-type appearances [@Grubb1986] but also technical difficulty in measuring tiny weight of discs in lower LMA leaves.
-We found that estimates of whole-leaf and leaf disc LMA diverged when total dry mass of leaf discs was small (Appendix S1, Figure S5), and thus species with lower leaf tissue density and thin leaves, which have smaller dry mass (Appendix S1, Table S2), tended to show grater variation in whole leaf to leaf disc LMA ratio especially when we used a smaller leaf punch.
+We found that estimates of whole-leaf and leaf disc LMA diverged when total dry mass of leaf discs was small (Appendix S1, Figure S5), and thus species with lower leaf tissue density and thin leaves, which have smaller dry mass (Appendix S1, Table S2), tended to show grater variation in whole-leaf to leaf disc LMA ratio especially when we used a smaller leaf punch.
 
 Species with higher leaf tissue density and large leaves showed greater whole-leaf LMA than leaf disc LMA (Fig. 2ab: large leaf punch).
 We also observed that leaf disc and whole-leaf LMA estimate diverged for species with greater investment in petiole dry mass (Fig. 3a), and large-leaved species tended to have greater investment for petiole dry mass than small-leaved species (Fig. 3b).
@@ -360,7 +360,7 @@ Future studies should include more samples to improve the comparisons of leaf di
 
 # Conclusions
 
-The present study was designed to examine the extent to which whole leaf and leaf disc LMA matched.
+The present study was designed to examine the extent to which whole-leaf and leaf disc LMA matched.
 Although our study was not designed to evaluate the effects of diameter sizes of leaf punches, the sizes of leaf punches as well as leaf morphology are the important sources of variance between whole-leaf and leaf disc LMA.
 Our study shows that mean values of leaf disc LMA is generally a good proxy for mean values of whole-leaf LMA when an appropriate size of leaf punch (e.g., 1.0-cm in diameter) was used.
 Those LMA values can be converted using OLS regressions.
@@ -374,7 +374,7 @@ Accurately representing leaf traits will probably require careful selection betw
 
 We thank the editors and two anonymous reviewers, whose comments greatly improved the manuscript.
 We also thank Lian-Bin Tao and Peng-Yun Yan for field work.
-This work was funded by the National Natural Science Foundation of China (41861144016, 32071735, 31570406, 32171507), the CAS 'Light of West China' Program, Yunnan Provincial Science and Technology Department (2018HB068).
+This work was funded by the National Natural Science Foundation of China (41861144016, 32071735, 31570406, 32171507), the CAS 'Light of West China' Program, Yunnan Provincial Science and Technology Department (2018HB068), and Yunnan Revitalization Talents Support Plan (YNWR-QNBJ-2019-177)
 PM was supported by financial support from CAS-TWAS President’s Fellowship for International Doctoral Students.
 MK was supported by CAS President’s International Fellowship Initiative (2020FYB0003).
 

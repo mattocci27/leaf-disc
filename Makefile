@@ -4,10 +4,10 @@ all: ms/LMA_method.pdf ms/LMA_method.docx ms/LMA_method-diff$(GIT).pdf ms/respon
 local: ms/leaf_disc.bib
 dif: ms/LMA_method-diff$(GIT).pdf
 
-ms/LMA_method.pdf: ms/LMA_method.Rmd values.yml figs/*
+ms/LMA_method.pdf: ms/LMA_method.Rmd values.yml figs/* ms/leaf_disc.bib
 	R -e 'system.time(rmarkdown::render("$<", "bookdown::pdf_document2"))'
 
-ms/LMA_method.docx: ms/LMA_method.Rmd values.yml figs/*
+ms/LMA_method.docx: ms/LMA_method.Rmd values.yml figs/* ms/leaf_disc.bib
 	R -e 'system.time(rmarkdown::render("$<", "bookdown::word_document2"))'
 
 ms/LMA_method-diff$(GIT).pdf: ms/LMA_method.tex
