@@ -11,7 +11,7 @@ Cong Zhou,
 Jiao-Lin Zhang,
 Ya-Jun Chen*
 
-Code repostitory to run the analysis and generate the manuscript for Maenpuen et al. "Sources and consequnces of mismatch between leaf disc and whole-leaf leaf mass per area (LMA)".
+Code repository to run the analysis and generate the manuscript for Maenpuen et al. "Sources and consequences of mismatch between leaf disc and whole-leaf leaf mass per area (LMA)".
 
 ## Reproduce the results
 
@@ -75,5 +75,5 @@ apptainer exec tinytex.sif make
 
 Requirements:
 
-- Apptainer (or singularity)
+- Apptainer (or Singularity)
 - cmdstan 2.29.2 (radian.sif does not contain cmdstan)
