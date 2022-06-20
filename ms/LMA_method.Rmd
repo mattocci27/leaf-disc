@@ -53,7 +53,6 @@ output:
 library(knitr)
 library(tidyverse)
 library(methods)
-source("../scripts/rmd_func.R")
 basename <- "LMA_method"
 opts_chunk$set(fig.path = paste("figs/", sep = ""))
 opts_chunk$set(
