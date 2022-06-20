@@ -426,37 +426,6 @@ Relationships between whole-leaf LMA : disc leaf LMA and total dry mass for the 
 
 \newpage
 
-```{r tb1, echo=FALSE, eval=FALSE}
-tab1 <- read.csv("../data/sma_sp_ld_tab.csv")
-colnames(tab1) <- c("Data", "Slope", "Intercept", "*R^2^*")
-
-tab1 <- tab1 |>
-  mutate(Data = case_when(
-    Data == "Dense~Thick~Large" ~ "Dense-thick-large",
-    Data == "Dense~Thick~Small" ~ "Dense-thick-small",
-    Data == "Dense~Thin~Large" ~ "Dense-thin-large",
-    Data == "Dense~Thin~Small" ~ "Dense-thin-small",
-    Data == "Nondense~Thick~Large" ~ "Nondense-thick-large",
-    Data == "Nondense~Thick~Small" ~ "Nondense-thick-small",
-    Data == "Nondense~Thin~Large" ~ "Nondense-thin-large",
-    Data == "Nondense~Thin~Small" ~ "Nondense-thin-small",
-    TRUE ~ Data
-  ))
-if ("html" == knitr::opts_knit$get("rmarkdown.pandoc.to")) {
-  tab1 |>
-    kable(format = "html") |>
-    kable_classic()
-} else if ("docx" == knitr::opts_knit$get("rmarkdown.pandoc.to")) {
-  tab1 |>
-    kable(format = "pipe")
-} else if ("latex" == knitr::opts_knit$get("rmarkdown.pandoc.to")) {
-  tab1 |>
-    kable(format = "pipe")
-}
-```
-
-\newpage
-
 # Figure legends
 
 **Fig. 1.**
@@ -478,7 +447,7 @@ Relationships between petiole to leaf dry mass ratio and (a) leaf area and (b) w
 Blue solid lines indicate ordinary least squares (OLS) regressions.
 The 95% confidence intervals are presented as the shaded area.
 All the correlations are significant (P < 0.001).
-All the samples were obtained with a diameter 1.0-cm leaf punch.
+Note that all the samples were obtained with a diameter 1.0-cm leaf punch.
 
 
 **Fig. 4.**
