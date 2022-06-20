@@ -373,8 +373,9 @@ Accurately representing leaf traits will probably require careful selection betw
 # ACKNOWLEDGMENTS
 
 We thank the editors and two anonymous reviewers, whose comments greatly improved the manuscript.
-We also thank Lian-Bin Tao and Peng-Yun Yan for field work.
-This work was funded by the National Natural Science Foundation of China (41861144016, 32071735, 31570406, 32171507), the CAS 'Light of West China' Program, Yunnan Provincial Science and Technology Department (2018HB068), and Yunnan Revitalization Talents Support Plan (YNWR-QNBJ-2019-177)
+We also thank Lian-Bin Tao and Peng-Yun Yan for field work in China.
+The data collection in Yakushima was achieved with help of many colleagues in particular Kenshi Tetsuka and financially supported by the Global COE Program ‘Asian conservation ecology’, MEXT of Japan for Tetsukazu Yahara.
+This work was funded by the National Natural Science Foundation of China (41861144016, 32071735, 31570406, 32171507), the CAS 'Light of West China' Program, Yunnan Provincial Science and Technology Department (2018HB068), and Yunnan Revitalization Talents Support Plan (YNWR-QNBJ-2019-177).
 PM was supported by financial support from CAS-TWAS President’s Fellowship for International Doctoral Students.
 MK was supported by CAS President’s International Fellowship Initiative (2020FYB0003).
 
