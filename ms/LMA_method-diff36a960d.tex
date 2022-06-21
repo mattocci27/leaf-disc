@@ -1,7 +1,7 @@
 %%
 %DIF LATEXDIFF DIFFERENCE FILE
-%DIF DEL /tmp/LdEIIjp5R_/latexdiff-vc-36a960d/ms/LMA_method.tex   Sat May 14 00:26:01 2022
-%DIF ADD ms/LMA_method.tex                                        Mon Jun 20 23:46:05 2022
+%DIF DEL /var/folders/1v/_ypjfm2d71bf8nf01_2jk2t00000gn/T/DqlDgj84Ku/latexdiff-vc-36a960d/ms/LMA_method.tex   Fri May 13 23:26:01 2022
+%DIF ADD ms/LMA_method.tex                                                                                    Tue Jun 21 13:35:30 2022
 % Copyright (c) 2017 - 2020, Pascal Wagler;
 % Copyright (c) 2014 - 2020, John MacFarlane
 %
@@ -372,7 +372,7 @@
 %DIF HYPERREF PREAMBLE %DIF PREAMBLE
 \providecommand{\DIFadd}[1]{\texorpdfstring{\DIFaddtex{#1}}{#1}} %DIF PREAMBLE
 \providecommand{\DIFdel}[1]{\texorpdfstring{\DIFdeltex{#1}}{}} %DIF PREAMBLE
-%DIF LISTINGS PREAMBLE %DIF PREAMBLE
+%DIF COLORLISTINGS PREAMBLE %DIF PREAMBLE
 \RequirePackage{listings} %DIF PREAMBLE
 \RequirePackage{color} %DIF PREAMBLE
 \lstdefinelanguage{DIFcode}{ %DIF PREAMBLE
@@ -406,11 +406,11 @@ Sources and consequences of mismatch between leaf disc and whole-leaf leaf mass 
 
 \[ \]
 
-Phisamai Maenpuen\textsuperscript{1,2,3},
+Phisamai Maenpuen\textsuperscript{1,2,\DIFdelbegin \DIFdel{3}\DIFdelend \DIFaddbegin \DIFadd{3*}\DIFaddend },
 Masatoshi Katabuchi\textsuperscript{1*},
 Yusuke Onoda\textsuperscript{4},
 Cong Zhou\textsuperscript{1,2},
-Jiao-Lin Zhang\textsuperscript{1,3*},
+Jiao-Lin Zhang\textsuperscript{1,\DIFdelbegin \DIFdel{3*}\DIFdelend \DIFaddbegin \DIFadd{3}\DIFaddend },
 Ya-Jun Chen\textsuperscript{1,3,5}
 
 \[ \]
@@ -439,7 +439,10 @@ Tel: +86 691 871 3046;
 Fax: +86 691 871 5070;
 E-mail: \href{mailto:zjl@xtbg.org.cn}{\nolinkurl{zjl@xtbg.org.cn}}
 
-\[ \]
+\DIFaddbegin \DIFadd{* These authors contributed equally to this work.
+}
+
+\DIFaddend \[ \]
 
 Manuscript received \_\_\_\_\_\_\_; revision accepted \_\_\_\_\_\_\_.
 
@@ -713,11 +716,12 @@ Accurately representing leaf traits will probably require careful selection betw
 \hypertarget{acknowledgments}{%
 \section{ACKNOWLEDGMENTS}\label{acknowledgments}}
 
-\DIFdelbegin \DIFdel{The authors }\DIFdelend \DIFaddbegin \DIFadd{We thank the editors and two anonymous reviewers, whose comments greatly improved the manuscript.
-We also }\DIFaddend thank Lian-Bin Tao and Peng-Yun Yan for field work \DIFaddbegin \DIFadd{in China.
-The data collection in Yakushima was achieved with help of many colleagues in particular Kenshi Tetsuka and financially supported by the Global COE Program `Asian conservation ecology', MEXT of Japan for Tetsukazu Yahara}\DIFaddend .
-This work was funded by the National Natural Science Foundation of China (41861144016, 32071735, 31570406, 32171507), the CAS `Light of West China' Program, Yunnan Provincial Science and Technology Department (2018HB068)\DIFaddbegin \DIFadd{, and Yunnan Revitalization Talents Support Plan (YNWR-QNBJ-2019-177)}\DIFaddend .
-PM was supported by financial support from CAS-TWAS President's Fellowship for International Doctoral Students.
+\DIFdelbegin \DIFdel{The authors thank }\DIFdelend \DIFaddbegin \DIFadd{We thank the editors and two anonymous reviewers, whose comments greatly improved the manuscript.
+We also thank }\DIFaddend Lian-Bin Tao and Peng-Yun Yan for field work \DIFaddbegin \DIFadd{in China}\DIFaddend .
+This work was funded by the National Natural Science Foundation of China (41861144016, 32071735, 31570406, 32171507), the CAS `Light of West China' Program, Yunnan Provincial Science and Technology Department (2018HB068)\DIFdelbegin \DIFdel{.
+}\DIFdelend \DIFaddbegin \DIFadd{, and Yunnan Revitalization Talents Support Plan (YNWR-QNBJ-2019-177).
+The data collection in Yakushima was achieved with help of many colleagues in particular Kenshi Tetsuka and financially supported by the Global COE Program `Asian conservation ecology', MEXT of Japan for Tetsukazu Yahara.
+}\DIFaddend PM was supported by financial support from CAS-TWAS President's Fellowship for International Doctoral Students.
 MK was supported by CAS President's International Fellowship Initiative (2020FYB0003).
 
 \hypertarget{author-contributions}{%
@@ -835,7 +839,7 @@ Jiao, Y., K. J. Niklas, L. Wang, K. Yu, Y. Li, and P. Shi. 2022. \DIFdelbegin \D
 \DIFdel{Photinia}%DIFDELCMD < }%%%
 \DIFdel{\texttimes{} fraseri'}%DIFDELCMD < {%%%
 \DIFdel{Red Robin}%DIFDELCMD < }%%%
-\DIFdel{'}\DIFdelend \DIFaddbegin \href{https://doi.org/10.3389/fpls.2022.860206}{Influence of leaf age on the scaling relationships of lamina biomass vs. area}\DIFaddend . \emph{Frontiers in Plant Science} 13: 860206.
+\DIFdel{'. }\DIFdelend \DIFaddbegin \href{https://doi.org/10.3389/fpls.2022.860206}{\DIFadd{Influence of leaf age on the scaling relationships of lamina biomass vs. area}}\DIFadd{. }\DIFaddend \emph{Frontiers in Plant Science} 13: 860206.
 
 \leavevmode\vadjust pre{\hypertarget{ref-John2017}{}}%
 John, G. P., C. Scoffoni, T. N. Buckley, R. Villar, H. Poorter, and L. Sack. 2017. \href{https://doi.org/10.1111/ele.12739}{The anatomical and compositional basis of leaf mass per area}. \emph{Ecology Letters} 20: 412--425.
@@ -853,11 +857,14 @@ Kichenin, E., D. A. Wardle, D. A. Peltzer, C. W. Morse, and G. T. Freschet. 2013
 Kitajima, K., and L. Poorter. 2010. \href{https://doi.org/10.1111/j.1469-8137.2010.03212.x}{Tissue-level leaf toughness, but not lamina thickness, predicts sapling leaf lifespan and shade tolerance of tropical tree species}. \emph{New Phytologist} 186: 708--721.
 
 \leavevmode\vadjust pre{\hypertarget{ref-Kraft2008}{}}%
-Kraft, N. J. B., R. Valencia, and D. D. Ackerly. 2008. \DIFdelbegin %DIFDELCMD < \href{https://doi.org/10.1126/science.1160662}{Functional {Traits} and {Niche-Based Tree Community Assembly} in an {Amazonian Forest}}%%%
-\DIFdelend \DIFaddbegin \href{https://doi.org/10.1126/science.1160662}{Functional traits and niche-based tree community assembly in an {Amazonian} forest}\DIFaddend . \emph{Science} 322: 580--582.
+Kraft, N. J. B., R. Valencia, and D. D. Ackerly. 2008. \href{https://doi.org/10.1126/science.1160662}{Functional \DIFdelbegin %DIFDELCMD < {%%%
+\DIFdel{Traits}%DIFDELCMD < } %%%
+\DIFdelend \DIFaddbegin \DIFadd{traits }\DIFaddend and \DIFdelbegin %DIFDELCMD < {%%%
+\DIFdel{Niche-Based Tree Community Assembly}%DIFDELCMD < } %%%
+\DIFdelend \DIFaddbegin \DIFadd{niche-based tree community assembly }\DIFaddend in an {Amazonian\DIFdelbegin \DIFdel{Forest}\DIFdelend } \DIFaddbegin \DIFadd{forest}\DIFaddend }. \emph{Science} 322: 580--582.
 
 \leavevmode\vadjust pre{\DIFaddbegin \hypertarget{ref-Landau2021}{}}%DIF > 
-\DIFadd{Landau, W. M. 2021. }\href{https://doi.org/10.21105/joss.02959}{The targets {R} package: A dynamic {Make-like} function-oriented pipeline toolkit for reproducibility and high-performance computing}\DIFadd{. }\emph{\DIFadd{Journal of Open Source Software}} \DIFadd{6: 2959.
+\DIFadd{Landau, W. M. 2021. }\href{https://doi.org/10.21105/joss.02959}{\DIFadd{The targets }{\DIFadd{R}} \DIFadd{package: A dynamic }{\DIFadd{Make-like}} \DIFadd{function-oriented pipeline toolkit for reproducibility and high-performance computing}}\DIFadd{. }\emph{\DIFadd{Journal of Open Source Software}} \DIFadd{6: 2959.
 }
 
 \leavevmode\vadjust \DIFadd{pre}{\DIFaddend \hypertarget{ref-Leps2011}{}}%
@@ -870,8 +877,13 @@ Li, S., Y. \DIFdelbegin \DIFdel{-J}\DIFdelend \DIFaddbegin \DIFadd{J}\DIFaddend 
 Li, Y., P. Shi, Ü. Niinemets, Y. Song, K. Yu, J. Schrader, and K. J. Niklas. 2022. \href{https://doi.org/10.1002/ajb2.1812}{Diminishing returns among lamina fresh and dry mass, surface area, and petiole fresh mass among nine {Lauraceae} species}. \emph{American Journal of Botany} 109: 377--392.
 
 \leavevmode\vadjust pre{\hypertarget{ref-Li2022a}{}}%
-Li, Y., Y. Zheng, D. A. Ratkowsky, H. Wei, and P. Shi. 2022. \DIFdelbegin %DIFDELCMD < \href{https://doi.org/10.3389/fpls.2021.822907}{Application of an {Ovate Leaf Shape Model} to {Evaluate Leaf Bilateral Asymmetry} and {Calculate Lamina Centroid Location}}%%%
-\DIFdelend \DIFaddbegin \href{https://doi.org/10.3389/fpls.2021.822907}{Application of an ovate leaf shape model to evaluate leaf bilateral asymmetry and calculate lamina centroid location}\DIFaddend . \emph{Frontiers in Plant Science} 12: 822907.
+Li, Y., Y. Zheng, D. A. Ratkowsky, H. Wei, and P. Shi. 2022. \href{https://doi.org/10.3389/fpls.2021.822907}{Application of an \DIFdelbegin %DIFDELCMD < {%%%
+\DIFdel{Ovate Leaf Shape Model}%DIFDELCMD < } %%%
+\DIFdelend \DIFaddbegin \DIFadd{ovate leaf shape model }\DIFaddend to \DIFdelbegin %DIFDELCMD < {%%%
+\DIFdel{Evaluate Leaf Bilateral Asymmetry}%DIFDELCMD < } %%%
+\DIFdelend \DIFaddbegin \DIFadd{evaluate leaf bilateral asymmetry }\DIFaddend and \DIFdelbegin %DIFDELCMD < {%%%
+\DIFdel{Calculate Lamina Centroid Location}%DIFDELCMD < }%%%
+\DIFdelend \DIFaddbegin \DIFadd{calculate lamina centroid location}\DIFaddend }. \emph{Frontiers in Plant Science} 12: 822907.
 
 \leavevmode\vadjust pre{\hypertarget{ref-Messier2017}{}}%
 Messier, J., B. J. McGill, B. J. Enquist, and M. J. Lechowicz. 2017. \href{https://doi.org/10.1111/ecog.02006}{Trait variation and integration across scales: Is the leaf economic spectrum present at local scales?} \emph{Ecography} 40: 685--697.
@@ -901,8 +913,7 @@ Onoda, Y., M. Westoby, P. B. Adler, A. M. F. Choong, F. J. Clissold, J. H. C. Co
 Onoda, Y., I. J. Wright, J. R. Evans, K. Hikosaka, K. Kitajima, Ü. Niinemets, H. Poorter, et al. 2017. \href{https://doi.org/10.1111/nph.14496}{Physiological and structural tradeoffs underlying the leaf economics spectrum}. \emph{New Phytologist} 214: 1447--1463.
 
 \leavevmode\vadjust pre{\hypertarget{ref-Osada2014}{}}%
-Osada, N., Y. Yasumura, and A. Ishida. 2014. \DIFdelbegin %DIFDELCMD < \href{https://doi.org/10.1007/s00442-014-2966-y}{Leaf nitrogen distribution in relation to crown architecture in the tall canopy species, {Fagus} crenata}%%%
-\DIFdelend \DIFaddbegin \href{https://doi.org/10.1007/s00442-014-2966-y}{Leaf nitrogen distribution in relation to crown architecture in the tall canopy species, {\emph{Fagus}}{ \emph{Crenata}}}\DIFaddend . \emph{Oecologia} 175: 1093--1106.
+Osada, N., Y. Yasumura, and A. Ishida. 2014. \href{https://doi.org/10.1007/s00442-014-2966-y}{Leaf nitrogen distribution in relation to crown architecture in the tall canopy species, {\DIFdelbegin \DIFdel{Fagus}\DIFdelend \DIFaddbegin \emph{\DIFadd{Fagus}}\DIFaddend }\DIFdelbegin \DIFdel{crenata}\DIFdelend \DIFaddbegin { \emph{\DIFadd{Crenata}}}\DIFaddend }. \emph{Oecologia} 175: 1093--1106.
 
 \leavevmode\vadjust pre{\hypertarget{ref-Parry2002}{}}%
 Parry, M. A., P. J. Andralojc, S. Khan, P. J. Lea, and A. J. Keys. 2002. Rubisco activity: Effects of drought stress. \emph{Annals of Botany} 89: 833--839.
@@ -944,8 +955,13 @@ Siefert, A., C. Violle, L. Chalmandrier, C. H. Albert, A. Taudiere, A. Fajardo, 
 Song, Q. \DIFdelbegin \DIFdel{-H}\DIFdelend \DIFaddbegin \DIFadd{H}\DIFaddend ., Y. \DIFdelbegin \DIFdel{-P}\DIFdelend \DIFaddbegin \DIFadd{P}\DIFaddend . Zhang, L. \DIFdelbegin \DIFdel{-Q}\DIFdelend \DIFaddbegin \DIFadd{Q}\DIFaddend . Sha, X. \DIFdelbegin \DIFdel{-B}\DIFdelend \DIFaddbegin \DIFadd{B}\DIFaddend . Deng, Y. Deng, C. \DIFdelbegin \DIFdel{-S}\DIFdelend \DIFaddbegin \DIFadd{S}\DIFaddend . Wu, Z. \DIFdelbegin \DIFdel{-Y}\DIFdelend \DIFaddbegin \DIFadd{Y}\DIFaddend . Lu, et al. 2017. \href{https://doi.org/10.3832/ifor2223-010}{Canopy temperature variability in a tropical rainforest, subtropical evergreen forest, and savanna forest in {Southwest China}}. \emph{iForest - Biogeosciences and Forestry} 10: 611.
 
 \leavevmode\vadjust pre{\hypertarget{ref-Terashima2001}{}}%
-Terashima, I., S.-I. Miyazawa, and Y. T. Hanba. 2001. \DIFdelbegin %DIFDELCMD < \href{https://doi.org/10.1007/PL00013972}{Why are {Sun Leaves Thicker} than {Shade Leaves}? \textemdash{} {Consideration} based on {Analyses} of {CO2 Diffusion} in the {Leaf}}%%%
-\DIFdelend \DIFaddbegin \href{https://doi.org/10.1007/PL00013972}{Why are sun leaves thicker than shade leaves? \textemdash{} {Consideration} based on analyses of {CO}{\textsubscript{2}} diffusion in the leaf}\DIFaddend . \emph{Journal of Plant Research} 114: 93--105.
+Terashima, I., S.-I. Miyazawa, and Y. T. Hanba. 2001. \href{https://doi.org/10.1007/PL00013972}{Why are \DIFdelbegin %DIFDELCMD < {%%%
+\DIFdel{Sun Leaves Thicker}%DIFDELCMD < } %%%
+\DIFdelend \DIFaddbegin \DIFadd{sun leaves thicker }\DIFaddend than \DIFdelbegin %DIFDELCMD < {%%%
+\DIFdel{Shade Leaves}%DIFDELCMD < }%%%
+\DIFdelend \DIFaddbegin \DIFadd{shade leaves}\DIFaddend ? \textemdash{} {Consideration} based on \DIFaddbegin \DIFadd{analyses of }\DIFaddend {\DIFdelbegin \DIFdel{Analyses}\DIFdelend \DIFaddbegin \DIFadd{CO}\DIFaddend }\DIFdelbegin \DIFdel{of }\DIFdelend {\DIFdelbegin \DIFdel{CO2 Diffusion}\DIFdelend \DIFaddbegin \DIFadd{\textsubscript{2}}\DIFaddend } \DIFaddbegin \DIFadd{diffusion }\DIFaddend in the \DIFdelbegin %DIFDELCMD < {%%%
+\DIFdel{Leaf}%DIFDELCMD < }%%%
+\DIFdelend \DIFaddbegin \DIFadd{leaf}\DIFaddend }. \emph{Journal of Plant Research} 114: 93--105.
 
 \leavevmode\vadjust pre{\hypertarget{ref-Warton2012a}{}}%
 Warton, D. I., R. A. Duursma, D. S. Falster, and S. Taskinen. 2012. \href{https://doi.org/10.1111/j.2041-210X.2011.00153.x}{Smatr 3\textendash{} an {R} package for estimation and inference about allometric lines}. \emph{Methods in Ecology and Evolution} 3: 257--259.
@@ -972,7 +988,7 @@ Yang, J., J. Lu, Y. Chen, E. Yan, J. Hu, X. Wang, and G. Shen. 2020. \DIFdelbegi
 \DIFdel{Intraspecific Trait Variation}%DIFDELCMD < } %%%
 \DIFdel{and }%DIFDELCMD < {%%%
 \DIFdel{Its Improvements}%DIFDELCMD < }%%%
-\DIFdelend \DIFaddbegin \href{https://doi.org/10.3389/fpls.2020.00053}{Large underestimation of intraspecific trait variation and its improvements}\DIFaddend . \emph{Frontiers in Plant Science} \DIFdelbegin \DIFdel{11.
+\DIFdelend \DIFaddbegin \href{https://doi.org/10.3389/fpls.2020.00053}{\DIFadd{Large underestimation of intraspecific trait variation and its improvements}}\DIFaddend . \emph{Frontiers in Plant Science} \DIFdelbegin \DIFdel{11.
 }\DIFdelend \DIFaddbegin \DIFadd{11: 53.
 }\DIFaddend 
 

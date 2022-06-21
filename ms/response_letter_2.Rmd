@@ -49,9 +49,11 @@ Dear Editors,
 We hereby resubmit the manuscript (AJB-D-21-00391R1), “Sources and consequences of mismatch between leaf disc and whole-leaf leaf mass per area (LMA)” (Phisamai Maenpuen, Masatoshi Katabuchi, Yusuke Onoda, Cong Zhou, Jiao-Lin Zhang, Ya-Jun Chen).
 We thank the associate editor and the reviewers for their careful attention to detail in our manuscript and for providing comments that have greatly improved the study.
 
-We found small errors in R codes and the total number of individuals used in our analysis was increased from 1365 to 1469.
+
+First, we found small errors in R codes and the total number of individuals used in our analysis was increased from 1365 to 1469.
 Accordingly, several statistical values have changed slightly (highlighted in blue).
-Additionally, we have cited one more R package that made a significant contribution to workflow management (Line 233-234).
+Second, we have cited one more R package that made a significant contribution to workflow management (Line 233-234).
+Finally, we would like add Masatoshi Katabuchi as co-first author, if the journal does not have the limitation for this arrangement.
 
 Below we provide detailed responses.
 The editing history is recorded in a separate pdf file.
@@ -71,29 +73,29 @@ Xishuangbanna Tropical Botanical Garden, Chinese Academy of Sciences
 > Associate Editor Comments:
 > AE comments: I agree with the reviewers that the paper looks much improved. Reviewer 1 has several further minor suggestions.
 
-Thank you again for the positive evalutation.
+Thank you again for the positive evaluation.
 
 > Reviewer #1: Review of AJB-D-21-00391_R1
 
 > Overall summary: The authors did a really nice job updating this manuscript in response to the previous reviews. I especially appreciate the inclusion of the section "Conversion between whole-leaf and leaf disc LMA". I also appreciate the updated appendices, which very much help to clarify the experimental design. I just have a few lingering comments, the only major one being about the new section (see comment on lines 311-317):
 
-We are pleased that the reviewer was satisfied with the revsied manuscript.
+We are pleased that the reviewer was satisfied with the revised manuscript.
 We also thank you for pointing out typos and style errors.
 
 > Line 123: it would be helpful to rephrase this line to clarify what unit is being reported here. For example: "We collected leaves from ___individuals of 334 species from 4 biomes"
 
 Thank you.
-We have added the number of individuals (Line 123).
+We have added the number of individuals (Line 124).
 
 > Line 139-143 Please report the # of individuals and # of species for each of the two datasets here
 
 Thank you for pointing this error out.
-We have added the numbers of species and indivdiuals (Line 142-144)
+We have added the numbers of species and individuals (Line 143-145).
 
 > Line 169 Remove second "using a micrometer".
 
 Thank you.
-We have corrected it (Line 170).
+We have corrected it (Line 171).
 
 > Lines 311-317 I love this inclusion in the revision. However, I'm not clear on the difference between eq. 1 and 2 and between eq. 3 and 4. Please clarify when authors should use each. Also please clarify how generalizable you believe these equations are.
 
@@ -104,7 +106,7 @@ We have added an explnation of the differences, and the text now reads:
 > Line 315 Typo
 
 Thank you again for pointing this error out.
-We have corrected it (Line 319).
+We have corrected it (Line 320).
 
 > Reviewer #2: The authors have well responded to my comments. I can recommend accepting it if the associate editor and another reviewer also feel satisfactory with this revised manuscript.
 
@@ -122,12 +124,12 @@ For more details see “c. Key Words” at https://bsapubs.onlinelibrary.wiley.c
 > In the Materials and Methods section please provide the city, spelled-out state (if in USA), and country for the locations and companies mentioned (such as L175).
 
 Confirmed:
-We have spelled-out state (Ohio) (Line 176).
+We have spelled-out state (Ohio) (Line 177).
 
 > Would you like to thank the reviewers in the acknowledgements? It is not required, but we recommend it, especially if you found their comments helpful. (They don’t, as a rule, see your final response letter.)
 
 Confirmed:
-We have added a new line for the acknowledgements (line 379-380).
+We have added a new line for the acknowledgements (line 380-381).
 
 > Data Availability:
 > Please provide a doi for your data deposited in the Zenodo database at this time.
@@ -136,7 +138,7 @@ We have added a new line for the acknowledgements (line 379-380).
 
 
 Confirmed.
-We have added the DOI: https://doi.org/10.5281/zenodo.6665083 (Line 395-397)
+We have added the DOI: https://doi.org/10.5281/zenodo.6665083 (Line 397-398)
 
 > For the online supplements:
 > a) For appendices with multiple parts, these parts should be labeled Appendix S1, Table (or Fig) S1; Appendix S1, Table S2, etc.

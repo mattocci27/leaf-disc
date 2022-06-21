@@ -72,11 +72,11 @@ Sources and consequences of mismatch between leaf disc and whole-leaf leaf mass 
 
 $$ $$
 
-Phisamai Maenpuen^1,2,3^,
+Phisamai Maenpuen^1,2,3\*^,
 Masatoshi Katabuchi^1\*^,
 Yusuke Onoda^4^,
 Cong Zhou^1,2^,
-Jiao-Lin Zhang^1,3\*^,
+Jiao-Lin Zhang^1,3^,
 Ya-Jun Chen^1,3,5^
 
 $$ $$
@@ -104,6 +104,8 @@ Jiao-Lin Zhang
 Tel: +86 691 871 3046;
 Fax: +86 691 871 5070;
 E-mail: zjl@xtbg.org.cn
+
+\* These authors contributed equally to this work.
 
 $$ $$
 
@@ -373,8 +375,8 @@ Accurately representing leaf traits will probably require careful selection betw
 
 We thank the editors and two anonymous reviewers, whose comments greatly improved the manuscript.
 We also thank Lian-Bin Tao and Peng-Yun Yan for field work in China.
-The data collection in Yakushima was achieved with help of many colleagues in particular Kenshi Tetsuka and financially supported by the Global COE Program ‘Asian conservation ecology’, MEXT of Japan for Tetsukazu Yahara.
 This work was funded by the National Natural Science Foundation of China (41861144016, 32071735, 31570406, 32171507), the CAS 'Light of West China' Program, Yunnan Provincial Science and Technology Department (2018HB068), and Yunnan Revitalization Talents Support Plan (YNWR-QNBJ-2019-177).
+The data collection in Yakushima was achieved with help of many colleagues in particular Kenshi Tetsuka and financially supported by the Global COE Program ‘Asian conservation ecology’, MEXT of Japan for Tetsukazu Yahara.
 PM was supported by financial support from CAS-TWAS President’s Fellowship for International Doctoral Students.
 MK was supported by CAS President’s International Fellowship Initiative (2020FYB0003).
 
