@@ -70,6 +70,9 @@ Xishuangbanna Tropical Botanical Garden, Chinese Academy of Sciences
 
 # Responses
 
+Please note that line numbers refer to LMA_method-diff36a960d.pdf that contains editing history.
+The word file has slightly different line numbers.
+
 > Associate Editor Comments:
 > AE comments: I agree with the reviewers that the paper looks much improved. Reviewer 1 has several further minor suggestions.
 
