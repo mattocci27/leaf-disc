@@ -1,5 +1,5 @@
 GIT = 36a960d # second submission
-all: ms/LMA_method.pdf ms/LMA_method.docx ms/LMA_method-diff$(GIT).pdf ms/response_letter_2.pdf
+all: ms/LMA_method.pdf ms/LMA_method.docx ms/LMA_method-diff$(GIT).pdf ms/response_letter_2.pdf ms/SI.pdf
 #docker: ms/LMA_method.pdf ms/diff.pdf
 local: ms/leaf_disc.bib
 dif: ms/LMA_method-diff$(GIT).pdf
@@ -23,6 +23,9 @@ ms/cover.docx: ms/cover.md
 	pandoc $< \
   --reference-doc ms/templates/cover_style.docx \
 	-o $@
+
+ms/SI.pdf: ms/SI.Rmd values.yml figs/* ms/leaf_disc.bib data/*
+	R -e 'system.time(rmarkdown::render("$<", "pdf_document"))'
 
 # ms/leaf_disc.bib: ~/trait-method.bib
 # 	cp $< $@

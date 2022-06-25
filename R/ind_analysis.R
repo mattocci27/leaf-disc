@@ -25,7 +25,10 @@ dm_glmm <- function(tree) {
   rownames(tb)[3] <- "log(Leaf area)"
   rownames(tb)[4] <- "log(Leaf thickness)"
   rownames(tb)[5] <- "Small leaf punch"
-  tb
+  tb |>
+    as_tibble() |>
+    write_csv("data/dm_glmm.csv")
+  paste("data/dm_glmm.csv")
 }
 
 

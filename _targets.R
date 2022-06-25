@@ -530,7 +530,14 @@ list(
         width = 3.5,
         height = 3.5
       )
-      paste0("figs/sma_sep", c(".png"))
+      ggsave(
+        "figs/sma_sep.pdf",
+        p,
+        device = cairo_pdf,
+        width = 3.5,
+        height = 3.5
+      )
+      paste0("figs/sma_sep", c(".png", ".pdf"))
     },
     format = "file"
   ),
@@ -545,7 +552,14 @@ list(
         width = 3,
         height = 3
       )
-      paste0("figs/ratio_dm", c(".png"))
+      ggsave(
+        "figs/ratio_dm.pdf",
+        p,
+        device = cairo_pdf,
+        width = 3,
+        height = 3
+      )
+      paste0("figs/ratio_dm", c(".png", ".pdf"))
     },
     format = "file"
   ),
@@ -560,7 +574,14 @@ list(
         width = 6,
         height = 3
       )
-      paste0("figs/lma_ld", c(".png"))
+      ggsave(
+        "figs/lma_ld.pdf",
+        p,
+        device = cairo_pdf,
+        width = 6,
+        height = 3
+      )
+      paste0("figs/lma_ld", c(".png", ".pdf"))
     },
     format = "file"
   ),
@@ -631,15 +652,16 @@ list(
 
   tar_target(
     dm_glmm_tab,
-    dm_glmm(tree)
+    dm_glmm(tree),
+    format = "file"
   ),
   tar_render(
     report,
     "report.Rmd"
-   ),
-  tar_render(
-    si,
-    "ms/SI.Rmd",
-    output_format = "html_document"
    )
+  # tar_render(
+  #   si,
+  #   "ms/SI.Rmd",
+  #   output_format = "pdf_document"
+  #  )
 )

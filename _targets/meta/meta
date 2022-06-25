@@ -32,8 +32,8 @@ data_clean_cv|function|bcd05ea5987c1ab1|||||||||||||||
 data_clean_mean|function|5fd6128dfec47328|||||||||||||||
 data_clean_tree|function|41bd043134150469|||||||||||||||
 div_check|function|9913df743f96f3d8|||||||||||||||
-dm_glmm|function|e3fd46b7101f64ac|||||||||||||||
-dm_glmm_tab|stem|e1f4387986b8d46a|c53ccbb2648c011b|5e7582206e0b6118|1700728476||t19161.294485433s|efcd02b2c80eadaa|298|rds|local|vector|||1.086||
+dm_glmm|function|8c8e03c0ebd0f3a3|||||||||||||||
+dm_glmm_tab|stem|f6d318193663d27f|c53ccbb2648c011b|8ce65657e474920f|1700728476|data/dm_glmm.csv|t19168.4341192761s|f03314691db89012|182|file|local|vector|||0.136||
 fit_sim_data|stem|6ef8b964d897c6bc|b73325f3ec22f2b1|6549ca047f05ab0c|1254334156||t19161.2944629794s|1b632e0752a33977|3120|qs|local|vector|||0||
 fit_sim_diagnostics_model|stem|2041412df7bf96f8|aee84e5a1005546e|231e7dabcd6ec9ac|-486598987||t19161.2945407569s|107ee31a18b4437b|78163|fst_tbl|local|vector|||0.014||
 fit_sim_draws_model|stem|fa205756654e97fc|06453cf05d5948be|231e7dabcd6ec9ac|-1102940780||t19161.2945588123s|bb1ebf9f26ca06f7|16392989|fst_tbl|local|vector|||0.681||
@@ -132,7 +132,7 @@ fit_sp_punch4_mcmc_model|stem|375e30a4ee17cd83|fbb8a034d34e88e6|cb305b2892241a07
 fit_sp_punch4_summary_model|stem|bd7f26c5bde8aef8|a8410422027558d4|e78bc0c67699d66b|526707933||t19161.2955124203s|f2ab84bc1fbf5dcd|135135|fst_tbl|local|vector|||24.505||
 get_name|function|7a18c7ab185fb2db|||||||||||||||
 lma_la|stem|46ecb18abbbbb9ba|fb2589e25fdcd8e2|ef46db3751d8e999|-1055660499|data-raw/yunnan_la.csv|t19160.6746329927s|29ef6665baf2b1c1|14915|file|local|vector|||0.378||
-lma_ld_plot|stem|a90574a518af9f58|bcc4f4069e59c56d|44fd5d433863405e|-1333039547|figs/lma_ld.png|t19163.2715862628s|7f58f65d3ce8f6e9|210431|file|local|vector|||6.792||
+lma_ld_plot|stem|40e94ed9af45cba2|e1bf3e10a7f088b8|17631e79e42f2114|-1333039547|figs/lma_ld.png*figs/lma_ld.pdf|t19168.4397272247s|49033f142d3d205c|248737|file|local|vector|||11.837||
 lma_ld_wrap_point|function|2729b351fd53478d|||||||||||||||
 lma_raw|stem|ffb025dfa27cc0bb|d974977d59a9f9e6|ef46db3751d8e999|-1228800265|data-raw/yunnan_lma.csv|t19160.6746329927s|4f8bb3e73a281ddc|172130|file|local|vector|||0.381||
 lma_raw_re|stem|3aa9e009bb2305f9|7d50d0ace870fc2d|c416ce3f05c509e8|-1208287638||t19161.2944658035s|e509c68a9c9e329f|46263|rds|local|vector|||0.179||
@@ -147,17 +147,17 @@ pred_each2|function|df8d526249baa46e|||||||||||||||
 pred_mcmc|function|d6faa05ff8a9256c|||||||||||||||
 pred_mcmc_plot|stem|65e87b716b7f9da1|978f769173162588|284b342bf9de1ac2|-458926008|figs/pred_mcmc.png*figs/pred_mcmc.pdf|t19161.2951959397s|f325f68ba02f48b0|102459|file|local|vector|||6.29||
 ratio_dm|function|dbd9be395e382a17|||||||||||||||
-ratio_dm_plot|stem|bbe0218ce0441f4c|31e4d879753eee68|52f76ae3d78bab54|719225831|figs/ratio_dm.png|t19161.2944895071s|2494cb6a053cb9d1|237638|file|local|vector|||1.354|Removed 94 rows containing missing values geom_point.|
-report|stem|541cc58aadad1b7b|4ef7750735eafa83|f1d829bf26adf708|-237041703|report.html*report.Rmd|t19163.2716827003s|1318d8ef1004ca8c|2886944|file|local|vector|||5.755||
+ratio_dm_plot|stem|004eab69007ec5b2|69673524c0d43877|aabc0daea7ab592c|719225831|figs/ratio_dm.png*figs/ratio_dm.pdf|t19168.4448601923s|3d768ddd6c88c511|301599|file|local|vector|||0.593|Removed 94 rows containing missing values geom_point.. Removed 94 rows containing missing values geom_point.|
+report|stem|924c1d0a2f3cd5e1|4ef7750735eafa83|35924174d29bd104|-237041703|report.html*report.Rmd|t19168.4397953272s|b3ec8e2938a01e03|2886548|file|local|vector|||5.799||
 save_tiff|function|5bae6d4d57942267|||||||||||||||
-si|stem|5b0ea414dc76ac7f|093d99ed3d06734d|8fe56a46011866dc|2093119568|ms/SI.html*ms/SI.Rmd|t19163.6134367985s|c52469dde8c537f7|4862870|file|local|vector|||0.706||
-site_info|stem|9a71faf02887457a|d765ddff39700187|20c816180a355a1a|1530165991|data/site_info.json|t19161.2946641823s|120d90f695a7bfd7|2336|file|local|vector|||0.032||
+si|stem|5b0ea414dc76ac7f|2989fe39160fbeed|8fe56a46011866dc|2093119568|ms/SI.html*ms/SI.Rmd|t19163.6134367985s||4862870|file|local|vector|||0.417|error in running command|LaTeX failed to compile SI.tex. See httpsyihui.orgtinytexrdebugging for debugging tips. See SI.log for more info.
+site_info|stem|9a71faf02887457a|d765ddff39700187|20c816180a355a1a|1530165991|data/site_info.json|t19168.464296378s|120d90f695a7bfd7|2336|file|local|vector|||0.341||
 site_info_raw|stem|247a5cf354f6eeab|3e67250b7942301c|ef46db3751d8e999|-1723180885|data-raw/site_info_raw.json|t19125.7165989896s|9fb6a091b313babb|1611|file|local|vector|||0.375||
 sma_fun|function|276e65d7f92ddb7a|||||||||||||||
 sma_plot|stem|a7c872edadd6912b|1ab62f8e949c16c8|dba4025012e4f3d2|1199661423|figs/sma.png*figs/sma.pdf|t19161.2947539504s|fa864e5751017a35|220596|file|local|vector|||24.201||
 sma_point|function|d228f5276831870d|||||||||||||||
 sma_point_sep|function|e4804c30415ce595|||||||||||||||
-sma_sep_plot|stem|eaa2af5bd1e58ae3|f4e18a80339c4ebc|9aa7050d25deae18|-1158231308|figs/sma_sep.png|t19161.3441841092s|282c8073f7167f74|179876|file|local|vector|||6.477||
+sma_sep_plot|stem|b0e14424be727a2f|1208865a06ba0268|0b3097f2d4941b62|-1158231308|figs/sma_sep.png*figs/sma_sep.pdf|t19168.443273463s|d92d51407d66e87e|220745|file|local|vector|||12.449||
 sp_cv|stem|46e02e901d8fcb69|860791273b06134d|b0644bd2c7106367|1537666347||t19161.2944970071s|17fe62a7243238c3|5548|rds|local|vector|||0.327||
 sp_cv_file|stem|7010322f24d67018|9aaf2755a481b25e|076e22e1e8b82163|-166939267|data/sp_cv.csv|t19161.2944845071s|5d8bedb3709ebbd6|18427|file|local|vector|||0.597||
 sp_mean|stem|bd7373fcd41a5381|a53f408c3bd649a4|f4c27b8a10dbaaca|-1139609546||t19161.2944686275s|8747fe8a407c7c8e|23908|rds|local|vector|||0.041||

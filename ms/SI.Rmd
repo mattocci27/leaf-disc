@@ -39,13 +39,13 @@ output:
     keep_md: false
     fig_caption: yes
     keep_tex: yes
-    toc: no
+    toc: yes
     number_sections: no
     template: templates/eisvogel2.tex
     #template: null
-    pandoc_args:
-      - "--filter"
-      - "pandoc-crossref"
+    # pandoc_args:
+    #   - "--filter"
+    #   - "pandoc-crossref"
   word_document:
     fig_width: 6
     fig_caption: yes
@@ -62,6 +62,8 @@ library(knitr)
 library(tidyverse)
 library(methods)
 library(targets)
+library(here)
+library(kableExtra)
 basename <- "LMA_method"
 opts_chunk$set(fig.path = paste("figs/", sep = ""))
 opts_chunk$set(tidy = FALSE,
@@ -76,10 +78,8 @@ opts_chunk$set(dev='pdf')
 
 # https://github.com/haozhu233/kableExtra/issues/47
 options(kableExtra.auto_format = FALSE)
-library(kableExtra)
-
 # for dependency
-targets::tar_load(yml)
+#targets::tar_load(yml)
 #  for non-targets
 # val <- yaml::yaml.load_file("../values.yml")
 #val <- yaml::yaml.load_file("values.yml")
@@ -89,6 +89,8 @@ targets::tar_load(yml)
 
 Supporting Tables and Figures.
 
+\newpage
+
 # Table S1:
 
 Site information.
@@ -96,15 +98,22 @@ MAT: mean annual temperature,
 MAP: mean annual precipitation,
 CV: coefficient of variation
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, caption = "hopge"}
 library(jsonlite)
 #site <- fromJSON("../data/site_info.json")
-site <- fromJSON("data/site_info.json")
+#site <- fromJSON("data/site_info.json")
+site <- fromJSON(here("data", "site_info.json"))
 site |>
-  kable(format = "html") |>
+  kable(format = "latex",
+    caption = "Site information.
+              MAT: mean annual temperature,
+              MAP: mean annual precipitation,
+              CV: coefficient of variation") |>
   # kable_styling() |>
-  kable_styling(latex_options = "scale_down")
-  #kableExtra::landscape()
+  kable_styling(latex_options = "scale_down") |>
+  # column_spec(13:16, width = "2cm") |>
+  column_spec(1:16, width = "2cm") |>
+  kableExtra::landscape()
 ```
 
 The site information and climate data in Yunnan, referred to @Fei2018, and @Song2017.
@@ -119,9 +128,9 @@ Species was used as a random intercept.
 The leaf punch size is described as an effect of '0.6 cm diameter' compared with '1.0 cm diameter'.
 
 ```{r, eval=TRUE, echo=FALSE}
-targets::tar_load(dm_glmm_tab)
-dm_glmm_tab |>
-  kable(format = "html") |>
+dm_glmm <- read_csv(here("data", "dm_glmm.csv"))
+dm_glmm |>
+  kable(format = "latex") |>
   kable_styling()
 ```
 
@@ -162,11 +171,8 @@ We have independent measurement for thickness for leaf discs and whole-leaves in
 If we use the same leaf thickness values for leaf discs and whole-leaves (i.e., LTw~i~/LTd~i~ =1), the scatter plots will be identical for LMA and LD.
 Consequently, we do not perform further analyses for LD, because differences between whole-leaf LD and leaf disc LD only depends on the ratio between whole-leaf LMA and leaf disc LMA and measurement errors of leaf thickness.
 
-```{r, include=FALSE}
-targets::tar_load(lma_ld_plot)
-```
 
-![](../figs/lma_ld.png){ width="600" style="display: block; margin: 0 auto" }
+![](../figs/lma_ld.pdf){ width="600" style="display: block; margin: 0 auto" }
 
 Figure: Relationships between species mean leaf mass per area (LMA) and leaf tissue density (LD) determined by using whole leaves and leaf discs for the Yunnan dataset that has both leaf thickness for leaf discs and whole leaves.
 Dashed lines indicate 1:1 lines.
@@ -190,11 +196,8 @@ Thick and thin lines indicate 90% and 95% credible intervals, respectively.
 Circles show posterior means of coefficients.
 Circles filled with blue indicate significant effects and white indicate non-significance effects.
 
-```{r, include=FALSE}
-targets::tar_load(coef_sp_punch1_add_plot)
-```
 
-![](../figs/coef_sp_punch1_add.png)
+![](../figs/coef_sp_punch1_add.pdf)
 
 \newpage
 
@@ -206,11 +209,8 @@ Blue solid lines indicate standardized major axis (SMA) regressions.
 The 95% confidence intervals are resented as the shaded area.
 The correlation is significant (*P* < 0.001).
 
-```{r, include=FALSE}
-targets::tar_load(sma_sep_plot)
-```
 
-![](../figs/sma_sep.png){ width="400" style="display: block; margin: 0 auto" }
+![](../figs/sma_sep.pdf){ width="400" style="display: block; margin: 0 auto" }
 
 \newpage
 
@@ -220,11 +220,8 @@ Relationships between whole-leaf LMA : disc leaf LMA and total dry mass for the 
 The relationships was heteroscedastic (unequal variance, *p* < 0.001; all the samples were analyzed together).
 Samples with small total dry mass tended to show greater variance.
 
-```{r, include=FALSE}
-targets::tar_load(ratio_dm_plot)
-```
 
-![](../figs/ratio_dm.png){ width="400" style="display: block; margin: 0 auto" }
+![](../figs/ratio_dm.pdf){ width="400" style="display: block; margin: 0 auto" }
 
 \newpage
 
