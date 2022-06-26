@@ -1,34 +1,20 @@
 ---
 title: "Appendix S1: Supporting Tables and Figures."
-#title: "Maenpuen *et al.* --American Journal of Botany-- Appendix S1"
 geometry: margin=1in
 link-citations: yes
 csl: templates/american-journal-of-botany.csl
 bibliography: leaf_disc.bib
 fontsize: 12pt
-#font-famliy: "ebgaramond"
-mainfont: Arial
-sansfont: Arial
 header-includes:
-  - \usepackage{booktabs}
-  - \usepackage{longtable}
-  - \usepackage{array}
-  - \usepackage{multirow}
-  - \usepackage{wrapfig}
   - \usepackage{float}
+  - \usepackage{booktabs}
   - \usepackage{colortbl}
-  - \usepackage{pdflscape}
-  - \usepackage{tabu}
-  - \usepackage[normalem]{ulem}
-  - \usepackage{makecell}
-  - \usepackage{xcolor}
-  - \usepackage{caption}
   - \usepackage{fancyhdr}
-  - \pagestyle{fancy}  # enable header
-  - \fancypagestyle{plain}{\pagestyle{fancy}} # show header on first page
-  - \fancyhead[RE,RO]{Maenpuen \textit{et al}. --American Journal of Botany-- Appendix S1} # add header on right side
- # - \captionsetup[figure]{name=Figure S} #  - \usepackage{lineno}
-#  - \linenumbers
+  - \pagestyle{fancy}
+  - \usepackage[default]{sourcesanspro}
+  - \usepackage{sourcecodepro}
+  - \fancypagestyle{plain}{\pagestyle{fancy}}
+  - \fancyhead[RE,RO]{Maenpuen \textit{et al}. --American Journal of Botany-- Appendix S1}
 output:
   html_document:
     fig_caption: yes
@@ -92,14 +78,8 @@ colnames(site2) <- site2[1,]
 site2 <- site2[-1,]
 site2 |>
   kbl(booktabs = TRUE, escape = FALSE, format = "latex") |>
-  #kable(format = "simple") |>
-    # caption = "Site information.
-    #           MAT: mean annual temperature,
-    #           MAP: mean annual precipitation,
-    #           CV: coefficient of variation") |>
   kable_styling(latex_options = c("striped", "HOLD_position")) |>
-  column_spec(1:5, width = "3cm")# |>
-#  kableExtra::landscape()
+  column_spec(1:5, width = "3cm")
 ```
 
 The site information and climate data in Yunnan, referred to @Fei2018, and @Song2017.
@@ -126,10 +106,11 @@ dm_glmm |>
 
 Detailed sampling protocol for whole-leaf and leaf disc LMA.
 
-![](../figs/S2.jpeg){ width="470" style="display: block; margin: 0 auto" }
+::: {.center data-latex=""}
+![](../figs/S2.jpeg){ width=470 margin=auto }
+:::
 
 \newpage
-
 
 # Figure S2:
 
@@ -156,8 +137,7 @@ We have independent measurement for thickness for leaf discs and whole-leaves in
 If we use the same leaf thickness values for leaf discs and whole-leaves (i.e., LTw~i~/LTd~i~ =1), the scatter plots will be identical for LMA and LD.
 Consequently, we do not perform further analyses for LD, because differences between whole-leaf LD and leaf disc LD only depends on the ratio between whole-leaf LMA and leaf disc LMA and measurement errors of leaf thickness.
 
-
-![](../figs/lma_ld.pdf){ width="600" style="display: block; margin: 0 auto" }
+![](../figs/lma_ld.pdf){ width="600" style="display: block; margin: 0 auto; align: center" }
 
 Relationships between species mean leaf mass per area (LMA) and leaf tissue density (LD) determined by using whole leaves and leaf discs for the Yunnan dataset that has both leaf thickness for leaf discs and whole leaves.
 Dashed lines indicate 1:1 lines.
