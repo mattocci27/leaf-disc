@@ -151,8 +151,8 @@ ratio_dm_plot|stem|004eab69007ec5b2|69673524c0d43877|aabc0daea7ab592c|719225831|
 report|stem|924c1d0a2f3cd5e1|4ef7750735eafa83|35924174d29bd104|-237041703|report.html*report.Rmd|t19168.4397953272s|b3ec8e2938a01e03|2886548|file|local|vector|||5.799||
 save_tiff|function|5bae6d4d57942267|||||||||||||||
 si|stem|5b0ea414dc76ac7f|2989fe39160fbeed|8fe56a46011866dc|2093119568|ms/SI.html*ms/SI.Rmd|t19163.6134367985s||4862870|file|local|vector|||0.417|error in running command|LaTeX failed to compile SI.tex. See httpsyihui.orgtinytexrdebugging for debugging tips. See SI.log for more info.
-site_info|stem|9a71faf02887457a|d765ddff39700187|20c816180a355a1a|1530165991|data/site_info.json|t19168.464296378s|120d90f695a7bfd7|2336|file|local|vector|||0.341||
-site_info_raw|stem|247a5cf354f6eeab|3e67250b7942301c|ef46db3751d8e999|-1723180885|data-raw/site_info_raw.json|t19125.7165989896s|9fb6a091b313babb|1611|file|local|vector|||0.375||
+site_info|stem|4e8151579a43e114|d765ddff39700187|9fbe819694b703f0|1530165991|data/site_info.json|t19169.4358772189s|dba4431b618a9291|2334|file|local|vector|||0.344||
+site_info_raw|stem|2d6db37879952781|3e67250b7942301c|ef46db3751d8e999|-1723180885|data-raw/site_info_raw.json|t19169.4356712888s|49c3093a2e8614d1|1609|file|local|vector|||0.329||
 sma_fun|function|276e65d7f92ddb7a|||||||||||||||
 sma_plot|stem|a7c872edadd6912b|1ab62f8e949c16c8|dba4025012e4f3d2|1199661423|figs/sma.png*figs/sma.pdf|t19161.2947539504s|fa864e5751017a35|220596|file|local|vector|||24.201||
 sma_point|function|d228f5276831870d|||||||||||||||

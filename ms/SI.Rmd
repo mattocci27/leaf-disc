@@ -1,11 +1,14 @@
 ---
-title: "Maenpuen *et al.* --American Journal of Botany-- Appendix S1"
+title: "Appendix S1: Supporting Tables and Figures."
+#title: "Maenpuen *et al.* --American Journal of Botany-- Appendix S1"
 geometry: margin=1in
 link-citations: yes
 csl: templates/american-journal-of-botany.csl
 bibliography: leaf_disc.bib
 fontsize: 12pt
 #font-famliy: "ebgaramond"
+mainfont: Arial
+sansfont: Arial
 header-includes:
   - \usepackage{booktabs}
   - \usepackage{longtable}
@@ -16,12 +19,15 @@ header-includes:
   - \usepackage{colortbl}
   - \usepackage{pdflscape}
   - \usepackage{tabu}
-  - \usepackage{threeparttable}
-  - \usepackage{threeparttablex}
   - \usepackage[normalem]{ulem}
   - \usepackage{makecell}
   - \usepackage{xcolor}
-#  - \usepackage{lineno}
+  - \usepackage{caption}
+  - \usepackage{fancyhdr}
+  - \pagestyle{fancy}  # enable header
+  - \fancypagestyle{plain}{\pagestyle{fancy}} # show header on first page
+  - \fancyhead[RE,RO]{Maenpuen \textit{et al}. --American Journal of Botany-- Appendix S1} # add header on right side
+ # - \captionsetup[figure]{name=Figure S} #  - \usepackage{lineno}
 #  - \linenumbers
 output:
   html_document:
@@ -35,26 +41,13 @@ output:
       collapsed: TRUE
       smooth_scroll: TRUE
       toc: true
-  pdf_document:
-    keep_md: false
-    fig_caption: yes
-    keep_tex: yes
+  bookdown::pdf_document2:
+    citation_package: default
     toc: yes
     number_sections: no
-    template: templates/eisvogel2.tex
-    #template: null
-    # pandoc_args:
-    #   - "--filter"
-    #   - "pandoc-crossref"
-  word_document:
-    fig_width: 6
-    fig_caption: yes
-    toc: FALSE
-    reference_docx: templates/rmd_style.docx
-    pandoc_args:
-    - "--filter"
-    - "pandoc-crossref"
-    - "--mathml"
+    fig_caption: no
+    keep_tex: yes
+    # template: templates/eisvogel2.tex
 ---
 
 ```{r caching, include=FALSE, eval=TRUE}
@@ -78,16 +71,7 @@ opts_chunk$set(dev='pdf')
 
 # https://github.com/haozhu233/kableExtra/issues/47
 options(kableExtra.auto_format = FALSE)
-# for dependency
-#targets::tar_load(yml)
-#  for non-targets
-# val <- yaml::yaml.load_file("../values.yml")
-#val <- yaml::yaml.load_file("values.yml")
 ```
-
-# Appendix S1:
-
-Supporting Tables and Figures.
 
 \newpage
 
@@ -96,31 +80,32 @@ Supporting Tables and Figures.
 Site information.
 MAT: mean annual temperature,
 MAP: mean annual precipitation,
-CV: coefficient of variation
+CV: coefficient of variation.
 
 ```{r, echo=FALSE, caption = "hopge"}
 library(jsonlite)
-#site <- fromJSON("../data/site_info.json")
-#site <- fromJSON("data/site_info.json")
 site <- fromJSON(here("data", "site_info.json"))
-site |>
-  kable(format = "latex",
-    caption = "Site information.
-              MAT: mean annual temperature,
-              MAP: mean annual precipitation,
-              CV: coefficient of variation") |>
-  # kable_styling() |>
-  kable_styling(latex_options = "scale_down") |>
-  # column_spec(13:16, width = "2cm") |>
-  column_spec(1:16, width = "2cm") |>
-  kableExtra::landscape()
+site2 <- t(site)
+site2[1,] <- t(site)[2,]
+site2[2,] <- t(site)[1,]
+colnames(site2) <- site2[1,]
+site2 <- site2[-1,]
+site2 |>
+  kbl(booktabs = TRUE, escape = FALSE, format = "latex") |>
+  #kable(format = "simple") |>
+    # caption = "Site information.
+    #           MAT: mean annual temperature,
+    #           MAP: mean annual precipitation,
+    #           CV: coefficient of variation") |>
+  kable_styling(latex_options = c("striped", "HOLD_position")) |>
+  column_spec(1:5, width = "3cm")# |>
+#  kableExtra::landscape()
 ```
 
 The site information and climate data in Yunnan, referred to @Fei2018, and @Song2017.
 MAT and MAP of Yakushima were obtained from the Yakushima meteorological station and @Eguchi2006.
 
 \newpage
-
 # Table S2:
 
 Summary of a linear mixed model for log-transformed total dry mass of leaf discs for each tree individual.
@@ -130,8 +115,9 @@ The leaf punch size is described as an effect of '0.6 cm diameter' compared with
 ```{r, eval=TRUE, echo=FALSE}
 dm_glmm <- read_csv(here("data", "dm_glmm.csv"))
 dm_glmm |>
-  kable(format = "latex") |>
-  kable_styling()
+  rename(`\\textit{P} value` = `*P* value`) |>
+  kbl(booktabs = TRUE, escape = FALSE, format = "latex") |>
+  kable_styling(latex_options = c("striped", "HOLD_position"))
 ```
 
 \newpage
@@ -140,8 +126,7 @@ dm_glmm |>
 
 Detailed sampling protocol for whole-leaf and leaf disc LMA.
 
-
-![](../figs/S2.jpeg)
+![](../figs/S2.jpeg){ width="470" style="display: block; margin: 0 auto" }
 
 \newpage
 
@@ -174,7 +159,7 @@ Consequently, we do not perform further analyses for LD, because differences bet
 
 ![](../figs/lma_ld.pdf){ width="600" style="display: block; margin: 0 auto" }
 
-Figure: Relationships between species mean leaf mass per area (LMA) and leaf tissue density (LD) determined by using whole leaves and leaf discs for the Yunnan dataset that has both leaf thickness for leaf discs and whole leaves.
+Relationships between species mean leaf mass per area (LMA) and leaf tissue density (LD) determined by using whole leaves and leaf discs for the Yunnan dataset that has both leaf thickness for leaf discs and whole leaves.
 Dashed lines indicate 1:1 lines.
 Blue solid lines indicate standardized major axis regressions.
 The 95% confidence intervals are presented as the shaded area.

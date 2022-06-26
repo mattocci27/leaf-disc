@@ -25,7 +25,7 @@ ms/cover.docx: ms/cover.md
 	-o $@
 
 ms/SI.pdf: ms/SI.Rmd values.yml figs/* ms/leaf_disc.bib data/*
-	R -e 'system.time(rmarkdown::render("$<", "pdf_document"))'
+	R -e 'system.time(rmarkdown::render("$<", "bookdown::pdf_document2"))'
 
 # ms/leaf_disc.bib: ~/trait-method.bib
 # 	cp $< $@
