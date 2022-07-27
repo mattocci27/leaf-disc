@@ -300,8 +300,7 @@ coef_pointrange <- function(data, ld = TRUE, add = FALSE) {
   theme_bw() &
   theme(
     legend.position = "none",
-    plot.tag = element_text(face = "bold"),
-    text = element_text(family = "Arial"))
+    plot.tag = element_text(face = "bold"))
 }
 
 
@@ -469,8 +468,8 @@ pred_mcmc <- function(draws, sp_mean, n = 80) {
   p_lt <- plot_fun(d_lt, xlab = "Leaf thickness (mm)")
   p_la <- plot_fun(d_la, xlab = expression(paste("Leaf area (", cm^2,")")))
   p_ld <- plot_fun(d_ld, xlab = expression(paste("Leaf tissue density (g ", cm^-3,")"))) +
+  #p_ld <- plot_fun(d_ld, xlab = expression(paste(Leaf~tissue~density," (g ", cm^-3,")"))) +
       theme(
-      text = element_text(family = "Arial"),
       legend.position = c(0.6, 0.21),
       legend.key.size = unit(0.5, "cm"),
       legend.spacing.y = unit(0.1, "cm"),
@@ -483,7 +482,7 @@ pred_mcmc <- function(draws, sp_mean, n = 80) {
   p_ld + p_la + p_lt +
       plot_annotation(tag_levels = "a") &
       theme(
-        text = element_text(family = "Arial", size = 8.5),
+        text = element_text(size = 8.5),
         plot.tag = element_text(face = "bold")
       )
 }

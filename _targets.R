@@ -420,7 +420,6 @@ list(
       ggsave(
         "figs/pred_mcmc.pdf",
         p,
-        device = cairo_pdf,
         width = 7.25,
         height = 2.5
       )
@@ -442,7 +441,6 @@ list(
       ggsave(
         "figs/coef_sp_punch1.pdf",
         p,
-        device = cairo_pdf,
         width = 5,
         height = 6)
       paste0("figs/coef_sp_punch1", c(".png", ".pdf"))
@@ -462,7 +460,6 @@ list(
       ggsave(
         "figs/coef_sp_punch1_add.pdf",
         p,
-        device = cairo_pdf,
         width = 5,
         height = 6)
       paste0("figs/coef_sp_punch1_add", c(".png", ".pdf"))
@@ -470,10 +467,6 @@ list(
     format = "file"
   ),
 
-  # tar_target(
-  #   cv_tree,
-  #   create_cv_fit(tree, k = 10, seed = 123)
-  # ),
   tar_target(
     cv_sp,
     create_cv_fit(sp_mean, k = 10, seed = 123)
@@ -512,7 +505,6 @@ list(
       ggsave(
         "figs/sma.pdf",
         p,
-        device = cairo_pdf,
         width = 3.5,
         height = 3.5
       )
@@ -533,7 +525,6 @@ list(
       ggsave(
         "figs/sma_sep.pdf",
         p,
-        device = cairo_pdf,
         width = 3.5,
         height = 3.5
       )
@@ -555,7 +546,6 @@ list(
       ggsave(
         "figs/ratio_dm.pdf",
         p,
-        device = cairo_pdf,
         width = 3,
         height = 3
       )
@@ -577,7 +567,6 @@ list(
       ggsave(
         "figs/lma_ld.pdf",
         p,
-        device = cairo_pdf,
         width = 6,
         height = 3
       )
@@ -599,7 +588,6 @@ list(
       ggsave(
         "figs/cv_pool.pdf",
         p,
-        device = cairo_pdf,
         width = 3.5,
         height = 3.5
       )
@@ -620,7 +608,6 @@ list(
       ggsave(
         "figs/cv_pool_rm.pdf",
         p,
-        device = cairo_pdf,
         width = 3,
         height = 3
       )
@@ -642,7 +629,6 @@ list(
       ggsave(
         "figs/petiole.pdf",
         p,
-        device = cairo_pdf,
         width = 6,
         height = 3)
         paste0("figs/petiole", c(".png", ".pdf"))
