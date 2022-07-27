@@ -76,7 +76,7 @@ cv_pool_point <- function(sp_cv, remove_outliers = FALSE) {
     theme_bw()
   if (remove_outliers) {
     p <- p +
-      coord_fixed(xlim = c(0.005, 0.1), ylim = c(0.005, 0.1))
+      coord_fixed(xlim = c(0.005, 0.1) * 100, ylim = c(0.005, 0.1) * 100)
   }
   p
 }

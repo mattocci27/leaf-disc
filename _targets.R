@@ -602,14 +602,14 @@ list(
         "figs/cv_pool_rm.png",
         p,
         dpi = 300,
-        width = 3,
-        height = 3
+        width = 3.5,
+        height = 3.5
       )
       ggsave(
         "figs/cv_pool_rm.pdf",
         p,
-        width = 3,
-        height = 3
+        width = 3.5,
+        height = 3.5
       )
       paste0("figs/cv_pool_rm", c(".png", ".pdf"))
     },
