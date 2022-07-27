@@ -10,11 +10,9 @@ sma_point <- function(data) {
     xlab(expression("Leaf disc LMA "(g~m^{-2}))) +
     ylab(expression("Whole-leaf LMA "(g~m^{-2}))) +
     stat_cor(
-      aes(label = paste(..rr.label.., ..n.label.., sep = "~`,`~"),
-          family = "Arial")
+      aes(label = paste(..rr.label.., ..n.label.., sep = "~`,`~"))
     ) +
-    theme_bw() +
-    theme(text = element_text(family = "Arial"))
+    theme_bw()
 }
 
 #' @title Leaf disc vs whole-leaf LMA (simple)
@@ -24,8 +22,8 @@ sma_point_sep <- function(data) {
     mutate(size_gr = ifelse(location == "Yakushima", "1.0-cm", "0.6-cm")) |>
     ggplot(aes(x = lma_disc, y = lma_leaf, col = size_gr)) +
     geom_point(alpha = 0.8) +
-    scale_x_log10() +
-    scale_y_log10() +
+    scale_x_log10(breaks = c(30, 50, 100, 200)) +
+    scale_y_log10(breaks = c(30, 50, 100, 200, 300)) +
     geom_abline(slope = 1, intercept = 0, lty = 2) +
     geom_sma(se = TRUE, nboot = 2000) +
     scale_color_manual(
@@ -39,11 +37,11 @@ sma_point_sep <- function(data) {
     xlab(expression("Leaf disc LMA "(g~m^{-2}))) +
     ylab(expression("Whole-leaf LMA "(g~m^{-2}))) +
     stat_cor(
-      aes(label = paste(..rr.label.., ..n.label.., sep = "~`,`~"), family = "Arial"),
+      aes(label = paste(..rr.label.., ..n.label.., sep = "~`,`~")),
       show.legend = FALSE
     ) +
     theme_bw() +
-    theme(text = element_text(family = "Arial"),
+    theme(
       legend.position = c(0.7, 0.15),
       legend.key.size = unit(0.5, "cm"),
       legend.spacing.y = unit(0.1, "cm"),
@@ -73,14 +71,12 @@ cv_pool_point <- function(sp_cv, remove_outliers = FALSE) {
        label.x.npc = 0.45,
        label.y.npc = 0.1,
        vjust = 1.5,
-       aes(label = paste(..rr.label.., ..n.label.., sep = "~`,`~"), family = "Arial")
+       aes(label = paste(..rr.label.., ..n.label.., sep = "~`,`~"))
      )  +
-    theme_bw() +
-    theme(
-      text = element_text(family = "Arial"))
+    theme_bw()
   if (remove_outliers) {
     p <- p +
-      coord_fixed(xlim = c(0.005, 0.1), ylim = c(0.005, 0.1))
+      coord_fixed(xlim = c(0.005, 0.1) * 100, ylim = c(0.005, 0.1) * 100)
   }
   p
 }
@@ -121,15 +117,12 @@ lma_ld_wrap_point <- function(sp_mean) {
     facet_wrap(~trait_lab, scale = "free", labeller = label_parsed) +
     stat_cor(
       aes(
-        label = paste(..rr.label.., ..n.label.., sep = "~`,`~"),
-        family = "Arial"
+        label = paste(..rr.label.., ..n.label.., sep = "~`,`~")
       )
     ) +
     xlab("Leaf disc") +
     ylab("Whole-leaf") +
-    theme_bw() +
-    theme(
-      text = element_text(family = "Arial"))
+    theme_bw()
   p_all
 }
 
@@ -144,8 +137,7 @@ petiole_point <- function(yaku_sp) {
     geom_smooth(method = "lm") +
     stat_cor(
       aes(
-        label = paste(..rr.label.., ..n.label.., sep = "~`,`~"),
-        family = "Arial"
+        label = paste(..rr.label.., ..n.label.., sep = "~`,`~")
       )
     )
 
@@ -158,8 +150,7 @@ petiole_point <- function(yaku_sp) {
     geom_smooth(method = "lm") +
     stat_cor(
       aes(
-        label = paste(..rr.label.., ..n.label.., sep = "~`,`~"),
-        family = "Arial"
+        label = paste(..rr.label.., ..n.label.., sep = "~`,`~")
       )
     )
 
@@ -167,7 +158,7 @@ petiole_point <- function(yaku_sp) {
     plot_annotation(tag_levels = "a") &
     theme_bw() &
     theme(
-      text = element_text(family = "Arial", size = 10),
+      text = element_text(size = 10),
       plot.tag = element_text(face = "bold"))
 }
 

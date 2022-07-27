@@ -2,6 +2,7 @@ GIT = 36a960d # second submission
 all: ms/LMA_method.pdf ms/LMA_method.docx ms/LMA_method-diff$(GIT).pdf ms/response_letter_2.pdf ms/SI.pdf
 #docker: ms/LMA_method.pdf ms/diff.pdf
 local: ms/leaf_disc.bib
+si: ms/SI.pdf ms/SI.docx
 dif: ms/LMA_method-diff$(GIT).pdf
 
 ms/LMA_method.pdf: ms/LMA_method.Rmd values.yml figs/* ms/leaf_disc.bib
@@ -26,6 +27,9 @@ ms/cover.docx: ms/cover.md
 
 ms/SI.pdf: ms/SI.Rmd values.yml figs/* ms/leaf_disc.bib data/*
 	R -e 'system.time(rmarkdown::render("$<", "bookdown::pdf_document2"))'
+
+ms/SI.docx: ms/SI.Rmd values.yml figs/* ms/leaf_disc.bib data/*
+	R -e 'system.time(rmarkdown::render("$<", "bookdown::word_document2"))'
 
 # ms/leaf_disc.bib: ~/trait-method.bib
 # 	cp $< $@

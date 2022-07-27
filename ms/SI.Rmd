@@ -7,6 +7,7 @@ bibliography: leaf_disc.bib
 fontsize: 12pt
 header-includes:
   - \usepackage{float}
+  - \usepackage{caption}
   - \usepackage{booktabs}
   - \usepackage{colortbl}
   - \usepackage{fancyhdr}
@@ -33,7 +34,11 @@ output:
     number_sections: no
     fig_caption: no
     keep_tex: yes
-    # template: templates/eisvogel2.tex
+  bookdown::word_document2:
+    citation_package: default
+    toc: yes
+    number_sections: no
+    fig_caption: no
 ---
 
 ```{r caching, include=FALSE, eval=TRUE}
@@ -114,11 +119,11 @@ Detailed sampling protocol for whole-leaf and leaf disc LMA.
 
 # Figure S2:
 
-Generalization for a relationship between ratios of disc-based and whole-leaf estimates of leaf mass per area (LMA), leaf tissue density (LD), and leaf thickness (LT).
+Generalization for a relationship between ratios of disc-based and whole-leaf-based estimates of leaf mass per area (LMA), leaf tissue density (LD), and leaf thickness (LT).
 For the *i* tree individual or species, the relationship between ratios of disc-based and whole-leaf estimates of LMA, LD, and LT is:
 
 $$
-\frac{LDd_i}{LDw_i} = \frac{LMAd_i}{LMAw_i} \frac{LTw_i}{LTd_i}
+\frac{\mathrm{LD_d}_i}{\mathrm{LD_w}_i} = \frac{\mathrm{LMA_d}_i}{\mathrm{LMA_w}_i} \frac{\mathrm{LT_w}_i}{\mathrm{LT_d}_i}
 $$
 
 where *d* indicates disc-based estimates, *w* indicates whole-leaf based estimates.
@@ -127,14 +132,14 @@ Because thickness is measured on leaf lamina whether one uses a leaf disc or a w
 The above relationship, therefore, can be rewritten using lognormally distributed multiplicative error ($\epsilon_i$) on the arithmetic scale:
 
 $$
-\frac{LDd_i}{LDw_i} = \frac{LMAd_i}{LMAw_i} exp(\epsilon_i) \;\;\;\;\epsilon_i \sim N(0, \sigma^2).
+\frac{\mathrm{LD_d}_i}{\mathrm{LD_w}_i} = \frac{\mathrm{LMA_d}_i}{\mathrm{LMA_w}_i} exp(\epsilon_i) \;\;\;\;\epsilon_i \sim \mathcal{N}(0, \sigma^2).
 $$
 
 LMA requires two times measurements (mass and area) and LD requires three time measurements (mass, area and thickness), and thus variance in the ratio of whole-leaf LD and leaf disc LD should be greater than that of LMA.
 
-As we expected LD, showed the slightly smaller *R^2^* value than LMA (Figure below) in the Yunnan dataset.
+As we expected LD, showed the slightly smaller *R*^2^ value than LMA (Figure below) in the Yunnan dataset.
 We have independent measurement for thickness for leaf discs and whole-leaves in the Yunnan dataset.
-If we use the same leaf thickness values for leaf discs and whole-leaves (i.e., LTw~i~/LTd~i~ =1), the scatter plots will be identical for LMA and LD.
+If we use the same leaf thickness values for leaf discs and whole-leaves (i.e., LT~w*i*~/LT~d*i*~ = 1), the scatter plots will be identical for LMA and LD.
 Consequently, we do not perform further analyses for LD, because differences between whole-leaf LD and leaf disc LD only depends on the ratio between whole-leaf LMA and leaf disc LMA and measurement errors of leaf thickness.
 
 ![](../figs/lma_ld.pdf){ width="600" style="display: block; margin: 0 auto; align: center" }
@@ -149,18 +154,17 @@ All the correlations are significant (*P* < 0.001).
 
 # Figure S3:
 
-Standardized regression coefficients modelig the effects of leaf tissue density,
+Standardized regression coefficients modeling the effects of leaf tissue density,
 leaf area,
 leaf thickness,
 punch size, and
-their interactios
-(a) on the mean estimates of whole-leaf LMA, and
-(b) on the estimated variance of whole-leaf LMA.
+their interactions on
+(a) the mean estimates of whole-leaf-based leaf mass per area (LMA) and
+(b) the estimated variance of whole-leaf LMA.
 The leaf disc LMA was used for the baseline mean of the whole-leaf LMA.
 Thick and thin lines indicate 90% and 95% credible intervals, respectively.
 Circles show posterior means of coefficients.
 Circles filled with blue indicate significant effects and white indicate non-significance effects.
-
 
 ![](../figs/coef_sp_punch1_add.pdf)
 
@@ -168,25 +172,23 @@ Circles filled with blue indicate significant effects and white indicate non-sig
 
 # Figure S4:
 
-Relationships between species mean leaf mass per area (LMA) determined by using whole-leaves and leaf discs for species obtained with leaf punches of different diameters.
+Relationships between species mean leaf mass per area (LMA) determined by using whole leaves and leaf discs obtained with leaf punches of different diameters.
 Dashed lines indicate 1:1 lines.
 Blue solid lines indicate standardized major axis (SMA) regressions.
 The 95% confidence intervals are resented as the shaded area.
 The correlation is significant (*P* < 0.001).
 
-
-![](../figs/sma_sep.pdf){ width="400" style="display: block; margin: 0 auto" }
+![](../figs/sma_sep.pdf){ width=400 margin=auto }
 
 \newpage
 
 # Figure S5:
 
-Relationships between whole-leaf LMA : disc leaf LMA and total dry mass for the leaf disc.
+Relationships between the ratio of whole-leaf leaf mass per area (LMA) to disc leaf LMA and total dry mass for the leaf disc.
 The relationships was heteroscedastic (unequal variance, *p* < 0.001; all the samples were analyzed together).
 Samples with small total dry mass tended to show greater variance.
 
-
-![](../figs/ratio_dm.pdf){ width="400" style="display: block; margin: 0 auto" }
+![](../figs/ratio_dm.pdf){ width=400 margin=auto }
 
 \newpage
 
