@@ -540,14 +540,14 @@ list(
         "figs/ratio_dm.png",
         p,
         dpi = 300,
-        width = 3,
-        height = 3
+        width = 3.5,
+        height = 3.5
       )
       ggsave(
         "figs/ratio_dm.pdf",
         p,
-        width = 3,
-        height = 3
+        width = 3.5,
+        height = 3.5
       )
       paste0("figs/ratio_dm", c(".png", ".pdf"))
     },

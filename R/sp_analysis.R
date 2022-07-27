@@ -22,8 +22,8 @@ sma_point_sep <- function(data) {
     mutate(size_gr = ifelse(location == "Yakushima", "1.0-cm", "0.6-cm")) |>
     ggplot(aes(x = lma_disc, y = lma_leaf, col = size_gr)) +
     geom_point(alpha = 0.8) +
-    scale_x_log10() +
-    scale_y_log10() +
+    scale_x_log10(breaks = c(30, 50, 100, 200)) +
+    scale_y_log10(breaks = c(30, 50, 100, 200, 300)) +
     geom_abline(slope = 1, intercept = 0, lty = 2) +
     geom_sma(se = TRUE, nboot = 2000) +
     scale_color_manual(

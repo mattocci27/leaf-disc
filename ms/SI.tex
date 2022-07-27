@@ -93,6 +93,7 @@
 \newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
 \newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
 \usepackage{float}
+\usepackage{caption}
 \usepackage{booktabs}
 \usepackage{colortbl}
 \usepackage{fancyhdr}
@@ -211,11 +212,11 @@ Detailed sampling protocol for whole-leaf and leaf disc LMA.
 \hypertarget{figure-s2}{%
 \section{Figure S2:}\label{figure-s2}}
 
-Generalization for a relationship between ratios of disc-based and whole-leaf estimates of leaf mass per area (LMA), leaf tissue density (LD), and leaf thickness (LT).
+Generalization for a relationship between ratios of disc-based and whole-leaf-based estimates of leaf mass per area (LMA), leaf tissue density (LD), and leaf thickness (LT).
 For the \emph{i} tree individual or species, the relationship between ratios of disc-based and whole-leaf estimates of LMA, LD, and LT is:
 
 \[
-\frac{LDd_i}{LDw_i} = \frac{LMAd_i}{LMAw_i} \frac{LTw_i}{LTd_i}
+\frac{\mathrm{LD_d}_i}{\mathrm{LD_w}_i} = \frac{\mathrm{LMA_d}_i}{\mathrm{LMA_w}_i} \frac{\mathrm{LT_w}_i}{\mathrm{LT_d}_i}
 \]
 
 where \emph{d} indicates disc-based estimates, \emph{w} indicates whole-leaf based estimates.
@@ -224,14 +225,14 @@ Because thickness is measured on leaf lamina whether one uses a leaf disc or a w
 The above relationship, therefore, can be rewritten using lognormally distributed multiplicative error (\(\epsilon_i\)) on the arithmetic scale:
 
 \[
-\frac{LDd_i}{LDw_i} = \frac{LMAd_i}{LMAw_i} exp(\epsilon_i) \;\;\;\;\epsilon_i \sim N(0, \sigma^2).
+\frac{\mathrm{LD_d}_i}{\mathrm{LD_w}_i} = \frac{\mathrm{LMA_d}_i}{\mathrm{LMA_w}_i} exp(\epsilon_i) \;\;\;\;\epsilon_i \sim \mathcal{N}(0, \sigma^2).
 \]
 
 LMA requires two times measurements (mass and area) and LD requires three time measurements (mass, area and thickness), and thus variance in the ratio of whole-leaf LD and leaf disc LD should be greater than that of LMA.
 
-As we expected LD, showed the slightly smaller \emph{R\textsuperscript{2}} value than LMA (Figure below) in the Yunnan dataset.
+As we expected LD, showed the slightly smaller \emph{R}\textsuperscript{2} value than LMA (Figure below) in the Yunnan dataset.
 We have independent measurement for thickness for leaf discs and whole-leaves in the Yunnan dataset.
-If we use the same leaf thickness values for leaf discs and whole-leaves (i.e., LTw\textsubscript{i}/LTd\textsubscript{i} =1), the scatter plots will be identical for LMA and LD.
+If we use the same leaf thickness values for leaf discs and whole-leaves (i.e., LT\textsubscript{w\emph{i}}/LT\textsubscript{d\emph{i}} = 1), the scatter plots will be identical for LMA and LD.
 Consequently, we do not perform further analyses for LD, because differences between whole-leaf LD and leaf disc LD only depends on the ratio between whole-leaf LMA and leaf disc LMA and measurement errors of leaf thickness.
 
 \includegraphics[width=6.25in,height=\textheight]{../figs/lma_ld.pdf}
@@ -247,13 +248,13 @@ All the correlations are significant (\emph{P} \textless{} 0.001).
 \hypertarget{figure-s3}{%
 \section{Figure S3:}\label{figure-s3}}
 
-Standardized regression coefficients modelig the effects of leaf tissue density,
+Standardized regression coefficients modeling the effects of leaf tissue density,
 leaf area,
 leaf thickness,
 punch size, and
-their interactios
-(a) on the mean estimates of whole-leaf LMA, and
-(b) on the estimated variance of whole-leaf LMA.
+their interactions on
+(a) the mean estimates of whole-leaf-based leaf mass per area (LMA) and
+(b) the estimated variance of whole-leaf LMA.
 The leaf disc LMA was used for the baseline mean of the whole-leaf LMA.
 Thick and thin lines indicate 90\% and 95\% credible intervals, respectively.
 Circles show posterior means of coefficients.
@@ -266,7 +267,7 @@ Circles filled with blue indicate significant effects and white indicate non-sig
 \hypertarget{figure-s4}{%
 \section{Figure S4:}\label{figure-s4}}
 
-Relationships between species mean leaf mass per area (LMA) determined by using whole-leaves and leaf discs for species obtained with leaf punches of different diameters.
+Relationships between species mean leaf mass per area (LMA) determined by using whole leaves and leaf discs obtained with leaf punches of different diameters.
 Dashed lines indicate 1:1 lines.
 Blue solid lines indicate standardized major axis (SMA) regressions.
 The 95\% confidence intervals are resented as the shaded area.
@@ -279,7 +280,7 @@ The correlation is significant (\emph{P} \textless{} 0.001).
 \hypertarget{figure-s5}{%
 \section{Figure S5:}\label{figure-s5}}
 
-Relationships between whole-leaf LMA : disc leaf LMA and total dry mass for the leaf disc.
+Relationships between the ratio of whole-leaf leaf mass per area (LMA) to disc leaf LMA and total dry mass for the leaf disc.
 The relationships was heteroscedastic (unequal variance, \emph{p} \textless{} 0.001; all the samples were analyzed together).
 Samples with small total dry mass tended to show greater variance.
 
@@ -294,10 +295,10 @@ Samples with small total dry mass tended to show greater variance.
 \hypertarget{refs}{}
 \begin{CSLReferences}{1}{0}
 \leavevmode\vadjust pre{\hypertarget{ref-Eguchi2006}{}}%
-Eguchi, T. 2006. Climate. Yakushima, 3--26. {Asakura Shoten}, {Tokyo (in Japanese)}.
+Eguchi, T. 2006. Climate. \emph{In} M. Ohsawa, H. Tagawa, and J. Yamagiwa {[}eds.{]}, Yakushima, 3--26. {Asakura Shoten}, {Tokyo (in Japanese)}.
 
 \leavevmode\vadjust pre{\hypertarget{ref-Fei2018}{}}%
-Fei, X., Q. Song, Y. Zhang, Y. Liu, L. Sha, G. Yu, L. Zhang, et al. 2018. \href{https://doi.org/10.1016/j.scitotenv.2017.10.239}{Carbon exchanges and their responses to temperature and precipitation in forest ecosystems in {Yunnan}, {Southwest China}}. \emph{Science of The Total Environment} 616--617: 824--840.
+Fei, X., Q. Song, Y. Zhang, Y. Liu, L. Sha, G. Yu, L. Zhang, et al. 2018. \href{https://doi.org/10.1016/j.scitotenv.2017.10.239}{Carbon exchanges and their responses to temperature and precipitation in forest ecosystems in {Yunnan}, {Southwest China}}. \emph{Science of the Total Environment} 616--617: 824--840.
 
 \leavevmode\vadjust pre{\hypertarget{ref-Song2017}{}}%
 Song, Q. H., Y. P. Zhang, L. Q. Sha, X. B. Deng, Y. Deng, C. S. Wu, Z. Y. Lu, et al. 2017. \href{https://doi.org/10.3832/ifor2223-010}{Canopy temperature variability in a tropical rainforest, subtropical evergreen forest, and savanna forest in {Southwest China}}. \emph{iForest - Biogeosciences and Forestry} 10: 611.

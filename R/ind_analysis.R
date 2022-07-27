@@ -47,7 +47,7 @@ ratio_dm <- function(tree) {
       values = my_col[c(2, 4)],
       name = "Leaf punch diameter"
     ) +
-    xlab("Total dry mass of leaf disc (g)") +
+    xlab("Total dry mass of leaf discs (g)") +
     ylab("Whole-leaf LMA / leaf disc LMA") +
     theme_bw() +
     theme(
@@ -56,8 +56,8 @@ ratio_dm <- function(tree) {
       legend.spacing.y = unit(0.1, "cm"),
       legend.text.align = 0,
       legend.key.height = unit(0.3, "cm"),
-      legend.text = element_text(size = 7),
-      legend.title = element_text(size = 7)
+      legend.text = element_text(size = 9),
+      legend.title = element_text(size = 9)
     )
   ratio_mass
 }
