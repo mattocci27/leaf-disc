@@ -28,11 +28,11 @@ sma_point_sep <- function(data) {
     geom_sma(se = TRUE, nboot = 2000) +
     scale_color_manual(
       values = my_col[c(2, 4)],
-      name = "Leaf punch diameter"
+      name = "Leaf disc diameter"
     ) +
     scale_fill_manual(
       values = my_col[c(2, 4)],
-      name = "Leaf punch diameter"
+      name = "Leaf disc diameter"
     ) +
     xlab(expression("Leaf disc LMA "(g~m^{-2}))) +
     ylab(expression("Whole-leaf LMA "(g~m^{-2}))) +

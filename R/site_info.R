@@ -32,3 +32,15 @@ update_site_info <- function(site_info_raw, yml) {
   # The return value must be a vector of paths to the files we write:
   paste("data/site_info.json")
 }
+
+#' @title Produce site csv for docx
+write_site_csv <- function(site_info) {
+  site <- fromJSON(site_info)
+  site2 <- t(site)
+  site2[1,] <- t(site)[2,]
+  site2[2,] <- t(site)[1,]
+  colnames(site2) <- site2[1,]
+  site2 <- site2[-1,]
+  write.csv(site2, here("data", "site_info.csv"))
+  paste(here("data", "site_info.csv"))
+}

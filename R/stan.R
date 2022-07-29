@@ -251,41 +251,41 @@ coef_pointrange <- function(data, ld = TRUE, add = FALSE) {
       "beta_2" = expression(Leaf~tissue~density~(beta[1])),
       "beta_3" = expression(Leaf~area~(beta[2])),
       "beta_4" = expression(Leaf~thickness~(beta[3])),
-      "beta_5" = expression(Small~punch~(beta[4])),
-      "beta_6" = expression(Leaf~tissue~density%*%small~punch~(beta[5])),
-      "beta_7" = expression(Leaf~area%*%small~punch~(beta[6])),
-      "beta_8" = expression(Leaf~thickness%*%small~punch~(beta[7]))
+      "beta_5" = expression(Small~disc~(beta[4])),
+      "beta_6" = expression(Leaf~tissue~density%*%small~disc~(beta[5])),
+      "beta_7" = expression(Leaf~area%*%small~disc~(beta[6])),
+      "beta_8" = expression(Leaf~thickness%*%small~disc~(beta[7]))
       )
 
  gamma_lab <- c(
       "gamma_2" = expression(Leaf~tissue~density~(gamma[1])),
       "gamma_3" = expression(Leaf~area~(gamma[2])),
       "gamma_4" = expression(Leaf~thickness~(gamma[3])),
-      "gamma_5" = expression(Small~punch~(gamma[4])),
-      "gamma_6" = expression(Leaf~tissue~density%*%small~punch~(gamma[5])),
-      "gamma_7" = expression(Leaf~area%*%small~punch~(gamma[6])),
-      "gamma_8" = expression(Leaf~thickness%*%small~punch~(gamma[7]))
+      "gamma_5" = expression(Small~disc~(gamma[4])),
+      "gamma_6" = expression(Leaf~tissue~density%*%small~disc~(gamma[5])),
+      "gamma_7" = expression(Leaf~area%*%small~disc~(gamma[6])),
+      "gamma_8" = expression(Leaf~thickness%*%small~disc~(gamma[7]))
       )
 
 
   if (add) {
     beta_lab[5:7] <- c(
-        "beta_6" = expression(paste("Leaf tissue density (small punch: ", beta[1]+beta[5], ")")),
-        "beta_7" = expression(paste("Leaf area (small punch: ", beta[2]+beta[6], ")")),
-        "beta_8" = expression(paste("Leaf thickness (small punch: ", beta[3]+beta[7], ")"))
+        "beta_6" = expression(paste("Leaf tissue density (small disc: ", beta[1]+beta[5], ")")),
+        "beta_7" = expression(paste("Leaf area (small disc: ", beta[2]+beta[6], ")")),
+        "beta_8" = expression(paste("Leaf thickness (small disc: ", beta[3]+beta[7], ")"))
     )
     gamma_lab[5:7] <- c(
-        "gamma_6" = expression(paste("Leaf tissue density (small punch: ", gamma[1]+gamma[5], ")")),
-        "gamma_7" = expression(paste("Leaf area (small punch: ", gamma[2]+gamma[6], ")")),
-        "gamma_8" = expression(paste("Leaf thickness (small punch: ", gamma[3]+gamma[7], ")"))
+        "gamma_6" = expression(paste("Leaf tissue density (small disc: ", gamma[1]+gamma[5], ")")),
+        "gamma_7" = expression(paste("Leaf area (small disc: ", gamma[2]+gamma[6], ")")),
+        "gamma_8" = expression(paste("Leaf thickness (small disc: ", gamma[3]+gamma[7], ")"))
     )
   }
 
   if (!ld) {
     beta_lab[1] <- expression(LMA~(beta[1]))
-    beta_lab[5] <- expression(LMA%*%small~punch~(beta[5]))
+    beta_lab[5] <- expression(LMA%*%small~disc~(beta[5]))
     gamma_lab[1] <- expression(LMA~(gamma[1]))
-    gamma_lab[5] <- expression(LMA%*%small~punch~(gamma[5]))
+    gamma_lab[5] <- expression(LMA%*%small~disc~(gamma[5]))
   }
 
   p1 <- plot_fun(data1) +
@@ -454,11 +454,11 @@ pred_mcmc <- function(draws, sp_mean, n = 80) {
     scale_x_log10() +
     scale_color_manual(
       values = my_col[c(2, 4)],
-      name = "Leaf punch diameter"
+      name = "Leaf disc diameter"
     ) +
     scale_fill_manual(
       values = my_col[c(2, 4)],
-      name = "Leaf punch diameter"
+      name = "Leaf disc diameter"
     ) +
     coord_cartesian(ylim = c(0.5, 1.5)) +
     theme_bw() +

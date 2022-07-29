@@ -1,6 +1,6 @@
+[![https://img.shields.io/badge/DOI-10.1002%2Fajb2.16038-green](https://img.shields.io/badge/DOI-10.1002%2Fajb2.16038-green)](https://doi.org/10.1002/ajb2.16038)
 [![DOI](https://zenodo.org/badge/438468062.svg)](https://zenodo.org/badge/latestdoi/438468062)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
 
 # Sources and consequences of mismatch between leaf disc and whole-leaf leaf mass per area (LMA)
 
@@ -12,6 +12,7 @@ Jiao-Lin Zhang,
 Ya-Jun Chen*
 
 Code repository to run the analysis and generate the manuscript for Maenpuen et al. "Sources and consequences of mismatch between leaf disc and whole-leaf leaf mass per area (LMA)".
+https://doi.org/10.1002/ajb2.16038
 
 ## Reproduce the results
 

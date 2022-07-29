@@ -95,7 +95,7 @@ MAT and MAP of Yakushima were obtained from the Yakushima meteorological station
 
 Summary of a linear mixed model for log-transformed total dry mass of leaf discs for each tree individual.
 Species was used as a random intercept.
-The leaf punch size is described as an effect of '0.6 cm diameter' compared with '1.0 cm diameter'.
+The small disc is described as an effect of '0.6 cm diameter' compared with '1.0 cm diameter'.
 
 ```{r, eval=TRUE, echo=FALSE}
 dm_glmm <- read_csv(here("data", "dm_glmm.csv"))
@@ -112,7 +112,7 @@ dm_glmm |>
 Detailed sampling protocol for whole-leaf and leaf disc LMA.
 
 ::: {.center data-latex=""}
-![](../figs/S2.jpeg){ width=470 margin=auto }
+![](../figs/s1.jpeg){ width=470 margin=auto }
 :::
 
 \newpage

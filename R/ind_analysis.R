@@ -24,9 +24,8 @@ dm_glmm <- function(tree) {
   rownames(tb)[2] <- "log(Leaf tissue density)"
   rownames(tb)[3] <- "log(Leaf area)"
   rownames(tb)[4] <- "log(Leaf thickness)"
-  rownames(tb)[5] <- "Small leaf punch"
-  tb |>
-    as_tibble() |>
+  rownames(tb)[5] <- "Small disc"
+  bind_cols(Predictors = rownames(tb), tb) |>
     write_csv("data/dm_glmm.csv")
   paste("data/dm_glmm.csv")
 }
@@ -45,7 +44,7 @@ ratio_dm <- function(tree) {
     geom_hline(yintercept = 1) +
     scale_color_manual(
       values = my_col[c(2, 4)],
-      name = "Leaf punch diameter"
+      name = "Leaf disc diameter"
     ) +
     xlab("Total dry mass of leaf discs (g)") +
     ylab("Whole-leaf LMA / leaf disc LMA") +

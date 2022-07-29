@@ -28,7 +28,8 @@ tar_option_set(packages = c(
   "loo",
   "jsonlite",
   "lmtest",
-  "modelr"
+  "modelr",
+  "here"
 ))
 
 # check if it's inside a container
@@ -64,6 +65,11 @@ list(
   tar_target(
     site_info_raw,
     "data-raw/site_info_raw.json",
+    format = "file"
+  ),
+  tar_target(
+    fig_s1,
+    "data-raw/s1.jpeg",
     format = "file"
   ),
   tar_target(
@@ -125,7 +131,11 @@ list(
     update_site_info(site_info_raw, yml),
     format = "file"
   ),
-
+  tar_target(
+    site_info_csv,
+    write_site_csv(site_info),
+    format = "file"
+  ),
 
   # analyses and figs ---------------------------------------------
   tar_target(
