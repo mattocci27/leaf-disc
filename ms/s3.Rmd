@@ -1,0 +1,60 @@
+---
+#title: "Appendix S1: Supporting Tables and Figures."
+geometry: margin=1in
+link-citations: yes
+csl: templates/american-journal-of-botany.csl
+bibliography: leaf_disc.bib
+fontsize: 12pt
+header-includes:
+  - \usepackage{float}
+  - \usepackage{caption}
+  - \usepackage{booktabs}
+  - \usepackage{colortbl}
+  - \usepackage{fancyhdr}
+  - \pagestyle{fancy}
+  - \usepackage[default]{sourcesanspro}
+  - \usepackage{sourcecodepro}
+  - \fancypagestyle{plain}{\pagestyle{fancy}}
+  - \fancyhead[RE,RO]{Maenpuen \textit{et al}. --American Journal of Botany-- Appendix S3}
+output:
+  bookdown::pdf_document2:
+    citation_package: default
+    toc: yes
+    number_sections: no
+    fig_caption: no
+    keep_tex: yes
+---
+
+# Appendix S3:
+
+Generalization for a relationship between ratios of disc-based and whole-leaf-based estimates of leaf mass per area (LMA), leaf tissue density (LD), and leaf thickness (LT).
+For the *i* tree individual or species, the relationship between ratios of disc-based and whole-leaf estimates of LMA, LD, and LT is:
+
+$$
+\frac{\mathrm{LD_d}_i}{\mathrm{LD_w}_i} = \frac{\mathrm{LMA_d}_i}{\mathrm{LMA_w}_i} \frac{\mathrm{LT_w}_i}{\mathrm{LT_d}_i}
+$$
+
+where *d* indicates disc-based estimates, *w* indicates whole-leaf based estimates.
+
+Because thickness is measured on leaf lamina whether one uses a leaf disc or a whole-leaf, the expected ratio between thickness for a leaf disc and a whole-leaf should be 1.
+The above relationship, therefore, can be rewritten using lognormally distributed multiplicative error ($\epsilon_i$) on the arithmetic scale:
+
+$$
+\frac{\mathrm{LD_d}_i}{\mathrm{LD_w}_i} = \frac{\mathrm{LMA_d}_i}{\mathrm{LMA_w}_i} exp(\epsilon_i) \;\;\;\;\epsilon_i \sim \mathcal{N}(0, \sigma^2).
+$$
+
+LMA requires two times measurements (mass and area) and LD requires three time measurements (mass, area and thickness), and thus variance in the ratio of whole-leaf LD and leaf disc LD should be greater than that of LMA.
+
+As we expected LD, showed the slightly smaller *R*^2^ value than LMA (Figure below) in the Yunnan dataset.
+We have independent measurement for thickness for leaf discs and whole-leaves in the Yunnan dataset.
+If we use the same leaf thickness values for leaf discs and whole-leaves (i.e., LT~w*i*~/LT~d*i*~ = 1), the scatter plots will be identical for LMA and LD.
+Consequently, we do not perform further analyses for LD, because differences between whole-leaf LD and leaf disc LD only depends on the ratio between whole-leaf LMA and leaf disc LMA and measurement errors of leaf thickness.
+
+![](../figs/lma_ld.pdf){ width="600" style="display: block; margin: 0 auto; align: center" }
+
+Relationships between species mean leaf mass per area (LMA) and leaf tissue density (LD) determined by using whole leaves and leaf discs for the Yunnan dataset that has both leaf thickness for leaf discs and whole leaves.
+Dashed lines indicate 1:1 lines.
+Blue solid lines indicate standardized major axis regressions.
+The 95% confidence intervals are presented as the shaded area.
+All the correlations are significant (*P* < 0.001).
+

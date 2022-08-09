@@ -1,0 +1,36 @@
+---
+#title: "Appendix S1: Supporting Tables and Figures."
+geometry: margin=1in
+link-citations: yes
+csl: templates/american-journal-of-botany.csl
+bibliography: leaf_disc.bib
+fontsize: 12pt
+header-includes:
+  - \usepackage{float}
+  - \usepackage{caption}
+  - \usepackage{booktabs}
+  - \usepackage{colortbl}
+  - \usepackage{fancyhdr}
+  - \pagestyle{fancy}
+  - \usepackage[default]{sourcesanspro}
+  - \usepackage{sourcecodepro}
+  - \fancypagestyle{plain}{\pagestyle{fancy}}
+  - \fancyhead[RE,RO]{Maenpuen \textit{et al}. --American Journal of Botany-- Appendix S5}
+output:
+  bookdown::pdf_document2:
+    citation_package: default
+    toc: no
+    number_sections: no
+    fig_caption: no
+    keep_tex: yes
+---
+
+# Appendix S5:
+
+Relationships between species mean leaf mass per area (LMA) determined by using whole leaves and leaf discs obtained with leaf punches of different diameters.
+Dashed lines indicate 1:1 lines.
+Blue solid lines indicate standardized major axis (SMA) regressions.
+The 95% confidence intervals are resented as the shaded area.
+The correlation is significant (*P* < 0.001).
+
+![](../figs/sma_sep.pdf){ width=400 margin=auto }

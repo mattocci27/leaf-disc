@@ -1,0 +1,35 @@
+---
+#title: "Appendix S1: Supporting Tables and Figures."
+geometry: margin=1in
+link-citations: yes
+csl: templates/american-journal-of-botany.csl
+bibliography: leaf_disc.bib
+fontsize: 12pt
+header-includes:
+  - \usepackage{float}
+  - \usepackage{caption}
+  - \usepackage{booktabs}
+  - \usepackage{colortbl}
+  - \usepackage{fancyhdr}
+  - \pagestyle{fancy}
+  - \usepackage[default]{sourcesanspro}
+  - \usepackage{sourcecodepro}
+  - \fancypagestyle{plain}{\pagestyle{fancy}}
+  - \fancyhead[RE,RO]{Maenpuen \textit{et al}. --American Journal of Botany-- Appendix S6}
+output:
+  bookdown::pdf_document2:
+    citation_package: default
+    toc: no
+    number_sections: no
+    fig_caption: no
+    keep_tex: yes
+---
+
+# Appendix S6:
+
+Relationships between the ratio of whole-leaf leaf mass per area (LMA) to disc leaf LMA and total dry mass for the leaf disc.
+The relationships was heteroscedastic (unequal variance, *p* < 0.001; all the samples were analyzed together).
+Samples with small total dry mass tended to show greater variance.
+
+![](../figs/ratio_dm.pdf){ width=400 margin=auto }
+

@@ -2,7 +2,7 @@ GIT = 36a960d # second submission
 all: ms/LMA_method.pdf ms/LMA_method.docx ms/LMA_method-diff$(GIT).pdf ms/response_letter_2.pdf ms/SI.pdf
 #docker: ms/LMA_method.pdf ms/diff.pdf
 local: ms/leaf_disc.bib
-si: ms/SI.pdf ms/SI.docx
+si: ms/SI.pdf ms/SI.docx ms/s4.pdf ms/s5.pdf ms/s6.pdf ms/s3.pdf
 dif: ms/LMA_method-diff$(GIT).pdf
 
 ms/LMA_method.pdf: ms/LMA_method.Rmd values.yml figs/* ms/leaf_disc.bib
@@ -30,6 +30,18 @@ ms/SI.pdf: ms/SI.Rmd values.yml figs/* ms/leaf_disc.bib data/*
 
 ms/SI.docx: ms/SI.Rmd values.yml figs/* ms/leaf_disc.bib data/*
 	R -e 'system.time(rmarkdown::render("$<", "bookdown::word_document2"))'
+
+ms/s3.pdf: ms/s3.Rmd ms/leaf_disc.bib data/*
+	R -e 'system.time(rmarkdown::render("$<", "bookdown::pdf_document2"))'
+
+ms/s4.pdf: ms/s4.Rmd ms/leaf_disc.bib data/*
+	R -e 'system.time(rmarkdown::render("$<", "bookdown::pdf_document2"))'
+
+ms/s5.pdf: ms/s5.Rmd ms/leaf_disc.bib data/*
+	R -e 'system.time(rmarkdown::render("$<", "bookdown::pdf_document2"))'
+
+ms/s6.pdf: ms/s6.Rmd ms/leaf_disc.bib data/*
+	R -e 'system.time(rmarkdown::render("$<", "bookdown::pdf_document2"))'
 
 # ms/leaf_disc.bib: ~/trait-method.bib
 # 	cp $< $@

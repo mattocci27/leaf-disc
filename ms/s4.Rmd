@@ -1,0 +1,42 @@
+---
+#title: "Appendix S1: Supporting Tables and Figures."
+geometry: margin=1in
+link-citations: yes
+csl: templates/american-journal-of-botany.csl
+bibliography: leaf_disc.bib
+fontsize: 12pt
+header-includes:
+  - \usepackage{float}
+  - \usepackage{caption}
+  - \usepackage{booktabs}
+  - \usepackage{colortbl}
+  - \usepackage{fancyhdr}
+  - \pagestyle{fancy}
+  - \usepackage[default]{sourcesanspro}
+  - \usepackage{sourcecodepro}
+  - \fancypagestyle{plain}{\pagestyle{fancy}}
+  - \fancyhead[RE,RO]{Maenpuen \textit{et al}. --American Journal of Botany-- Appendix S4}
+output:
+  bookdown::pdf_document2:
+    citation_package: default
+    toc: no
+    number_sections: no
+    fig_caption: no
+    keep_tex: yes
+---
+
+# Appendix S4:
+
+Standardized regression coefficients modeling the effects of leaf tissue density,
+leaf area,
+leaf thickness,
+punch size, and
+their interactions on
+(a) the mean estimates of whole-leaf-based leaf mass per area (LMA) and
+(b) the estimated variance of whole-leaf LMA.
+The leaf disc LMA was used for the baseline mean of the whole-leaf LMA.
+Thick and thin lines indicate 90% and 95% credible intervals, respectively.
+Circles show posterior means of coefficients.
+Circles filled with blue indicate significant effects and white indicate non-significance effects.
+
+![](../figs/coef_sp_punch1_add.pdf)

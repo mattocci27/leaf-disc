@@ -133,7 +133,7 @@ archive/
 figs/LA_prorp.png
 figs/LT_prop.png
 ms/LMA_figs.pdf
-ms/*.pdf
+#ms/*.pdf
 #ms/*.html
 
 data/try.csv
