@@ -19,7 +19,7 @@ header-includes:
 output:
   bookdown::pdf_document2:
     citation_package: default
-    toc: yes
+    toc: no
     number_sections: no
     fig_caption: no
     keep_tex: yes
