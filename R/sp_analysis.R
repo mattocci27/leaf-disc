@@ -146,7 +146,7 @@ petiole_point <- function(yaku_sp) {
     scale_x_log10(breaks = c(0.02, 0.05, 0.1, 0.2)) +
     scale_y_log10() +
     xlab("Petiole / leaf dry mass ratio") +
-    ylab(expression(Leaf ~ area ~ (g ~ cm^2))) +
+    ylab(expression(Leaf ~ area ~ (cm^2))) +
     geom_smooth(method = "lm") +
     stat_cor(
       aes(
